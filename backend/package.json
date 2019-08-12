@@ -1,0 +1,11 @@
+{
+  "name": "fullstack-marketplace",
+  "version": "1.0.0",
+  "description": "E-commerence app built on JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nireo",
+  "license": "ISC"
+}
