@@ -1,5 +1,4 @@
 const userModel = require('./userModel');
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 exports.getAllUsers = async (req, res, next) => {
