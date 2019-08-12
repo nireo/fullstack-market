@@ -14,6 +14,16 @@ const connectToDatabase = () => {
     });
 };
 
+const getToken = req => {
+  const authorization = req.get('authorization');
+  if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+    // token with 'bearer ' cut out
+    return authorization.substring(7);
+  }
+  return null;
+};
+
 module.exports = {
-  connectToDatabase
+  connectToDatabase,
+  getToken
 };
