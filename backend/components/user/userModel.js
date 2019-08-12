@@ -13,10 +13,20 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
+  email: {
+    type: String,
+    required: true
+  },
   reviewsPosted: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Review'
+    }
+  ],
+  posts: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
     }
   ]
 });
@@ -26,6 +36,7 @@ userSchema.plugin(uniqueValidator);
 userSchema.set('toJSON', {
   transform: (document, object) => {
     delete object.__v;
+    delete object.passwordHash;
   }
 });
 
