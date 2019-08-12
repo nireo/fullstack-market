@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const { connectToDatabase } = require('./utils/helper');
 const middleware = require('./utils/middleware');
 const userRoutes = require('./components/user/userRoutes');
+const loginRoutes = require('./components/login/loginRoutes');
 
 mongoose.set('useFindAndModify', false);
 
@@ -20,6 +21,7 @@ connectToDatabase();
 app.use(middleware.requestLog);
 
 app.use('/api/user', userRoutes);
+app.use('/api/login', loginRoutes);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
