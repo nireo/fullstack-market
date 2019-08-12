@@ -6,8 +6,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { connectToDatabase } = require('./utils/helper');
 const middleware = require('./utils/middleware');
+
 const userRoutes = require('./components/user/userRoutes');
 const loginRoutes = require('./components/login/loginRoutes');
+const postRoutes = require('./components/post/postRoutes');
+const reviewRoutes = require('./components/review/reviewRoutes');
 
 mongoose.set('useFindAndModify', false);
 
@@ -22,6 +25,8 @@ app.use(middleware.requestLog);
 
 app.use('/api/user', userRoutes);
 app.use('/api/login', loginRoutes);
+app.use('/api/review', reviewRoutes);
+app.use('/api/post', postRoutes);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

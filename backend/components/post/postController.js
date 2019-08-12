@@ -19,6 +19,8 @@ exports.getAllPosts = async (req, res, next) => {
 };
 
 exports.createPost = async (req, res, next) => {
+  const { title, description, price } = req.body;
+  const time = new Date();
   const token = getToken(req);
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
@@ -27,8 +29,6 @@ exports.createPost = async (req, res, next) => {
         error: 'invalid token'
       });
     }
-    const { title, description, price } = req.body;
-    const time = new Date();
     const newPost = new postModel({
       title,
       description,

@@ -32,3 +32,26 @@ exports.createReview = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.removeReview = async (req, res, next) => {
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const review = await reviewModel.findById(req.params.id);
+    if (review.postedBy.toString() === decodedToken.id) {
+      await reviewModel.findByIdAndRemove(review._id);
+      return res.status(204).end();
+    }
+    return res.status(403).json({
+      error: 'unauthorized'
+    });
+  } catch (e) {
+    next(e);
+  }
+};

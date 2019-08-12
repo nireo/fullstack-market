@@ -5,5 +5,6 @@ const reviewController = require('./reviewController');
 // there will be no public review routes
 // Private Routes
 router.post('/', reviewController.createReview);
+router.delete('/:id', reviewController.createReview);
 
 module.exports = router;
