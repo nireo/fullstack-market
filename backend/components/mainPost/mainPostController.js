@@ -64,3 +64,32 @@ exports.removePost = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.updatePost = async (req, res, next) => {
+  const { price, description, title } = req.body;
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!decodedToken || !token) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const updatedPost = {
+      price,
+      description,
+      title
+    };
+
+    if (decodedToken.username === 'admin') {
+      await mainPostModel.findByIdAndUpdate(req.params.id, updatedPost);
+      return res.status(204).end();
+    }
+    return res.status(403).json({
+      error: 'unauthorized'
+    });
+  } catch (e) {
+    next(e);
+  }
+};
