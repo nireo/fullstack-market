@@ -33,3 +33,25 @@ exports.createUser = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.deleteUser = async (req, res, next) => {
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    if (decodedToken.username === 'admin') {
+      await userModel.findByIdAndRemove(req.params.id);
+      return res.status(204).end();
+    }
+    return res.status(403).json({
+      error: 'unauthorized'
+    });
+  } catch (e) {
+    next(e);
+  }
+};
