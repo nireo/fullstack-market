@@ -42,3 +42,25 @@ exports.createPost = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.removePost = async (req, res, next) => {
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!decodedToken || !token) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    if (decodedToken.username === 'admin') {
+      await mainPostModel.findByIdAndRemove(req.params.id);
+      return res.status(204).end();
+    }
+    return res.status(403).json({
+      error: 'unauthorized'
+    });
+  } catch (e) {
+    next(e);
+  }
+};
