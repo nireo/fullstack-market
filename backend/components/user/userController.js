@@ -55,3 +55,32 @@ exports.deleteUser = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.updateUser = async (req, res, next) => {
+  const { email, username } = req.body;
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const user = await userModel.findById(req.params.id);
+    const updatedUser = {
+      email,
+      username,
+      passwordHash: user.passwordHash
+    };
+    if (
+      decodedToken.id === req.params.id ||
+      decodedToken.username === 'admin'
+    ) {
+      const saved = await userModel.findByIdAndUpdate(user._id, updatedUser);
+      return res.json(saved);
+    }
+  } catch (e) {
+    next(e);
+  }
+};
