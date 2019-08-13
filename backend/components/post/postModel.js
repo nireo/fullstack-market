@@ -22,7 +22,13 @@ const postSchema = new Schema({
   posted: {
     type: String,
     default: Date.now
-  }
+  },
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Review'
+    }
+  ]
 });
 
 postSchema.set('toJSON', {
