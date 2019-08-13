@@ -11,6 +11,7 @@ const userRoutes = require('./components/user/userRoutes');
 const loginRoutes = require('./components/login/loginRoutes');
 const postRoutes = require('./components/post/postRoutes');
 const reviewRoutes = require('./components/review/reviewRoutes');
+const mainController = require('./components/mainPost/mainPostRoutes');
 
 mongoose.set('useFindAndModify', false);
 
@@ -27,6 +28,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/login', loginRoutes);
 app.use('/api/review', reviewRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/main', mainController);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
