@@ -96,3 +96,32 @@ exports.addReviewToPost = (req, res, next) => {
     next(e);
   }
 };
+
+exports.updateReview = async (req, res, next) => {
+  const token = getToken(req);
+  const { stars, recommended, title, description } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+    const updatedReview = {
+      stars,
+      recommended,
+      title,
+      description
+    };
+    const review = await reviewModel.findById(req.params.id);
+    if (review.postedBy === decodedToken.id) {
+      const saved = await reviewModel.findByIdAndUpdate(
+        req.params.id,
+        updatedReview
+      );
+      return res.json(saved);
+    }
+  } catch (e) {
+    next(e);
+  }
+}
