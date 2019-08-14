@@ -84,8 +84,11 @@ exports.updatePost = async (req, res, next) => {
     };
 
     if (decodedToken.username === 'admin') {
-      await mainPostModel.findByIdAndUpdate(req.params.id, updatedPost);
-      return res.status(204).end();
+      const saved = await mainPostModel.findByIdAndUpdate(
+        req.params.id,
+        updatedPost
+      );
+      return res.json(saved);
     }
     return res.status(403).json({
       error: 'unauthorized'
