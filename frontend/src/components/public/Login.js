@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { handleLogin } from '../../reducers/userReducer';
 
-const Login = () => {
+const Login = props => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+
+  const handleLogin = event => {
+    event.preventDefault();
+    const credentials = {
+      username,
+      password
+    };
+    props.handleLogin(credentials);
+  };
+  console.log(props.user);
+
   return (
     <div class="text-center container">
-      <form class="form-signin">
+      <form onSubmit={handleLogin} class="form-signin">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <div>
           <input
@@ -51,11 +63,20 @@ const Login = () => {
             Login
           </button>
         </div>
-
         <p class="mt-5 mb-3 text-muted">&copy;2019 Benelov Software</p>
+        {props.user && <p>You're logged in</p>}
       </form>
     </div>
   );
 };
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(
+  null,
+  { handleLogin }
+)(Login);
