@@ -6,5 +6,6 @@ router.get('/', postController.getAllPosts);
 
 // Protected routes
 router.post('/', postController.createPost);
+router.delete('/:id', postController.removePost);
 
 module.exports = router;

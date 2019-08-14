@@ -43,3 +43,25 @@ exports.createPost = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.removePost = async (req, res, next) => {
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECREt);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+    const post = await postModel.findById(req.params.id);
+    if (post.postedBy === decodedToken.id) {
+      await postModel.findByIdAndRemove(post._id);
+      return res.status(204).end();
+    }
+    return res.status(403).json({
+      error: 'unauthorized'
+    });
+  } catch (e) {
+    next(e);
+  }
+};
