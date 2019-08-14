@@ -107,13 +107,13 @@ exports.updateReview = async (req, res, next) => {
         error: 'invalid token'
       });
     }
-    const updatedReview = {
-      stars,
-      recommended,
-      title,
-      description
-    };
     const review = await reviewModel.findById(req.params.id);
+    const updatedReview = {
+      stars: stars ? stars : review.stars,
+      recommended: recommended ? recommended : review.recommended,
+      title: title ? title : review.title,
+      description: description ? description : review.description
+    };
     if (review.postedBy.toString() === decodedToken.id) {
       const saved = await reviewModel.findByIdAndUpdate(
         review._id,

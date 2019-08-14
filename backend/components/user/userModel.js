@@ -15,7 +15,8 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   reviewsPosted: [
     {
@@ -36,6 +37,8 @@ userSchema.plugin(uniqueValidator);
 userSchema.set('toJSON', {
   transform: (document, object) => {
     delete object.__v;
+
+    // since it's good practice to not show this.
     delete object.passwordHash;
   }
 });

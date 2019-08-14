@@ -76,10 +76,11 @@ exports.updatePost = async (req, res, next) => {
       });
     }
 
+    const post = await mainPostModel.findById(req.params.id);
     const updatedPost = {
-      price,
-      description,
-      title
+      price: price ? price : post.price,
+      description: description ? description : post.description,
+      title: title ? title : post.title
     };
 
     if (decodedToken.username === 'admin') {

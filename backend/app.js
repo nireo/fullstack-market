@@ -4,9 +4,9 @@ const helmet = require('helmet');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+// const fs = require('fs');
 const { connectToDatabase } = require('./utils/helper');
 const middleware = require('./utils/middleware');
-
 const userRoutes = require('./components/user/userRoutes');
 const loginRoutes = require('./components/login/loginRoutes');
 const postRoutes = require('./components/post/postRoutes');
@@ -17,9 +17,15 @@ mongoose.set('useFindAndModify', false);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// const logStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {
+//  flags: 'a'
+// });
+
 app.use(compression());
 app.use(helmet());
 app.use(cors());
+// app.use(morgan('combined', { stream: logStream }));
 
 connectToDatabase();
 app.use(middleware.requestLog);

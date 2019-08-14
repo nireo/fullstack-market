@@ -47,7 +47,10 @@ exports.deleteUser = async (req, res, next) => {
       });
     }
 
-    if (decodedToken.username === 'admin') {
+    if (
+      decodedToken.username === 'admin' ||
+      decodedToken.id === req.params.id
+    ) {
       await userModel.findByIdAndRemove(req.params.id);
       return res.status(204).end();
     }
