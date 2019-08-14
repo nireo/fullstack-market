@@ -62,7 +62,7 @@ exports.removeReview = async (req, res, next) => {
   }
 };
 
-exports.addReviewToPost = (req, res, next) => {
+exports.addReviewToPost = async (req, res, next) => {
   const token = getToken(req);
   const { stars, title, description, recommended } = req.body;
   try {
@@ -73,7 +73,7 @@ exports.addReviewToPost = (req, res, next) => {
       });
     }
 
-    const post = await postModel.findById(req.params.id)
+    const post = await postModel.findById(req.params.id);
     const user = await userModel.findById(decodedToken.id);
 
     const newReview = {
@@ -82,16 +82,16 @@ exports.addReviewToPost = (req, res, next) => {
       description,
       recommended,
       postedBy: user._id
-    }
-    
+    };
+
     const saved = await newReview.save();
 
     post.reviews = post.reviews.concat(saved._id);
-    user.reviewsPosted = user.reviewsPosted.concat(saved._id)
+    user.reviewsPosted = user.reviewsPosted.concat(saved._id);
 
     await user.save();
     const postWithReview = await post.save();
-    return res.json(postWithReview)
+    return res.json(postWithReview);
   } catch (e) {
     next(e);
   }
@@ -114,7 +114,7 @@ exports.updateReview = async (req, res, next) => {
       description
     };
     const review = await reviewModel.findById(req.params.id);
-    if (review.postedBy === decodedToken.id) {
+    if (review.postedBy.toString() === decodedToken.id) {
       const saved = await reviewModel.findByIdAndUpdate(
         review._id,
         updatedReview
@@ -124,4 +124,4 @@ exports.updateReview = async (req, res, next) => {
   } catch (e) {
     next(e);
   }
-}
+};

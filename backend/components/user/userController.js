@@ -3,11 +3,14 @@ const bcrypt = require('bcrypt');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    await userModel.find({}).exec((err, results) => {
-      if (err) return res.status(500);
+    await userModel
+      .find({})
+      .populate('reviews')
+      .exec((err, results) => {
+        if (err) return res.status(500);
 
-      return res.json(results);
-    });
+        return res.json(results);
+      });
   } catch (e) {
     next(e);
   }
@@ -73,10 +76,7 @@ exports.updateUser = async (req, res, next) => {
       username,
       passwordHash: user.passwordHash
     };
-    if (
-      decodedToken.id === req.params.id ||
-      decodedToken.username === 'admin'
-    ) {
+    if (decodedToken.id === user.id || decodedToken.username === 'admin') {
       const saved = await userModel.findByIdAndUpdate(user._id, updatedUser);
       return res.json(saved);
     }

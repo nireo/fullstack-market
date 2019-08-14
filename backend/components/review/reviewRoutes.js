@@ -7,6 +7,6 @@ const reviewController = require('./reviewController');
 router.post('/main/:id', reviewController.addReviewToMain);
 router.post('/post/:id', reviewController.addReviewToPost);
 router.put('/:id', reviewController.updateReview);
-router.delete('/:id', reviewController.createReview);
+router.delete('/:id', reviewController.removeReview);
 
 module.exports = router;
