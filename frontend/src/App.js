@@ -1,9 +1,10 @@
 import React from 'react';
 import Routes from './Routes';
+import './components/styles.css';
 
 const App = () => {
   return (
-    <div>
+    <div class="animation-delays animate fadeIn">
       <Routes />
     </div>
   );
