@@ -116,7 +116,7 @@ exports.updateReview = async (req, res, next) => {
     const review = await reviewModel.findById(req.params.id);
     if (review.postedBy === decodedToken.id) {
       const saved = await reviewModel.findByIdAndUpdate(
-        req.params.id,
+        review._id,
         updatedReview
       );
       return res.json(saved);
