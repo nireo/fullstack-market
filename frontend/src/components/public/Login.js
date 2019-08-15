@@ -13,9 +13,8 @@ const Login = props => {
       username,
       password
     };
-    props.handleLogin(credentials);
+    props.handleLogin(credentials, rememberMe);
   };
-  console.log(props.user);
 
   return (
     <div class="text-center container">

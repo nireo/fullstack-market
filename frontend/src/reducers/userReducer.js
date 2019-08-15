@@ -11,13 +11,30 @@ const reducer = (state = null, action) => {
   }
 };
 
-export const handleLogin = credentials => {
+export const handleLogin = (credentials, rememberMe) => {
   return async dispatch => {
     const user = await loginService.login(credentials);
+    if (rememberMe) {
+      window.localStorage.setItem('user', JSON.stringify(user));
+    }
+
     dispatch({
       type: 'LOG_IN',
       data: user.user
     });
+  };
+};
+
+export const checkLocalStorage = () => {
+  return async dispatch => {
+    const userInfo = localStorage.getItem('user');
+    if (userInfo) {
+      const userInfoJson = JSON.parse(userInfo);
+      dispatch({
+        type: 'LOG_IN',
+        data: userInfoJson.user
+      });
+    }
   };
 };
 
