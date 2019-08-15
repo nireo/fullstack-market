@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import userService from '../../services/user';
 import { connect } from 'react-redux';
 
-const Signup = () => {
+const Signup = props => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
+
+  if (props.user !== null) {
+    return null;
+  }
 
   const handleSignup = event => {
     event.preventDefault();
