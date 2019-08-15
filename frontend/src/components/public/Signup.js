@@ -1,37 +1,31 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { handleLogin } from '../../reducers/userReducer';
-import { logOut } from '../../reducers/userReducer';
 
-const Login = props => {
+const Signup = () => {
+  const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [rememberMe, setRememberMe] = useState(false);
+  const [confirm, setConfirm] = useState('');
 
-  if (props.user !== null) {
-    return (
-      <div class="container text-center">
-        <h2>You're already logged in.</h2>
-        <button class="btn btn-outline-primary" onClick={() => props.logOut()}>
-          Log out
-        </button>
-      </div>
-    );
-  }
-
-  const handleLogin = event => {
+  const handleSignup = event => {
     event.preventDefault();
-    const credentials = {
-      username,
-      password
-    };
-    props.handleLogin(credentials, rememberMe);
   };
 
   return (
     <div class="text-center container">
-      <form onSubmit={handleLogin} class="form-signin">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+      <form onSubmit={handleSignup} class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Signup</h1>
+        <div class="form-group">
+          <input
+            style={{ width: '50%', display: 'inline-block' }}
+            class="form-control"
+            type="email"
+            placeholder="Email"
+            required
+            value={email}
+            onChange={({ target }) => setEmail(target.value)}
+          />
+        </div>
         <div class="form-group">
           <input
             style={{ width: '50%', display: 'inline-block' }}
@@ -54,16 +48,16 @@ const Login = props => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-
-        <div class="checkbox mb-3">
-          <label>
-            <input
-              type="checkbox"
-              value={rememberMe}
-              onClick={() => setRememberMe(!rememberMe)}
-            />{' '}
-            Remember me
-          </label>
+        <div class="form-group">
+          <input
+            style={{ width: '50%', display: 'inline-block' }}
+            type="password"
+            class="form-control"
+            placeholder="Confirm Password"
+            required
+            value={confirm}
+            onChange={({ target }) => setConfirm(target.value)}
+          />
         </div>
         <div>
           <button
@@ -88,5 +82,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { handleLogin, logOut }
-)(Login);
+  null
+)(Signup);

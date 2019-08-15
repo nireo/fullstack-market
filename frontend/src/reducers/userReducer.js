@@ -38,4 +38,9 @@ export const checkLocalStorage = () => {
   };
 };
 
+export const logOut = () => {
+  window.localStorage.clear();
+  return { type: 'LOG_OUT' };
+};
+
 export default reducer;
