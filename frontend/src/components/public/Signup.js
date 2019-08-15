@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import userService from '../../services/user';
 import { connect } from 'react-redux';
 
 const Signup = () => {
@@ -9,6 +10,18 @@ const Signup = () => {
 
   const handleSignup = event => {
     event.preventDefault();
+    if (email || username || confirm || password) {
+      return null;
+    }
+
+    const credentials = {
+      email,
+      username,
+      password
+    };
+    if (password === confirm) {
+      userService.makeNewUser(credentials);
+    }
   };
 
   return (
@@ -65,7 +78,7 @@ const Signup = () => {
             class="btn btn-lg btn-primary btn-block"
             type="submit"
           >
-            Login
+            Signup
           </button>
         </div>
         <p class="mt-5 mb-3 text-muted">&copy;2019 Benelov Software</p>
