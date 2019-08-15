@@ -26,6 +26,11 @@ const NavBar = props => {
               Explore
             </Link>
           </li>
+          <li class="nav-item active">
+            <Link class="nav-link" to="/official">
+              Official
+            </Link>
+          </li>
           {props.user && (
             <li class="nav-item active">
               <Link class="nav-link" to="/profile">
