@@ -6,6 +6,7 @@ import Home from './components/public/Home';
 import { connect } from 'react-redux';
 import Signup from './components/public/Signup';
 import MainPosts from './components/public/MainPost/MainPosts';
+import Posts from './components/public/Community/Posts';
 
 const Routes = props => {
   return (
@@ -23,6 +24,7 @@ const Routes = props => {
         render={() => (!props.user ? <Signup /> : <Redirect to="/" />)}
       />
       <Route exact path="/official" render={() => <MainPosts />} />
+      <Route exact path="/community" render={() => <Posts />} />
     </Router>
   );
 };

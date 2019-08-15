@@ -1,14 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initMainPosts } from '../../../reducers/mainReducer';
-import '../../../utils/loadingBar.css';
 
-const MainPosts = props => {
-  useEffect(() => {
-    props.initMainPosts();
-  });
-
-  if (props.mainPost === null) {
+const Posts = props => {
+  if (props.posts === null) {
     return (
       <div class="container text-center">
         <div class="spinner">
@@ -25,11 +19,11 @@ const MainPosts = props => {
 
 const mapStateToProps = state => {
   return {
-    mainPost: state.mainPosts
+    posts: state.posts
   };
 };
 
 export default connect(
   mapStateToProps,
-  { initMainPosts }
-)(MainPosts);
+  null
+)(Posts);

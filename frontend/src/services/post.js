@@ -11,4 +11,9 @@ const getConfig = () => ({
   headers: { Authorization: token }
 });
 
-export default { setToken };
+const getAllPosts = async () => {
+  const response = await axios.get(baseUrl);
+  return response.data;
+};
+
+export default { setToken, getAllPosts };

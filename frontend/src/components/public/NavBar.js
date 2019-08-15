@@ -21,14 +21,19 @@ const NavBar = props => {
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
+          <li class="nav-item">
             <Link class="nav-link" to="/explore">
               Explore
             </Link>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <Link class="nav-link" to="/official">
               Official
+            </Link>
+          </li>
+          <li class="nav-item">
+            <Link class="nav-link" to="/community">
+              Community
             </Link>
           </li>
           {props.user && (
