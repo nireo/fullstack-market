@@ -9,6 +9,7 @@ import MainPosts from './components/public/MainPost/MainPosts';
 import Posts from './components/public/Community/Posts';
 import Notification from './components/public/Notification';
 import SinglePost from './components/public/Community/SinglePost';
+import CreatePost from './components/private/CreatePost';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -39,6 +40,11 @@ const Routes = props => {
             <SinglePost post={findPostWithId(match.params.id)} />
           )
         }
+      />
+      <Route
+        exact
+        path="/create"
+        render={() => (!props.user ? <Redirect to="/" /> : <CreatePost />)}
       />
     </Router>
   );

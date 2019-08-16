@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const SinglePost = props => {
   if (props.post === null) {
@@ -17,8 +18,13 @@ const SinglePost = props => {
           <div class="card" style={{ width: '15rem' }}>
             <div class="card-body">
               <h5 class="card-title">Posted by</h5>
-              <h6 class="card-subtitle text-muted">
-                {props.post.postedBy.username}
+              <h6 class="card-subtitle">
+                <Link
+                  to={`/profile/${props.post.postedBy._id}`}
+                  class="text-muted"
+                >
+                  {props.post.postedBy.username}
+                </Link>
               </h6>
               <div class="row" style={{ paddingTop: '1rem' }}>
                 <div class="col">
