@@ -5,8 +5,10 @@ import '../../../utils/loadingBar.css';
 
 const MainPosts = props => {
   useEffect(() => {
-    props.initMainPosts();
-  });
+    if (props.mainPost === null) {
+      props.initMainPosts();
+    }
+  }, []);
 
   if (props.mainPost === null) {
     return (

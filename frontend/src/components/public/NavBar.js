@@ -37,19 +37,29 @@ const NavBar = props => {
             </Link>
           </li>
           {props.user && (
-            <li class="nav-item active">
+            <li class="nav-item">
               <Link class="nav-link" to="/profile">
                 My Profile
               </Link>
             </li>
           )}
         </ul>
-        <Link to="/login">
-          <button class="btn btn-outline-secondary my-2 my-sm-0">Login</button>
-        </Link>
-        <Link to="signup">
-          <button class="btn btn-outline-primary my-2 my-sm-0">Signup</button>
-        </Link>
+        {!props.user ? (
+          <div>
+            <Link to="/login">
+              <button class="btn btn-outline-secondary my-2 my-sm-0">
+                Login
+              </button>
+            </Link>
+            <Link to="signup">
+              <button class="btn btn-outline-primary my-2 my-sm-0">
+                Signup
+              </button>
+            </Link>
+          </div>
+        ) : (
+          <button class="btn btn-outline-primary my-2 my-sm-0">Log out</button>
+        )}
       </div>
     </nav>
   );

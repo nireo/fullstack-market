@@ -14,7 +14,7 @@ const Signup = props => {
 
   const handleSignup = event => {
     event.preventDefault();
-    if (email || username || confirm || password) {
+    if (email === '' || username === '' || confirm === '' || password === '') {
       return null;
     }
 
