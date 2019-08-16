@@ -59,11 +59,11 @@ const NavBar = props => {
             </li>
           </ul>
         ) : (
-          <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-              <a class="nav-link" onClick={() => props.logOut()}>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <Link class="nav-link" onClick={() => props.logOut()}>
                 Sign out
-              </a>
+              </Link>
             </li>
           </ul>
         )}
