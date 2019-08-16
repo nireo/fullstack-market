@@ -21,4 +21,18 @@ const createNewPost = async newObject => {
   return response.data;
 };
 
-export default { setToken, getAllPosts, createNewPost };
+const deletePost = async postId => {
+  const response = await axios.delete(`${baseUrl}/${postId}`, getConfig());
+  return response.data;
+};
+
+const updatePost = async (postId, newObject) => {
+  const response = await axios.put(
+    `${baseUrl}/${postId}`,
+    newObject,
+    getConfig()
+  );
+  return response.data;
+};
+
+export default { setToken, getAllPosts, createNewPost, deletePost, updatePost };

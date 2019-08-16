@@ -16,4 +16,14 @@ const makeNewUser = async credentials => {
   return response.data;
 };
 
-export default { makeNewUser, setToken };
+const removeUser = async id => {
+  const response = await axios.delete(`${baseUrl}/${id}`, getConfig());
+  return response.data;
+};
+
+const updateUser = async (id, newObject) => {
+  const response = await axios.put(`${baseUrl}/${id}`, newObject, getConfig());
+  return response.data;
+};
+
+export default { makeNewUser, setToken, removeUser, updateUser };
