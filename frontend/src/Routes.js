@@ -32,9 +32,13 @@ const Routes = props => {
       <Route
         exact
         path="/community/post/:id"
-        render={({ match }) => (
-          <SinglePost post={findPostWithId(match.params.id)} />
-        )}
+        render={({ match }) =>
+          !props.posts ? (
+            <Posts />
+          ) : (
+            <SinglePost post={findPostWithId(match.params.id)} />
+          )
+        }
       />
     </Router>
   );
