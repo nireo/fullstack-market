@@ -8,8 +8,10 @@ import Signup from './components/public/Signup';
 import MainPosts from './components/public/MainPost/MainPosts';
 import Posts from './components/public/Community/Posts';
 import Notification from './components/public/Notification';
+import SinglePost from './components/public/Community/SinglePost';
 
 const Routes = props => {
+  const findPostWithId = id => props.posts.find(p => p._id === id);
   return (
     <Router>
       <NavBar />
@@ -27,13 +29,22 @@ const Routes = props => {
       />
       <Route exact path="/official" render={() => <MainPosts />} />
       <Route exact path="/community" render={() => <Posts />} />
+      <Route
+        exact
+        path="/community/post/:id"
+        render={({ match }) => (
+          <SinglePost post={findPostWithId(match.params.id)} />
+        )}
+      />
     </Router>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    posts: state.posts,
+    mainPosts: state.mainPosts
   };
 };
 

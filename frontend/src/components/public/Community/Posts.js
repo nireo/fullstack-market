@@ -26,18 +26,23 @@ const Posts = props => {
     <div class="card" style={{ width: '18rem' }}>
       <div class="card-body">
         <h5 class="card-title">{p.title}</h5>
-        <p class="card-text">{p.content}</p>
+        <h6 class="card-subtitle text-muted">{p.price} $</h6>
+        <p class="card-text">{p.description}</p>
         <Link href="#" class="card-link">
           Add to cart
         </Link>
-        <Link href="#" class="card-link">
+        <Link to={`/community/post/${p._id}`} class="card-link">
           Read more
         </Link>
       </div>
     </div>
   ));
 
-  return <div class="container">{renderPosts}</div>;
+  return (
+    <div class="container" style={{ paddingTop: '1rem' }}>
+      {renderPosts}
+    </div>
+  );
 };
 
 const mapStateToProps = state => {
