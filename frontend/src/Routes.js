@@ -7,11 +7,13 @@ import { connect } from 'react-redux';
 import Signup from './components/public/Signup';
 import MainPosts from './components/public/MainPost/MainPosts';
 import Posts from './components/public/Community/Posts';
+import Notification from './components/public/Notification';
 
 const Routes = props => {
   return (
     <Router>
       <NavBar />
+      <Notification />
       <Route exact path="/" render={() => <Home />} />
       <Route
         exact

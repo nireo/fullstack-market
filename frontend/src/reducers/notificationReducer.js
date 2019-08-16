@@ -9,7 +9,7 @@ const reducer = (state = null, action) => {
   }
 };
 
-export const setMessage = (content, type, time = time * 1000) => {
+export const setNotification = (content, type, time) => {
   return async dispatch => {
     dispatch({
       type: 'SET_NOTIFICATION',
@@ -22,7 +22,7 @@ export const setMessage = (content, type, time = time * 1000) => {
       dispatch({
         type: 'CLEAR_NOTIFICATION'
       });
-    }, time);
+    }, time * 1000);
   };
 };
 

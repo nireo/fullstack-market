@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { handleLogin } from '../../reducers/userReducer';
 import { logOut } from '../../reducers/userReducer';
+import { setNotification } from '../../reducers/notificationReducer';
 
 const Login = props => {
   const [username, setUsername] = useState('');
@@ -26,6 +27,7 @@ const Login = props => {
       password
     };
     props.handleLogin(credentials, rememberMe);
+    props.setNotification('Successfully logged in', 'success', 4);
   };
 
   return (
@@ -88,5 +90,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { handleLogin, logOut }
+  { handleLogin, logOut, setNotification }
 )(Login);
