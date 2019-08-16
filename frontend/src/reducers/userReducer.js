@@ -1,4 +1,5 @@
 import loginService from '../services/login';
+import { setTokens } from '../utils/helpers';
 
 const reducer = (state = null, action) => {
   switch (action.type) {
@@ -18,6 +19,7 @@ export const handleLogin = (credentials, rememberMe) => {
       window.localStorage.setItem('user', JSON.stringify(user));
     }
 
+    setTokens(user.token);
     dispatch({
       type: 'LOG_IN',
       data: user.user
@@ -30,6 +32,7 @@ export const checkLocalStorage = () => {
     const userInfo = localStorage.getItem('user');
     if (userInfo) {
       const userInfoJson = JSON.parse(userInfo);
+      setTokens(userInfoJson.token);
       dispatch({
         type: 'LOG_IN',
         data: userInfoJson.user

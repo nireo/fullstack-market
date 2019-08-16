@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { createPost } from '../../reducers/postReducer';
+import { setNotification } from '../../reducers/notificationReducer';
 
-const CreatePost = () => {
+const CreatePost = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
+
+  const handleCreation = event => {
+    event.preventDefault();
+    const newObject = {
+      title,
+      description,
+      price
+    };
+    props.createPost();
+    props.setNotification('Something went wrong', 'error', 2);
+  };
+
   return (
     <div class="container">
-      <form>
+      <form onSubmit={handleCreation}>
         <div class="form-group">
           <label>Title</label>
           <input
@@ -49,5 +63,5 @@ const CreatePost = () => {
 
 export default connect(
   null,
-  null
+  { createPost, setNotification }
 )(CreatePost);
