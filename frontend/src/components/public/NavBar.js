@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { logOut } from '../../reducers/userReducer';
 
 const NavBar = props => {
   return (
@@ -45,20 +46,26 @@ const NavBar = props => {
           )}
         </ul>
         {!props.user ? (
-          <div>
-            <Link to="/login">
-              <button class="btn btn-outline-secondary my-2 my-sm-0">
+          <ul class="navbar-nav">
+            <li>
+              <Link to="/login" class="nav-link">
                 Login
-              </button>
-            </Link>
-            <Link to="signup">
-              <button class="btn btn-outline-primary my-2 my-sm-0">
+              </Link>
+            </li>
+            <li>
+              <Link to="signup" class="nav-link">
                 Signup
-              </button>
-            </Link>
-          </div>
+              </Link>
+            </li>
+          </ul>
         ) : (
-          <button class="btn btn-outline-primary my-2 my-sm-0">Log out</button>
+          <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+              <a class="nav-link" onClick={() => props.logOut()}>
+                Sign out
+              </a>
+            </li>
+          </ul>
         )}
       </div>
     </nav>
@@ -73,5 +80,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { logOut }
 )(NavBar);

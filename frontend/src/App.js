@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Routes from './Routes';
+import { connect } from 'react-redux';
+import { checkLocalStorage } from './reducers/userReducer';
 import './components/styles.css';
 
-const App = () => {
+const App = props => {
+  useEffect(() => {
+    if (props.user === null) {
+      props.checkLocalStorage();
+    }
+  }, []);
+
   return (
     <div class="animation-delays animate fadeIn">
       <Routes />
@@ -10,4 +18,13 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { checkLocalStorage }
+)(App);
