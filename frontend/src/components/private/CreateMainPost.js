@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { createPost } from '../../reducers/postReducer';
-import { setNotification } from '../../reducers/notificationReducer';
 import PostForm from './PostForm';
 
-const CreatePost = props => {
+const CreateMainPost = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
 
   const handleCreation = event => {
     event.preventDefault();
-    const newObject = {
-      title,
-      description,
-      price
-    };
-    props.createPost(newObject);
-    props.setNotification('Post added', 'success', 2);
   };
 
   return (
@@ -33,7 +23,4 @@ const CreatePost = props => {
   );
 };
 
-export default connect(
-  null,
-  { createPost, setNotification }
-)(CreatePost);
+export default CreateMainPost;

@@ -12,15 +12,15 @@ const reducer = (state = null, action) => {
 };
 
 export const clearCart = () => {
-  dispatch({ type: 'CLEAR_CART' });
+  return { type: 'CLEAR_CART' };
 };
 
 export const addItemToCart = itemId => {
-  dispatch({ type: 'ADD_NEW_ITEM', data: itemId });
+  return { type: 'ADD_NEW_ITEM', data: itemId };
 };
 
 export const removeItemFromCart = itemId => {
-  dispatch({ type: 'REMOVE_ITEM', id: itemId });
+  return { type: 'REMOVE_ITEM', id: itemId };
 };
 
 export default reducer;

@@ -10,6 +10,7 @@ import Posts from './components/public/Community/Posts';
 import Notification from './components/public/Notification';
 import SinglePost from './components/public/Community/SinglePost';
 import CreatePost from './components/private/CreatePost';
+import CreateMainPost from './components/private/CreateMainPost';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -45,6 +46,19 @@ const Routes = props => {
         exact
         path="/create"
         render={() => (!props.user ? <Redirect to="/" /> : <CreatePost />)}
+      />
+      <Route
+        exact
+        path="/create/main"
+        render={() => {
+          if (props.user) {
+            if (props.user.username === 'admin') {
+              return <CreateMainPost />;
+            }
+            return <Redirect to="/" />;
+          }
+          return <Redirect to="/" />;
+        }}
       />
     </Router>
   );
