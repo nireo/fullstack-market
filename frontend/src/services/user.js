@@ -11,6 +11,11 @@ const getConfig = () => ({
   headers: { Authorization: token }
 });
 
+const initUsers = async () => {
+  const response = await axios.get(baseUrl);
+  return response.data;
+};
+
 const makeNewUser = async credentials => {
   const response = await axios.post(baseUrl, credentials);
   return response.data;
@@ -26,4 +31,4 @@ const updateUser = async (id, newObject) => {
   return response.data;
 };
 
-export default { makeNewUser, setToken, removeUser, updateUser };
+export default { makeNewUser, setToken, removeUser, updateUser, initUsers };
