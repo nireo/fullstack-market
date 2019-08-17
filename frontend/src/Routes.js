@@ -11,6 +11,7 @@ import Notification from './components/public/Notification';
 import SinglePost from './components/public/Community/SinglePost';
 import CreatePost from './components/private/CreatePost';
 import CreateMainPost from './components/private/CreateMainPost';
+import AdminPanel from './components/private/admin/AdminPanel';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -59,6 +60,17 @@ const Routes = props => {
           }
           return <Redirect to="/" />;
         }}
+      />
+      <Route
+        exact
+        path="/admin"
+        render={() =>
+          props.user && props.user.username === 'admin' ? (
+            <AdminPanel />
+          ) : (
+            <Redirect to="/" />
+          )
+        }
       />
     </Router>
   );

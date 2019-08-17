@@ -9,7 +9,7 @@ const reducer = (state = null, action) => {
     case 'CREATE_MAIN_POST':
       return [...state, action.data];
     case 'UPDATE_MAIN_POST':
-      return state.map(p => (p.id === action.data._id ? action.data : p));
+      return state.map(p => (p._id === action.data._id ? action.data : p));
     default:
       return state;
   }

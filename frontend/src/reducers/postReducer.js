@@ -6,6 +6,10 @@ const reducer = (state = null, action) => {
       return action.data;
     case 'CREATE_NEW_POST':
       return [...state, action.data];
+    case 'REMOVE_POST':
+      return state.filter(p => p._id !== action.id);
+    case 'UPDATE_POST':
+      return state.map(p => (p._id === action.data._id ? action.data : p));
     default:
       return state;
   }
@@ -26,6 +30,26 @@ export const createPost = newObject => {
     const post = await postService.createNewPost(newObject);
     dispatch({
       type: 'CREATE_NEW_POST',
+      data: post
+    });
+  };
+};
+
+export const removePost = id => {
+  return async dispatch => {
+    await postService.deletePost(id);
+    dispatch({
+      type: 'REMOVE_POST',
+      id: id
+    });
+  };
+};
+
+export const updatePost = (id, newObject) => {
+  return async dispatch => {
+    const post = await postService.updatePost(id, newObject);
+    dispatch({
+      type: 'UPDATE_POST',
       data: post
     });
   };

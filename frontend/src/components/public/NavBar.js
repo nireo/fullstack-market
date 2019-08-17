@@ -55,9 +55,19 @@ const NavBar = props => {
             ))}
           {props.user &&
             (props.user.username === 'admin' && (
-              <Link class="nav-link" to={`/create/main`}>
-                Create Official Post
-              </Link>
+              <li class="nav-item">
+                <Link class="nav-link" to={`/create/main`}>
+                  Create Post
+                </Link>
+              </li>
+            ))}
+          {props.user &&
+            (props.user.username === 'admin' && (
+              <li class="nav-item">
+                <Link class="nav-link" to="/admin">
+                  Admin panel
+                </Link>
+              </li>
             ))}
         </ul>
         {!props.user ? (
