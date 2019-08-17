@@ -30,14 +30,16 @@ const UserManager = props => {
       <td>{u.posts.length}</td>
       <td>{u.reviewsPosted.length}</td>
       <td>
-        <Link class="nav-link">Delete</Link>
+        <Link class="nav-link" style={{ color: 'black' }}>
+          Delete
+        </Link>
       </td>
     </tr>
   ));
 
   return (
     <div class="container">
-      <h2>Users</h2>
+      <h4>Users</h4>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>

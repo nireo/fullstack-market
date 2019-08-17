@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const postModel = require('./postModel');
+const userModel = require('../user/userModel');
 const { getToken } = require('../../utils/helper');
 const config = require('../../utils/config');
 
@@ -28,6 +29,8 @@ exports.createPost = async (req, res, next) => {
         error: 'invalid token'
       });
     }
+
+    const user = await userModel.findById(decodedToken.id);
     const newPost = new postModel({
       title,
       description,
@@ -37,6 +40,8 @@ exports.createPost = async (req, res, next) => {
     });
 
     const savedPost = await newPost.save();
+    user.posts = user.posts.concat(savedPost);
+    await user.save();
     return res.json(savedPost);
   } catch (e) {
     next(e);

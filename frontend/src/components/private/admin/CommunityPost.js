@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initMainPosts } from '../../../reducers/mainReducer';
+import { initPosts } from '../../../reducers/postReducer';
+import { Link } from 'react-router-dom';
 
-const MainPostManager = props => {
+const CommunityPost = props => {
   useEffect(() => {
-    if (props.mainPosts === null) {
-      props.initMainPosts();
+    if (props.posts === null) {
+      props.initPosts();
     }
   }, []);
-  if (props.mainPosts === null) {
+  if (props.posts === null) {
     return (
       <div class="container text-center">
         <div class="spinner">
@@ -20,21 +21,22 @@ const MainPostManager = props => {
     );
   }
 
-  const renderMainPosts = props.mainPosts.map(m => (
+  const renderPosts = props.posts.map(p => (
     <tr>
-      <td>{m._id}</td>
-      <td>{m.title}</td>
-      <td>{m.description}</td>
-      <td>{m.price}</td>
+      <td>{p._id}</td>
+      <td>{p.title}</td>
+      <td>{p.description}</td>
+      <td>{p.price}</td>
       <td>
-        <button class="nav-link">Delete</button>
+        <Link class="nav-link" style={{ color: 'black' }}>
+          Delete
+        </Link>
       </td>
     </tr>
   ));
-
   return (
     <div class="container">
-      <h4>Main Posts</h4>
+      <h4>Community posts</h4>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
@@ -46,7 +48,7 @@ const MainPostManager = props => {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{renderMainPosts}</tbody>
+          <tbody>{renderPosts}</tbody>
         </table>
       </div>
     </div>
@@ -55,11 +57,11 @@ const MainPostManager = props => {
 
 const mapStateToProps = state => {
   return {
-    mainPosts: state.mainPosts
+    posts: state.posts
   };
 };
 
 export default connect(
   mapStateToProps,
-  { initMainPosts }
-)(MainPostManager);
+  { initPosts }
+)(CommunityPost);
