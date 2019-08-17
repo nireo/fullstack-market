@@ -23,11 +23,13 @@ const Posts = props => {
   }
 
   const renderPosts = props.posts.map(p => (
-    <div class="card" style={{ width: '18rem' }}>
+    <div class="card" style={{ width: '20rem' }}>
       <div class="card-body">
         <h5 class="card-title">{p.title}</h5>
         <h6 class="card-subtitle text-muted">{p.price} $</h6>
-        <p class="card-text">{p.description}</p>
+        <p class="card-text" style={{ paddingBottom: '1rem' }}>
+          {p.description}
+        </p>
         <Link href="#" class="card-link">
           Add to cart
         </Link>

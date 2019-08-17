@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initMainPosts } from '../../../reducers/mainReducer';
+import { initUsers } from '../../../reducers/allUsersReducer';
+import { Link } from 'react-router-dom';
 
-const MainPostManager = props => {
+const UserManager = props => {
   useEffect(() => {
-    if (props.mainPosts === null) {
-      props.initMainPosts();
+    if (props.users === null) {
+      props.initUsers();
     }
   }, []);
-  if (props.mainPosts === null) {
+
+  if (props.users === null) {
     return (
       <div class="container text-center">
         <div class="spinner">
@@ -20,33 +22,35 @@ const MainPostManager = props => {
     );
   }
 
-  const renderMainPosts = props.mainPosts.map(m => (
+  const renderUsers = props.users.map(u => (
     <tr>
-      <td>{m._id}</td>
-      <td>{m.title}</td>
-      <td>{m.description}</td>
-      <td>{m.price}</td>
+      <td>{u._id}</td>
+      <td>{u.username}</td>
+      <td>{u.email}</td>
+      <td>{u.posts.length}</td>
+      <td>{u.reviewsPosted.length}</td>
       <td>
-        <button class="nav-link">Delete</button>
+        <Link class="nav-link">Delete</Link>
       </td>
     </tr>
   ));
 
   return (
     <div class="container">
-      <h2>Main Posts</h2>
+      <h2>Users</h2>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Price</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Posts</th>
+              <th>Reviews</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{renderMainPosts}</tbody>
+          <tbody>{renderUsers}</tbody>
         </table>
       </div>
     </div>
@@ -55,11 +59,11 @@ const MainPostManager = props => {
 
 const mapStateToProps = state => {
   return {
-    mainPosts: state.mainPosts
+    users: state.allUsers
   };
 };
 
 export default connect(
   mapStateToProps,
-  { initMainPosts }
-)(MainPostManager);
+  { initUsers }
+)(UserManager);

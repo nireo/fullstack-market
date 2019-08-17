@@ -15,6 +15,7 @@ const About = () => {
         </div>
         <div class="col">
           <p>Image</p>
+          {'<h1>this is great</h1>'}
         </div>
       </div>
     </div>

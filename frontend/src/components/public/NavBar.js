@@ -37,13 +37,14 @@ const NavBar = props => {
               Community
             </Link>
           </li>
-          {props.user && (
-            <li class="nav-item">
-              <Link class="nav-link" to={`/profile/${props.user._id}`}>
-                My Profile
-              </Link>
-            </li>
-          )}
+          {props.user &&
+            (props.user.username !== 'admin' && (
+              <li class="nav-item">
+                <Link class="nav-link" to={`/profile/${props.user._id}`}>
+                  My Profile
+                </Link>
+              </li>
+            ))}
           {props.user &&
             // hide normal posts from admin since no use
             (props.user.username !== 'admin' && (
