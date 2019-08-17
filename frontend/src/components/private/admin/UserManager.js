@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initUsers } from '../../../reducers/allUsersReducer';
+import { initUsers, removeUser } from '../../../reducers/allUsersReducer';
 import { Link } from 'react-router-dom';
 
 const UserManager = props => {
@@ -22,6 +22,12 @@ const UserManager = props => {
     );
   }
 
+  const handleRemove = id => {
+    if (window.confirm('Are you sure you want to delete ID: ' + id)) {
+      props.removeUser(id);
+    }
+  };
+
   const renderUsers = props.users.map(u => (
     <tr>
       <td>{u._id}</td>
@@ -30,7 +36,11 @@ const UserManager = props => {
       <td>{u.posts.length}</td>
       <td>{u.reviewsPosted.length}</td>
       <td>
-        <Link class="nav-link" style={{ color: 'black' }}>
+        <Link
+          class="nav-link"
+          style={{ color: 'black' }}
+          onClick={() => handleRemove(u._id)}
+        >
           Delete
         </Link>
       </td>
@@ -67,5 +77,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initUsers }
+  { initUsers, removeUser }
 )(UserManager);

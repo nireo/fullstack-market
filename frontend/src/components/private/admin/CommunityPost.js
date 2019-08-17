@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initPosts } from '../../../reducers/postReducer';
+import { initPosts, removePost } from '../../../reducers/postReducer';
 import { Link } from 'react-router-dom';
 
 const CommunityPost = props => {
@@ -21,6 +21,12 @@ const CommunityPost = props => {
     );
   }
 
+  const handleRemove = id => {
+    if (window.confirm('Are you sure you want to delete ID: ' + id)) {
+      props.removePost(id);
+    }
+  };
+
   const renderPosts = props.posts.map(p => (
     <tr>
       <td>{p._id}</td>
@@ -28,7 +34,11 @@ const CommunityPost = props => {
       <td>{p.description}</td>
       <td>{p.price}</td>
       <td>
-        <Link class="nav-link" style={{ color: 'black' }}>
+        <Link
+          class="nav-link"
+          style={{ color: 'black' }}
+          onClick={() => handleRemove(p._id)}
+        >
           Delete
         </Link>
       </td>
@@ -63,5 +73,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initPosts }
+  { initPosts, removePost }
 )(CommunityPost);

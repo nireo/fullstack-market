@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { initMainPosts } from '../../../reducers/mainReducer';
+import { initMainPosts, removeMainPost } from '../../../reducers/mainReducer';
+import { Link } from 'react-router-dom';
 
 const MainPostManager = props => {
   useEffect(() => {
@@ -20,6 +21,12 @@ const MainPostManager = props => {
     );
   }
 
+  const handleRemove = id => {
+    if (window.confirm('Are you sure you want to delete ID: ' + id)) {
+      props.removeMainPost(id);
+    }
+  };
+
   const renderMainPosts = props.mainPosts.map(m => (
     <tr>
       <td>{m._id}</td>
@@ -27,7 +34,13 @@ const MainPostManager = props => {
       <td>{m.description}</td>
       <td>{m.price}</td>
       <td>
-        <button class="nav-link">Delete</button>
+        <Link
+          class="nav-link"
+          style={{ color: 'black' }}
+          onClick={() => handleRemove(m._id)}
+        >
+          Delete
+        </Link>
       </td>
     </tr>
   ));
@@ -61,5 +74,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initMainPosts }
+  { initMainPosts, removeMainPost }
 )(MainPostManager);
