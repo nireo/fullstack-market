@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initPosts, removePost } from '../../../reducers/postReducer';
 import { Link } from 'react-router-dom';
 
 const CommunityPost = props => {
+  const [search, setSearch] = useState('');
   useEffect(() => {
     if (props.posts === null) {
       props.initPosts();
@@ -27,7 +28,13 @@ const CommunityPost = props => {
     }
   };
 
-  const renderPosts = props.posts.map(p => (
+  const filteredSearch = search
+    ? props.posts.filter(p =>
+        p.title.toLowerCase().includes(search.toLowerCase())
+      )
+    : props.posts;
+
+  const renderPosts = filteredSearch.map(p => (
     <tr>
       <td>{p._id}</td>
       <td>{p.title}</td>
@@ -47,6 +54,15 @@ const CommunityPost = props => {
   return (
     <div class="container">
       <h4>Community posts</h4>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search users"
+          value={search}
+          onChange={({ target }) => setSearch(target.value)}
+        />
+      </div>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>

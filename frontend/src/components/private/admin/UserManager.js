@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initUsers, removeUser } from '../../../reducers/allUsersReducer';
 import { Link } from 'react-router-dom';
 
 const UserManager = props => {
+  const [search, setSearch] = useState('');
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -28,7 +29,13 @@ const UserManager = props => {
     }
   };
 
-  const renderUsers = props.users.map(u => (
+  const filteredSearch = search
+    ? props.users.filter(u =>
+        u.username.toLowerCase().includes(search.toLowerCase())
+      )
+    : props.users;
+
+  const renderUsers = filteredSearch.map(u => (
     <tr>
       <td>{u._id}</td>
       <td>{u.username}</td>
@@ -50,6 +57,15 @@ const UserManager = props => {
   return (
     <div class="container">
       <h4>Users</h4>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search users"
+          value={search}
+          onChange={({ target }) => setSearch(target.value)}
+        />
+      </div>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>

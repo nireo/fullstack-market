@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initMainPosts, removeMainPost } from '../../../reducers/mainReducer';
 import { Link } from 'react-router-dom';
 
 const MainPostManager = props => {
+  const [search, setSearch] = useState('');
   useEffect(() => {
     if (props.mainPosts === null) {
       props.initMainPosts();
@@ -27,7 +28,13 @@ const MainPostManager = props => {
     }
   };
 
-  const renderMainPosts = props.mainPosts.map(m => (
+  const filteredSearch = search
+    ? props.mainPosts.filter(p =>
+        p.title.toLowerCase().includes(search.toLowerCase())
+      )
+    : props.mainPosts;
+
+  const renderMainPosts = filteredSearch.map(m => (
     <tr>
       <td>{m._id}</td>
       <td>{m.title}</td>
@@ -48,6 +55,15 @@ const MainPostManager = props => {
   return (
     <div class="container">
       <h4>Main Posts</h4>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search main posts"
+          value={search}
+          onChange={({ target }) => setSearch(target.value)}
+        />
+      </div>
       <div class="table-responsive">
         <table class="table table-striped table-sm">
           <thead>
