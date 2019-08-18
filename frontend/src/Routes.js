@@ -15,6 +15,7 @@ import AdminPanel from './components/private/admin/AdminPanel';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
+  const findMainPostWithId = id => props.mainPosts.find(p => p._id === id);
   return (
     <Router>
       <NavBar />
@@ -37,7 +38,7 @@ const Routes = props => {
         path="/community/post/:id"
         render={({ match }) =>
           !props.posts ? (
-            <Posts />
+            <Posts type="community" />
           ) : (
             <SinglePost post={findPostWithId(match.params.id)} />
           )
@@ -70,6 +71,13 @@ const Routes = props => {
           ) : (
             <Redirect to="/" />
           )
+        }
+      />
+      <Route
+        exact
+        path="/official/:id"
+        render={({ match }) =>
+          props.mainPosts(findMainPostWithId(match.params.id))
         }
       />
     </Router>
