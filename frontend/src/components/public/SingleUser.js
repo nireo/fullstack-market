@@ -9,6 +9,15 @@ const SingleUser = props => {
     </tr>
   ));
 
+  const renderReviews = props.user.reviewsPosted.map(r => (
+    <tr>
+      <td>{r.title}</td>
+      <td>{r.description}</td>
+      <td>{r.stars}</td>
+      <td>{r.recommend ? 'True' : 'False'}</td>
+    </tr>
+  ));
+
   return (
     <div class="container">
       <h2>{props.user.username}</h2>
@@ -23,6 +32,20 @@ const SingleUser = props => {
             </tr>
           </thead>
           <tbody>{renderPosts}</tbody>
+        </table>
+      </div>
+      <hr />
+      <h4>Reviews</h4>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Stars</th>
+              <th>Recommended</th>
+            </tr>
+          </thead>
         </table>
       </div>
     </div>
