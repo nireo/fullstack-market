@@ -29,4 +29,9 @@ const postCommunityReview = async (postId, newObject) => {
   return response.data;
 };
 
-export default { setToken, postMainReview, postCommunityReview };
+const removeReview = async reviewId => {
+  const response = await axios.delete(`${baseUrl}/${reviewId}`, getConfig());
+  return response.data;
+};
+
+export default { setToken, postMainReview, postCommunityReview, removeReview };
