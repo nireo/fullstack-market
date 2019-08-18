@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { initMainPosts } from '../../../reducers/mainReducer';
 import '../../../utils/loadingBar.css';
+import Loading from '../../Loading';
 
 const MainPosts = props => {
   useEffect(() => {
@@ -11,15 +12,7 @@ const MainPosts = props => {
   }, []);
 
   if (props.mainPost === null) {
-    return (
-      <div class="container text-center">
-        <div class="spinner">
-          <div class="bounce1" />
-          <div class="bounce2" />
-          <div class="bounce3" />
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   return <div />;

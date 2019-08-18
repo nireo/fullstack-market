@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { initPosts } from '../../../reducers/postReducer';
+import Loading from '../../Loading';
 
 const Posts = props => {
   useEffect(() => {
@@ -11,15 +12,7 @@ const Posts = props => {
   }, []);
 
   if (props.posts === null) {
-    return (
-      <div class="container text-center">
-        <div class="spinner">
-          <div class="bounce1" />
-          <div class="bounce2" />
-          <div class="bounce3" />
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   const renderPosts = props.posts.map(p => (

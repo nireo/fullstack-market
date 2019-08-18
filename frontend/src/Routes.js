@@ -12,6 +12,7 @@ import SinglePost from './components/public/Community/SinglePost';
 import CreatePost from './components/private/CreatePost';
 import CreateMainPost from './components/private/CreateMainPost';
 import AdminPanel from './components/private/admin/AdminPanel';
+import Users from './components/public/Users';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -65,6 +66,7 @@ const Routes = props => {
       <Route
         exact
         path="/admin"
+        Users
         render={() =>
           props.user && props.user.username === 'admin' ? (
             <AdminPanel />
@@ -80,6 +82,7 @@ const Routes = props => {
           props.mainPosts(findMainPostWithId(match.params.id))
         }
       />
+      <Route exact path="/users" render={() => <Users />} />
     </Router>
   );
 };

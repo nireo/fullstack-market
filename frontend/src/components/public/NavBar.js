@@ -70,6 +70,11 @@ const NavBar = props => {
                 </Link>
               </li>
             ))}
+          <li class="nav-item">
+            <Link class="nav-link" to="/users">
+              Users
+            </Link>
+          </li>
         </ul>
         {!props.user ? (
           <ul class="navbar-nav">

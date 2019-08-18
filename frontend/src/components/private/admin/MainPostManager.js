@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initMainPosts, removeMainPost } from '../../../reducers/mainReducer';
 import { Link } from 'react-router-dom';
+import Loading from '../../Loading';
 
 const MainPostManager = props => {
   const [search, setSearch] = useState('');
@@ -11,15 +12,7 @@ const MainPostManager = props => {
     }
   }, []);
   if (props.mainPosts === null) {
-    return (
-      <div class="container text-center">
-        <div class="spinner">
-          <div class="bounce1" />
-          <div class="bounce2" />
-          <div class="bounce3" />
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   const handleRemove = id => {
