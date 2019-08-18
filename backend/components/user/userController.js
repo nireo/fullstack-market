@@ -5,7 +5,8 @@ exports.getAllUsers = async (req, res, next) => {
   try {
     await userModel
       .find({})
-      .populate('reviews')
+      .populate('reviewsPosted')
+      .populate('posts')
       .exec((err, results) => {
         if (err) return res.status(500);
 

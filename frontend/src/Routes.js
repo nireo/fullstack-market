@@ -13,10 +13,19 @@ import CreatePost from './components/private/CreatePost';
 import CreateMainPost from './components/private/CreateMainPost';
 import AdminPanel from './components/private/admin/AdminPanel';
 import Users from './components/public/Users';
+import SingleUser from './components/public/SingleUser';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
   const findMainPostWithId = id => props.mainPosts.find(p => p._id === id);
+  const findUserWithId = id => {
+    const user = props.users.find(u => u._id === id);
+    // since we don't want a public admin profile
+    if (user.username === 'admin') {
+      return null;
+    }
+    return user;
+  };
   return (
     <Router>
       <NavBar />
@@ -83,6 +92,13 @@ const Routes = props => {
         }
       />
       <Route exact path="/users" render={() => <Users />} />
+      <Route
+        exact
+        path="/profile/:id"
+        render={({ match }) => (
+          <SingleUser user={findUserWithId(match.params.id)} />
+        )}
+      />
     </Router>
   );
 };
@@ -91,7 +107,8 @@ const mapStateToProps = state => {
   return {
     user: state.user,
     posts: state.posts,
-    mainPosts: state.mainPosts
+    mainPosts: state.mainPosts,
+    users: state.allUsers
   };
 };
 
