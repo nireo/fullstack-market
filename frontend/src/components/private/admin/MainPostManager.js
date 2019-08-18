@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { initMainPosts, removeMainPost } from '../../../reducers/mainReducer';
 import { Link } from 'react-router-dom';
 import Loading from '../../Loading';
+import { setNotification } from '../../../reducers/notificationReducer';
 
 const MainPostManager = props => {
   const [search, setSearch] = useState('');
@@ -18,6 +19,7 @@ const MainPostManager = props => {
   const handleRemove = id => {
     if (window.confirm('Are you sure you want to delete ID: ' + id)) {
       props.removeMainPost(id);
+      props.setNotification(`Post ID: ${id} has been deleted`, 'success', 2);
     }
   };
 
@@ -83,5 +85,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initMainPosts, removeMainPost }
+  { initMainPosts, removeMainPost, setNotification }
 )(MainPostManager);
