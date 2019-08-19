@@ -14,6 +14,7 @@ import CreateMainPost from './components/private/CreateMainPost';
 import AdminPanel from './components/private/admin/AdminPanel';
 import Users from './components/public/Users';
 import SingleUser from './components/public/SingleUser';
+import Cart from './components/private/Cart';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -98,6 +99,11 @@ const Routes = props => {
         render={({ match }) => (
           <SingleUser user={findUserWithId(match.params.id)} />
         )}
+      />
+      <Route
+        exact
+        path="/cart"
+        render={() => (props.user ? <Cart /> : <Redirect to="/" />)}
       />
     </Router>
   );

@@ -14,7 +14,7 @@ const SinglePost = props => {
           <h3 class="text-muted">{props.post.price} $</h3>
           <p>{props.post.description}</p>
         </div>
-        {props.type === 'community' && (
+        {!props.type && (
           <div class="col">
             <div class="card" style={{ width: '15rem' }}>
               <div class="card-body">
