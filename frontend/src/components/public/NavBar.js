@@ -24,33 +24,25 @@ const NavBar = props => {
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <Link class="nav-link" to="/explore">
-              Explore
+              <i class="fas fa-search" /> Explore
             </Link>
           </li>
           <li class="nav-item">
             <Link class="nav-link" to="/official">
-              Official
+              <i class="far fa-building" /> Official
             </Link>
           </li>
           <li class="nav-item">
             <Link class="nav-link" to="/community">
-              Community
+              <i class="fas fa-city" /> Community
             </Link>
           </li>
-          {props.user &&
-            (props.user.username !== 'admin' && (
-              <li class="nav-item">
-                <Link class="nav-link" to={`/profile/${props.user._id}`}>
-                  My Profile
-                </Link>
-              </li>
-            ))}
           {props.user &&
             // hide normal posts from admin since no use
             (props.user.username !== 'admin' && (
               <li class="nav-item">
                 <Link class="nav-link" to={`/create`}>
-                  Create Post
+                  <i class="fas fa-plus" /> Create Post
                 </Link>
               </li>
             ))}
@@ -58,7 +50,7 @@ const NavBar = props => {
             (props.user.username === 'admin' && (
               <li class="nav-item">
                 <Link class="nav-link" to={`/create/main`}>
-                  Create Post
+                  <i class="fas fa-plus" /> Create Post
                 </Link>
               </li>
             ))}
@@ -66,13 +58,13 @@ const NavBar = props => {
             (props.user.username === 'admin' && (
               <li class="nav-item">
                 <Link class="nav-link" to="/admin">
-                  Admin panel
+                  <i class="fas fa-chart-line" /> Admin panel
                 </Link>
               </li>
             ))}
           <li class="nav-item">
             <Link class="nav-link" to="/users">
-              Users
+              <i class="fas fa-users" /> Users
             </Link>
           </li>
         </ul>
@@ -92,7 +84,13 @@ const NavBar = props => {
         ) : (
           <ul class="navbar-nav">
             <li class="nav-item">
+              <Link class="nav-link" to="/cart">
+                <i class="fas fa-cart-plus" /> Cart
+              </Link>
+            </li>
+            <li class="nav-item">
               <Link class="nav-link" onClick={() => props.logOut()}>
+                <i class="fas fa-sign-out-alt" />
                 Sign out
               </Link>
             </li>
