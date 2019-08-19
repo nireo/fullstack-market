@@ -64,7 +64,7 @@ exports.deleteUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res, next) => {
-  const { email, username } = req.body;
+  const { email, username, bio } = req.body;
   const token = getToken(req);
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
@@ -76,14 +76,54 @@ exports.updateUser = async (req, res, next) => {
 
     const user = await userModel.findById(req.params.id);
     const updatedUser = {
-      email,
-      username,
-      passwordHash: user.passwordHash
+      email: email ? email : user.email,
+      username: username ? username : user.username,
+      bio: bio ? bio : user.bio
     };
     if (decodedToken.id === user.id || decodedToken.username === 'admin') {
       const saved = await userModel.findByIdAndUpdate(user._id, updatedUser);
       return res.json(saved);
     }
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.buyMainItems = async (req, res, next) => {
+  const token = getToken(req);
+  const { postIds } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+    const user = await userModel.findById(decodedToken.id);
+    postIds.forEach(p => {
+      user.mainItemsBought.concat(p);
+    });
+    await user.save();
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.buyCommunityItems = async (req, res, next) => {
+  const token = getToken(req);
+  const { postIds } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+    const user = await userModel.findById(decodedToken.id);
+    postIds.forEach(p => {
+      user.communityItemsBought.concat(p);
+    });
+    await user.save();
   } catch (e) {
     next(e);
   }

@@ -46,6 +46,7 @@ const SingleUser = props => {
               <th>Recommended</th>
             </tr>
           </thead>
+          <tbody>{renderReviews}</tbody>
         </table>
       </div>
     </div>

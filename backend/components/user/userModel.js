@@ -29,6 +29,23 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Post'
     }
+  ],
+  bio: {
+    type: String,
+    max: 350,
+    default: 'No bio specified'
+  },
+  communityItemsBought: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
+  mainItemsBought: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Main'
+    }
   ]
 });
 
