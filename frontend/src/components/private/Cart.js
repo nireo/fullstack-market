@@ -9,6 +9,7 @@ const Cart = props => {
       </div>
     );
   }
+  console.log(props.cart);
   const renderCartItems = props.cart.map(i => (
     <div>
       <hr />
