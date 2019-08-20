@@ -5,6 +5,9 @@ const reducer = (state = null, action) => {
     case 'INIT_POSTS':
       return action.data;
     case 'CREATE_NEW_POST':
+      if (state === null) {
+        return action.data;
+      }
       return [...state, action.data];
     case 'REMOVE_POST':
       return state.filter(p => p._id !== action.id);

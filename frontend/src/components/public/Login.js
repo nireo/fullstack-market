@@ -28,11 +28,7 @@ const Login = props => {
     };
     try {
       props.handleLogin(credentials, rememberMe);
-      if (props.user !== null) {
-        props.setNotification('Successfully logged in', 'success', 2);
-      } else {
-        props.setNotification('Wrong credentials', 'error', 2);
-      }
+      props.setNotification('Logged in successfully', 'success', 2);
     } catch {
       props.setNotification('Something went wrong', 'error', 2);
     }

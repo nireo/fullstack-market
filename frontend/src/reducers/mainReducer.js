@@ -7,6 +7,9 @@ const reducer = (state = null, action) => {
     case 'REMOVE_MAIN_POST':
       return state.filter(p => p._id !== action.id);
     case 'CREATE_MAIN_POST':
+      if (state === null) {
+        return action.data;
+      }
       return [...state, action.data];
     case 'UPDATE_MAIN_POST':
       return state.map(p => (p._id === action.data._id ? action.data : p));

@@ -24,6 +24,7 @@ const PostForm = props => {
             onChange={({ target }) => props.setPrice(target.value)}
             required
             min={0}
+            step={0.01}
           />
         </div>
         <div class="form-group">

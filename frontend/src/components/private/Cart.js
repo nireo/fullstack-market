@@ -22,6 +22,7 @@ const Cart = props => {
     <div class="container">
       <h2 style={{ paddingBottom: '2em' }}>Your cart</h2>
       {renderCartItems}
+      <hr />
     </div>
   );
 };

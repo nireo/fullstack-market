@@ -38,7 +38,7 @@ const Posts = props => {
           <p class="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 250)}
           </p>
-          <Link href="#" class="card-link" onClick={() => addToCart(p)}>
+          <Link class="card-link" onClick={() => addToCart(p)}>
             Add to cart
           </Link>
           <Link to={`/community/post/${p._id}`} class="card-link">
