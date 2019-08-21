@@ -16,6 +16,7 @@ import Users from './components/public/Users';
 import SingleUser from './components/public/SingleUser';
 import Cart from './components/private/Cart';
 import Chat from './components/public/Chat';
+import NotFound from './components/public/NotFound';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -106,7 +107,13 @@ const Routes = props => {
         path="/cart"
         render={() => (props.user ? <Cart /> : <Redirect to="/" />)}
       />
-      <Route exact path="/chat" render={() => <Chat />} />
+      <Route
+        exact
+        path="/chat"
+        render={() => (props.user ? <Chat /> : <Redirect to="/" />)}
+      />
+      <Route path="/404" render={() => <NotFound />} />
+      <Redirect from="*" to="/404" />
     </Router>
   );
 };

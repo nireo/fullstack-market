@@ -62,6 +62,13 @@ const NavBar = props => {
                 </Link>
               </li>
             ))}
+          {props.user && (
+            <li class="nav-item">
+              <Link class="nav-link" to="/chat">
+                <i class="far fa-comments" /> Chat
+              </Link>
+            </li>
+          )}
           <li class="nav-item">
             <Link class="nav-link" to="/users">
               <i class="fas fa-users" /> Users

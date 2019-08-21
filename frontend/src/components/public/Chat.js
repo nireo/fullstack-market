@@ -44,7 +44,9 @@ const Chat = props => {
     <div class="container" style={{ paddingTop: '2rem' }}>
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
-        <ul>{renderMessages}</ul>
+        <hr />
+        <ul style={{ listStyleType: 'none' }}>{renderMessages}</ul>
+        <hr />
         <div class="form-group">
           <input
             class="form-control"
@@ -53,6 +55,7 @@ const Chat = props => {
             onChange={({ target }) => setMessage(target.value)}
           />
         </div>
+
         <button type="submit" class="btn btn-primary">
           submit
         </button>
