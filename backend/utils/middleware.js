@@ -25,6 +25,9 @@ const unknownEndpoint = (req, res) => {
 };
 
 const requestLog = (req, res, next) => {
+  //if (req.path === '/socket.io/') {
+  //return null;
+  //}
   logger.info('---');
   logger.info('Time: ', Date.now());
   logger.info('Method: ', req.method);

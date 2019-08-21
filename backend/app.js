@@ -4,7 +4,6 @@ const helmet = require('helmet');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const io = require('socket.io')();
 // const fs = require('fs');
 const { connectToDatabase } = require('./utils/helper');
 const middleware = require('./utils/middleware');

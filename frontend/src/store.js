@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import io from 'socket.io-client';
 
 import userReducer from './reducers/userReducer';
 import mainReducer from './reducers/mainReducer';

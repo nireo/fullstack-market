@@ -15,6 +15,7 @@ import AdminPanel from './components/private/admin/AdminPanel';
 import Users from './components/public/Users';
 import SingleUser from './components/public/SingleUser';
 import Cart from './components/private/Cart';
+import Chat from './components/public/Chat';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -105,6 +106,7 @@ const Routes = props => {
         path="/cart"
         render={() => (props.user ? <Cart /> : <Redirect to="/" />)}
       />
+      <Route exact path="/chat" render={() => <Chat />} />
     </Router>
   );
 };
