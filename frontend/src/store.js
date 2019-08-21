@@ -7,6 +7,7 @@ import postReducer from './reducers/postReducer';
 import notificationReducer from './reducers/notificationReducer';
 import cartReducer from './reducers/cartReducer';
 import allUsersReducer from './reducers/allUsersReducer';
+import chatReducer from './reducers/chatReducer';
 
 const reducer = combineReducers({
   user: userReducer,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
   posts: postReducer,
   notification: notificationReducer,
   cart: cartReducer,
-  allUsers: allUsersReducer
+  allUsers: allUsersReducer,
+  chat: chatReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
