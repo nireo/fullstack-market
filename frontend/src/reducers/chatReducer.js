@@ -1,4 +1,4 @@
-const reducer = (state = null, action) => {
+const reducer = (state = [], action) => {
   switch (action.type) {
     case 'NEW_MESSAGE':
       if (state === null) {

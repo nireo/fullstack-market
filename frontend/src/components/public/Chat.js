@@ -8,9 +8,14 @@ const Chat = props => {
   const [socket, setSocket] = useState(null);
   useEffect(() => {
     if (!socket) {
-      setSocket(io(':3001'));
+      setSocket(io('http://localhost:3001'));
     }
-  }, []);
+    if (socket) {
+      socket.on('sent message', data => {
+        props.createMessage(data);
+      });
+    }
+  }, [socket]);
 
   const sendChatMessage = event => {
     event.preventDefault();
@@ -20,45 +25,26 @@ const Chat = props => {
     if (!socket) {
       return null;
     }
-    socket.emit('message', message);
-    props.createMessage({ from: 'anonymous', content: message });
+    socket.emit('message', { from: props.user.username, content: message });
+    props.createMessage({ from: props.user.username, content: message });
+    setMessage('');
   };
 
-  if (props.chat === null) {
+  const renderMessages = props.chat.map(c => {
     return (
-      <div class="container">
-        <form onSubmit={sendChatMessage}>
-          <div class="form-group">
-            <input
-              class="form-control"
-              type="text"
-              value={message}
-              onChange={({ target }) => setMessage(target.value)}
-            />
-          </div>
-          <button type="submit" class="btn btn-primary">
-            submit
-          </button>
-        </form>
-      </div>
-    );
-  }
-
-  const renderMessage = props.chat.map(c => (
-    <div>
       <li key={c.message}>
         <b>
-          {c.form}: {c.content}
+          {c.from}: {c.content}
         </b>
       </li>
-    </div>
-  ));
+    );
+  });
 
   return (
     <div class="container" style={{ paddingTop: '2rem' }}>
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
-        <ul>{renderMessage}</ul>
+        <ul>{renderMessages}</ul>
         <div class="form-group">
           <input
             class="form-control"
@@ -77,7 +63,8 @@ const Chat = props => {
 
 const mapStateToProps = state => {
   return {
-    chat: state.chat
+    chat: state.chat,
+    user: state.user
   };
 };
 
