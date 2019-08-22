@@ -6,6 +6,7 @@ import { createMessage } from '../../reducers/chatReducer';
 const Chat = props => {
   const [message, setMessage] = useState('');
   const [socket, setSocket] = useState(null);
+  const [typing, setTyping] = useState(null);
   useEffect(() => {
     if (!socket) {
       setSocket(io('http://localhost:3001'));
@@ -15,7 +16,23 @@ const Chat = props => {
         props.createMessage(data);
       });
     }
+    if (socket) {
+      socket.on('typing', data => {
+        setTyping(data);
+      });
+    }
+    if (socket) {
+      socket.on('stopped typing', () => {
+        setTyping(null);
+      });
+    }
   }, [socket]);
+
+  const handleChange = event => {
+    event.preventDefault();
+    socket.emit('typing', props.user.username);
+    setMessage(event.target.value);
+  };
 
   const sendChatMessage = event => {
     event.preventDefault();
@@ -26,6 +43,7 @@ const Chat = props => {
       return null;
     }
     socket.emit('message', { from: props.user.username, content: message });
+    socket.emit('stopped typing', null);
     props.createMessage({ from: props.user.username, content: message });
     setMessage('');
   };
@@ -47,12 +65,13 @@ const Chat = props => {
         <hr />
         <ul style={{ listStyleType: 'none' }}>{renderMessages}</ul>
         <hr />
+        {typing && <p>{typing}</p>}
         <div class="form-group">
           <input
             class="form-control"
             type="text"
             value={message}
-            onChange={({ target }) => setMessage(target.value)}
+            onChange={handleChange}
           />
         </div>
 
