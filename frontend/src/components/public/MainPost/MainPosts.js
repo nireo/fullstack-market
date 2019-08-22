@@ -5,6 +5,7 @@ import '../../../utils/loadingBar.css';
 import Loading from '../../Loading';
 import { Link } from 'react-router-dom';
 import { addItemToCart } from '../../../reducers/cartReducer';
+import { setNotification } from '../../../reducers/notificationReducer';
 
 const MainPosts = props => {
   useEffect(() => {
@@ -58,11 +59,12 @@ const MainPosts = props => {
 
 const mapStateToProps = state => {
   return {
-    mainPost: state.mainPosts
+    mainPost: state.mainPosts,
+    cart: state.cart
   };
 };
 
 export default connect(
   mapStateToProps,
-  { initMainPosts, addItemToCart }
+  { initMainPosts, addItemToCart, setNotification }
 )(MainPosts);

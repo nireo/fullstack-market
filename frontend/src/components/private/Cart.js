@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { clearCart, removeItemFromCart } from '../../reducers/cartReducer';
+import { setNotification } from '../../reducers/notificationReducer';
 
 const Cart = props => {
   if (props.cart === null) {
@@ -9,13 +11,25 @@ const Cart = props => {
       </div>
     );
   }
-  console.log(props.cart);
+
   const renderCartItems = props.cart.map(i => (
     <div>
       <hr />
-      <h5>{i.title}</h5>
-      <h6>{i.price}</h6>
-      <p>{i.description}</p>
+      <div class="row">
+        <div class="col-10">
+          <h5>{i.title}</h5>
+          <p>{i.description}</p>
+        </div>
+        <div class="col-2">
+          <h6 style={{ color: 'green' }}>{i.price}$</h6>
+          <button
+            onClick={() => props.removeItemFromCart(i._id)}
+            class="btn btn-danger"
+          >
+            Remove item
+          </button>
+        </div>
+      </div>
     </div>
   ));
   return (
@@ -23,6 +37,9 @@ const Cart = props => {
       <h2 style={{ paddingBottom: '2em' }}>Your cart</h2>
       {renderCartItems}
       <hr />
+      <button onClick={props.clearCart} class="btn btn-danger">
+        Clear cart
+      </button>
     </div>
   );
 };
@@ -35,5 +52,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { clearCart, setNotification, removeItemFromCart }
 )(Cart);
