@@ -18,6 +18,7 @@ import Cart from './components/private/Cart';
 import Chat from './components/public/Chat';
 import NotFound from './components/public/NotFound';
 import Explore from './components/public/Explore';
+import SingleMainPost from './components/public/MainPost/SingleMainPost';
 
 const Routes = props => {
   const findPostWithId = id => props.posts.find(p => p._id === id);
@@ -115,6 +116,13 @@ const Routes = props => {
       />
       <Route path="/404" render={() => <NotFound />} />
       <Route exact path="/explore" render={() => <Explore />} />
+      <Route
+        exact
+        path="/official/post/:id"
+        render={({ match }) => (
+          <SingleMainPost post={findMainPostWithId(match.params.id)} />
+        )}
+      />
       <Redirect from="*" to="/404" />
     </Router>
   );

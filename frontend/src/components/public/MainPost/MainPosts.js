@@ -44,7 +44,7 @@ const MainPosts = props => {
           <Link class="card-link" onClick={() => addToCart(p)}>
             Add to cart
           </Link>
-          <Link to={`/community/post/${p._id}`} class="card-link">
+          <Link to={`/official/post/${p._id}`} class="card-link">
             Read more
           </Link>
         </div>

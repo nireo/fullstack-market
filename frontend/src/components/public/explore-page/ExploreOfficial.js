@@ -25,7 +25,7 @@ const ExploreOfficial = props => {
           <p class="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 100)}
           </p>
-          <Link to={`/community/post/${p._id}`} class="card-link">
+          <Link to={`/official/post/${p._id}`} class="card-link">
             Read more
           </Link>
         </div>
