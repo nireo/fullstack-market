@@ -31,8 +31,8 @@ const CommunityPost = props => {
     <tr>
       <td>{p._id}</td>
       <td>{p.title}</td>
-      <td>{p.description}</td>
-      <td>{p.price}</td>
+      <td>{p.description.slice(0, 100)}</td>
+      <td style={{ color: 'green' }}>{p.price} $</td>
       <td>
         <Link
           class="nav-link"

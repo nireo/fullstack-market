@@ -33,8 +33,8 @@ const MainPostManager = props => {
     <tr>
       <td>{m._id}</td>
       <td>{m.title}</td>
-      <td>{m.description}</td>
-      <td>{m.price}</td>
+      <td>{m.description.slice(0, 100)}</td>
+      <td style={{ color: 'green' }}>{m.price} $</td>
       <td>
         <Link
           class="nav-link"
