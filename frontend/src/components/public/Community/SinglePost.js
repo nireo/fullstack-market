@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setNotification } from '../../../reducers/notificationReducer';
 import { addItemToCart } from '../../../reducers/cartReducer';
+import ReviewForm from '../../private/ReviewForm';
 
 const SinglePost = props => {
   if (props.post === null) {
@@ -58,6 +59,7 @@ const SinglePost = props => {
           </div>
         )}
       </div>
+      <ReviewForm />
     </div>
   );
 };

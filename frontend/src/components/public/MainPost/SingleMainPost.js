@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
+import ReviewForm from '../../private/ReviewForm';
 
 const SingleMainPost = props => {
   if (props.post === null) {
@@ -27,6 +28,7 @@ const SingleMainPost = props => {
       <h3 style={{ color: 'green' }}>{props.post.price} $</h3>
       <p>{props.post.description}</p>
       <Link onClick={() => addToCart(props.post)}>Add to cart</Link>
+      <ReviewForm />
     </div>
   );
 };
