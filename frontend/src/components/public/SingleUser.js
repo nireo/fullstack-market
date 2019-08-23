@@ -4,15 +4,15 @@ const SingleUser = props => {
   const renderPosts = props.user.posts.map(p => (
     <tr>
       <td>{p.title}</td>
-      <td>{p.description}</td>
-      <td>{p.price}</td>
+      <td>{p.description.slice(0, 100)}</td>
+      <td style={{ color: 'green' }}>{p.price} $</td>
     </tr>
   ));
 
   const renderReviews = props.user.reviewsPosted.map(r => (
     <tr>
       <td>{r.title}</td>
-      <td>{r.description}</td>
+      <td>{r.description.slice(0, 100)}</td>
       <td>{r.stars}</td>
       <td>{r.recommend ? 'True' : 'False'}</td>
     </tr>

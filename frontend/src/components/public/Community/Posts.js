@@ -34,7 +34,9 @@ const Posts = props => {
       <div class="card" style={{ marginTop: '1em' }}>
         <div class="card-body">
           <h5 class="card-title">{p.title}</h5>
-          <h6 class="card-subtitle text-muted">{p.price} $</h6>
+          <h6 class="card-subtitle" style={{ color: 'green' }}>
+            {p.price} $
+          </h6>
           <p class="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 250)}
           </p>

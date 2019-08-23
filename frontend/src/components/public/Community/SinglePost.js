@@ -11,7 +11,7 @@ const SinglePost = props => {
       <div class="row">
         <div class="col">
           <h1>{props.post.title}</h1>
-          <h3 class="text-muted">{props.post.price} $</h3>
+          <h3 style={{ color: 'green' }}>{props.post.price} $</h3>
           <p>{props.post.description}</p>
         </div>
         {!props.type && (
