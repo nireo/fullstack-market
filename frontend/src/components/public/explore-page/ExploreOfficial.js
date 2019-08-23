@@ -9,7 +9,7 @@ const ExploreOfficial = props => {
     if (props.posts === null) {
       props.initMainPosts();
     }
-  }, []);
+  }, [props]);
   if (props.posts === null) {
     return <Loading />;
   }

@@ -26,7 +26,7 @@ const Chat = props => {
         setTyping(null);
       });
     }
-  }, [socket]);
+  }, [socket, props]);
 
   const handleChange = event => {
     event.preventDefault();

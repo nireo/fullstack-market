@@ -5,7 +5,7 @@ const ReviewForm = () => {
   const [stars, setStars] = useState(0.0);
   return (
     <div>
-      <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
+      <h5>Create new review</h5>
       <form>
         <div class="from-group">
           <label>Review content</label>

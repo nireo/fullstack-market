@@ -9,7 +9,7 @@ const App = props => {
     if (props.user === null) {
       props.checkLocalStorage();
     }
-  }, []);
+  }, [props]);
 
   return (
     <div class="animation-delays animate fadeIn">

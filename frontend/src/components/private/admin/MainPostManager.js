@@ -11,7 +11,7 @@ const MainPostManager = props => {
     if (props.mainPosts === null) {
       props.initMainPosts();
     }
-  }, []);
+  }, [props]);
   if (props.mainPosts === null) {
     return <Loading />;
   }

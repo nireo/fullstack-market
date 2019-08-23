@@ -11,7 +11,7 @@ const Posts = props => {
     if (props.posts === null) {
       props.initPosts();
     }
-  }, []);
+  }, [props]);
 
   if (props.posts === null) {
     return <Loading />;

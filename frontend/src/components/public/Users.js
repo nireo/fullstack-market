@@ -9,7 +9,7 @@ const Users = props => {
     if (props.users === null) {
       props.initUsers();
     }
-  }, [props.users]);
+  }, [props]);
 
   if (props.users === null) {
     return <Loading />;

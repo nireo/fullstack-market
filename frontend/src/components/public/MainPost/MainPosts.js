@@ -12,7 +12,7 @@ const MainPosts = props => {
     if (props.mainPost === null) {
       props.initMainPosts();
     }
-  }, []);
+  }, [props]);
 
   if (props.mainPost === null) {
     return <Loading />;

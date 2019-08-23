@@ -59,14 +59,16 @@ const SinglePost = props => {
           </div>
         )}
       </div>
-      <ReviewForm />
+      <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
+      {props.user && <ReviewForm />}
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   };
 };
 

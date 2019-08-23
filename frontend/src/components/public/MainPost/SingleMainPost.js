@@ -17,9 +17,10 @@ const SingleMainPost = props => {
     }
     if (checkForItem) {
       props.setNotification('Already in cart', 'error', 2);
+    } else {
+      props.addItemToCart(toAdd);
+      props.setNotification('Item added to cart', 'success', 2);
     }
-    props.addItemToCart(toAdd);
-    props.setNotification('Item added to cart', 'success', 2);
   };
 
   return (
@@ -28,14 +29,16 @@ const SingleMainPost = props => {
       <h3 style={{ color: 'green' }}>{props.post.price} $</h3>
       <p>{props.post.description}</p>
       <Link onClick={() => addToCart(props.post)}>Add to cart</Link>
-      <ReviewForm />
+      <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
+      {props.user && <ReviewForm />}
     </div>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   };
 };
 

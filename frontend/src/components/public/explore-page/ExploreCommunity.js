@@ -9,10 +9,12 @@ const ExploreCommunity = props => {
     if (props.posts === null) {
       props.initPosts();
     }
-  }, []);
+  }, [props]);
+
   if (props.posts === null) {
     return <Loading />;
   }
+
   // render only 3 since I want to keep the page clean
   const renderPosts = props.posts.slice(0, 3).map(p => (
     <div class="col-md-4">

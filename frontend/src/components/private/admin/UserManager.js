@@ -10,7 +10,7 @@ const UserManager = props => {
     if (props.users === null) {
       props.initUsers();
     }
-  }, []);
+  }, [props]);
 
   if (props.users === null) {
     return <Loading />;
