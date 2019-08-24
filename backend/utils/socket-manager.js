@@ -1,7 +1,12 @@
+let amountOfUsers = 0;
 module.exports = socket => {
   socket.on('message', data => {
     socket.broadcast.emit('sent message', data);
   });
+
+  ++amountOfUsers;
+  console.log(amountOfUsers);
+  socket.broadcast.emit('user joined', amountOfUsers);
 
   socket.on('typing', data => {
     socket.broadcast.emit('typing', `${data} is typing`);
@@ -12,6 +17,7 @@ module.exports = socket => {
   });
 
   socket.on('disconnect', () => {
-    console.log('user left');
+    --amountOfUsers;
+    socket.broadcast.emit(`user left`, amountOfUsers);
   });
 };

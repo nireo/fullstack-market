@@ -8,6 +8,7 @@ const Chat = props => {
   const [message, setMessage] = useState('');
   const [socket, setSocket] = useState(null);
   const [typing, setTyping] = useState(null);
+  const [peopleInChat, setPeopleInChat] = useState(0);
   useEffect(() => {
     if (!socket) {
       setSocket(io('http://localhost:3001'));
@@ -16,15 +17,21 @@ const Chat = props => {
       socket.on('sent message', data => {
         props.createMessage(data);
       });
-    }
-    if (socket) {
+
       socket.on('typing', data => {
         setTyping(data);
       });
-    }
-    if (socket) {
+
       socket.on('stopped typing', () => {
         setTyping(null);
+      });
+
+      socket.on('user joined', data => {
+        setPeopleInChat(data);
+      });
+
+      socket.on('user left', data => {
+        setPeopleInChat(data);
       });
     }
   }, [socket, props]);
@@ -74,6 +81,7 @@ const Chat = props => {
     <div class="container" style={{ paddingTop: '2rem' }}>
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
+        <p>People in chat {peopleInChat}</p>
         <ul class="list-unstyled">{renderMessages}</ul>
         {typing && <p>{typing}</p>}
         <div class="form-group">
