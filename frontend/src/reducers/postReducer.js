@@ -1,4 +1,5 @@
 import postService from '../services/post';
+import reviewService from '../services/review';
 
 const reducer = (state = null, action) => {
   switch (action.type) {
@@ -51,6 +52,16 @@ export const removePost = id => {
 export const updatePost = (id, newObject) => {
   return async dispatch => {
     const post = await postService.updatePost(id, newObject);
+    dispatch({
+      type: 'UPDATE_POST',
+      data: post
+    });
+  };
+};
+
+export const addReview = (id, newObject) => {
+  return async dispatch => {
+    const post = await reviewService.postCommunityReview(id, newObject);
     dispatch({
       type: 'UPDATE_POST',
       data: post
