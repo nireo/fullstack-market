@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setNotification } from '../../../reducers/notificationReducer';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import ReviewForm from '../../private/ReviewForm';
+import { addReview } from '../../../reducers/postReducer';
 
 const SinglePost = props => {
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [stars, setStars] = useState(0.0);
   if (props.post === null) {
     return null;
   }
+
+  const clearFields = () => {
+    setStars(0.0);
+    setContent('');
+    setTitle('');
+  };
 
   const addToCart = toAdd => {
     let checkForItem;
@@ -20,6 +30,16 @@ const SinglePost = props => {
     }
     props.addItemToCart(toAdd);
     props.setNotification('Item added to cart', 'success', 2);
+  };
+
+  const addReview = review => {
+    try {
+      props.addReview(props.post._id, review);
+      clearFields();
+    } catch {
+      props.setNotification('Already in cart', 'error', 4);
+      clearFields();
+    }
   };
 
   return (
@@ -60,7 +80,17 @@ const SinglePost = props => {
         )}
       </div>
       <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
-      {props.user && <ReviewForm />}
+      {props.user && (
+        <ReviewForm
+          stars={stars}
+          setStars={setStars}
+          content={content}
+          setContent={setContent}
+          title={title}
+          setTitle={setTitle}
+          addReview={addReview}
+        />
+      )}
     </div>
   );
 };
@@ -74,5 +104,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { setNotification, addItemToCart }
+  { setNotification, addItemToCart, addReview }
 )(SinglePost);

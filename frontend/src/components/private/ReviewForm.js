@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const ReviewForm = () => {
-  const [content, setContent] = useState('');
-  const [stars, setStars] = useState(0.0);
+const ReviewForm = props => {
   return (
     <div>
       <h5>Create new review</h5>
       <form>
+        <div class="form-group">
+          <label>Review Title</label>
+          <input
+            class="form-control"
+            value={props.title}
+            onChange={({ target }) => props.setTitle(target.value)}
+          />
+        </div>
         <div class="from-group">
           <label>Review content</label>
           <textarea
             class="form-control"
-            value={content}
-            onChange={({ target }) => setContent(target.value)}
+            value={props.content}
+            onChange={({ target }) => props.setContent(target.value)}
             rows="4"
           />
         </div>
@@ -20,9 +26,9 @@ const ReviewForm = () => {
           <label>Star rating</label>
           <input
             class="form-control"
-            value={stars}
+            value={props.stars}
             type="number"
-            onChange={({ target }) => setStars(target.value)}
+            onChange={({ target }) => props.setStars(target.value)}
             step={0.01}
             min={0}
             max={5}
