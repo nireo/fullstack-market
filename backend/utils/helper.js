@@ -7,7 +7,7 @@ const connectToDatabase = () => {
   mongoose
     .connect(config.MONGODB_URI, { useNewUrlParser: true })
     .then(() => {
-      logger.info('successfully connected to mongodb');
+      logger.info('[mongoose] Successfully connected database');
     })
     .catch(e => {
       logger.info(e);
