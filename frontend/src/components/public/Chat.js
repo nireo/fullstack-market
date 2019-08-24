@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { createMessage } from '../../reducers/chatReducer';
+import { Link } from 'react-router-dom';
 
 const Chat = props => {
   const [message, setMessage] = useState('');
@@ -42,18 +43,29 @@ const Chat = props => {
     if (!socket) {
       return null;
     }
-    socket.emit('message', { from: props.user.username, content: message });
+    socket.emit('message', {
+      from: props.user.username,
+      content: message,
+      userId: props.user._id
+    });
     socket.emit('stopped typing', null);
-    props.createMessage({ from: props.user.username, content: message });
+    props.createMessage({
+      from: props.user.username,
+      content: message,
+      userId: props.user._id
+    });
     setMessage('');
   };
 
   const renderMessages = props.chat.map(c => {
     return (
-      <li key={c.message}>
-        <b>
-          {c.from}: {c.content}
-        </b>
+      <li class="media" key={c.message} style={{ paddingBottom: '1rem' }}>
+        <div class="media-body">
+          <h6 class="media-heading" style={{ marginBottom: '0rem' }}>
+            <Link to={`/profile/${c.userId}`}>@{c.from}</Link>
+          </h6>
+          {c.content}
+        </div>
       </li>
     );
   });
@@ -62,9 +74,7 @@ const Chat = props => {
     <div class="container" style={{ paddingTop: '2rem' }}>
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
-        <hr />
-        <ul style={{ listStyleType: 'none' }}>{renderMessages}</ul>
-        <hr />
+        <ul class="list-unstyled">{renderMessages}</ul>
         {typing && <p>{typing}</p>}
         <div class="form-group">
           <input
@@ -76,7 +86,7 @@ const Chat = props => {
         </div>
 
         <button type="submit" class="btn btn-primary">
-          submit
+          Send Message
         </button>
       </form>
     </div>

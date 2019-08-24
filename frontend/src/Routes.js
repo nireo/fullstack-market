@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from './components/public/NavBar';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Login from './components/public/Login';
@@ -21,6 +21,7 @@ import Explore from './components/public/Explore';
 import SingleMainPost from './components/public/MainPost/SingleMainPost';
 
 const Routes = props => {
+  const [show404, setShow404] = useState(false);
   const findPostWithId = id => props.posts.find(p => p._id === id);
   const findMainPostWithId = id => props.mainPosts.find(p => p._id === id);
   const findUserWithId = id => {
@@ -28,6 +29,11 @@ const Routes = props => {
     // since we don't want a public admin profile
     if (user.username === 'admin') {
       return null;
+    }
+    if (show404 === false) {
+      setTimeout(() => {
+        setShow404(true);
+      }, 1500);
     }
     return user;
   };
@@ -123,7 +129,7 @@ const Routes = props => {
           <SingleMainPost post={findMainPostWithId(match.params.id)} />
         )}
       />
-      <Redirect from="*" to="/404" />
+      {show404 && <Redirect from="*" to="/404" />}
     </Router>
   );
 };
