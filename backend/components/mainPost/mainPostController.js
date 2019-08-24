@@ -5,11 +5,14 @@ const config = require('../../utils/config');
 
 exports.getAllPosts = async (req, res, next) => {
   try {
-    await mainPostModel.find({}).exec((err, results) => {
-      if (err) return res.status(500);
+    await mainPostModel
+      .find({})
+      .populate('reviews')
+      .exec((err, results) => {
+        if (err) return res.status(500);
 
-      return res.json(results);
-    });
+        return res.json(results);
+      });
   } catch (e) {
     next(e);
   }

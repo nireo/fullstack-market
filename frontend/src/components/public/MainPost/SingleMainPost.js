@@ -5,6 +5,7 @@ import { addItemToCart } from '../../../reducers/cartReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
 import ReviewForm from '../../private/ReviewForm';
 import { addReview } from '../../../reducers/mainReducer';
+import Review from '../Review';
 
 const SingleMainPost = props => {
   const [stars, setStars] = useState(0.0);
@@ -43,6 +44,8 @@ const SingleMainPost = props => {
     }
   };
 
+  const renderReview = props.post.reviews.map(r => <Review review={r} />);
+
   return (
     <div class="container" style={{ paddingTop: '1rem' }}>
       <h1>{props.post.title}</h1>
@@ -61,6 +64,7 @@ const SingleMainPost = props => {
           addReview={addReview}
         />
       )}
+      {renderReview}
     </div>
   );
 };

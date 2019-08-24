@@ -13,7 +13,7 @@ const getConfig = () => ({
 
 const postMainReview = async (postId, newObject) => {
   const response = await axios.post(
-    `${baseUrl}/${postId}`,
+    `${baseUrl}/main/${postId}`,
     newObject,
     getConfig()
   );
@@ -22,7 +22,7 @@ const postMainReview = async (postId, newObject) => {
 
 const postCommunityReview = async (postId, newObject) => {
   const response = await axios.post(
-    `${baseUrl}/${postId}`,
+    `${baseUrl}/post/${postId}`,
     newObject,
     getConfig()
   );

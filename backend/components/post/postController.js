@@ -9,6 +9,7 @@ exports.getAllPosts = async (req, res, next) => {
     await postModel
       .find({})
       .populate('postedBy')
+      .populate('reviews')
       .exec((err, results) => {
         if (err) return res.status(500);
 

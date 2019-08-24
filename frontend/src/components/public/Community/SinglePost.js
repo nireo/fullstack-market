@@ -32,12 +32,13 @@ const SinglePost = props => {
     props.setNotification('Item added to cart', 'success', 2);
   };
 
-  const addReview = review => {
+  const addReviewToPost = review => {
     try {
+      props.setNotification('Review has been posted', 'success', 2);
       props.addReview(props.post._id, review);
       clearFields();
     } catch {
-      props.setNotification('Already in cart', 'error', 4);
+      props.setNotification('Something went wrong', 'error', 2);
       clearFields();
     }
   };
@@ -88,7 +89,7 @@ const SinglePost = props => {
           setContent={setContent}
           title={title}
           setTitle={setTitle}
-          addReview={addReview}
+          addReview={addReviewToPost}
         />
       )}
     </div>

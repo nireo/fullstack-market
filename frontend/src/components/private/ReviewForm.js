@@ -1,10 +1,19 @@
 import React from 'react';
 
 const ReviewForm = props => {
+  const handleReview = event => {
+    event.preventDefault();
+    const reviewObject = {
+      title: props.title,
+      description: props.content,
+      stars: props.stars
+    };
+    props.addReview(reviewObject);
+  };
   return (
     <div>
       <h5>Create new review</h5>
-      <form>
+      <form onSubmit={handleReview}>
         <div class="form-group">
           <label>Review Title</label>
           <input
@@ -34,12 +43,12 @@ const ReviewForm = props => {
             max={5}
           />
         </div>
+        <div style={{ paddingTop: '1rem' }}>
+          <button class="btn btn-outline-primary" type="submit">
+            Submit review
+          </button>
+        </div>
       </form>
-      <div style={{ paddingTop: '1rem' }}>
-        <button class="btn btn-outline-primary" type="submit">
-          Submit review
-        </button>
-      </div>
     </div>
   );
 };

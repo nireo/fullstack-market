@@ -76,19 +76,16 @@ exports.addReviewToPost = async (req, res, next) => {
     const post = await postModel.findById(req.params.id);
     const user = await userModel.findById(decodedToken.id);
 
-    const newReview = {
+    const newReview = new reviewModel({
       stars,
       title,
       description,
       recommended,
       postedBy: user._id
-    };
+    });
 
-    const saved = await newReview.save();
-
-    post.reviews = post.reviews.concat(saved._id);
-    user.reviewsPosted = user.reviewsPosted.concat(saved._id);
-
+    post.reviews = post.reviews.concat(newReview._id);
+    user.reviewsPosted = user.reviewsPosted.concat(newReview._id);
     await user.save();
     const postWithReview = await post.save();
     return res.json(postWithReview);

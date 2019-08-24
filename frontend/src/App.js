@@ -20,7 +20,8 @@ const App = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    posts: state.posts
   };
 };
 
