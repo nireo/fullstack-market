@@ -31,7 +31,7 @@ const MainPosts = props => {
   };
 
   const renderPosts = props.mainPost.map(p => (
-    <div className="col-md 4">
+    <div key={p._id} className="col-md 4">
       <div className="card" style={{ marginTop: '1em' }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
@@ -41,9 +41,12 @@ const MainPosts = props => {
           <p className="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 250)}
           </p>
-          <Link className="card-link" onClick={() => addToCart(p)}>
-            Add to cart
-          </Link>
+          {props.user && (
+            <Link className="card-link" onClick={() => addToCart(p)}>
+              Add to cart
+            </Link>
+          )}
+
           <Link to={`/official/post/${p._id}`} className="card-link">
             Read more
           </Link>
@@ -62,7 +65,8 @@ const MainPosts = props => {
 const mapStateToProps = state => {
   return {
     mainPost: state.mainPosts,
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   };
 };
 

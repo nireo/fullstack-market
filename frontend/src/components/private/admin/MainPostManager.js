@@ -30,7 +30,7 @@ const MainPostManager = props => {
     : props.mainPosts;
 
   const renderMainPosts = filteredSearch.map(m => (
-    <tr>
+    <tr key={m._id}>
       <td>{m._id}</td>
       <td>{m.title}</td>
       <td>{m.description.slice(0, 100)}</td>

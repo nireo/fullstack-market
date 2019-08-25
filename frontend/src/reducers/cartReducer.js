@@ -6,7 +6,7 @@ const reducer = (state = null, action) => {
       }
       return [...state, action.data];
     case 'REMOVE_ITEM':
-      return state.filter(i => i !== action.id);
+      return state.filter(i => i._id !== action.id);
     case 'CLEAR_CART':
       return null;
     default:

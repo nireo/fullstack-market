@@ -29,7 +29,7 @@ const UserManager = props => {
     : props.users;
 
   const renderUsers = filteredSearch.map(u => (
-    <tr>
+    <tr key={u._id}>
       <td>{u._id}</td>
       <td>{u.username}</td>
       <td>{u.email}</td>

@@ -13,7 +13,7 @@ const Cart = props => {
   }
 
   const renderCartItems = props.cart.map(i => (
-    <div>
+    <div key={i._id}>
       <hr />
       <div className="row">
         <div className="col-10">

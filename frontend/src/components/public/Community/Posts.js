@@ -30,7 +30,7 @@ const Posts = props => {
   };
 
   const renderPosts = props.posts.map(p => (
-    <div className="col-md 4">
+    <div key={p._id} className="col-md 4">
       <div className="card" style={{ marginTop: '1em' }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
@@ -40,9 +40,11 @@ const Posts = props => {
           <p className="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 250)}
           </p>
-          <Link className="card-link" onClick={() => addToCart(p)}>
-            Add to cart
-          </Link>
+          {props.user && (
+            <Link className="card-link" onClick={() => addToCart(p)}>
+              Add to cart
+            </Link>
+          )}
           <Link to={`/community/post/${p._id}`} className="card-link">
             Read more
           </Link>
@@ -61,7 +63,8 @@ const Posts = props => {
 const mapStateToProps = state => {
   return {
     posts: state.posts,
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   };
 };
 

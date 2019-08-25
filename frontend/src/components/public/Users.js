@@ -20,7 +20,7 @@ const Users = props => {
       return null;
     }
     return (
-      <tr>
+      <tr key={u._id}>
         <td>
           <Link to={`/profile/${u._id}`}>{u.username}</Link>
         </td>

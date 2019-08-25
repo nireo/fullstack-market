@@ -28,7 +28,7 @@ const CommunityPost = props => {
     : props.posts;
 
   const renderPosts = filteredSearch.map(p => (
-    <tr>
+    <tr key={p._id}>
       <td>{p._id}</td>
       <td>{p.title}</td>
       <td>{p.description.slice(0, 100)}</td>

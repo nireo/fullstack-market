@@ -15,7 +15,7 @@ const ExploreOfficial = props => {
   }
 
   const renderPosts = props.posts.slice(0, 3).map(p => (
-    <div className="col-md-4">
+    <div key={p._id} className="col-md-4">
       <div className="card">
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
