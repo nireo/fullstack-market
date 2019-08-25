@@ -24,19 +24,27 @@ import Chat from './components/public/Chat';
 import NotFound from './components/public/NotFound';
 import Explore from './components/public/Explore';
 import SingleMainPost from './components/public/MainPost/SingleMainPost';
+import { initPosts } from './reducers/postReducer';
+import { initMainPosts } from './reducers/mainReducer';
+import { initUsers } from './reducers/allUsersReducer';
 
 const Routes = props => {
-  const findPostWithId = id => props.posts.find(p => p._id === id);
-  const findMainPostWithId = id => props.mainPosts.find(p => p._id === id);
-  const findUserWithId = id => {
-    const user = props.users.find(u => u._id === id);
-    // since we don't want a public admin profile
-    if (user.username === 'admin') {
-      return null;
+  const findPostWithId = id => {
+    if (props.posts === null) {
+      props.initPosts();
     }
-
-    return user;
+    const post = props.posts.find(p => p._id === id);
+    return post;
   };
+
+  const findMainPostWithId = id => {
+    if (props.mainPosts === null) {
+      props.initMainPosts();
+    }
+    const mainPost = props.mainPosts.find(p => p._id === id);
+    return mainPost;
+  };
+
   return (
     <Router>
       <NavBar />
@@ -107,9 +115,7 @@ const Routes = props => {
         <Route
           exact
           path="/profile/:id"
-          render={({ match }) => (
-            <SingleUser user={findUserWithId(match.params.id)} />
-          )}
+          render={({ match }) => <SingleUser id={match.params.id} />}
         />
         <Route
           exact
@@ -138,11 +144,14 @@ const Routes = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    users: state.allUsers,
+    posts: state.posts,
+    mainPosts: state.mainPosts
   };
 };
 
 export default connect(
   mapStateToProps,
-  null
+  { initMainPosts, initPosts, initUsers }
 )(Routes);
