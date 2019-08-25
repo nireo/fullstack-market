@@ -31,4 +31,26 @@ const updateUser = async (id, newObject) => {
   return response.data;
 };
 
-export default { makeNewUser, setToken, removeUser, updateUser, initUsers };
+const buyCommunityItems = async object => {
+  const response = await axios.post(
+    `${baseUrl}/buy/community`,
+    object,
+    getConfig()
+  );
+  return response.data;
+};
+
+const buyOfficialItems = async object => {
+  const response = await axios.post(`${baseUrl}/buy/main`, object, getConfig());
+  return response.data;
+};
+
+export default {
+  makeNewUser,
+  setToken,
+  removeUser,
+  updateUser,
+  initUsers,
+  buyCommunityItems,
+  buyOfficialItems
+};
