@@ -5,7 +5,7 @@ const Welcome = () => {
   return (
     <div className="jumbotron text-center">
       <h1>
-        <strong style={{ color: '#4f81c7' }}>Benevol</strong>ant market
+        <strong style={{ color: '#4f81c7' }}>Benevol</strong>ent market
       </h1>
       <p className="lead text-muted">An online store that is less evil</p>
       <p>

@@ -1,13 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logOut } from '../../reducers/userReducer';
 
 const NavBar = props => {
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    if (props.cart !== null) {
+      setTotal(
+        props.cart.reduce((acc, obj) => {
+          return acc + obj.price;
+        }, 0)
+      );
+    }
+  }, [props]);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">
-        <strong style={{ color: '#4f81c7' }}>Benevol</strong>ant
+      <Link className="navbar-brand mb-0 h1" to="/">
+        <strong style={{ color: '#4f81c7' }}>Benevol</strong>ent
       </Link>
       <button
         className="navbar-toggler"
@@ -22,46 +32,60 @@ const NavBar = props => {
       </button>
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/explore">
+          <li className="nav-item dropdown">
+            <Link
+              className="nav-link dropdown-toggle"
+              id="exploreDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
               <i className="fas fa-search" /> Explore
             </Link>
+            <div className="dropdown-menu" aria-labelledby="exploreDropdown">
+              <Link className="dropdown-item">
+                <i className="fas fa-search" to="/explore" /> Explore
+              </Link>
+              <Link className="dropdown-item" to="/official">
+                <i className="far fa-building" /> Official
+              </Link>
+              <Link className="dropdown-item" to="/community">
+                <i className="fas fa-city" /> Community
+              </Link>
+              <Link className="dropdown-item" to="/users">
+                <i className="fas fa-users" /> Users
+              </Link>
+            </div>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/official">
-              <i className="far fa-building" /> Official
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/community">
-              <i className="fas fa-city" /> Community
-            </Link>
-          </li>
-          {props.user &&
-            // hide normal posts from admin since no use
-            (props.user.username !== 'admin' && (
-              <li className="nav-item">
-                <Link className="nav-link" to={`/create`}>
-                  <i className="fas fa-plus" /> Create Post
-                </Link>
-              </li>
-            ))}
-          {props.user &&
-            (props.user.username === 'admin' && (
-              <li className="nav-item">
-                <Link className="nav-link" to={`/create/main`}>
-                  <i className="fas fa-plus" /> Create Post
-                </Link>
-              </li>
-            ))}
-          {props.user &&
-            (props.user.username === 'admin' && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/admin">
+          {props.user && (
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle"
+                id="userDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i className="fas fa-user" /> {props.user.username}
+              </Link>
+              <div className="dropdown-menu" aria-labelledby="userDropdown">
+                {props.user.admin ? (
+                  <Link className="dropdown-item" to="/create/main">
+                    <i className="fas fa-plus" /> Create Post
+                  </Link>
+                ) : (
+                  <Link className="dropdown-item" to={`/create`}>
+                    <i className="fas fa-plus" /> Create Post
+                  </Link>
+                )}
+                <Link className="dropdown-item" to="/admin">
                   <i className="fas fa-chart-line" /> Admin panel
                 </Link>
-              </li>
-            ))}
+              </div>
+            </li>
+          )}
           {props.user && (
             <li className="nav-item">
               <Link className="nav-link" to="/chat">
@@ -69,11 +93,6 @@ const NavBar = props => {
               </Link>
             </li>
           )}
-          <li className="nav-item">
-            <Link className="nav-link" to="/users">
-              <i className="fas fa-users" /> Users
-            </Link>
-          </li>
         </ul>
         {!props.user ? (
           <ul className="navbar-nav">
@@ -90,10 +109,27 @@ const NavBar = props => {
           </ul>
         ) : (
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                id="cartDropdown"
+              >
                 <i className="fas fa-cart-plus" /> Cart
               </Link>
+              <div className="dropdown-menu" aria-labelledby="cartDropdown">
+                <Link to="/cart" className="dropdown-item">
+                  Go to cart
+                </Link>
+                <div className="dropdown-divider"></div>
+                <Link className="dropdown-item disabled">Total: {total} $</Link>
+                <Link className="dropdown-item disabled">
+                  {props.cart ? `Items ${props.cart.length}` : 'Cart empty'}
+                </Link>
+              </div>
             </li>
             <li className="nav-item">
               <Link className="nav-link" onClick={() => props.logOut()}>
@@ -110,7 +146,8 @@ const NavBar = props => {
 
 const mapStateToProps = state => {
   return {
-    user: state.user
+    user: state.user,
+    cart: state.cart
   };
 };
 
