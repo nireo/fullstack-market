@@ -18,7 +18,7 @@ const SingleUser = props => {
 
   if (!user) {
     return (
-      <div class="container" style={{ paddingTop: '1rem' }}>
+      <div className="container" style={{ paddingTop: '1rem' }}>
         <h3>User has not been found</h3>
         <p>
           You can find the user you're looking for with the navigation bar, or
@@ -34,15 +34,17 @@ const SingleUser = props => {
   }
 
   const renderPosts = user.posts.map(p => (
-    <tr>
-      <td>{p.title}</td>
+    <tr key={p._id}>
+      <td>
+        <Link to={`/community/post/${p._id}`}>{p.title}</Link>
+      </td>
       <td>{p.description.slice(0, 100)}</td>
       <td style={{ color: 'green' }}>{p.price} $</td>
     </tr>
   ));
 
   const renderReviews = user.reviewsPosted.map(r => (
-    <tr>
+    <tr key={r._id}>
       <td>{r.title}</td>
       <td>{r.description.slice(0, 100)}</td>
       <td>{r.stars}</td>
@@ -51,11 +53,11 @@ const SingleUser = props => {
   ));
 
   return (
-    <div class="container">
+    <div className="container">
       <h2>{user.username}</h2>
       <h4>Posts</h4>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+      <div className="table-responsive">
+        <table className="table table-striped table-sm">
           <thead>
             <tr>
               <th>Title</th>
@@ -68,8 +70,8 @@ const SingleUser = props => {
       </div>
       <hr />
       <h4>Reviews</h4>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+      <div className="table-responsive">
+        <table className="table table-striped table-sm">
           <thead>
             <tr>
               <th>Title</th>

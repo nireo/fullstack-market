@@ -15,17 +15,17 @@ const ExploreOfficial = props => {
   }
 
   const renderPosts = props.posts.slice(0, 3).map(p => (
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{p.title}</h5>
-          <h6 class="card-subtitle" style={{ color: 'green' }}>
+    <div className="col-md-4">
+      <div className="card">
+        <div className="card-body">
+          <h5 className="card-title">{p.title}</h5>
+          <h6 className="card-subtitle" style={{ color: 'green' }}>
             {p.price} $
           </h6>
-          <p class="card-text" style={{ paddingBottom: '1rem' }}>
+          <p className="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 100)}
           </p>
-          <Link to={`/official/post/${p._id}`} class="card-link">
+          <Link to={`/official/post/${p._id}`} className="card-link">
             Read more
           </Link>
         </div>
@@ -34,10 +34,10 @@ const ExploreOfficial = props => {
   ));
 
   return (
-    <div style={{ paddingBottom: '2em' }} class="container">
+    <div style={{ paddingBottom: '2em' }} className="container">
       <h3>Official</h3>
       <p>Official posts can only be posted by staff</p>
-      <div class="row">{renderPosts}</div>
+      <div className="row">{renderPosts}</div>
     </div>
   );
 };

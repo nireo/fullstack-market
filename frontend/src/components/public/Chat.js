@@ -66,9 +66,9 @@ const Chat = props => {
 
   const renderMessages = props.chat.map(c => {
     return (
-      <li class="media" key={c.message} style={{ paddingBottom: '1rem' }}>
-        <div class="media-body">
-          <h6 class="media-heading" style={{ marginBottom: '0rem' }}>
+      <li className="media" key={c.message} style={{ paddingBottom: '1rem' }}>
+        <div className="media-body">
+          <h6 className="media-heading" style={{ marginBottom: '0rem' }}>
             <Link to={`/profile/${c.userId}`}>@{c.from}</Link>
           </h6>
           {c.content}
@@ -78,22 +78,22 @@ const Chat = props => {
   });
 
   return (
-    <div class="container" style={{ paddingTop: '2rem' }}>
+    <div className="container" style={{ paddingTop: '2rem' }}>
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
         <p>People in chat {peopleInChat}</p>
-        <ul class="list-unstyled">{renderMessages}</ul>
+        <ul className="list-unstyled">{renderMessages}</ul>
         {typing && <p>{typing}</p>}
-        <div class="form-group">
+        <div className="form-group">
           <input
-            class="form-control"
+            className="form-control"
             type="text"
             value={message}
             onChange={handleChange}
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Send Message
         </button>
       </form>

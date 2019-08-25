@@ -37,7 +37,7 @@ const UserManager = props => {
       <td>{u.reviewsPosted.length}</td>
       <td>
         <Link
-          class="nav-link"
+          className="nav-link"
           style={{ color: 'black' }}
           onClick={() => handleRemove(u._id)}
         >
@@ -48,19 +48,19 @@ const UserManager = props => {
   ));
 
   return (
-    <div class="container">
+    <div className="container">
       <h4>Users</h4>
-      <div class="form-group">
+      <div className="form-group">
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           placeholder="Search users"
           value={search}
           onChange={({ target }) => setSearch(target.value)}
         />
       </div>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+      <div className="table-responsive">
+        <table className="table table-striped table-sm">
           <thead>
             <tr>
               <th>ID</th>

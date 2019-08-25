@@ -11,9 +11,12 @@ const Login = props => {
 
   if (props.user !== null) {
     return (
-      <div class="container text-center">
+      <div className="container text-center">
         <h2>You're already logged in.</h2>
-        <button class="btn btn-outline-primary" onClick={() => props.logOut()}>
+        <button
+          className="btn btn-outline-primary"
+          onClick={() => props.logOut()}
+        >
           Log out
         </button>
       </div>
@@ -35,25 +38,25 @@ const Login = props => {
   };
 
   return (
-    <div class="text-center container">
-      <form onSubmit={handleLogin} class="form-signin">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <div class="form-group">
+    <div className="text-center container">
+      <form onSubmit={handleLogin} className="form-signin">
+        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <div className="form-group">
           <input
             style={{ width: '50%', display: 'inline-block' }}
             type="text"
-            class="form-control"
+            className="form-control"
             placeholder="Username"
             required
             value={username}
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <input
             style={{ width: '50%', display: 'inline-block' }}
             type="password"
-            class="form-control"
+            className="form-control"
             placeholder="Password"
             required
             value={password}
@@ -61,7 +64,7 @@ const Login = props => {
           />
         </div>
 
-        <div class="checkbox mb-3">
+        <div className="checkbox mb-3">
           <label>
             <input
               type="checkbox"
@@ -74,13 +77,13 @@ const Login = props => {
         <div>
           <button
             style={{ width: '50%', display: 'inline-block' }}
-            class="btn btn-lg btn-primary btn-block"
+            className="btn btn-lg btn-primary btn-block"
             type="submit"
           >
             Login
           </button>
         </div>
-        <p class="mt-5 mb-3 text-muted">&copy;2019 Benelov Software</p>
+        <p className="mt-5 mb-3 text-muted">&copy;2019 Benelov Software</p>
       </form>
     </div>
   );

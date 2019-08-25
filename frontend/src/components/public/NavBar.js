@@ -5,12 +5,12 @@ import { logOut } from '../../reducers/userReducer';
 
 const NavBar = props => {
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <Link class="navbar-brand" to="/">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link className="navbar-brand" to="/">
         <strong style={{ color: '#4f81c7' }}>Benevol</strong>ant
       </Link>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarText"
@@ -18,86 +18,86 @@ const NavBar = props => {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon" />
+        <span className="navbar-toggler-icon" />
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <Link class="nav-link" to="/explore">
-              <i class="fas fa-search" /> Explore
+      <div className="collapse navbar-collapse" id="navbarText">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/explore">
+              <i className="fas fa-search" /> Explore
             </Link>
           </li>
-          <li class="nav-item">
-            <Link class="nav-link" to="/official">
-              <i class="far fa-building" /> Official
+          <li className="nav-item">
+            <Link className="nav-link" to="/official">
+              <i className="far fa-building" /> Official
             </Link>
           </li>
-          <li class="nav-item">
-            <Link class="nav-link" to="/community">
-              <i class="fas fa-city" /> Community
+          <li className="nav-item">
+            <Link className="nav-link" to="/community">
+              <i className="fas fa-city" /> Community
             </Link>
           </li>
           {props.user &&
             // hide normal posts from admin since no use
             (props.user.username !== 'admin' && (
-              <li class="nav-item">
-                <Link class="nav-link" to={`/create`}>
-                  <i class="fas fa-plus" /> Create Post
+              <li className="nav-item">
+                <Link className="nav-link" to={`/create`}>
+                  <i className="fas fa-plus" /> Create Post
                 </Link>
               </li>
             ))}
           {props.user &&
             (props.user.username === 'admin' && (
-              <li class="nav-item">
-                <Link class="nav-link" to={`/create/main`}>
-                  <i class="fas fa-plus" /> Create Post
+              <li className="nav-item">
+                <Link className="nav-link" to={`/create/main`}>
+                  <i className="fas fa-plus" /> Create Post
                 </Link>
               </li>
             ))}
           {props.user &&
             (props.user.username === 'admin' && (
-              <li class="nav-item">
-                <Link class="nav-link" to="/admin">
-                  <i class="fas fa-chart-line" /> Admin panel
+              <li className="nav-item">
+                <Link className="nav-link" to="/admin">
+                  <i className="fas fa-chart-line" /> Admin panel
                 </Link>
               </li>
             ))}
           {props.user && (
-            <li class="nav-item">
-              <Link class="nav-link" to="/chat">
-                <i class="far fa-comments" /> Chat
+            <li className="nav-item">
+              <Link className="nav-link" to="/chat">
+                <i className="far fa-comments" /> Chat
               </Link>
             </li>
           )}
-          <li class="nav-item">
-            <Link class="nav-link" to="/users">
-              <i class="fas fa-users" /> Users
+          <li className="nav-item">
+            <Link className="nav-link" to="/users">
+              <i className="fas fa-users" /> Users
             </Link>
           </li>
         </ul>
         {!props.user ? (
-          <ul class="navbar-nav">
+          <ul className="navbar-nav">
             <li>
-              <Link to="/login" class="nav-link">
+              <Link to="/login" className="nav-link">
                 Login
               </Link>
             </li>
             <li>
-              <Link to="signup" class="nav-link">
+              <Link to="signup" className="nav-link">
                 Signup
               </Link>
             </li>
           </ul>
         ) : (
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <Link class="nav-link" to="/cart">
-                <i class="fas fa-cart-plus" /> Cart
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                <i className="fas fa-cart-plus" /> Cart
               </Link>
             </li>
-            <li class="nav-item">
-              <Link class="nav-link" onClick={() => props.logOut()}>
-                <i class="fas fa-sign-out-alt" />
+            <li className="nav-item">
+              <Link className="nav-link" onClick={() => props.logOut()}>
+                <i className="fas fa-sign-out-alt" />
                 Sign out
               </Link>
             </li>

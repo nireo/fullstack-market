@@ -2,23 +2,23 @@ import React from 'react';
 
 const PostForm = props => {
   return (
-    <div class="container">
+    <div className="container">
       <form onSubmit={props.handleCreation}>
-        <div class="form-group">
+        <div className="form-group">
           <label>Title</label>
           <input
-            class="form-control"
+            className="form-control"
             placeholder="Enter title"
             value={props.title}
             onChange={({ target }) => props.setTitle(target.value)}
             required
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label>Price</label>
           <input
             type="number"
-            class="form-control"
+            className="form-control"
             placeholder="Enter price"
             value={props.price}
             onChange={({ target }) => props.setPrice(target.value)}
@@ -27,17 +27,17 @@ const PostForm = props => {
             step={0.01}
           />
         </div>
-        <div class="form-group">
+        <div className="form-group">
           <label>Description</label>
           <textarea
-            class="form-control"
+            className="form-control"
             value={props.description}
             onChange={({ target }) => props.setDescription(target.value)}
             placeholder="Enter description"
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Create post
         </button>
       </form>

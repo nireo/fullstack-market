@@ -47,7 +47,7 @@ const SingleMainPost = props => {
   const renderReview = props.post.reviews.map(r => <Review review={r} />);
 
   return (
-    <div class="container" style={{ paddingTop: '1rem' }}>
+    <div className="container" style={{ paddingTop: '1rem' }}>
       <h1>{props.post.title}</h1>
       <h3 style={{ color: 'green' }}>{props.post.price} $</h3>
       <p>{props.post.description}</p>

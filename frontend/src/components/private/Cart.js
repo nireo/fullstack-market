@@ -6,7 +6,7 @@ import { setNotification } from '../../reducers/notificationReducer';
 const Cart = props => {
   if (props.cart === null) {
     return (
-      <div class="container text-center">
+      <div className="container text-center">
         <h2>Your cart is empty</h2>
       </div>
     );
@@ -15,16 +15,16 @@ const Cart = props => {
   const renderCartItems = props.cart.map(i => (
     <div>
       <hr />
-      <div class="row">
-        <div class="col-10">
+      <div className="row">
+        <div className="col-10">
           <h5>{i.title}</h5>
           <p>{i.description}</p>
         </div>
-        <div class="col-2">
+        <div className="col-2">
           <h6 style={{ color: 'green' }}>{i.price}$</h6>
           <button
             onClick={() => props.removeItemFromCart(i._id)}
-            class="btn btn-danger"
+            className="btn btn-danger"
           >
             Remove item
           </button>
@@ -33,11 +33,11 @@ const Cart = props => {
     </div>
   ));
   return (
-    <div class="container">
+    <div className="container">
       <h2 style={{ paddingBottom: '2em' }}>Your cart</h2>
       {renderCartItems}
       <hr />
-      <button onClick={props.clearCart} class="btn btn-danger">
+      <button onClick={props.clearCart} className="btn btn-danger">
         Clear cart
       </button>
     </div>

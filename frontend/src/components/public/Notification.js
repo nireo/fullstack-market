@@ -8,11 +8,11 @@ const Notification = props => {
   }
 
   if (notification.type === 'success') {
-    return <div class="alert alert-success">{notification.content}</div>;
+    return <div className="alert alert-success">{notification.content}</div>;
   }
 
   if (notification.type === 'error') {
-    return <div class="alert alert-danger">{notification.content}</div>;
+    return <div className="alert alert-danger">{notification.content}</div>;
   }
 
   return null;

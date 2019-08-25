@@ -5,7 +5,7 @@ import CommunityPost from './CommunityPost';
 
 const AdminPanel = () => {
   return (
-    <div class="container">
+    <div className="container">
       <h2>Admin Panel</h2>
       <hr />
       <MainPostManager />

@@ -31,10 +31,10 @@ const Users = props => {
   });
 
   return (
-    <div class="container">
+    <div className="container">
       <h4>Users</h4>
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
+      <div className="table-responsive">
+        <table className="table table-striped table-sm">
           <thead>
             <tr>
               <th>Username</th>

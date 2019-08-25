@@ -14,27 +14,27 @@ const ReviewForm = props => {
     <div>
       <h5>Create new review</h5>
       <form onSubmit={handleReview}>
-        <div class="form-group">
+        <div className="form-group">
           <label>Review Title</label>
           <input
-            class="form-control"
+            className="form-control"
             value={props.title}
             onChange={({ target }) => props.setTitle(target.value)}
           />
         </div>
-        <div class="from-group">
+        <div className="from-group">
           <label>Review content</label>
           <textarea
-            class="form-control"
+            className="form-control"
             value={props.content}
             onChange={({ target }) => props.setContent(target.value)}
             rows="4"
           />
         </div>
-        <div class="from-group" style={{ paddingTop: '1rem' }}>
+        <div className="from-group" style={{ paddingTop: '1rem' }}>
           <label>Star rating</label>
           <input
-            class="form-control"
+            className="form-control"
             value={props.stars}
             type="number"
             onChange={({ target }) => props.setStars(target.value)}
@@ -44,7 +44,7 @@ const ReviewForm = props => {
           />
         </div>
         <div style={{ paddingTop: '1rem' }}>
-          <button class="btn btn-outline-primary" type="submit">
+          <button className="btn btn-outline-primary" type="submit">
             Submit review
           </button>
         </div>

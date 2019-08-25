@@ -5,7 +5,7 @@ import ExploreOfficial from './explore-page/ExploreOfficial';
 
 const Explore = () => {
   return (
-    <div class="container" style={{ paddingTop: '2em' }}>
+    <div className="container" style={{ paddingTop: '2em' }}>
       <h2>Explore</h2>
       <p>
         From this page you can explore official and community postings and also

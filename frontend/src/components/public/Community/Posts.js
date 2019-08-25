@@ -30,20 +30,20 @@ const Posts = props => {
   };
 
   const renderPosts = props.posts.map(p => (
-    <div class="col-md 4">
-      <div class="card" style={{ marginTop: '1em' }}>
-        <div class="card-body">
-          <h5 class="card-title">{p.title}</h5>
-          <h6 class="card-subtitle" style={{ color: 'green' }}>
+    <div className="col-md 4">
+      <div className="card" style={{ marginTop: '1em' }}>
+        <div className="card-body">
+          <h5 className="card-title">{p.title}</h5>
+          <h6 className="card-subtitle" style={{ color: 'green' }}>
             {p.price} $
           </h6>
-          <p class="card-text" style={{ paddingBottom: '1rem' }}>
+          <p className="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 250)}
           </p>
-          <Link class="card-link" onClick={() => addToCart(p)}>
+          <Link className="card-link" onClick={() => addToCart(p)}>
             Add to cart
           </Link>
-          <Link to={`/community/post/${p._id}`} class="card-link">
+          <Link to={`/community/post/${p._id}`} className="card-link">
             Read more
           </Link>
         </div>
@@ -52,7 +52,7 @@ const Posts = props => {
   ));
 
   return (
-    <div class="container" style={{ paddingTop: '1rem' }}>
+    <div className="container" style={{ paddingTop: '1rem' }}>
       {renderPosts}
     </div>
   );
