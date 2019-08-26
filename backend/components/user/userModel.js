@@ -46,7 +46,13 @@ const userSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Main'
     }
-  ]
+  ],
+  personalShop: {
+    about: {
+      type: String,
+      default: 'No bio given'
+    }
+  }
 });
 
 userSchema.plugin(uniqueValidator);

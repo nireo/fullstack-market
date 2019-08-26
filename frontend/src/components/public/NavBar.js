@@ -44,7 +44,7 @@ const NavBar = props => {
               <i className="fas fa-search" /> Explore
             </Link>
             <div className="dropdown-menu" aria-labelledby="exploreDropdown">
-              <Link className="dropdown-item">
+              <Link className="dropdown-item" to="/explore">
                 <i className="fas fa-search" to="/explore" /> Explore
               </Link>
               <Link className="dropdown-item" to="/official">
