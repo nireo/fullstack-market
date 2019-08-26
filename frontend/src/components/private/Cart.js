@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { clearCart, removeItemFromCart } from '../../reducers/cartReducer';
 import { setNotification } from '../../reducers/notificationReducer';
 import { Link } from 'react-router-dom';
 
 const Cart = props => {
+  const [total, setTotal] = useState(0);
+  useEffect(() => {
+    if (props.cart !== null) {
+      setTotal(
+        props.cart.reduce((acc, obj) => {
+          return acc + obj.price;
+        }, 0)
+      );
+    }
+  }, [props]);
   if (props.cart === null || props.cart === []) {
     return (
       <div className="container">
@@ -18,11 +28,6 @@ const Cart = props => {
     );
   }
 
-  //const total = props.cart.reduce((a, b) => ({ price: a.price + b.price }));
-  const total = props.cart.reduce((acc, obj) => {
-    return acc + obj.price;
-  }, 0);
-
   const renderCartItems = props.cart.map(i => (
     <div key={i._id}>
       <hr />
@@ -32,7 +37,7 @@ const Cart = props => {
           <p>{i.description}</p>
         </div>
         <div className="col-2">
-          <h6 style={{ color: 'green' }}>{i.price}$</h6>
+          <h6 style={{ color: 'green' }}>{i.price} $</h6>
           <button
             onClick={() => props.removeItemFromCart(i._id)}
             className="btn btn-danger"

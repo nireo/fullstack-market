@@ -80,6 +80,9 @@ const NavBar = props => {
                     <i className="fas fa-plus" /> Create Post
                   </Link>
                 )}
+                <Link className="dropdown-item" to="/edit">
+                  <i class="fas fa-edit"></i> Edit Posts
+                </Link>
                 <Link className="dropdown-item" to="/admin">
                   <i className="fas fa-chart-line" /> Admin panel
                 </Link>

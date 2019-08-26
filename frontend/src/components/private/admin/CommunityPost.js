@@ -51,7 +51,7 @@ const CommunityPost = props => {
         <input
           type="text"
           className="form-control"
-          placeholder="Search users"
+          placeholder="Search posts"
           value={search}
           onChange={({ target }) => setSearch(target.value)}
         />
