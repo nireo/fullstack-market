@@ -83,9 +83,19 @@ const NavBar = props => {
                 <Link className="dropdown-item" to="/edit">
                   <i class="fas fa-edit"></i> Edit Posts
                 </Link>
-                <Link className="dropdown-item" to="/admin">
-                  <i className="fas fa-chart-line" /> Admin panel
-                </Link>
+                {props.user.admin && (
+                  <Link className="dropdown-item" to="/admin">
+                    <i className="fas fa-chart-line" /> Admin panel
+                  </Link>
+                )}
+                {!props.user.admin && (
+                  <Link
+                    className="dropdown-item"
+                    to={`/shop/${props.user._id}`}
+                  >
+                    <i class="fas fa-store"></i> Personal store
+                  </Link>
+                )}
               </div>
             </li>
           )}

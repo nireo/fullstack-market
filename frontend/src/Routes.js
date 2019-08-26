@@ -27,6 +27,7 @@ import SingleMainPost from './components/public/MainPost/SingleMainPost';
 import { initPosts } from './reducers/postReducer';
 import { initMainPosts } from './reducers/mainReducer';
 import { initUsers } from './reducers/allUsersReducer';
+import Overview from './components/public/personal-shop/Overview';
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -135,6 +136,11 @@ const Routes = props => {
           render={({ match }) => (
             <SingleMainPost post={findMainPostWithId(match.params.id)} />
           )}
+        />
+        <Route
+          exact
+          path="/shop/:id"
+          render={({ match }) => <Overview id={match.params.id} />}
         />
         <Route render={() => <NotFound />} />
       </Switch>
