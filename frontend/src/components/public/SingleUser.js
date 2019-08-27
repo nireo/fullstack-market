@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { initUsers } from '../../reducers/allUsersReducer';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Loading from '../Loading';
 
 const SingleUser = props => {
@@ -31,6 +31,10 @@ const SingleUser = props => {
         <Link to="/users">Go to users page</Link>
       </div>
     );
+  }
+
+  if (user.username === 'admin') {
+    return <Redirect to="/users" />;
   }
 
   const renderPosts = user.posts.map(p => (

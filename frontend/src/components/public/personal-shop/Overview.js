@@ -4,6 +4,7 @@ import { initUsers } from '../../../reducers/allUsersReducer';
 import Loading from '../../Loading';
 import Pinned from './Pinned';
 import Bio from './Bio';
+import { Redirect } from 'react-router-dom';
 
 const Overview = props => {
   const [user, setUser] = useState(null);
@@ -20,6 +21,10 @@ const Overview = props => {
     return <Loading />;
   }
 
+  if (user.username === 'admin') {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div>
       <div
@@ -29,7 +34,7 @@ const Overview = props => {
         <h1 style={{ color: 'white' }}>{user.username}'s shop</h1>
       </div>
       <Pinned posts={user.posts} />
-      <Bio about={user.personalShop.about} />
+      <Bio about={user.personalShop.about} id={user._id} />
     </div>
   );
 };
