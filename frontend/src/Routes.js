@@ -28,6 +28,7 @@ import { initPosts } from './reducers/postReducer';
 import { initMainPosts } from './reducers/mainReducer';
 import { initUsers } from './reducers/allUsersReducer';
 import Overview from './components/public/personal-shop/Overview';
+import EditPosts from './components/private/EditPosts';
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -141,6 +142,13 @@ const Routes = props => {
           exact
           path="/shop/:id"
           render={({ match }) => <Overview id={match.params.id} />}
+        />
+        <Route
+          exact
+          path="/edit"
+          render={() =>
+            props.user ? <EditPosts id={props.user._id} /> : <Redirect to="/" />
+          }
         />
         <Route render={() => <NotFound />} />
       </Switch>
