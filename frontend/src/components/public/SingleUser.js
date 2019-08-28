@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initUsers } from '../../reducers/allUsersReducer';
 import { Link, Redirect } from 'react-router-dom';
 import Loading from '../Loading';
 
 const SingleUser = props => {
+  const [showForm, setShowForm] = useState(false);
+  const [bio, setBio] = useState('');
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -27,7 +29,6 @@ const SingleUser = props => {
         <div>
           <Link to="/">Go home</Link>
         </div>
-
         <Link to="/users">Go to users page</Link>
       </div>
     );
@@ -56,9 +57,47 @@ const SingleUser = props => {
     </tr>
   ));
 
+  const handleBioUpdate = event => {
+    event.preventDefault();
+  };
+
   return (
     <div className="container">
       <h2>{user.username}</h2>
+      <p>{user.personalShop.about}</p>
+      {props.user.username === user.username &&
+        (!showForm ? (
+          <button
+            style={{ marginBottom: '1rem' }}
+            class="btn btn-outline-primary btn-sm"
+            onClick={() => setShowForm(true)}
+          >
+            Change bio
+          </button>
+        ) : (
+          <form onSubmit={handleBioUpdate}>
+            <div class="form-group">
+              <label>Bio</label>
+              <textarea
+                className="form-control"
+                value={bio}
+                onChange={({ target }) => setBio(target.value)}
+                maxLength={300}
+              />
+            </div>
+            <div class="form-group">
+              <button type="submit" className="btn btn-outline-primary btn-sm">
+                Change bio
+              </button>{' '}
+              <button
+                className="btn btn-outline-primary btn-sm"
+                onClick={() => setShowForm(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        ))}
       <h4>Posts</h4>
       <div className="table-responsive">
         <table className="table table-striped table-sm">
@@ -93,7 +132,8 @@ const SingleUser = props => {
 
 const mapStateToProps = state => {
   return {
-    users: state.allUsers
+    users: state.allUsers,
+    user: state.user
   };
 };
 
