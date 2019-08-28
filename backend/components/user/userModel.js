@@ -50,7 +50,8 @@ const userSchema = new Schema({
   personalShop: {
     about: {
       type: String,
-      default: 'No bio given'
+      default: 'No bio given',
+      max: 300
     }
   }
 });
