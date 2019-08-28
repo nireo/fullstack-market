@@ -39,14 +39,6 @@ const Routes = props => {
     return post;
   };
 
-  const findMainPostWithId = id => {
-    if (props.mainPosts === null) {
-      props.initMainPosts();
-    }
-    const mainPost = props.mainPosts.find(p => p._id === id);
-    return mainPost;
-  };
-
   return (
     <Router>
       <NavBar />
@@ -109,9 +101,7 @@ const Routes = props => {
         <Route
           exact
           path="/official/:id"
-          render={({ match }) =>
-            props.mainPosts(findMainPostWithId(match.params.id))
-          }
+          render={({ match }) => <SingleMainPost id={match.params.id} />}
         />
         <Route exact path="/users" render={() => <Users />} />
         <Route
@@ -134,9 +124,7 @@ const Routes = props => {
         <Route
           exact
           path="/official/post/:id"
-          render={({ match }) => (
-            <SingleMainPost post={findMainPostWithId(match.params.id)} />
-          )}
+          render={({ match }) => <SingleMainPost id={match.params.id} />}
         />
         <Route
           exact

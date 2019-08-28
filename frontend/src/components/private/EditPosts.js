@@ -13,7 +13,7 @@ const EditPosts = props => {
     if (user === null && props.users) {
       setUser(props.users.find(u => u._id === props.id));
     }
-  });
+  }, [props, user, setUser]);
 
   if (user === null) {
     return <Loading />;

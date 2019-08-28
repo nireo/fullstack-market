@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
+import { initMainPosts } from '../../../reducers/mainReducer';
 import ReviewForm from '../../private/ReviewForm';
 import { addReview } from '../../../reducers/mainReducer';
 import Review from '../Review';
+import Loading from '../../Loading';
 
 const SingleMainPost = props => {
+  const [post, setPost] = useState(null);
   const [stars, setStars] = useState(0.0);
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
-  if (props.post === null) {
-    return null;
+  useEffect(() => {
+    if (props.posts === null) {
+      props.initMainPosts();
+    }
+    if (props.posts && post === null) {
+      setPost(props.posts.find(p => p._id === props.id));
+    }
+  }, [props]);
+  if (props.posts === null) {
+    return <Loading />;
+  }
+
+  if (post === null) {
+    return (
+      <div class="container">
+        <h3>Post has not been found</h3>
+      </div>
+    );
   }
 
   const clearFields = () => {
@@ -36,7 +55,7 @@ const SingleMainPost = props => {
 
   const addReview = review => {
     try {
-      props.addReview(props.post._id, review);
+      props.addReview(post._id, review);
       clearFields();
     } catch {
       props.setNotification('Already in cart', 'error', 4);
@@ -44,14 +63,14 @@ const SingleMainPost = props => {
     }
   };
 
-  const renderReview = props.post.reviews.map(r => <Review review={r} />);
+  const renderReview = post.reviews.map(r => <Review review={r} />);
 
   return (
     <div className="container" style={{ paddingTop: '1rem' }}>
-      <h1>{props.post.title}</h1>
-      <h3 style={{ color: 'green' }}>{props.post.price} $</h3>
-      <p>{props.post.description}</p>
-      <Link onClick={() => addToCart(props.post)}>Add to cart</Link>
+      <h1>{post.title}</h1>
+      <h3 style={{ color: 'green' }}>{post.price} $</h3>
+      <p>{post.description}</p>
+      <Link onClick={() => addToCart(post)}>Add to cart</Link>
       <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
       {props.user && (
         <ReviewForm
@@ -72,11 +91,12 @@ const SingleMainPost = props => {
 const mapStateToProps = state => {
   return {
     cart: state.cart,
-    user: state.user
+    user: state.user,
+    posts: state.mainPosts
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addItemToCart, setNotification, addReview }
+  { addItemToCart, setNotification, addReview, initMainPosts }
 )(SingleMainPost);
