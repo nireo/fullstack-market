@@ -5,8 +5,8 @@ const About = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-7">
-          <h2>About</h2>
+        <div className="col-md-9">
+          <h2>What is Benelov market</h2>
           <p style={{ fontSize: '1.25rem' }}>
             Benelov market is a marketplace for selling virtual items, from PDFs
             to game items. This site consists of an official tab, which contains
@@ -14,7 +14,7 @@ const About = () => {
             for selling and buying items from fellow community members.
           </p>
         </div>
-        <div className="col-md-5">
+        <div className="col-md-3">
           <img src={image1} alt="desktop-logo"></img>
         </div>
       </div>
