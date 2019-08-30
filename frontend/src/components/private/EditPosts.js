@@ -58,7 +58,7 @@ const EditPosts = props => {
       <div className="row">
         <div className="col-md 6">{renderPosts}</div>
         <div className="col-md 6">
-          <EditForm post={postToEdit} />
+          <EditForm post={postToEdit} setPost={setPostToEdit} />
         </div>
       </div>
     </div>

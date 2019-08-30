@@ -38,9 +38,18 @@ const PostForm = props => {
           />
         </div>
         {props.type === 'edit' ? (
-          <button type="submit" className="btn btn-primary">
-            Commit changes
-          </button>
+          <div>
+            <button type="submit" className="btn btn-outline-primary">
+              Commit changes
+            </button>
+            {'  '}
+            <button
+              onClick={() => props.setPost(null)}
+              className="btn btn-outline-danger"
+            >
+              Close
+            </button>
+          </div>
         ) : (
           <button type="submit" className="btn btn-primary">
             Create post
