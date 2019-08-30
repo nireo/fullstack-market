@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { initUsers } from '../../reducers/allUsersReducer';
 import Loading from '../Loading';
+import EditForm from './EditForm';
 
 const EditPosts = props => {
   const [user, setUser] = useState(null);
+  const [postToEdit, setPostToEdit] = useState(null);
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -32,7 +34,7 @@ const EditPosts = props => {
   }
 
   const renderPosts = user.posts.map(p => (
-    <div key={p._id} className="col-md 4">
+    <div key={p._id} className="col-md 6">
       <div className="card" style={{ marginTop: '1em' }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
@@ -40,18 +42,25 @@ const EditPosts = props => {
             {p.price} $
           </h6>
           <p className="card-text" style={{ paddingBottom: '1rem' }}>
-            {p.description.slice(0, 250)}
+            {p.description.slice(0, 100)}
           </p>
-          <Link className="card-link">Edit</Link>
+          <Link className="card-link" onClick={() => setPostToEdit(p)}>
+            Edit
+          </Link>
         </div>
       </div>
     </div>
   ));
 
   return (
-    <div class="container">
+    <div className="container">
       <h1>Edit posts</h1>
-      {renderPosts}
+      <div className="row">
+        <div className="col-md 6">{renderPosts}</div>
+        <div className="col-md 6">
+          <EditForm post={postToEdit} />
+        </div>
+      </div>
     </div>
   );
 };

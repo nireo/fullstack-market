@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
@@ -21,7 +21,7 @@ const SingleMainPost = props => {
     if (props.posts && post === null) {
       setPost(props.posts.find(p => p._id === props.id));
     }
-  }, [props]);
+  }, [props, post]);
   if (props.posts === null) {
     return <Loading />;
   }

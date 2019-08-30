@@ -37,9 +37,15 @@ const PostForm = props => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Create post
-        </button>
+        {props.type === 'edit' ? (
+          <button type="submit" className="btn btn-primary">
+            Commit changes
+          </button>
+        ) : (
+          <button type="submit" className="btn btn-primary">
+            Create post
+          </button>
+        )}
       </form>
     </div>
   );
