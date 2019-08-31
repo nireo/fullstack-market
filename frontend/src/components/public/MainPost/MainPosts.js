@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { initMainPosts } from '../../../reducers/mainReducer';
 import '../../../utils/loadingBar.css';
@@ -6,8 +6,11 @@ import Loading from '../../Loading';
 import { Link } from 'react-router-dom';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
+import Pagination from '../Pagination';
 
 const MainPosts = props => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [amountInPage, setAmountInPage] = useState(3);
   useEffect(() => {
     if (props.mainPost === null) {
       props.initMainPosts();
@@ -30,7 +33,12 @@ const MainPosts = props => {
     props.setNotification('Item added to cart', 'success', 2);
   };
 
-  const renderPosts = props.mainPost.map(p => (
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentPosts = props.mainPost.slice(firstPostIndex, lastPostIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
+
+  const renderPosts = currentPosts.map(p => (
     <div key={p._id} className="col-md 4">
       <div className="card" style={{ marginTop: '1em' }}>
         <div className="card-body">
@@ -57,7 +65,15 @@ const MainPosts = props => {
 
   return (
     <div className="container" style={{ paddingTop: '1rem' }}>
+      <p>Posts per page: {amountInPage}</p>
       {renderPosts}
+      <div className="container" style={{ paddingTop: '1rem' }}>
+        <Pagination
+          amountInPage={amountInPage}
+          totalPosts={props.mainPost.length}
+          paginate={paginate}
+        />
+      </div>
     </div>
   );
 };
