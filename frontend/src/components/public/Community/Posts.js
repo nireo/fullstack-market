@@ -63,7 +63,20 @@ const Posts = props => {
 
   return (
     <div class="container" style={{ paddingTop: '1rem' }}>
-      <p>Posts per page: {amountInPage}</p>
+      <div className="row">
+        <div className="col-md-10">
+          <p>Posts per page: {amountInPage}</p>
+        </div>
+        <div className="col-md-2">
+          Select posts per page
+          <select className="form-control form-control-sm">
+            <option onClick={() => setAmountInPage(2)}>2</option>
+            <option onClick={() => setAmountInPage(3)}>3</option>
+            <option onClick={() => setAmountInPage(4)}>4</option>
+            <option onClick={() => setAmountInPage(5)}>5</option>
+          </select>
+        </div>
+      </div>
       {renderPosts}
       <div class="container" style={{ paddingTop: '1rem' }}>
         <Pagination
