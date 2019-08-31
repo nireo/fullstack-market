@@ -6,6 +6,8 @@ const reducer = (state = null, action) => {
       return action.data;
     case 'REMOVE_USER':
       return state.filter(u => u._id !== action.id);
+    case 'UPDATE_USER':
+      return state.map(u => (u._id === action.data._id ? action.data : u));
     default:
       return state;
   }
@@ -27,6 +29,16 @@ export const removeUser = id => {
     dispatch({
       type: 'REMOVE_USER',
       id: id
+    });
+  };
+};
+
+export const updateBio = bio => {
+  return async dispatch => {
+    const user = await userService.updateBio(bio);
+    dispatch({
+      type: 'UPDATE_USERS',
+      data: user
     });
   };
 };

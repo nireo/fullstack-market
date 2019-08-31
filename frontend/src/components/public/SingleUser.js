@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { initUsers } from '../../reducers/allUsersReducer';
 import { Link, Redirect } from 'react-router-dom';
 import Loading from '../Loading';
+import { updateBio } from '../../reducers/allUsersReducer';
+import { setNotification } from '../../reducers/notificationReducer';
 
 const SingleUser = props => {
   const [showForm, setShowForm] = useState(false);
@@ -59,6 +61,14 @@ const SingleUser = props => {
 
   const handleBioUpdate = event => {
     event.preventDefault();
+    if (bio === '') {
+      try {
+        props.updateBio(bio);
+        props.setNotification('Something went wrong', 'error', 2);
+      } catch {
+        props.setNotification('Something went wrong', 'error', 2);
+      }
+    }
   };
 
   return (
@@ -139,5 +149,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initUsers }
+  { initUsers, updateBio, setNotification }
 )(SingleUser);

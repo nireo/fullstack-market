@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { initUsers } from '../../reducers/allUsersReducer';
+import { setNotification } from '../../reducers/notificationReducer';
+import { removePost } from '../../reducers/postReducer';
 import Loading from '../Loading';
 import EditForm from './EditForm';
 
@@ -33,6 +35,17 @@ const EditPosts = props => {
     );
   }
 
+  const handleDelete = id => {
+    if (window.confirm('Are you sure you want delete the post')) {
+      try {
+        props.removePost(id);
+        props.setNotification('Post has been deleted', 'success', 2);
+      } catch {
+        props.setNotification('Something went wrong', 'error', 2);
+      }
+    }
+  };
+
   const renderPosts = user.posts.map(p => (
     <div key={p._id} className="col-md 6">
       <div className="card" style={{ marginTop: '1em' }}>
@@ -46,6 +59,9 @@ const EditPosts = props => {
           </p>
           <Link className="card-link" onClick={() => setPostToEdit(p)}>
             Edit
+          </Link>
+          <Link className="card-link" onClick={() => handleDelete(p._id)}>
+            Delete
           </Link>
         </div>
       </div>
@@ -73,5 +89,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initUsers }
+  { initUsers, setNotification, removePost }
 )(EditPosts);

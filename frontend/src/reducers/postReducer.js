@@ -13,7 +13,7 @@ const reducer = (state = null, action) => {
     case 'REMOVE_POST':
       return state.filter(p => p._id !== action.id);
     case 'UPDATE_POST':
-      return state.map(p => (p._id === action.data._id ? action.data : p));
+      return state.map(p => (p._id === action.id ? action.data : p));
     default:
       return state;
   }
@@ -54,7 +54,8 @@ export const updatePost = (id, newObject) => {
     const post = await postService.updatePost(id, newObject);
     dispatch({
       type: 'UPDATE_POST',
-      data: post
+      data: post,
+      id: id
     });
   };
 };

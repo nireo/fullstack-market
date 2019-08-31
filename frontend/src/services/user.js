@@ -45,6 +45,11 @@ const buyOfficialItems = async object => {
   return response.data;
 };
 
+const updateBio = async object => {
+  const response = await axios.post(`${baseUrl}/bio`, object, getConfig());
+  return response.data;
+};
+
 export default {
   makeNewUser,
   setToken,
@@ -52,5 +57,6 @@ export default {
   updateUser,
   initUsers,
   buyCommunityItems,
-  buyOfficialItems
+  buyOfficialItems,
+  updateBio
 };

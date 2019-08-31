@@ -19,9 +19,14 @@ const EditForm = props => {
       description: description ? description : null,
       price: price ? price : null
     };
+
     try {
       props.updatePost(props.post._id, editedObject);
-      props.setNotification('Post has been edited', 'success', 2);
+      props.setNotification(
+        'Post has been edited, and will be shown on the next load',
+        'success',
+        2
+      );
     } catch {
       props.setNotification('Something went wrong', 'error', 2);
     }
