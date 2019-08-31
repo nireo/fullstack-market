@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { initUsers } from '../../reducers/allUsersReducer';
+import { initUsers, updateRemovedPost } from '../../reducers/allUsersReducer';
 import { setNotification } from '../../reducers/notificationReducer';
 import { removePost } from '../../reducers/postReducer';
 import Loading from '../Loading';
@@ -70,7 +70,8 @@ const EditPosts = props => {
 
   return (
     <div className="container">
-      <h1>Edit posts</h1>
+      <h2>Edit posts</h2>
+      <p>All edits here, will be updated after reloading.</p>
       <div className="row">
         <div className="col-md 6">{renderPosts}</div>
         <div className="col-md 6">
@@ -89,5 +90,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initUsers, setNotification, removePost }
+  { initUsers, setNotification, removePost, updateRemovedPost }
 )(EditPosts);

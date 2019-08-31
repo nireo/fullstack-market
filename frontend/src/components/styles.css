@@ -1,4 +1,6 @@
-/* Animations for page loading */
+p {
+  font-size: '1.25rem';
+}
 
 .animate {
   -webkit-animation-duration: 3s;
@@ -28,5 +30,3 @@
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
 }
-
-/* =============================== */
