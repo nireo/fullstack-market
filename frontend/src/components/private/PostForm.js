@@ -1,6 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { setNotification } from '../../reducers/notificationReducer';
 
 const PostForm = props => {
+  const { price, title, description } = props;
+  const checkNextStep = () => {
+    if (title === '' || price === 0 || description === '') {
+      props.setNotification('You need to fill out all the fields', 'error', 3);
+      return null;
+    } else {
+      props.setStep(2);
+    }
+  };
   return (
     <div className="container">
       <form onSubmit={props.handleCreation}>
@@ -51,8 +62,8 @@ const PostForm = props => {
             </button>
           </div>
         ) : (
-          <button type="submit" className="btn btn-primary">
-            Create post
+          <button onClick={checkNextStep} className="btn btn-outline-primary">
+            Next
           </button>
         )}
       </form>
@@ -60,4 +71,7 @@ const PostForm = props => {
   );
 };
 
-export default PostForm;
+export default connect(
+  null,
+  { setNotification }
+)(PostForm);

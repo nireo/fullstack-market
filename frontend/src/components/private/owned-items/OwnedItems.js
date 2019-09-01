@@ -5,11 +5,11 @@ import { initItems } from '../../../reducers/ownedItemsReducer';
 
 const OwnedItems = props => {
   useEffect(() => {
-    if (props.ownedItems === null) {
+    if (props.items === null) {
       props.initItems();
     }
   }, [props]);
-  if (props.ownedItems === null) {
+  if (props.items === null) {
     return <Loading />;
   }
   return (
@@ -17,12 +17,12 @@ const OwnedItems = props => {
       <h2>Owned items</h2>
       <h3 className="mt-3">Community</h3>
       <ul>
-        {props.ownedItems.community.map(i => (
+        {props.items.community.map(i => (
           <li>{i.title}</li>
         ))}
       </ul>
       <h3 className="mt-3">Official</h3>
-      {props.ownedItems.main.map(i => (
+      {props.items.main.map(i => (
         <li>{i.title}</li>
       ))}
     </div>
