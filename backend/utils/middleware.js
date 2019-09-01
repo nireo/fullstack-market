@@ -17,6 +17,7 @@ const errorHandler = (error, req, res, next) => {
       error: 'invalid token'
     });
   }
+  res.status(500);
   next(error);
 };
 

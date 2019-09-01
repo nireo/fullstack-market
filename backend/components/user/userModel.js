@@ -50,7 +50,7 @@ const userSchema = new Schema({
   personalShop: {
     about: {
       type: String,
-      default: 'No bio given',
+      default: 'No about given',
       max: 300
     }
   }
@@ -64,6 +64,8 @@ userSchema.set('toJSON', {
 
     // since it's good practice to not show this.
     delete object.passwordHash;
+    delete object.mainItemsBought;
+    delete object.communityItemsBought;
   }
 });
 

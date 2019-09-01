@@ -149,3 +149,23 @@ exports.updateBio = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.getOwnedItems = async (req, res, next) => {
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+    const user = await userModel.findById(decodedToken.id);
+    ownedItems = {
+      main: user.mainItemsBought,
+      community: user.communityItemsBought
+    };
+    return res.json(ownedItems);
+  } catch (e) {
+    next(e);
+  }
+};
