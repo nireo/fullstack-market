@@ -1,3 +1,5 @@
+import userService from '../services/user';
+
 const reducer = (state = null, action) => {
   switch (action.type) {
     case 'INIT_OWNED_ITEMS':
@@ -10,6 +12,16 @@ const reducer = (state = null, action) => {
     default:
       return state;
   }
+};
+
+export const initItems = () => {
+  return async dispatch => {
+    const items = await userService.getOwnedItems();
+    dispatch({
+      type: 'INIT_OWNED_ITEMS',
+      data: items
+    });
+  };
 };
 
 export default reducer;

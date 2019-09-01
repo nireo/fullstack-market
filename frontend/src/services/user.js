@@ -50,6 +50,11 @@ const updateBio = async object => {
   return response.data;
 };
 
+const getOwnedItems = async () => {
+  const response = await axios.get(`${baseUrl}/owned`, getConfig());
+  return response.data;
+};
+
 export default {
   makeNewUser,
   setToken,
@@ -58,5 +63,6 @@ export default {
   initUsers,
   buyCommunityItems,
   buyOfficialItems,
-  updateBio
+  updateBio,
+  getOwnedItems
 };
