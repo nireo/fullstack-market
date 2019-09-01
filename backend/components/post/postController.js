@@ -41,7 +41,7 @@ exports.createPost = async (req, res, next) => {
     });
 
     const savedPost = await newPost.save();
-    user.posts = user.posts.concat(savedPost);
+    user.posts = user.posts.concat(savedPost._id);
     await user.save();
     return res.json(savedPost);
   } catch (e) {

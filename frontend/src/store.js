@@ -8,6 +8,7 @@ import notificationReducer from './reducers/notificationReducer';
 import cartReducer from './reducers/cartReducer';
 import allUsersReducer from './reducers/allUsersReducer';
 import chatReducer from './reducers/chatReducer';
+import ownedItemsReducer from './reducers/ownedItemsReducer';
 
 const reducer = combineReducers({
   user: userReducer,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   notification: notificationReducer,
   cart: cartReducer,
   allUsers: allUsersReducer,
-  chat: chatReducer
+  chat: chatReducer,
+  ownedItems: ownedItemsReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));

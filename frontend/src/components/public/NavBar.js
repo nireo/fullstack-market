@@ -96,6 +96,11 @@ const NavBar = props => {
                     <i class="fas fa-store"></i> Personal store
                   </Link>
                 )}
+                {!props.user.admin && (
+                  <Link className="dropdown-item" to={'/owned-items'}>
+                    <i class="fas fa-archive"></i> Owned items
+                  </Link>
+                )}
               </div>
             </li>
           )}

@@ -41,6 +41,10 @@ export const checkLocalStorage = () => {
   };
 };
 
+export const purchaseItems = ids => {
+  return async dispatch => {};
+};
+
 export const logOut = () => {
   window.localStorage.clear();
   return { type: 'LOG_OUT' };

@@ -20,7 +20,7 @@ const Pinned = props => {
             {p.price} $
           </h6>
           <p className="card-text" style={{ paddingBottom: '1rem' }}>
-            {p.description.slice(0, 100)}
+            {p.description.slice(0, 50)}
           </p>
           <Link to={`/community/post/${p._id}`} className="card-link">
             Read more
@@ -33,11 +33,7 @@ const Pinned = props => {
   return (
     <div className="container">
       <h4>Featured</h4>
-      {props.posts.length === 0 ? (
-        <p>User has no featured posts</p>
-      ) : (
-        { renderPosts }
-      )}
+      <div className="row">{renderPosts}</div>
     </div>
   );
 };

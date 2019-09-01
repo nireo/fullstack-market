@@ -28,6 +28,10 @@ const Cart = props => {
     );
   }
 
+  const handlePurchase = event => {
+    event.preventDefault();
+  };
+
   const renderCartItems = props.cart.map(i => (
     <div key={i._id}>
       <hr />
@@ -40,7 +44,7 @@ const Cart = props => {
           <h6 style={{ color: 'green' }}>{i.price} $</h6>
           <button
             onClick={() => props.removeItemFromCart(i._id)}
-            className="btn btn-danger"
+            className="btn btn-outline-danger"
           >
             Remove item
           </button>
@@ -57,9 +61,12 @@ const Cart = props => {
       <div>
         <h5>Your total is: {total} $</h5>
       </div>
-      <button onClick={props.clearCart} className="btn btn-danger">
-        Clear cart
-      </button>
+      <div>
+        <button className="btn btn-outline-success">Buy items</button>{' '}
+        <button onClick={props.clearCart} className="btn btn-outline-danger">
+          Clear cart
+        </button>
+      </div>
     </div>
   );
 };

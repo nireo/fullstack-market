@@ -79,7 +79,9 @@ const MainPosts = props => {
           </select>
         </div>
       </div>
+      <hr />
       {renderPosts}
+      <hr />
       <div className="container" style={{ paddingTop: '1rem' }}>
         <Pagination
           amountInPage={amountInPage}

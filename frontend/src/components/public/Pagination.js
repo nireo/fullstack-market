@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Pagination = ({ amountInPage, totalPosts, paginate }) => {
   const amountOfPages = [];
-  for (let i = 1; i <= Math.ceil(totalPosts, amountInPage); i++) {
+  for (let i = 1; i <= Math.ceil(totalPosts / amountInPage); i++) {
     amountOfPages.push(i);
   }
   return (

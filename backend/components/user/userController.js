@@ -1,5 +1,8 @@
 const userModel = require('./userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { getToken } = require('../../utils/helper');
+const config = require('../../utils/config');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -111,7 +114,7 @@ exports.buyMainItems = async (req, res, next) => {
 
 exports.buyCommunityItems = async (req, res, next) => {
   const token = getToken(req);
-  const { postIds } = req.body;
+  const { postId } = req.body;
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
     if (!token || !decodedToken) {
@@ -120,10 +123,9 @@ exports.buyCommunityItems = async (req, res, next) => {
       });
     }
     const user = await userModel.findById(decodedToken.id);
-    postIds.forEach(p => {
-      user.communityItemsBought.concat(p);
-    });
-    await user.save();
+    user.communityItemsBought.concat(postId);
+    const saved = await user.save();
+    return res.json(saved);
   } catch (e) {
     next(e);
   }
