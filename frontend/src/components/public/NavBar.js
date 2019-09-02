@@ -71,7 +71,7 @@ const NavBar = props => {
                 <i className="fas fa-user" /> {props.user.username}
               </Link>
               <div className="dropdown-menu" aria-labelledby="userDropdown">
-                {props.user.admin ? (
+                {props.user.username === 'admin' ? (
                   <Link className="dropdown-item" to="/create/main">
                     <i className="fas fa-plus" /> Create Post
                   </Link>
@@ -83,12 +83,12 @@ const NavBar = props => {
                 <Link className="dropdown-item" to="/edit">
                   <i class="fas fa-edit"></i> Edit Posts
                 </Link>
-                {props.user.admin && (
+                {props.user.username === 'admin' && (
                   <Link className="dropdown-item" to="/admin">
                     <i className="fas fa-chart-line" /> Admin panel
                   </Link>
                 )}
-                {!props.user.admin && (
+                {!props.user.username === 'admin' && (
                   <Link
                     className="dropdown-item"
                     to={`/shop/${props.user._id}`}
@@ -96,9 +96,17 @@ const NavBar = props => {
                     <i class="fas fa-store"></i> Personal store
                   </Link>
                 )}
-                {!props.user.admin && (
+                {!props.user.username === 'admin' && (
                   <Link className="dropdown-item" to={'/owned-items'}>
                     <i class="fas fa-archive"></i> Owned items
+                  </Link>
+                )}
+                {!props.user.username === 'admin' && (
+                  <Link
+                    className="dropdown-item"
+                    to={`/profile/${props.user._id}`}
+                  >
+                    <i className="fas fa-user"></i> My Profile
                   </Link>
                 )}
               </div>
