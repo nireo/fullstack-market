@@ -5,11 +5,13 @@ import { setNotification } from '../../../reducers/notificationReducer';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import ReviewForm from '../../private/ReviewForm';
 import { addReview } from '../../../reducers/postReducer';
+import Review from '../Review';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [stars, setStars] = useState(0.0);
+  const [recommended, setRecommended] = useState(false);
   if (props.post === null) {
     return null;
   }
@@ -90,8 +92,15 @@ const SinglePost = props => {
           title={title}
           setTitle={setTitle}
           addReview={addReviewToPost}
+          recommended={recommended}
+          setRecommended={setRecommended}
         />
       )}
+      <div style={{ paddingTop: '2rem' }}>
+        {props.post.reviews.map(r => (
+          <Review review={r} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -6,7 +6,8 @@ const ReviewForm = props => {
     const reviewObject = {
       title: props.title,
       description: props.content,
-      stars: props.stars
+      stars: props.stars,
+      recommended: props.recommended
     };
     props.addReview(reviewObject);
   };
@@ -31,7 +32,7 @@ const ReviewForm = props => {
             rows="4"
           />
         </div>
-        <div className="from-group" style={{ paddingTop: '1rem' }}>
+        <div className="form-group" style={{ paddingTop: '1rem' }}>
           <label>Star rating</label>
           <input
             className="form-control"
@@ -42,6 +43,16 @@ const ReviewForm = props => {
             min={0}
             max={5}
           />
+        </div>
+        <div className="form-group" style={{ paddingTop: '1rem' }}>
+          <label>
+            <input
+              type="checkbox"
+              value={props.recommend}
+              onClick={() => props.setRecommended(!props.recommend)}
+            />{' '}
+            Recommend
+          </label>
         </div>
         <div style={{ paddingTop: '1rem' }}>
           <button className="btn btn-outline-primary" type="submit">
