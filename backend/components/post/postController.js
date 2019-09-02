@@ -21,7 +21,7 @@ exports.getAllPosts = async (req, res, next) => {
 };
 
 exports.createPost = async (req, res, next) => {
-  const { title, description, price } = req.body;
+  const { title, description, price, content } = req.body;
   const token = getToken(req);
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
@@ -37,7 +37,8 @@ exports.createPost = async (req, res, next) => {
       description,
       price,
       posted: Date.now(),
-      postedBy: decodedToken.id
+      postedBy: decodedToken.id,
+      content
     });
 
     const savedPost = await newPost.save();
@@ -76,7 +77,7 @@ exports.removePost = async (req, res, next) => {
 };
 
 exports.updatePost = async (req, res, next) => {
-  const { price, title, description } = req.body;
+  const { price, title, description, content } = req.body;
   const token = getToken(req);
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
@@ -90,7 +91,8 @@ exports.updatePost = async (req, res, next) => {
     const newPostObject = {
       price: price ? price : post.price,
       title: title ? title : post.title,
-      description: description ? description : post.description
+      description: description ? description : post.description,
+      content: content ? content : post.content
     };
 
     if (post.postedBy.toString() === decodedToken.id) {

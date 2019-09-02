@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { checkLocalStorage } from './reducers/userReducer';
 import './components/styles.css';
 
-const App = props => {
+const App = ({ user, checkLocalStorage }) => {
   useEffect(() => {
-    if (props.user === null) {
-      props.checkLocalStorage();
+    if (user === null) {
+      checkLocalStorage();
     }
-  }, [props]);
+  }, [user, checkLocalStorage]);
 
   return (
     <div className="animation-delays animate fadeIn">

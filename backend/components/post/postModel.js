@@ -23,6 +23,10 @@ const postSchema = new Schema({
     type: String,
     default: Date.now
   },
+  content: {
+    type: String,
+    required: true
+  },
   reviews: [
     {
       type: Schema.Types.ObjectId,

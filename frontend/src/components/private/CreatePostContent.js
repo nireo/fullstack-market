@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 
-const CreatePostContent = props => {
+const CreatePostContent = ({ setStep, createPost }) => {
   const [text, setText] = useState('');
   const [type, setType] = useState('text');
+
+  const handleFunctionCall = event => {
+    event.preventDefault();
+    createPost(text);
+  };
+
   return (
     <div className="container">
-      <form>
+      <form onSubmit={handleFunctionCall}>
         <select className="form-control mb-3">
           <option onClick={() => setType('text')}>Description</option>
           <option onClick={() => setType('pdf')}>PDF</option>
@@ -21,14 +27,18 @@ const CreatePostContent = props => {
         ) : (
           <input />
         )}
+        <div>
+          <button type="submit" className="btn btn-outline-primary">
+            Create
+          </button>
+          <button
+            className="btn btn-outline-danger mt-3"
+            onClick={() => setStep(1)}
+          >
+            Back
+          </button>
+        </div>
       </form>
-
-      <button
-        className="btn btn-outline-danger mt-3"
-        onClick={() => props.setStep(1)}
-      >
-        Back
-      </button>
     </div>
   );
 };

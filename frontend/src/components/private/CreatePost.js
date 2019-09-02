@@ -5,21 +5,21 @@ import { setNotification } from '../../reducers/notificationReducer';
 import PostForm from './PostForm';
 import CreatePostContent from './CreatePostContent';
 
-const CreatePost = props => {
+const CreatePost = ({ createPost, setNotification }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [step, setStep] = useState(1);
 
-  const handleCreation = event => {
-    event.preventDefault();
+  const handleCreation = content => {
     const newObject = {
       title,
       description,
-      price
+      price,
+      content
     };
-    props.createPost(newObject);
-    props.setNotification('Post added', 'success', 2);
+    createPost(newObject);
+    setNotification('Post added', 'success', 2);
   };
 
   return (
@@ -39,7 +39,7 @@ const CreatePost = props => {
           setStep={setStep}
         />
       ) : (
-        <CreatePostContent setStep={setStep} />
+        <CreatePostContent setStep={setStep} createPost={handleCreation} />
       )}
     </div>
   );
