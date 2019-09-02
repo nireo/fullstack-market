@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setNotification } from '../../../reducers/notificationReducer';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import ReviewForm from '../../private/ReviewForm';
 import { addReview } from '../../../reducers/postReducer';
 import Review from '../Review';
+import Loading from '../../Loading';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
@@ -96,6 +97,7 @@ const SinglePost = props => {
           setRecommended={setRecommended}
         />
       )}
+      <hr />
       <div style={{ paddingTop: '2rem' }}>
         {props.post.reviews.map(r => (
           <Review review={r} />

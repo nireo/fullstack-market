@@ -54,7 +54,7 @@ const ReviewForm = props => {
             Recommend
           </label>
         </div>
-        <div style={{ paddingTop: '1rem' }}>
+        <div>
           <button className="btn btn-outline-primary" type="submit">
             Submit review
           </button>

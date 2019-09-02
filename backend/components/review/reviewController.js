@@ -88,8 +88,15 @@ exports.addReviewToPost = async (req, res, next) => {
     post.reviews = post.reviews.concat(savedReview._id);
     user.reviewsPosted = user.reviewsPosted.concat(savedReview._id);
     await user.save();
-    const postWithReview = await post.save();
-    return res.json(postWithReview);
+    await post.save((err, postPopulate) => {
+      postPopulate
+        .populate('reviews')
+        .populate('postedBy')
+        .execPopulate()
+        .then(populated => {
+          return res.json(populated);
+        });
+    });
   } catch (e) {
     next(e);
   }

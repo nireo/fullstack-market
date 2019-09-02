@@ -10,6 +10,10 @@ const reducer = (state = null, action) => {
         return action.data;
       }
       return [...state, action.data];
+    case 'ADD_REVIEW':
+      let post = state.find(p => p._id === action.id);
+      post.reviews.concat(action.data);
+      return state.map(p => (p._id === action.id ? post : p));
     case 'REMOVE_POST':
       return state.filter(p => p._id !== action.id);
     case 'UPDATE_POST':
@@ -62,10 +66,11 @@ export const updatePost = (id, newObject) => {
 
 export const addReview = (id, newObject) => {
   return async dispatch => {
-    const post = await reviewService.postCommunityReview(id, newObject);
+    const review = await reviewService.postCommunityReview(id, newObject);
     dispatch({
       type: 'UPDATE_POST',
-      data: post
+      data: review,
+      id: id
     });
   };
 };
