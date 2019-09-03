@@ -13,7 +13,7 @@ const reducer = (state = null, action) => {
       }
       return [...state, action.data];
     case 'UPDATE_MAIN_POST':
-      return state.map(p => (p._id === action.data._id ? action.data : p));
+      return state.map(p => (p._id === action.id ? action.data : p));
     default:
       return state;
   }
@@ -64,7 +64,8 @@ export const addReview = (id, newObject) => {
     const post = await reviewService.postMainReview(id, newObject);
     dispatch({
       type: 'UPDATE_MAIN_POST',
-      data: post
+      data: post,
+      id: id
     });
   };
 };

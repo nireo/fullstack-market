@@ -14,6 +14,7 @@ const SingleMainPost = props => {
   const [stars, setStars] = useState(0.0);
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
+  const [recommended, setRecommended] = useState(false);
   useEffect(() => {
     if (props.posts === null) {
       props.initMainPosts();
@@ -63,8 +64,6 @@ const SingleMainPost = props => {
     }
   };
 
-  const renderReview = post.reviews.map(r => <Review review={r} />);
-
   return (
     <div className="container" style={{ paddingTop: '1rem' }}>
       <h1>{post.title}</h1>
@@ -81,9 +80,15 @@ const SingleMainPost = props => {
           title={title}
           setTitle={setTitle}
           addReview={addReview}
+          recommended={recommended}
+          setRecommended={setRecommended}
         />
       )}
-      {renderReview}
+      <div style={{ paddingTop: '2rem' }}>
+        {post.reviews.map(r => (
+          <Review review={r} />
+        ))}
+      </div>
     </div>
   );
 };

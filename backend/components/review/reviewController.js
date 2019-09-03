@@ -16,10 +16,8 @@ exports.addReviewToMain = async (req, res, next) => {
         error: 'invalid token'
       });
     }
-
     const user = await userModel.findById(decodedToken.id);
     const mainPost = await mainModel.findById(req.params.id);
-
     const newReview = new reviewModel({
       title,
       recommended,
@@ -27,13 +25,19 @@ exports.addReviewToMain = async (req, res, next) => {
       description,
       postedBy: user.id
     });
-
     const saved = await newReview.save();
     user.reviewsPosted = user.reviewsPosted.concat(saved._id);
     mainPost.reviews = mainPost.reviews.concat(saved._id);
-    const reviewedMainPost = await mainPost.save();
-    await user.save(reviewedMainPost);
-    return res.json(saved);
+    await user.save();
+    await mainPost.save((err, post) => {
+      if (err) return res.status(500);
+      post
+        .populate('reviews')
+        .execPopulate()
+        .then(populated => {
+          return res.json(populated);
+        });
+    });
   } catch (e) {
     next(e);
   }
@@ -48,7 +52,6 @@ exports.removeReview = async (req, res, next) => {
         error: 'invalid token'
       });
     }
-
     const review = await reviewModel.findById(req.params.id);
     if (review.postedBy.toString() === decodedToken.id) {
       await reviewModel.findByIdAndRemove(review._id);
@@ -72,10 +75,8 @@ exports.addReviewToPost = async (req, res, next) => {
         error: 'invalid token'
       });
     }
-
     const post = await postModel.findById(req.params.id);
     const user = await userModel.findById(decodedToken.id);
-
     const newReview = new reviewModel({
       stars,
       title,
@@ -83,12 +84,12 @@ exports.addReviewToPost = async (req, res, next) => {
       recommended,
       postedBy: user._id
     });
-
     const savedReview = await newReview.save();
     post.reviews = post.reviews.concat(savedReview._id);
     user.reviewsPosted = user.reviewsPosted.concat(savedReview._id);
     await user.save();
     await post.save((err, postPopulate) => {
+      if (err) return res.status(500);
       postPopulate
         .populate('reviews')
         .populate('postedBy')
