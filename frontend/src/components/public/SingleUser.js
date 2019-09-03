@@ -5,6 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Loading from '../Loading';
 import { updateBio } from '../../reducers/allUsersReducer';
 import { setNotification } from '../../reducers/notificationReducer';
+import reviewService from '../../services/review';
 
 const SingleUser = props => {
   const [showForm, setShowForm] = useState(false);
@@ -50,12 +51,32 @@ const SingleUser = props => {
     </tr>
   ));
 
+  const handleReviewRemove = (id, title) => {
+    if (window.confirm('Are you sure you want to delete ' + title)) {
+      try {
+        reviewService.removeReview(id);
+        props.setNotification(
+          'Review has been removed, it will updated on next reload',
+          'success',
+          3
+        );
+      } catch {
+        props.setNotification('Something went wrong', 'error', 2);
+      }
+    }
+  };
+
   const renderReviews = user.reviewsPosted.map(r => (
     <tr key={r._id}>
       <td>{r.title}</td>
       <td>{r.description.slice(0, 100)}</td>
       <td>{r.stars}</td>
       <td>{r.recommend ? 'True' : 'False'}</td>
+      {props.user._id === user._id && (
+        <td onClick={() => handleReviewRemove(r._id, r.title)}>
+          <Link style={{ color: 'black', textDecoration: 'none' }}>Delete</Link>
+        </td>
+      )}
     </tr>
   ));
 
@@ -131,6 +152,7 @@ const SingleUser = props => {
               <th>Description</th>
               <th>Stars</th>
               <th>Recommended</th>
+              {props.user._id === user._id && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>{renderReviews}</tbody>

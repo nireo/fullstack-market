@@ -88,7 +88,7 @@ const NavBar = props => {
                     <i className="fas fa-chart-line" /> Admin panel
                   </Link>
                 )}
-                {!props.user.username === 'admin' && (
+                {props.user.username !== 'admin' && (
                   <Link
                     className="dropdown-item"
                     to={`/shop/${props.user._id}`}
@@ -96,12 +96,12 @@ const NavBar = props => {
                     <i class="fas fa-store"></i> Personal store
                   </Link>
                 )}
-                {!props.user.username === 'admin' && (
+                {props.user.username !== 'admin' && (
                   <Link className="dropdown-item" to={'/owned-items'}>
                     <i class="fas fa-archive"></i> Owned items
                   </Link>
                 )}
-                {!props.user.username === 'admin' && (
+                {props.user.username !== 'admin' && (
                   <Link
                     className="dropdown-item"
                     to={`/profile/${props.user._id}`}

@@ -75,4 +75,14 @@ export const addReview = (id, newObject) => {
   };
 };
 
+export const removeReview = id => {
+  return async dispatch => {
+    await reviewService.removeReview(id);
+    dispatch({
+      type: 'REMOVE_REVIEW',
+      id: id
+    });
+  };
+};
+
 export default reducer;
