@@ -6,6 +6,7 @@ import Loading from '../Loading';
 import { updateBio } from '../../reducers/allUsersReducer';
 import { setNotification } from '../../reducers/notificationReducer';
 import reviewService from '../../services/review';
+import { removePost } from '../../reducers/postReducer';
 
 const SingleUser = props => {
   const [showForm, setShowForm] = useState(false);
@@ -41,6 +42,21 @@ const SingleUser = props => {
     return <Redirect to="/users" />;
   }
 
+  const handlePostRemove = (id, title) => {
+    if (window.confirm('Are you sure you want to delete' + title)) {
+      try {
+        props.removePost(id);
+        props.setNotification(
+          'Post has been successfully deleted',
+          'success',
+          3
+        );
+      } catch {
+        props.setNotification('Something went wrong', 'error', 2);
+      }
+    }
+  };
+
   const renderPosts = user.posts.map(p => (
     <tr key={p._id}>
       <td>
@@ -48,6 +64,16 @@ const SingleUser = props => {
       </td>
       <td>{p.description.slice(0, 100)}</td>
       <td style={{ color: 'green' }}>{p.price} $</td>
+      {props.user._id === user._id && (
+        <td>
+          <Link
+            style={{ color: 'black', textDecoration: 'none' }}
+            onClick={() => handlePostRemove(p._id, p.title)}
+          >
+            Delete
+          </Link>
+        </td>
+      )}
     </tr>
   ));
 
@@ -137,6 +163,7 @@ const SingleUser = props => {
               <th>Title</th>
               <th>Description</th>
               <th>Price</th>
+              {props.user._id === user._id && <th>Actions</th>}
             </tr>
           </thead>
           <tbody>{renderPosts}</tbody>
@@ -171,5 +198,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { initUsers, updateBio, setNotification }
+  { initUsers, updateBio, setNotification, removePost }
 )(SingleUser);
