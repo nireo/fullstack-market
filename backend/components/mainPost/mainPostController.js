@@ -19,7 +19,7 @@ exports.getAllPosts = async (req, res, next) => {
 };
 
 exports.createPost = async (req, res, next) => {
-  const { title, description, price } = req.body;
+  const { title, description, price, content } = req.body;
   const token = getToken(req);
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
@@ -32,7 +32,8 @@ exports.createPost = async (req, res, next) => {
       const newMainPost = new mainPostModel({
         title,
         description,
-        price
+        price,
+        content
       });
 
       const saved = await newMainPost.save();
@@ -69,7 +70,7 @@ exports.removePost = async (req, res, next) => {
 };
 
 exports.updatePost = async (req, res, next) => {
-  const { price, description, title } = req.body;
+  const { price, description, title, content } = req.body;
   const token = getToken(req);
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
@@ -83,7 +84,8 @@ exports.updatePost = async (req, res, next) => {
     const updatedPost = {
       price: price ? price : post.price,
       description: description ? description : post.description,
-      title: title ? title : post.title
+      title: title ? title : post.title,
+      content: content ? content : post.content
     };
 
     if (decodedToken.username === 'admin') {

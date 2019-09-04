@@ -28,7 +28,7 @@ const CreatePostContent = ({ setStep, createPost }) => {
           <input />
         )}
         <div>
-          <button type="submit" className="btn btn-outline-primary">
+          <button type="submit" className="btn btn-outline-primary mt-3">
             Create
           </button>
           <button

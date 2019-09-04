@@ -21,7 +21,11 @@ const mainSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Review'
     }
-  ]
+  ],
+  content: {
+    type: String,
+    required: true
+  }
 });
 
 mainSchema.set('toJSON', {
