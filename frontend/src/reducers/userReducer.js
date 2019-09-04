@@ -1,5 +1,6 @@
 import loginService from '../services/login';
 import { setTokens } from '../utils/helpers';
+import userService from '../services/user';
 
 const reducer = (state = null, action) => {
   switch (action.type) {
@@ -39,10 +40,6 @@ export const checkLocalStorage = () => {
       });
     }
   };
-};
-
-export const purchaseItems = ids => {
-  return async dispatch => {};
 };
 
 export const logOut = () => {

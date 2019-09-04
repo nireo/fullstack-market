@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { clearCart, removeItemFromCart } from '../../reducers/cartReducer';
 import { setNotification } from '../../reducers/notificationReducer';
 import { Link } from 'react-router-dom';
+import userService from '../../services/user';
 
 const Cart = props => {
   const [total, setTotal] = useState(0);
@@ -28,8 +29,13 @@ const Cart = props => {
     );
   }
 
-  const handlePurchase = event => {
-    event.preventDefault();
+  const handlePurchase = () => {
+    if (props.cart.length === 0) {
+      return null;
+    }
+    props.cart.forEach(async id => {
+      await userService.buyCommunityItems({ id });
+    });
   };
 
   const renderCartItems = props.cart.map(i => (
@@ -62,7 +68,12 @@ const Cart = props => {
         <h5>Your total is: {total} $</h5>
       </div>
       <div>
-        <button className="btn btn-outline-success">Buy items</button>{' '}
+        <button
+          className="btn btn-outline-success"
+          onClick={() => handlePurchase}
+        >
+          Buy items
+        </button>{' '}
         <button onClick={props.clearCart} className="btn btn-outline-danger">
           Clear cart
         </button>
