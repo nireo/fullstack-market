@@ -7,7 +7,10 @@ const userModel = require('../user/userModel');
 exports.loginHandler = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const user = await userModel.findOne({ username });
+    const user = await userModel
+      .findOne({ username })
+      .populate('communityItemsBought')
+      .populate('mainItemsBought');
     const checkPassword =
       user === null ? false : await bcrypt.compare(password, user.passwordHash);
 
@@ -25,6 +28,7 @@ exports.loginHandler = async (req, res, next) => {
     const token = jwt.sign(userToken, config.SECRET);
     return res.status(200).send({ token, user });
   } catch (e) {
+    res.status(500);
     next(e);
   }
 };
