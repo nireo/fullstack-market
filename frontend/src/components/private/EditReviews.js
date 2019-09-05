@@ -40,22 +40,29 @@ const EditReviews = ({ user, setNotification }) => {
     <div key={r._id} className="col-md 6">
       <div className="card" style={{ marginTop: '1rem' }}>
         <div className="card-body">
-          <h5 className="card-title">{r.title}</h5>
-          <h6 className="card-subtitle">Stars: {r.stars}</h6>
-          <p>{r.description}</p>
-          <p>Recommended: {r.recommended ? 'Yes' : 'No'}</p>
-          <Link
-            style={{ color: 'black', textDecoration: 'none' }}
-            onClick={() => setReviewToEdit(r)}
-          >
-            Edit review
-          </Link>
-          <Link
-            onClick={() => handleRemove(r._id)}
-            style={{ color: 'black', textDecoration: 'none' }}
-          >
-            Delete review
-          </Link>
+          <div className="row">
+            <div className="col-md 9">
+              <h5 className="card-title">{r.title}</h5>
+              <p>{r.description}</p>
+              <Link
+                style={{ color: 'black', textDecoration: 'none' }}
+                onClick={() => setReviewToEdit(r)}
+              >
+                Edit
+              </Link>
+              {'  '}
+              <Link
+                onClick={() => handleRemove(r._id)}
+                style={{ color: 'black', textDecoration: 'none' }}
+              >
+                Delete
+              </Link>
+            </div>
+            <div className="col-md 3">
+              <h6 className="card-subtitle">Stars: {r.stars}</h6>
+              <p>Recommended: {r.recommended ? 'Yes' : 'No'}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
