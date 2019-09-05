@@ -18,7 +18,7 @@ const EditPosts = props => {
       <div className="container text-center">
         <h2>Edit posts</h2>
         <p>
-          You've no posts, you can create posts in the{' '}
+          You've got no posts, you can create posts in the{' '}
           <Link to="/create">create</Link> page.
         </p>
       </div>
@@ -38,7 +38,7 @@ const EditPosts = props => {
 
   const renderPosts = props.user.posts.map(p => (
     <div key={p._id} className="col-md 6">
-      <div className="card" style={{ marginTop: '1em' }}>
+      <div className="card" style={{ marginTop: '1rem' }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
           <h6 className="card-subtitle" style={{ color: 'green' }}>

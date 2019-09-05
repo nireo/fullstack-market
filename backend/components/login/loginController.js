@@ -11,7 +11,8 @@ exports.loginHandler = async (req, res, next) => {
       .findOne({ username })
       .populate('communityItemsBought')
       .populate('mainItemsBought')
-      .populate('posts');
+      .populate('posts')
+      .populate('reviewsPosted');
 
     const checkPassword =
       user === null ? false : await bcrypt.compare(password, user.passwordHash);

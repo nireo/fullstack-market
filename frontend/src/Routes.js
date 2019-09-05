@@ -30,6 +30,7 @@ import { initUsers } from './reducers/allUsersReducer';
 import Overview from './components/public/personal-shop/Overview';
 import EditPosts from './components/private/EditPosts';
 import OwnedItems from './components/private/owned-items/OwnedItems';
+import EditReviews from './components/private/EditReviews';
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -135,14 +136,17 @@ const Routes = props => {
         <Route
           exact
           path="/edit"
-          render={() =>
-            props.user ? <EditPosts id={props.user._id} /> : <Redirect to="/" />
-          }
+          render={() => (props.user ? <EditPosts /> : <Redirect to="/" />)}
         />
         <Route
           exact
           path="/owned-items"
           render={() => (props.user ? <OwnedItems /> : <Redirect to="/" />)}
+        />
+        <Route
+          exact
+          path="/edit-reviews"
+          render={() => (props.user ? <EditReviews /> : <Redirect to="/" />)}
         />
         <Route render={() => <NotFound />} />
       </Switch>

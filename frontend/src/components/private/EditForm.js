@@ -20,7 +20,8 @@ const EditForm = props => {
     const editedObject = {
       title: title ? title : null,
       description: description ? description : null,
-      price: price ? price : null
+      price: price ? price : null,
+      content: content ? content : null
     };
 
     try {
