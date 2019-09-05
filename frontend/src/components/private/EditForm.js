@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostForm from './PostForm';
 import { connect } from 'react-redux';
 import { updatePost } from '../../reducers/postReducer';
@@ -8,9 +8,23 @@ import { Link } from 'react-router-dom';
 const EditForm = props => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0.0);
   const [contentType, setContentType] = useState('basic');
   const [content, setContent] = useState('');
+  useEffect(() => {
+    if (
+      title === '' &&
+      description === '' &&
+      content === '' &&
+      price === 0.0 &&
+      props.post !== null
+    ) {
+      setTitle(props.post.title);
+      setDescription(props.post.description);
+      setPrice(props.post.price);
+      setContent(props.post.content);
+    }
+  }, [props.post]);
   if (props.post === null) {
     return <div className="container">You need to select a post</div>;
   }

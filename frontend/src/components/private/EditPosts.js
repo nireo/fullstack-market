@@ -68,10 +68,6 @@ const EditPosts = props => {
           <EditForm post={postToEdit} setPost={setPostToEdit} />
         </div>
       </div>
-      <div className="row">
-        <div className="col-md 6"></div>
-        <div className="col-md 6">{postToEdit ? postToEdit.content : ''}</div>
-      </div>
     </div>
   );
 };

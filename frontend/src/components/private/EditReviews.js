@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setNotification } from '../../reducers/notificationReducer';
+import { Link } from 'react-router-dom';
+import EditReviewForm from './EditReviewForm';
 
 const EditReviews = ({ user }) => {
+  const [reviewToEdit, setReviewToEdit] = useState(null);
   if (user === null) {
     return null;
   }
@@ -22,9 +25,15 @@ const EditReviews = ({ user }) => {
       <div className="card" style={{ marginTop: '1rem' }}>
         <div className="card-body">
           <h5 className="card-title">{r.title}</h5>
-          <h6 className="card-subtitle">{r.stars}</h6>
+          <h6 className="card-subtitle">Stars: {r.stars}</h6>
           <p>{r.description}</p>
           <p>Recommended: {r.recommended ? 'Yes' : 'No'}</p>
+          <Link
+            style={{ color: 'black', textDecoration: 'none' }}
+            onClick={() => setReviewToEdit(r)}
+          >
+            Edit review
+          </Link>
         </div>
       </div>
     </div>
@@ -36,6 +45,12 @@ const EditReviews = ({ user }) => {
       <p>All edits here, will be updated after reloading.</p>
       <div className="row">
         <div className="col-md 6">{renderReviews}</div>
+        <div className="col-md 6">
+          <EditReviewForm
+            review={reviewToEdit}
+            setReviewToEdit={setReviewToEdit}
+          />
+        </div>
       </div>
     </div>
   );
