@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { setNotification } from '../../reducers/notificationReducer';
 import { Link } from 'react-router-dom';
 import EditReviewForm from './EditReviewForm';
+import reviewService from '../../services/review';
 
-const EditReviews = ({ user }) => {
+const EditReviews = ({ user, setNotification }) => {
   const [reviewToEdit, setReviewToEdit] = useState(null);
   if (user === null) {
     return null;
@@ -20,6 +21,21 @@ const EditReviews = ({ user }) => {
     );
   }
 
+  const handleRemove = id => {
+    if (window.confirm('Are you sure you want to delete ' + id)) {
+      try {
+        reviewService.removeReview(id);
+        setNotification(
+          'Review has been deleted, and will be fully removed on next reload',
+          'success',
+          2
+        );
+      } catch {
+        setNotification('Something went while editing', 'error', 2);
+      }
+    }
+  };
+
   const renderReviews = user.reviewsPosted.map(r => (
     <div key={r._id} className="col-md 6">
       <div className="card" style={{ marginTop: '1rem' }}>
@@ -33,6 +49,12 @@ const EditReviews = ({ user }) => {
             onClick={() => setReviewToEdit(r)}
           >
             Edit review
+          </Link>
+          <Link
+            onClick={() => handleRemove(r._id)}
+            style={{ color: 'black', textDecoration: 'none' }}
+          >
+            Delete review
           </Link>
         </div>
       </div>

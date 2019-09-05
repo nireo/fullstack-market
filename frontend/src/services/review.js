@@ -34,4 +34,15 @@ const removeReview = async reviewId => {
   return response.data;
 };
 
-export default { setToken, postMainReview, postCommunityReview, removeReview };
+const editReview = async (id, object) => {
+  const response = await axios.put(`${baseUrl}/${id}`, object, getConfig());
+  return response.data;
+};
+
+export default {
+  editReview,
+  setToken,
+  postMainReview,
+  postCommunityReview,
+  removeReview
+};

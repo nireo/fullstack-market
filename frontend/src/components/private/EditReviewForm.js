@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setNotification } from '../../reducers/notificationReducer';
+import reviewService from '../../services/review';
 
-const EditReviewForm = ({ review, setReviewToEdit }) => {
+const EditReviewForm = ({ review, setReviewToEdit, setNotification }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [recommended, setRecommended] = useState(false);
@@ -29,6 +30,26 @@ const EditReviewForm = ({ review, setReviewToEdit }) => {
 
   const handleEdit = event => {
     event.preventDefault();
+    const reviewObject = {
+      title,
+      description,
+      recommended,
+      stars
+    };
+    try {
+      reviewService.editReview(review._id, reviewObject);
+      setNotification(
+        'Review has been edited, and will be updated on next load',
+        'success',
+        2
+      );
+    } catch {
+      setNotification(
+        'Something went wrong processing your request',
+        'error',
+        2
+      );
+    }
   };
 
   return (
