@@ -18,7 +18,6 @@ export const handleLogin = (credentials, rememberMe) => {
     if (rememberMe) {
       window.localStorage.setItem('user', JSON.stringify(user));
     }
-
     setTokens(user.token);
     dispatch({
       type: 'LOG_IN',
