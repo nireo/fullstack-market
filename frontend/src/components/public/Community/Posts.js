@@ -78,7 +78,13 @@ const Posts = props => {
         </div>
       </div>
       <hr />
-      {renderPosts}
+      {renderPosts.length === 0 ? (
+        <div className="text-center">
+          <p>No items have been posted</p>
+        </div>
+      ) : (
+        renderPosts
+      )}
       <hr />
       <div class="container" style={{ paddingTop: '1rem' }}>
         <Pagination

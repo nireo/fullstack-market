@@ -64,8 +64,6 @@ userSchema.set('toJSON', {
 
     // since it's good practice to not show this.
     delete object.passwordHash;
-    delete object.mainItemsBought;
-    delete object.communityItemsBought;
   }
 });
 

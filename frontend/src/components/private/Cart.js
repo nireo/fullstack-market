@@ -38,26 +38,59 @@ const Cart = props => {
     });
   };
 
+  const handleSinglePurchase = async id => {
+    if (!id) {
+      return null;
+    }
+    try {
+      await userService.buyCommunityItems({ id });
+      props.setNotification(
+        'Purchase has been completed successfully',
+        'success',
+        2
+      );
+      props.removeItemFromCart(id);
+    } catch {
+      props.setNotification(
+        'Something went wrong while processing',
+        'error',
+        2
+      );
+    }
+  };
+
   const renderCartItems = props.cart.map(i => (
     <div key={i._id}>
       <hr />
       <div className="row">
-        <div className="col-10">
+        <div className="col-9">
           <h5>{i.title}</h5>
           <p>{i.description}</p>
         </div>
-        <div className="col-2">
-          <h6 style={{ color: 'green' }}>{i.price} $</h6>
-          <button
-            onClick={() => props.removeItemFromCart(i._id)}
-            className="btn btn-outline-danger"
-          >
-            Remove item
-          </button>
+        <div className="col-3">
+          <h6 style={{ color: 'green' }}>
+            <strong>{i.price} $</strong>{' '}
+          </h6>
+          <div>
+            <button
+              onClick={() => handleSinglePurchase(i._id)}
+              className="btn btn-outline-success"
+            >
+              Buy
+            </button>
+            {'  '}
+            <button
+              onClick={() => props.removeItemFromCart(i._id)}
+              className="btn btn-outline-danger"
+            >
+              Remove item
+            </button>
+          </div>
         </div>
       </div>
     </div>
   ));
+
   return (
     <div className="container">
       <h2 style={{ paddingBottom: '2em' }}>Your cart</h2>

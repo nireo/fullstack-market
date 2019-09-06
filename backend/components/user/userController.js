@@ -114,7 +114,7 @@ exports.buyMainItems = async (req, res, next) => {
 
 exports.buyCommunityItems = async (req, res, next) => {
   const token = getToken(req);
-  const { postId } = req.body;
+  const { id } = req.body;
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
     if (!token || !decodedToken) {
@@ -123,7 +123,7 @@ exports.buyCommunityItems = async (req, res, next) => {
       });
     }
     const user = await userModel.findById(decodedToken.id);
-    user.communityItemsBought.concat(postId);
+    user.communityItemsBought = user.communityItemsBought.concat(id);
     const saved = await user.save();
     return res.json(saved);
   } catch (e) {

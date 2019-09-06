@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const OwnedItems = ({ user }) => {
   const [viewContent, setViewContent] = useState(null);
-  if (user === null) {
+  if (!user) {
     return null;
   }
 
