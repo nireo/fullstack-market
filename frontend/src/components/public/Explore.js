@@ -4,16 +4,20 @@ import ExploreOfficial from './explore-page/ExploreOfficial';
 
 const Explore = () => {
   return (
-    <div className="container" style={{ paddingTop: '2em' }}>
-      <div className="text-center">
-        <h2>Explore</h2>
-        <p>
-          From this page you can explore official and community postings and
-          also other statistics.
-        </p>
+    <div>
+      <div className="jumbotron">
+        <div className="text-center">
+          <h2>Explore</h2>
+          <p>
+            From this page you can explore official and community postings and
+            also other statistics.
+          </p>
+        </div>
       </div>
-      <ExploreOfficial />
-      <ExploreCommunity />
+      <div className="container">
+        <ExploreOfficial />
+        <ExploreCommunity />
+      </div>
     </div>
   );
 };

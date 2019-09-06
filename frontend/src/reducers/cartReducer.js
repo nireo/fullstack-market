@@ -1,4 +1,4 @@
-const reducer = (state = null, action) => {
+const reducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_NEW_ITEM':
       return [...state, action.data];

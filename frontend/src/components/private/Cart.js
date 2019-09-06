@@ -30,22 +30,42 @@ const Cart = props => {
     );
   }
 
-  const handlePurchase = () => {
+  const handlePurchase = async () => {
     if (props.cart.length === 0) {
       return null;
     }
-    props.cart.forEach(async id => {
-      await userService.buyCommunityItems({ id });
+    let objectToSend = {
+      ids: []
+    };
+    props.cart.forEach(i => {
+      objectToSend.ids = objectToSend.ids.concat(i._id);
     });
+    try {
+      const newInfo = await userService.buyCommunityItems(objectToSend);
+      if (!newInfo) {
+        return null;
+      }
+      props.setUserInfo(newInfo);
+      props.setNotification(
+        'Purchase has been completed successfully',
+        'success',
+        2
+      );
+    } catch {
+      props.setNotification('Something went while adding post', 'error', 2);
+    }
   };
 
   const handleSinglePurchase = async id => {
-    if (!id) {
+    if (!id || props.cart.length === 0) {
       return null;
     }
     try {
+      const objectToSend = {
+        ids: [id]
+      };
       // store return in a variable so that we can update the users owned items
-      const newInfo = await userService.buyCommunityItems({ id });
+      const newInfo = await userService.buyCommunityItems(objectToSend);
       if (!newInfo) {
         return null;
       }

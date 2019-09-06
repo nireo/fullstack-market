@@ -94,7 +94,7 @@ exports.updateUser = async (req, res, next) => {
 
 exports.buyMainItems = async (req, res, next) => {
   const token = getToken(req);
-  const { postIds } = req.body;
+  const { postId } = req.body;
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
     if (!token || !decodedToken) {
@@ -103,10 +103,19 @@ exports.buyMainItems = async (req, res, next) => {
       });
     }
     const user = await userModel.findById(decodedToken.id);
-    postIds.forEach(p => {
-      user.mainItemsBought.concat(p);
+    user.mainItemsBought = user.mainItemsBought.concat(postId);
+    await user.save((err, populateUser) => {
+      if (err) return res.status(500);
+      populateUser
+        .populate('communityItemsBought')
+        .populate('mainItemsBought')
+        .populate('posts')
+        .populate('reviewsPosted')
+        .execPopulate()
+        .then(populated => {
+          return res.json(populated);
+        });
     });
-    await user.save();
   } catch (e) {
     next(e);
   }
@@ -114,7 +123,7 @@ exports.buyMainItems = async (req, res, next) => {
 
 exports.buyCommunityItems = async (req, res, next) => {
   const token = getToken(req);
-  const { id } = req.body;
+  const { ids } = req.body;
   try {
     const decodedToken = jwt.verify(token, config.SECRET);
     if (!token || !decodedToken) {
@@ -123,7 +132,13 @@ exports.buyCommunityItems = async (req, res, next) => {
       });
     }
     const user = await userModel.findById(decodedToken.id);
-    user.communityItemsBought = user.communityItemsBought.concat(id);
+    if (ids.length === 1) {
+      user.communityItemsBought = user.communityItemsBought.concat(ids[0]);
+    } else {
+      ids.forEach(id => {
+        user.communityItemsBought = user.communityItemsBought.concat(id);
+      });
+    }
     await user.save((err, populateUser) => {
       if (err) return res.status(500);
       populateUser
