@@ -1,6 +1,5 @@
 import loginService from '../services/login';
 import { setTokens } from '../utils/helpers';
-import userService from '../services/user';
 
 const reducer = (state = null, action) => {
   switch (action.type) {
@@ -40,6 +39,15 @@ export const checkLocalStorage = () => {
       });
     }
   };
+};
+
+export const setUserInfo = info => {
+  // not really necessary
+  window.localStorage.clear();
+
+  // just so that everything doesn't reset after a reload
+  window.localStorage.setItem('user', JSON.stringify(info));
+  return { type: 'LOG_IN', data: info };
 };
 
 export const logOut = () => {

@@ -4,6 +4,7 @@ import { clearCart, removeItemFromCart } from '../../reducers/cartReducer';
 import { setNotification } from '../../reducers/notificationReducer';
 import { Link } from 'react-router-dom';
 import userService from '../../services/user';
+import { setUserInfo } from '../../reducers/userReducer';
 
 const Cart = props => {
   const [total, setTotal] = useState(0);
@@ -43,13 +44,18 @@ const Cart = props => {
       return null;
     }
     try {
-      await userService.buyCommunityItems({ id });
+      // store return in a variable so that we can update the users owned items
+      const newInfo = await userService.buyCommunityItems({ id });
+      if (!newInfo) {
+        return null;
+      }
       props.setNotification(
         'Purchase has been completed successfully',
         'success',
         2
       );
       props.removeItemFromCart(id);
+      props.setUserInfo(newInfo);
     } catch {
       props.setNotification(
         'Something went wrong while processing',
@@ -123,5 +129,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { clearCart, setNotification, removeItemFromCart }
+  { clearCart, setNotification, removeItemFromCart, setUserInfo }
 )(Cart);

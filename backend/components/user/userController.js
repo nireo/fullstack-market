@@ -124,8 +124,18 @@ exports.buyCommunityItems = async (req, res, next) => {
     }
     const user = await userModel.findById(decodedToken.id);
     user.communityItemsBought = user.communityItemsBought.concat(id);
-    const saved = await user.save();
-    return res.json(saved);
+    await user.save((err, populateUser) => {
+      if (err) return res.status(500);
+      populateUser
+        .populate('communityItemsBought')
+        .populate('mainItemsBought')
+        .populate('posts')
+        .populate('reviewsPosted')
+        .execPopulate()
+        .then(populated => {
+          return res.json(populated);
+        });
+    });
   } catch (e) {
     next(e);
   }
