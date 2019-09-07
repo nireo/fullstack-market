@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import reviewService from '../../services/review';
 import { setNotification } from '../../reducers/notificationReducer';
+
 const Review = ({ review, user, setNotification }) => {
   const handleDelete = id => {
     if (window.confirm('Are you sure you want to delete ' + id)) {
@@ -13,6 +14,7 @@ const Review = ({ review, user, setNotification }) => {
       }
     }
   };
+
   return (
     <div class="my-3 p-3 bg-white rounded shadow-sm">
       <div class="media text-muted pt-3">

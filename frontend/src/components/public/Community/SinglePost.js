@@ -6,15 +6,15 @@ import { addItemToCart } from '../../../reducers/cartReducer';
 import ReviewForm from '../../private/ReviewForm';
 import { addReview } from '../../../reducers/postReducer';
 import Review from '../Review';
-import Loading from '../../Loading';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [stars, setStars] = useState(0.0);
   const [recommended, setRecommended] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
   if (props.post === null) {
-    return null;
+    return <Redirect to="/community" />;
   }
 
   const clearFields = () => {
@@ -84,19 +84,35 @@ const SinglePost = props => {
         )}
       </div>
       <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
-      {props.user && (
-        <ReviewForm
-          stars={stars}
-          setStars={setStars}
-          content={content}
-          setContent={setContent}
-          title={title}
-          setTitle={setTitle}
-          addReview={addReviewToPost}
-          recommended={recommended}
-          setRecommended={setRecommended}
-        />
-      )}
+      {props.user &&
+        (showReviewForm === false ? (
+          <button
+            onClick={() => setShowReviewForm(true)}
+            className="btn btn-outline-primary"
+          >
+            Create review
+          </button>
+        ) : (
+          <div>
+            <ReviewForm
+              stars={stars}
+              setStars={setStars}
+              content={content}
+              setContent={setContent}
+              title={title}
+              setTitle={setTitle}
+              addReview={addReview}
+              recommended={recommended}
+              setRecommended={setRecommended}
+            />
+            <button
+              className="btn btn-outline-danger mt-2"
+              onClick={() => setShowReviewForm(false)}
+            >
+              Hide review form
+            </button>
+          </div>
+        ))}
       <hr />
       <div style={{ paddingTop: '2rem' }}>
         {props.post.reviews.map(r => (

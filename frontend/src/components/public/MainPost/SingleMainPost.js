@@ -15,6 +15,7 @@ const SingleMainPost = props => {
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [recommended, setRecommended] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
   useEffect(() => {
     if (props.posts === null) {
       props.initMainPosts();
@@ -71,19 +72,35 @@ const SingleMainPost = props => {
       <p>{post.description}</p>
       <Link onClick={() => addToCart(post)}>Add to cart</Link>
       <h3 style={{ paddingTop: '2rem' }}>Reviews</h3>
-      {props.user && (
-        <ReviewForm
-          stars={stars}
-          setStars={setStars}
-          content={content}
-          setContent={setContent}
-          title={title}
-          setTitle={setTitle}
-          addReview={addReview}
-          recommended={recommended}
-          setRecommended={setRecommended}
-        />
-      )}
+      {props.user &&
+        (showReviewForm === false ? (
+          <button
+            onClick={() => setShowReviewForm(true)}
+            className="btn btn-outline-primary"
+          >
+            Create review
+          </button>
+        ) : (
+          <div>
+            <ReviewForm
+              stars={stars}
+              setStars={setStars}
+              content={content}
+              setContent={setContent}
+              title={title}
+              setTitle={setTitle}
+              addReview={addReview}
+              recommended={recommended}
+              setRecommended={setRecommended}
+            />
+            <button
+              className="btn btn-outline-danger"
+              onClick={() => setShowReviewForm(false)}
+            >
+              Hide review form
+            </button>
+          </div>
+        ))}
       <div style={{ paddingTop: '2rem' }}>
         {post.reviews.map(r => (
           <Review review={r} />

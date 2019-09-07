@@ -41,7 +41,6 @@ export const checkLocalStorage = () => {
 };
 
 export const setUserInfo = info => {
-  // not really necessary
   window.localStorage.clear();
 
   // just so that everything doesn't reset after a reload
