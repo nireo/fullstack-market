@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { logOut } from '../../reducers/userReducer';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logOut } from "../../reducers/userReducer";
 
 const NavBar = props => {
   const [total, setTotal] = useState(0);
@@ -17,7 +17,7 @@ const NavBar = props => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand mb-0 h1" to="/">
-        <strong style={{ color: '#4f81c7' }}>Benevol</strong>ent
+        <strong style={{ color: "#aa96da" }}>benevol</strong>
       </Link>
       <button
         className="navbar-toggler"
@@ -71,7 +71,7 @@ const NavBar = props => {
                 <i className="fas fa-user" /> {props.user.username}
               </Link>
               <div className="dropdown-menu" aria-labelledby="userDropdown">
-                {props.user.username === 'admin' ? (
+                {props.user.username === "admin" ? (
                   <Link className="dropdown-item" to="/create/main">
                     <i className="fas fa-plus" /> Create Post
                   </Link>
@@ -83,12 +83,12 @@ const NavBar = props => {
                 <Link className="dropdown-item" to="/edit">
                   <i class="fas fa-edit"></i> Edit Posts
                 </Link>
-                {props.user.username === 'admin' && (
+                {props.user.username === "admin" && (
                   <Link className="dropdown-item" to="/admin">
                     <i className="fas fa-chart-line" /> Admin panel
                   </Link>
                 )}
-                {props.user.username !== 'admin' && (
+                {props.user.username !== "admin" && (
                   <Link
                     className="dropdown-item"
                     to={`/shop/${props.user._id}`}
@@ -96,12 +96,12 @@ const NavBar = props => {
                     <i class="fas fa-store"></i> Personal store
                   </Link>
                 )}
-                {props.user.username !== 'admin' && (
-                  <Link className="dropdown-item" to={'/owned-items'}>
+                {props.user.username !== "admin" && (
+                  <Link className="dropdown-item" to={"/owned-items"}>
                     <i class="fas fa-archive"></i> Owned items
                   </Link>
                 )}
-                {props.user.username !== 'admin' && (
+                {props.user.username !== "admin" && (
                   <Link
                     className="dropdown-item"
                     to={`/profile/${props.user._id}`}
@@ -109,7 +109,7 @@ const NavBar = props => {
                     <i className="fas fa-user"></i> My Profile
                   </Link>
                 )}
-                {props.user.username !== 'admin' && (
+                {props.user.username !== "admin" && (
                   <Link className="dropdown-item" to="/edit-reviews">
                     <i className="fas fa-scroll"></i> Edit reviews
                   </Link>
@@ -158,7 +158,7 @@ const NavBar = props => {
                 <div className="dropdown-divider"></div>
                 <Link className="dropdown-item disabled">Total: {total} $</Link>
                 <Link className="dropdown-item disabled">
-                  {props.cart ? `Items ${props.cart.length}` : 'Cart empty'}
+                  {props.cart ? `Items ${props.cart.length}` : "Cart empty"}
                 </Link>
               </div>
             </li>

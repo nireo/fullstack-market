@@ -1,10 +1,10 @@
 p {
-  font-size: '1.25rem';
+  font-size: "1.25rem";
 }
 
 .animate {
-  -webkit-animation-duration: 3s;
-  animation-duration: 3s;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
@@ -26,7 +26,126 @@ p {
   }
 }
 
+.main-page-heading {
+  color: #cca8e9;
+  font-size: 60px;
+  font-weight: 400;
+  margin-bottom: 30px;
+
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+
+  backface-visibility: hidden;
+}
+
+.main-page-sub-heading {
+  font-size: 20px;
+  font-weight: 400;
+  animation-name: moveInRight;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+
+  backface-visibility: hidden;
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
 .fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
+}
+
+.button {
+  text-decoration: none;
+  padding: 15px 20px;
+  display: inline-block;
+  border-radius: 25px;
+  transition: all 0.2s;
+  position: relative;
+  border: none;
+}
+
+.button-pink {
+  background-color: #cca8e9;
+  color: white;
+}
+
+.animate-from-bottom {
+  animation: moveInBottom 0.8.s ease-out 0.75s;
+  animation-fill-mode: backwards;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+}
+
+.button::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.button-pink::after {
+  background-color: #cca8e9;
+}
+
+.button:hover::after {
+  transform: scaleY(1.4) scaleX(1.6);
+  opacity: 0;
+}
+
+.button-animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  animation-fill-mode: backwards;
 }
