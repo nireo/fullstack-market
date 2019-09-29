@@ -101,6 +101,7 @@ p {
   transition: all 0.2s;
   position: relative;
   border: none;
+  margin-top: 30px;
 }
 
 .button-pink {

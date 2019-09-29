@@ -134,7 +134,7 @@ const NavBar = props => {
             </li>
             <li>
               <Link to="signup" className="nav-link">
-                Signup
+                Sign in
               </Link>
             </li>
           </ul>

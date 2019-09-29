@@ -1,16 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import reviewService from '../../services/review';
-import { setNotification } from '../../reducers/notificationReducer';
+import React from "react";
+import { connect } from "react-redux";
+import reviewService from "../../services/review";
+import { setNotification } from "../../reducers/notificationReducer";
+import RenderStars from "../RenderStars";
 
 const Review = ({ review, user, setNotification }) => {
   const handleDelete = id => {
-    if (window.confirm('Are you sure you want to delete ' + id)) {
+    if (window.confirm("Are you sure you want to delete " + id)) {
       try {
         reviewService.removeReview(id);
-        setNotification('Review deleted successfully', 'success', 2);
+        setNotification("Review deleted successfully", "success", 2);
       } catch {
-        setNotification('Something went wrong', 'error', 2);
+        setNotification("Something went wrong", "error", 2);
       }
     }
   };
@@ -26,14 +27,13 @@ const Review = ({ review, user, setNotification }) => {
             </div>
             <div className="col-md 2">
               <strong class="d-block text-gray-dark">Recommended</strong>
-              {review.recommended ? 'Yes' : 'No'}
+              {review.recommended ? "Yes" : "No"}
             </div>
             <div className="col-md 2">
-              <strong class="d-block text-gray-dark">Stars</strong>
-              {review.stars}
+              <RenderStars stars={review.stars} />
             </div>
           </div>
-          {user._id === review.postedBy && (
+          {user && user._id === review.postedBy && (
             <button
               onClick={() => handleDelete(review._id)}
               className="btn btn-outline-danger btn-sm mb-0 pb-0 mt-2"
