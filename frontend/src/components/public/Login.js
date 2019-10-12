@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { handleLogin } from '../../reducers/userReducer';
-import { logOut } from '../../reducers/userReducer';
-import { setNotification } from '../../reducers/notificationReducer';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { handleLogin } from "../../reducers/userReducer";
+import { logOut } from "../../reducers/userReducer";
+import { setNotification } from "../../reducers/notificationReducer";
 
 const Login = props => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   if (props.user !== null) {
@@ -31,19 +31,21 @@ const Login = props => {
     };
     try {
       props.handleLogin(credentials, rememberMe);
-      props.setNotification('Logged in successfully', 'success', 2);
+      props.setNotification("Logged in successfully", "success", 2);
     } catch {
-      props.setNotification('Something went wrong', 'error', 2);
+      props.setNotification("Something went wrong", "error", 2);
     }
   };
 
   return (
     <div className="text-center container">
       <form onSubmit={handleLogin} className="form-signin">
-        <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <div className="form-group">
+        <h1 className="h3 mb-3 font-weight-normal animate-fade-in">
+          Please sign in
+        </h1>
+        <div className="form-group animated-text-left">
           <input
-            style={{ width: '50%', display: 'inline-block' }}
+            style={{ width: "50%", display: "inline-block" }}
             type="text"
             className="form-control"
             placeholder="Username"
@@ -52,9 +54,9 @@ const Login = props => {
             onChange={({ target }) => setUsername(target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className="form-group animated-text-right">
           <input
-            style={{ width: '50%', display: 'inline-block' }}
+            style={{ width: "50%", display: "inline-block" }}
             type="password"
             className="form-control"
             placeholder="Password"
@@ -64,26 +66,28 @@ const Login = props => {
           />
         </div>
 
-        <div className="checkbox mb-3">
+        <div className="checkbox mb-3 animate-fade-in">
           <label>
             <input
               type="checkbox"
               value={rememberMe}
               onClick={() => setRememberMe(!rememberMe)}
-            />{' '}
+            />{" "}
             Remember me
           </label>
         </div>
         <div>
           <button
-            style={{ width: '50%', display: 'inline-block' }}
-            className="btn btn-lg btn-primary btn-block"
+            className="button button-animated button-pink"
+            style={{ width: "50%" }}
             type="submit"
           >
             Login
           </button>
         </div>
-        <p className="mt-5 mb-3 text-muted">&copy;2019 Benelov Software</p>
+        <p className="mt-5 mb-3 text-muted animate-fade-in">
+          &copy;2019 Benelov Software
+        </p>
       </form>
     </div>
   );
