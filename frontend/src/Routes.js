@@ -1,36 +1,37 @@
-import React from 'react';
-import NavBar from './components/public/NavBar';
+import React from "react";
+import NavBar from "./components/public/NavBar";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
   Switch
-} from 'react-router-dom';
-import Login from './components/public/Login';
-import Home from './components/public/Home';
-import { connect } from 'react-redux';
-import Signup from './components/public/Signup';
-import MainPosts from './components/public/MainPost/MainPosts';
-import Posts from './components/public/Community/Posts';
-import Notification from './components/public/Notification';
-import SinglePost from './components/public/Community/SinglePost';
-import CreatePost from './components/private/CreatePost';
-import CreateMainPost from './components/private/CreateMainPost';
-import AdminPanel from './components/private/admin/AdminPanel';
-import Users from './components/public/Users';
-import SingleUser from './components/public/SingleUser';
-import Cart from './components/private/Cart';
-import Chat from './components/public/Chat';
-import NotFound from './components/public/NotFound';
-import Explore from './components/public/Explore';
-import SingleMainPost from './components/public/MainPost/SingleMainPost';
-import { initPosts } from './reducers/postReducer';
-import { initMainPosts } from './reducers/mainReducer';
-import { initUsers } from './reducers/allUsersReducer';
-import Overview from './components/public/personal-shop/Overview';
-import EditPosts from './components/private/EditPosts';
-import OwnedItems from './components/private/owned-items/OwnedItems';
-import EditReviews from './components/private/EditReviews';
+} from "react-router-dom";
+import Login from "./components/public/Login";
+import Home from "./components/public/Home";
+import { connect } from "react-redux";
+import Signup from "./components/public/Signup";
+import MainPosts from "./components/public/MainPost/MainPosts";
+import Posts from "./components/public/Community/Posts";
+import Notification from "./components/public/Notification";
+import SinglePost from "./components/public/Community/SinglePost";
+import CreatePost from "./components/private/CreatePost";
+import CreateMainPost from "./components/private/CreateMainPost";
+import AdminPanel from "./components/private/admin/AdminPanel";
+import Users from "./components/public/Users";
+import SingleUser from "./components/public/SingleUser";
+import Cart from "./components/private/Cart";
+import Chat from "./components/public/Chat";
+import NotFound from "./components/public/NotFound";
+import Explore from "./components/public/Explore";
+import SingleMainPost from "./components/public/MainPost/SingleMainPost";
+import { initPosts } from "./reducers/postReducer";
+import { initMainPosts } from "./reducers/mainReducer";
+import { initUsers } from "./reducers/allUsersReducer";
+import Overview from "./components/public/personal-shop/Overview";
+import EditPosts from "./components/private/EditPosts";
+import OwnedItems from "./components/private/owned-items/OwnedItems";
+import EditReviews from "./components/private/EditReviews";
+import Tutorial from "./components/public/Tutorial/Tutorial";
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -80,7 +81,7 @@ const Routes = props => {
           path="/create/main"
           render={() => {
             if (props.user) {
-              if (props.user.username === 'admin') {
+              if (props.user.username === "admin") {
                 return <CreateMainPost />;
               }
               return <Redirect to="/" />;
@@ -93,7 +94,7 @@ const Routes = props => {
           path="/admin"
           Users
           render={() =>
-            props.user && props.user.username === 'admin' ? (
+            props.user && props.user.username === "admin" ? (
               <AdminPanel />
             ) : (
               <Redirect to="/" />
@@ -148,6 +149,7 @@ const Routes = props => {
           path="/edit-reviews"
           render={() => (props.user ? <EditReviews /> : <Redirect to="/" />)}
         />
+        <Route exact path="/tutorial" render={() => <Tutorial />} />
         <Route render={() => <NotFound />} />
       </Switch>
     </Router>
