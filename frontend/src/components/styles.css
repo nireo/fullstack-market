@@ -71,6 +71,13 @@ p {
   backface-visibility: hidden;
 }
 
+.animated-text-bottom {
+  animation-name: moveInBottom;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  backface-visibility: hidden;
+}
+
 @keyframes moveInRight {
   0% {
     opacity: 0;
@@ -171,6 +178,22 @@ p {
 .button-animated {
   animation: moveInBottom 0.5s ease-out 0.75s;
   animation-fill-mode: backwards;
+}
+
+.tutorial-button {
+  text-decoration: none;
+  padding: 5px 20px;
+  display: inline-block;
+  transition: all 0.2s;
+  position: relative;
+  border: none;
+  margin-top: 30px;
+  border-radius: 2px;
+}
+
+.button-bluish {
+  color: white;
+  background-color: #a8d8ea;
 }
 
 .input-container {

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { handleLogin } from "../../reducers/userReducer";
 import { logOut } from "../../reducers/userReducer";
 import { setNotification } from "../../reducers/notificationReducer";
+import Copyright from "../Copyright";
 
 const Login = props => {
   const [username, setUsername] = useState("");
@@ -85,9 +86,7 @@ const Login = props => {
             Login
           </button>
         </div>
-        <p className="mt-5 mb-3 text-muted animate-fade-in">
-          &copy;2019 Benelov Software
-        </p>
+        <Copyright />
       </form>
     </div>
   );
