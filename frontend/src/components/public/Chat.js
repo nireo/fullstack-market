@@ -1,74 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import io from 'socket.io-client';
-import { connect } from 'react-redux';
-import { createMessage } from '../../reducers/chatReducer';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import io from "socket.io-client";
+import { connect } from "react-redux";
+import { createMessage } from "../../reducers/chatReducer";
+import { Link } from "react-router-dom";
+
+let socket;
 
 const Chat = props => {
-  const [message, setMessage] = useState('');
-  const [socket, setSocket] = useState(null);
-  const [typing, setTyping] = useState(null);
-  const [peopleInChat, setPeopleInChat] = useState(0);
+  const [message, setMessage] = useState("");
+  const [users, setUsers] = useState([]);
+  const [messages, setMessages] = useState([]);
   useEffect(() => {
-    if (!socket) {
-      setSocket(io('http://localhost:3001'));
-    }
-    if (socket) {
-      socket.on('sent message', data => {
-        props.createMessage(data);
-      });
+    socket = io("localhost:3001");
 
-      socket.on('typing', data => {
-        setTyping(data);
-      });
-
-      socket.on('stopped typing', () => {
-        setTyping(null);
-      });
-
-      socket.on('user joined', data => {
-        setPeopleInChat(data);
-      });
-
-      socket.on('user left', data => {
-        setPeopleInChat(data);
+    if (props.user) {
+      const userObject = {
+        username: props.user.username,
+        id: props.user._id
+      };
+      socket.emit("join", userObject);
+    } else {
+      socket.emit("join", {
+        username: `anonymous${Math.floor(Math.random() * 100)}`,
+        id: `${Math.floor(Math.random() * 100)}`
       });
     }
   }, [socket, props]);
 
+  useEffect(() => {
+    socket.on("message", message => {
+      setMessages([...messages, message]);
+    });
+
+    socket.on("chatData", data => {
+      setUsers(data);
+    });
+
+    return () => {
+      socket.emit("disconnect");
+      socket.off();
+    };
+  }, [messages, users]);
+
   const handleChange = event => {
     event.preventDefault();
-    socket.emit('typing', props.user.username);
     setMessage(event.target.value);
   };
 
   const sendChatMessage = event => {
     event.preventDefault();
-    if (message === '') {
-      return null;
+    if (message) {
+      socket.emit("messageSent", message, () => {
+        setMessage("");
+      });
     }
-    if (!socket) {
-      return null;
-    }
-    socket.emit('message', {
-      from: props.user.username,
-      content: message,
-      userId: props.user._id
-    });
-    socket.emit('stopped typing', null);
-    props.createMessage({
-      from: props.user.username,
-      content: message,
-      userId: props.user._id
-    });
-    setMessage('');
   };
 
   const renderMessages = props.chat.map(c => {
     return (
-      <li className="media" key={c.message} style={{ paddingBottom: '1rem' }}>
+      <li className="media" key={c.message} style={{ paddingBottom: "1rem" }}>
         <div className="media-body">
-          <h6 className="media-heading" style={{ marginBottom: '0rem' }}>
+          <h6 className="media-heading" style={{ marginBottom: "0rem" }}>
             <Link to={`/profile/${c.userId}`}>@{c.from}</Link>
           </h6>
           {c.content}
@@ -78,10 +70,9 @@ const Chat = props => {
   });
 
   return (
-    <div className="container" style={{ paddingTop: '2rem' }}>
+    <div className="container" style={{ paddingTop: "2rem" }}>
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
-        <p>People in chat {peopleInChat}</p>
         <ul className="list-unstyled">{renderMessages}</ul>
         {typing && <p>{typing}</p>}
         <div className="form-group">
