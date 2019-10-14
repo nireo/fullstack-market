@@ -33,6 +33,7 @@ import OwnedItems from "./components/private/owned-items/OwnedItems";
 import EditReviews from "./components/private/EditReviews";
 import Tutorial from "./components/public/Tutorial/Tutorial";
 import SingleReport from "./components/private/admin/Reports/SingleReport";
+import ReportForm from "./components/public/ReportForm";
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -156,6 +157,17 @@ const Routes = props => {
           render={({ match }) =>
             props.user && props.user.username === "admin" ? (
               <SingleReport id={match.params.id} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
+        />
+        <Route
+          exact
+          path="/report/user/:id"
+          render={({ match }) =>
+            props.user ? (
+              <ReportForm id={match.params.id} />
             ) : (
               <Redirect to="/" />
             )

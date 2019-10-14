@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { initUsers } from '../../reducers/allUsersReducer';
-import { Link, Redirect } from 'react-router-dom';
-import Loading from '../Loading';
-import { updateBio } from '../../reducers/allUsersReducer';
-import { setNotification } from '../../reducers/notificationReducer';
-import reviewService from '../../services/review';
-import { removePost } from '../../reducers/postReducer';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { initUsers } from "../../reducers/allUsersReducer";
+import { Link, Redirect } from "react-router-dom";
+import Loading from "../Loading";
+import { updateBio } from "../../reducers/allUsersReducer";
+import { setNotification } from "../../reducers/notificationReducer";
+import reviewService from "../../services/review";
+import { removePost } from "../../reducers/postReducer";
 
 const SingleUser = props => {
   const [showForm, setShowForm] = useState(false);
-  const [bio, setBio] = useState('');
+  const [bio, setBio] = useState("");
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -24,7 +24,7 @@ const SingleUser = props => {
 
   if (!user) {
     return (
-      <div className="container" style={{ paddingTop: '1rem' }}>
+      <div className="container" style={{ paddingTop: "1rem" }}>
         <h3>User has not been found</h3>
         <p>
           You can find the user you're looking for with the navigation bar, or
@@ -38,21 +38,21 @@ const SingleUser = props => {
     );
   }
 
-  if (user.username === 'admin') {
+  if (user.username === "admin") {
     return <Redirect to="/users" />;
   }
 
   const handlePostRemove = (id, title) => {
-    if (window.confirm('Are you sure you want to delete' + title)) {
+    if (window.confirm("Are you sure you want to delete" + title)) {
       try {
         props.removePost(id);
         props.setNotification(
-          'Post has been successfully deleted',
-          'success',
+          "Post has been successfully deleted",
+          "success",
           3
         );
       } catch {
-        props.setNotification('Something went wrong', 'error', 2);
+        props.setNotification("Something went wrong", "error", 2);
       }
     }
   };
@@ -63,11 +63,11 @@ const SingleUser = props => {
         <Link to={`/community/post/${p._id}`}>{p.title}</Link>
       </td>
       <td>{p.description.slice(0, 100)}</td>
-      <td style={{ color: 'green' }}>{p.price} $</td>
+      <td style={{ color: "green" }}>{p.price} $</td>
       {props.user._id === user._id && (
         <td>
           <Link
-            style={{ color: 'black', textDecoration: 'none' }}
+            style={{ color: "black", textDecoration: "none" }}
             onClick={() => handlePostRemove(p._id, p.title)}
           >
             Delete
@@ -78,16 +78,16 @@ const SingleUser = props => {
   ));
 
   const handleReviewRemove = (id, title) => {
-    if (window.confirm('Are you sure you want to delete ' + title)) {
+    if (window.confirm("Are you sure you want to delete " + title)) {
       try {
         reviewService.removeReview(id);
         props.setNotification(
-          'Review has been removed, it will updated on next reload',
-          'success',
+          "Review has been removed, it will updated on next reload",
+          "success",
           3
         );
       } catch {
-        props.setNotification('Something went wrong', 'error', 2);
+        props.setNotification("Something went wrong", "error", 2);
       }
     }
   };
@@ -97,10 +97,10 @@ const SingleUser = props => {
       <td>{r.title}</td>
       <td>{r.description.slice(0, 100)}</td>
       <td>{r.stars}</td>
-      <td>{r.recommend ? 'True' : 'False'}</td>
+      <td>{r.recommend ? "True" : "False"}</td>
       {props.user._id === user._id && (
         <td onClick={() => handleReviewRemove(r._id, r.title)}>
-          <Link style={{ color: 'black', textDecoration: 'none' }}>Delete</Link>
+          <Link style={{ color: "black", textDecoration: "none" }}>Delete</Link>
         </td>
       )}
     </tr>
@@ -108,12 +108,12 @@ const SingleUser = props => {
 
   const handleBioUpdate = event => {
     event.preventDefault();
-    if (bio === '') {
+    if (bio === "") {
       try {
         props.updateBio(bio);
-        props.setNotification('Something went wrong', 'error', 2);
+        props.setNotification("Something went wrong", "error", 2);
       } catch {
-        props.setNotification('Something went wrong', 'error', 2);
+        props.setNotification("Something went wrong", "error", 2);
       }
     }
   };
@@ -122,10 +122,11 @@ const SingleUser = props => {
     <div className="container">
       <h2>{user.username}</h2>
       <p>{user.personalShop.about}</p>
+      <Link to={`/report/user/${user._id}`}>Report</Link>
       {props.user.username === user.username &&
         (!showForm ? (
           <button
-            style={{ marginBottom: '1rem' }}
+            style={{ marginBottom: "1rem" }}
             class="btn btn-outline-primary btn-sm"
             onClick={() => setShowForm(true)}
           >
@@ -145,7 +146,7 @@ const SingleUser = props => {
             <div class="form-group">
               <button type="submit" className="btn btn-outline-primary btn-sm">
                 Change bio
-              </button>{' '}
+              </button>{" "}
               <button
                 className="btn btn-outline-primary btn-sm"
                 onClick={() => setShowForm(false)}

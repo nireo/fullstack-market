@@ -9,7 +9,7 @@ const Welcome = () => {
         take your business to the next level
       </p>
       <p>
-        <Link to="/explore">
+        <Link to="/tutorial">
           <button className="button button-animated button-pink">
             get started
           </button>

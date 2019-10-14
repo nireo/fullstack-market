@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { initReports, removeReport } from "../../../../reducers/reportReducer";
 import { Link } from "react-router-dom";
 import { setNotification } from "../../../../reducers/notificationReducer";
+import Loading from "../../../Loading";
 
 const Report = ({ reports, initReports, removeReport, setNotification }) => {
   const [loaded, setLoaded] = useState(false);
@@ -18,7 +19,7 @@ const Report = ({ reports, initReports, removeReport, setNotification }) => {
   }
 
   if (reports === [] && loaded === true) {
-    <p>Yay!!!, no reports</p>;
+    return <p>Yay!!!, no reports</p>;
   }
 
   const handleRemove = id => {
