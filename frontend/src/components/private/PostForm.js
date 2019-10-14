@@ -1,12 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { setNotification } from '../../reducers/notificationReducer';
+import React from "react";
+import { connect } from "react-redux";
+import { setNotification } from "../../reducers/notificationReducer";
 
 const PostForm = props => {
   const { price, title, description } = props;
   const checkNextStep = () => {
-    if (title === '' || price === 0 || description === '') {
-      props.setNotification('You need to fill out all the fields', 'error', 3);
+    if (title === "" || price === 0 || description === "") {
+      props.setNotification("You need to fill out all the fields", "error", 3);
       return null;
     } else {
       props.setStep(2);
@@ -46,14 +46,15 @@ const PostForm = props => {
             onChange={({ target }) => props.setDescription(target.value)}
             placeholder="Enter description"
             required
+            rows="7"
           />
         </div>
-        {props.type === 'edit' ? (
+        {props.type === "edit" ? (
           <div>
             <button type="submit" className="btn btn-outline-primary">
               Commit changes
             </button>
-            {'  '}
+            {"  "}
             <button
               onClick={() => props.setPost(null)}
               className="btn btn-outline-danger"
