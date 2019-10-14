@@ -32,6 +32,7 @@ import EditPosts from "./components/private/EditPosts";
 import OwnedItems from "./components/private/owned-items/OwnedItems";
 import EditReviews from "./components/private/EditReviews";
 import Tutorial from "./components/public/Tutorial/Tutorial";
+import SingleReport from "./components/private/admin/Reports/SingleReport";
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -148,6 +149,17 @@ const Routes = props => {
           exact
           path="/edit-reviews"
           render={() => (props.user ? <EditReviews /> : <Redirect to="/" />)}
+        />
+        <Route
+          exact
+          path="/report/:id"
+          render={({ match }) =>
+            props.user && props.user.username === "admin" ? (
+              <SingleReport id={match.params.id} />
+            ) : (
+              <Redirect to="/" />
+            )
+          }
         />
         <Route exact path="/tutorial" render={() => <Tutorial />} />
         <Route render={() => <NotFound />} />
