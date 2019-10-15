@@ -3,6 +3,7 @@ const postController = require('./postController');
 
 // Public routes
 router.get('/', postController.getAllPosts);
+router.get('/:id', postController.getPostById);
 
 // Protected routes
 router.post('/', postController.createPost);

@@ -11,8 +11,11 @@ const Chat = props => {
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   useEffect(() => {
+    // connect the socket
     socket = io("localhost:3001");
 
+    // so that anyone can use the chat
+    // if they aren't logged in add them as anonymous
     if (props.user) {
       const userObject = {
         username: props.user.username,

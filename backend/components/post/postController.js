@@ -20,6 +20,22 @@ exports.getAllPosts = async (req, res, next) => {
   }
 };
 
+exports.getPostById = async (req, res, next) => {
+  try {
+    await postModel
+      .findById(request.params.id)
+      .populate('postedBy')
+      .populate('reviews')
+      .exec((err, results) => {
+        if (err) return res.status(500);
+
+        return res.json(results);
+      });
+  } catch (e) {
+    next(e);
+  }
+};
+
 exports.createPost = async (req, res, next) => {
   const { title, description, price, content } = req.body;
   const token = getToken(req);

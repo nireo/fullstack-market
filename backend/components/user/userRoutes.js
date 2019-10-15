@@ -3,6 +3,7 @@ const userController = require('./userController.js');
 
 // Public routes
 router.get('/', userController.getAllUsers);
+router.get('/:id', userController.getUserById);
 router.post('/', userController.createUser);
 
 // Private routes

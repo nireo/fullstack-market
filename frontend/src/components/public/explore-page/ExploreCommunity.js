@@ -38,6 +38,7 @@ const ExploreCommunity = props => {
       </div>
     </div>
   ));
+
   return (
     <div className="container">
       <h3>Community</h3>

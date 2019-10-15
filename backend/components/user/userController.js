@@ -20,6 +20,22 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
+exports.getUserById = async (req, res, next) => {
+  try {
+    await userModel
+      .findById(request.params.id)
+      .populate('reviewsPosted')
+      .populate('posts')
+      .exec((err, results) => {
+        if (err) return res.status(500);
+
+        return res.json(results);
+      });
+  } catch (e) {
+    next(e);
+  }
+};
+
 exports.createUser = async (req, res, next) => {
   const { username, password, email } = req.body;
   try {
