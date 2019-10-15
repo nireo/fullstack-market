@@ -228,3 +228,34 @@ exports.addItemToWishlist = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.removeItemFromWishlist = async (req, res, next) => {
+  const token = getToken(req);
+  const { postId } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!decodedToken || !token) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const user = await userModel.findById(decodedToken.id);
+    if (user) {
+      // don't know if fully necessary, but just incase
+      if (!user.wishlist) {
+        user.wishlist = [];
+      }
+
+      user.wishlist = user.wishlist.filter(p => p !== postId);
+      await user.save();
+      return res.status(204).end();
+    } else {
+      return res.status(403).json({
+        error: 'unauthorized'
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+};

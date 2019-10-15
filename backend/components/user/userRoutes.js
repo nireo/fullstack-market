@@ -13,5 +13,6 @@ router.post('/buy/main', userController.buyMainItems);
 router.post('/buy/community', userController.buyCommunityItems);
 router.post('/bio', userController.updateBio);
 router.post('/wishlist', userController.addItemToWishlist);
+router.delete('/wishlist', userController.removeItemFromWishlist);
 
 module.exports = router;
