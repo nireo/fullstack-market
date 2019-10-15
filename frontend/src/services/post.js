@@ -1,5 +1,5 @@
-import axios from 'axios';
-const baseUrl = '/api/post';
+import axios from "axios";
+const baseUrl = "/api/post";
 
 let token = null;
 
@@ -13,6 +13,11 @@ const getConfig = () => ({
 
 const getAllPosts = async () => {
   const response = await axios.get(baseUrl);
+  return response.data;
+};
+
+const getPostById = async id => {
+  const response = await axios.get(`${baseUrl}/${id}`);
   return response.data;
 };
 
@@ -35,4 +40,11 @@ const updatePost = async (postId, newObject) => {
   return response.data;
 };
 
-export default { setToken, getAllPosts, createNewPost, deletePost, updatePost };
+export default {
+  setToken,
+  getAllPosts,
+  createNewPost,
+  deletePost,
+  updatePost,
+  getPostById
+};

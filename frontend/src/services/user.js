@@ -1,5 +1,5 @@
-import axios from 'axios';
-const baseUrl = '/api/user';
+import axios from "axios";
+const baseUrl = "/api/user";
 
 let token = null;
 
@@ -13,6 +13,11 @@ const getConfig = () => ({
 
 const initUsers = async () => {
   const response = await axios.get(baseUrl);
+  return response.data;
+};
+
+const getUserById = async id => {
+  const response = await axios.get(`${baseUrl}/${id}`);
   return response.data;
 };
 
@@ -58,5 +63,6 @@ export default {
   initUsers,
   buyCommunityItems,
   buyOfficialItems,
-  updateBio
+  updateBio,
+  getUserById
 };

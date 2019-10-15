@@ -3,6 +3,7 @@ const mainPostController = require('./mainPostController');
 
 // Public routes
 router.get('/', mainPostController.getAllPosts);
+router.get('/:id', mainPostController.getMainPostWithId);
 
 // Protected routes
 router.post('/', mainPostController.createPost);
