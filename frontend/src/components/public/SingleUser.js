@@ -64,16 +64,17 @@ const SingleUser = props => {
       </td>
       <td>{p.description.slice(0, 100)}</td>
       <td style={{ color: "green" }}>{p.price} $</td>
-      {props.user._id === user._id && (
-        <td>
-          <Link
-            style={{ color: "black", textDecoration: "none" }}
-            onClick={() => handlePostRemove(p._id, p.title)}
-          >
-            Delete
-          </Link>
-        </td>
-      )}
+      {props.user &&
+        (props.user._id === user._id && (
+          <td>
+            <Link
+              style={{ color: "black", textDecoration: "none" }}
+              onClick={() => handlePostRemove(p._id, p.title)}
+            >
+              Delete
+            </Link>
+          </td>
+        ))}
     </tr>
   ));
 
@@ -98,11 +99,14 @@ const SingleUser = props => {
       <td>{r.description.slice(0, 100)}</td>
       <td>{r.stars}</td>
       <td>{r.recommend ? "True" : "False"}</td>
-      {props.user._id === user._id && (
-        <td onClick={() => handleReviewRemove(r._id, r.title)}>
-          <Link style={{ color: "black", textDecoration: "none" }}>Delete</Link>
-        </td>
-      )}
+      {props.user &&
+        (props.user._id === user._id && (
+          <td onClick={() => handleReviewRemove(r._id, r.title)}>
+            <Link style={{ color: "black", textDecoration: "none" }}>
+              Delete
+            </Link>
+          </td>
+        ))}
     </tr>
   ));
 
@@ -123,39 +127,43 @@ const SingleUser = props => {
       <h2>{user.username}</h2>
       <p>{user.personalShop.about}</p>
       <Link to={`/report/user/${user._id}`}>Report</Link>
-      {props.user.username === user.username &&
-        (!showForm ? (
-          <button
-            style={{ marginBottom: "1rem" }}
-            class="btn btn-outline-primary btn-sm"
-            onClick={() => setShowForm(true)}
-          >
-            Change bio
-          </button>
-        ) : (
-          <form onSubmit={handleBioUpdate}>
-            <div class="form-group">
-              <label>Bio</label>
-              <textarea
-                className="form-control"
-                value={bio}
-                onChange={({ target }) => setBio(target.value)}
-                maxLength={300}
-              />
-            </div>
-            <div class="form-group">
-              <button type="submit" className="btn btn-outline-primary btn-sm">
-                Change bio
-              </button>{" "}
-              <button
-                className="btn btn-outline-primary btn-sm"
-                onClick={() => setShowForm(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        ))}
+      {props.user &&
+        (props.user.username === user.username &&
+          (!showForm ? (
+            <button
+              style={{ marginBottom: "1rem" }}
+              class="btn btn-outline-primary btn-sm"
+              onClick={() => setShowForm(true)}
+            >
+              Change bio
+            </button>
+          ) : (
+            <form onSubmit={handleBioUpdate}>
+              <div class="form-group">
+                <label>Bio</label>
+                <textarea
+                  className="form-control"
+                  value={bio}
+                  onChange={({ target }) => setBio(target.value)}
+                  maxLength={300}
+                />
+              </div>
+              <div class="form-group">
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary btn-sm"
+                >
+                  Change bio
+                </button>{" "}
+                <button
+                  className="btn btn-outline-primary btn-sm"
+                  onClick={() => setShowForm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )))}
       <h4>Posts</h4>
       <div className="table-responsive">
         <table className="table table-striped table-sm">
@@ -164,7 +172,7 @@ const SingleUser = props => {
               <th>Title</th>
               <th>Description</th>
               <th>Price</th>
-              {props.user._id === user._id && <th>Actions</th>}
+              {props.user && (props.user._id === user._id && <th>Actions</th>)}
             </tr>
           </thead>
           <tbody>{renderPosts}</tbody>
@@ -180,7 +188,7 @@ const SingleUser = props => {
               <th>Description</th>
               <th>Stars</th>
               <th>Recommended</th>
-              {props.user._id === user._id && <th>Actions</th>}
+              {props.user && (props.user._id === user._id && <th>Actions</th>)}
             </tr>
           </thead>
           <tbody>{renderReviews}</tbody>

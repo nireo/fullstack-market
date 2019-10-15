@@ -1,6 +1,6 @@
-import React from 'react';
-import ExploreCommunity from './explore-page/ExploreCommunity';
-import ExploreOfficial from './explore-page/ExploreOfficial';
+import React from "react";
+import ExploreCommunity from "./explore-page/ExploreCommunity";
+import ExploreOfficial from "./explore-page/ExploreOfficial";
 
 const Explore = () => {
   return (
