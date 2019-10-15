@@ -74,7 +74,6 @@ const Chat = props => {
       <form onSubmit={sendChatMessage}>
         <h3>Chat</h3>
         <ul className="list-unstyled">{renderMessages}</ul>
-        {typing && <p>{typing}</p>}
         <div className="form-group">
           <input
             className="form-control"

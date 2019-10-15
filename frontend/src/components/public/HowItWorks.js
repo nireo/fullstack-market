@@ -1,16 +1,16 @@
-import React from 'react';
-import image2 from '../../images/home/home-image-2.png';
+import React from "react";
+import { ReactComponent as Invest } from "../../svg/invest.svg";
 
 const HowItWorks = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-3">
-          <img src={image2} alt="howitworks-img"></img>
+        <div className="col-md-4">
+          <Invest style={{ width: "250px", height: "250px" }} />
         </div>
-        <div className="col-md-9">
+        <div className="col-md-8">
           <h2>How it works</h2>
-          <p style={{ fontSize: '1.25rem' }}>
+          <p style={{ fontSize: "1.25rem" }}>
             Anyone can signup for a free account and start posting and buying
             products. Since this site is 100% free please consider donating to
             improve the project. Since this site is only for digital products,
