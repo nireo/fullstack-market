@@ -53,7 +53,13 @@ const userSchema = new Schema({
       default: 'No about given',
       max: 300
     }
-  }
+  },
+  wishlist: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ]
 });
 
 userSchema.plugin(uniqueValidator);

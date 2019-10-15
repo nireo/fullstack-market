@@ -12,5 +12,6 @@ router.put('/:id', userController.updateUser);
 router.post('/buy/main', userController.buyMainItems);
 router.post('/buy/community', userController.buyCommunityItems);
 router.post('/bio', userController.updateBio);
+router.post('/wishlist', userController.addItemToWishlist);
 
 module.exports = router;

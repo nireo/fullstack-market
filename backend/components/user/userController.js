@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { getToken } = require('../../utils/helper');
 const config = require('../../utils/config');
+const postModel = require('../post/postModel');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -186,6 +187,43 @@ exports.updateBio = async (req, res, next) => {
     user.personalShop.about = bio;
     const saved = await user.save();
     return res.json(saved);
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.addItemToWishlist = async (req, res, next) => {
+  const token = getToken(req);
+  const { postId } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const post = await postModel.findById(postId);
+    if (!post) {
+      return res.status(404).json({
+        error: `Post with id ${postId} has not been found.`
+      });
+    }
+
+    const user = await userModel.findById(decodedToken.id);
+    if (user) {
+      // check if the user object has a wishlist entry
+      if (!user.wishlist) {
+        user.wishlist = [];
+      }
+      user.wishlist = [...user.wishlist, postId];
+      const saved = await user.save();
+      return res.json(saved);
+    } else {
+      return res.status(403).json({
+        error: 'unauthorized'
+      });
+    }
   } catch (e) {
     next(e);
   }
