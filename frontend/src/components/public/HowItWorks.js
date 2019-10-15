@@ -4,7 +4,7 @@ import { ReactComponent as Invest } from "../../svg/invest.svg";
 const HowItWorks = () => {
   return (
     <div className="container">
-      <div className="row">
+      <div className="row how-it-works-animation">
         <div className="col-md-4">
           <Invest style={{ width: "250px", height: "250px" }} />
         </div>

@@ -4,7 +4,7 @@ import { ReactComponent as Shop } from "../../svg/bus-shop.svg";
 const About = () => {
   return (
     <div className="container">
-      <div className="row">
+      <div className="row about-animation">
         <div className="col-md-8">
           <h2>What is Benelov market</h2>
           <p style={{ fontSize: "1.25rem" }}>

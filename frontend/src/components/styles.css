@@ -117,6 +117,46 @@ p {
   }
 }
 
+@keyframes straightLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes straightRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+.about-animation {
+  animation-fill-mode: both;
+  animation-name: straightRight;
+  animation-delay: 1s;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  backface-visibility: hidden;
+}
+
+.how-it-works-animation {
+  animation-fill-mode: both;
+  animation-name: straightLeft;
+  animation-delay: 3s;
+  animation-duration: 1s;
+  animation-timing-function: ease-in;
+  backface-visibility: hidden;
+}
+
 .fadeIn {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
