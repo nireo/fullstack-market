@@ -1,14 +1,33 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import userData from "../../../../services/user";
+import userService from "../../../../services/user";
+import { setNotification } from "../../../../reducers/notificationReducer";
 
-const Information = ({ user }) => {
+const Information = ({ user, setNotification }) => {
   const [newEmail, setNewEmail] = useState("");
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
-  const handleEmailUpdate = event => {
+  const handleEmailUpdate = async event => {
+    event.preventDefault();
     const newUserData = { ...user, email: newEmail };
+    try {
+      await userService.updateUser(user._id, newUserData);
+      setNotification("Email has been successfully updated", "success", 2);
+    } catch {
+      setNotification("Something went wrong while updating", "error", 2);
+    }
+  };
+
+  const handleUsernameUpdate = async event => {
+    event.preventDefault();
+    const newUserData = { ...user, username: newUsername };
+    try {
+      await userService.updateUser(user._id, newUserData);
+      setNotification("Email has been successfully updated", "success", 2);
+    } catch {
+      setNotification("Something went wrong while updating", "error", 2);
+    }
   };
 
   return (
@@ -51,7 +70,7 @@ const Information = ({ user }) => {
           <h4 className="my-0 font-weight-normal">Update Information</h4>
         </div>
         <div className="card-body">
-          <form>
+          <form onSubmit={handleEmailUpdate}>
             <div className="row">
               <div className="col-9">
                 <div className="form-group">
@@ -71,14 +90,14 @@ const Information = ({ user }) => {
               </div>
             </div>
           </form>
-          <form>
+          <form onSubmit={handleEmailUpdate}>
             <div className="row">
               <div className="col-9">
                 <div className="form-group">
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="New email"
+                    placeholder="New username"
                     value={newUsername}
                     onChange={({ target }) => setNewUsername(target.value)}
                   />
@@ -96,9 +115,9 @@ const Information = ({ user }) => {
               <div className="col-9">
                 <div className="form-group">
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
-                    placeholder="New email"
+                    placeholder="New password"
                     value={newPassword}
                     onChange={({ target }) => setNewPassword(target.value)}
                   />
@@ -125,5 +144,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  null
+  { setNotification }
 )(Information);
