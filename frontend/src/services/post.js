@@ -11,13 +11,13 @@ const getConfig = () => ({
   headers: { Authorization: token }
 });
 
-const getAllPosts = async () => {
-  const response = await axios.get(baseUrl);
+const getAllPosts = async page => {
+  const response = await axios.get(`${baseUrl}/${page}`);
   return response.data;
 };
 
 const getPostById = async id => {
-  const response = await axios.get(`${baseUrl}/${id}`);
+  const response = await axios.get(`${baseUrl}/id/${id}`);
   return response.data;
 };
 

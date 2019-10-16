@@ -12,7 +12,7 @@ const Posts = props => {
   const [amountInPage] = useState(3);
   useEffect(() => {
     if (props.posts === null) {
-      props.initPosts();
+      props.initPosts(String(currentPage));
     }
   }, [props]);
 

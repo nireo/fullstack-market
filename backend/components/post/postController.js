@@ -6,15 +6,33 @@ const config = require('../../utils/config');
 
 exports.getAllPosts = async (req, res, next) => {
   try {
-    await postModel
-      .find({})
-      .populate('postedBy')
-      .populate('reviews')
-      .exec((err, results) => {
-        if (err) return res.status(500);
+    // convert string to number
+    const page = +req.params.page;
 
-        return res.json(results);
-      });
+    if (page === 1) {
+      await postModel
+        .find({})
+        .populate('postedBy')
+        .populate('reviews')
+        .limit(3)
+        .exec((err, results) => {
+          if (err) return res.status(500);
+
+          return res.json(results);
+        });
+    } else {
+      await postModel
+        .find({})
+        .populate('postedBy')
+        .populate('reviews')
+        .skip(3 * page - 3)
+        .limit(3 * page)
+        .exec((err, results) => {
+          if (err) return res.status(500);
+
+          return res.json(results);
+        });
+    }
   } catch (e) {
     next(e);
   }

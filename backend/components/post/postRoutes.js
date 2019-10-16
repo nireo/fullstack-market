@@ -2,8 +2,8 @@ const router = require('express').Router();
 const postController = require('./postController');
 
 // Public routes
-router.get('/', postController.getAllPosts);
-router.get('/:id', postController.getPostById);
+router.get('/:page', postController.getAllPosts);
+router.get('/id/:id', postController.getPostById);
 
 // Protected routes
 router.post('/', postController.createPost);

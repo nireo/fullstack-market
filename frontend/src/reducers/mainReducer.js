@@ -24,9 +24,9 @@ const reducer = (state = null, action) => {
   }
 };
 
-export const initMainPosts = () => {
+export const initMainPosts = page => {
   return async dispatch => {
-    const posts = await mainService.getMainPosts();
+    const posts = await mainService.getMainPosts(page);
     dispatch({
       type: "INIT_MAIN_POSTS",
       data: posts
