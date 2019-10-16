@@ -132,6 +132,12 @@ const Information = ({ user, setNotification }) => {
           </form>
         </div>
       </div>
+      <div className="card shadow-sm" style={{ marginTop: "3rem" }}>
+        <div className="card-header">
+          <h4 className="my-0 font-weight-normal">Preferences</h4>
+        </div>
+        <div className="card-body"></div>
+      </div>
     </div>
   );
 };
