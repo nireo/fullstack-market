@@ -34,6 +34,7 @@ import EditReviews from "./components/private/EditReviews";
 import Tutorial from "./components/public/Tutorial/Tutorial";
 import SingleReport from "./components/private/admin/Reports/SingleReport";
 import ReportForm from "./components/public/ReportForm";
+import SettingsMain from "./components/private/settings/SettingsMain";
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -172,6 +173,11 @@ const Routes = props => {
               <Redirect to="/" />
             )
           }
+        />
+        <Route
+          exact
+          path="/settings"
+          render={() => (props.user ? <SettingsMain /> : <Redirect to="/" />)}
         />
         <Route exact path="/tutorial" render={() => <Tutorial />} />
         <Route render={() => <NotFound />} />

@@ -114,6 +114,11 @@ const NavBar = props => {
                     <i className="fas fa-scroll"></i> Edit reviews
                   </Link>
                 )}
+                {props.user.username !== "admin" && (
+                  <Link className="dropdown-item" to="/settings">
+                    <i className="fas fa-cogs" /> Settings
+                  </Link>
+                )}
               </div>
             </li>
           )}

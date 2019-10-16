@@ -3,6 +3,7 @@ import Viewing from "./Steps/Viewing";
 import Listing from "./Steps/Listing";
 import Last from "./Steps/Last";
 import Copyright from "../../Copyright";
+import { Link } from "react-router-dom";
 
 const handleStep = step => {
   switch (step) {
@@ -56,7 +57,14 @@ const Tutorial = () => {
             Next
           </button>
         ) : (
-          <div></div>
+          <Link to="/">
+            <button
+              style={{ float: "right" }}
+              className="tutorial-button button-pink button-animated"
+            >
+              Go home
+            </button>
+          </Link>
         )}
       </div>
       <div className="text-center">

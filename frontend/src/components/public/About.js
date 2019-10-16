@@ -6,7 +6,7 @@ const About = () => {
     <div className="container">
       <div className="row about-animation">
         <div className="col-md-8">
-          <h2>What is Benelov market</h2>
+          <h2>What is Benelov</h2>
           <p style={{ fontSize: "1.25rem" }}>
             Benelov market is a marketplace for selling virtual items, from PDFs
             to game items. This site consists of an official tab, which contains
