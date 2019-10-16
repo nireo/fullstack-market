@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 const config = require('./config');
 // logger is not really needed now, but for later
 const logger = require('./logger');
-const { MONGODB_URI } = require('../env');
 
 const connectToDatabase = () => {
   mongoose
-    .connect(MONGODB_URI, { useNewUrlParser: true })
+    .connect(config.MONGODB_URI, { useNewUrlParser: true })
     .then(() => {
       logger.info('[mongoose] Successfully connected database');
     })

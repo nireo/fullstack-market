@@ -90,7 +90,7 @@ const Information = ({ user, setNotification }) => {
               </div>
             </div>
           </form>
-          <form onSubmit={handleEmailUpdate}>
+          <form onSubmit={handleUsernameUpdate}>
             <div className="row">
               <div className="col-9">
                 <div className="form-group">

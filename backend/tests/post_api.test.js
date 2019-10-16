@@ -11,6 +11,20 @@ test('Post route works and returns json', async () => {
     .expect('Content-Type', /application\/json/);
 });
 
+test('Creating post without token returns error', async () => {
+  const post = {
+    title: 'test',
+    description: 'test',
+    price: 1,
+    content: 'content'
+  };
+
+  await api
+    .post('/api/post')
+    .send(post)
+    .expect(401);
+});
+
 afterAll(() => {
   mongoose.connection.close();
 });

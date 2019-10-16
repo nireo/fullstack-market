@@ -15,7 +15,7 @@ const SinglePost = props => {
   const [recommended, setRecommended] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [amountInPage, setAmountInPage] = useState(3);
+  const [amountInPage] = useState(3);
   if (props.post === null) {
     return <Redirect to="/community" />;
   }
