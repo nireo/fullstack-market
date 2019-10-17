@@ -34,7 +34,6 @@ const CommunityPost = props => {
   const firstPostIndex = lastPostIndex - amountInPage;
   const currentPosts = filteredSearch.slice(firstPostIndex, lastPostIndex);
   const paginate = pageNum => setCurrentPage(pageNum);
-
   const renderPosts = currentPosts.map(p => (
     <tr key={p._id}>
       <td>{p._id}</td>
@@ -53,37 +52,44 @@ const CommunityPost = props => {
     </tr>
   ));
   return (
-    <div className="container">
-      <h4>Community posts</h4>
-      <div className="form-group">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search posts"
-          value={search}
-          onChange={({ target }) => setSearch(target.value)}
-        />
-      </div>
-      <div className="table-responsive">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{renderPosts}</tbody>
-        </table>
-      </div>
-      <div className="container" style={{ paddingTop: "1rem" }}>
-        <Pagination
-          amountInPage={amountInPage}
-          totalPosts={filteredSearch.length}
-          paginate={paginate}
-        />
+    <div className="container" style={{ marginTop: "1.5rem" }}>
+      <div className="card shadow-sm">
+        <div className="card-header">
+          <h4 className="my-0 font-weight-normal">Community posts</h4>
+        </div>
+        <div className="card-body">
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search posts"
+              value={search}
+              onChange={({ target }) => setSearch(target.value)}
+            />
+          </div>
+          <div className="table-responsive">
+            <table className="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>{renderPosts}</tbody>
+            </table>
+          </div>
+          <hr />
+          <div className="container">
+            <Pagination
+              amountInPage={amountInPage}
+              totalPosts={filteredSearch.length}
+              paginate={paginate}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

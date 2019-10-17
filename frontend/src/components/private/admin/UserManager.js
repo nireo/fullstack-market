@@ -56,38 +56,43 @@ const UserManager = props => {
   ));
 
   return (
-    <div className="container">
-      <h4>Users</h4>
-      <div className="form-group">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Search users"
-          value={search}
-          onChange={({ target }) => setSearch(target.value)}
-        />
-      </div>
-      <div className="table-responsive">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Posts</th>
-              <th>Reviews</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{renderUsers}</tbody>
-        </table>
-      </div>
-      <div className="container" style={{ paddingTop: "1rem" }}>
-        <Pagination
-          amountInPage={amountInPage}
-          paginate={paginate}
-          totalPosts={filteredSearch.length}
-        />
+    <div className="container" style={{ marginTop: "1.5rem" }}>
+      <div className="card shadow-sm">
+        <div className="card-header">
+          <h4 className="my-0 font-weight-normal">Users</h4>
+        </div>
+        <div className="card-body">
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search users"
+              value={search}
+              onChange={({ target }) => setSearch(target.value)}
+            />
+          </div>
+          <div className="table-responsive">
+            <table className="table table-striped table-sm">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Posts</th>
+                  <th>Reviews</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>{renderUsers}</tbody>
+            </table>
+          </div>
+          <hr />
+          <Pagination
+            amountInPage={amountInPage}
+            paginate={paginate}
+            totalPosts={filteredSearch.length}
+          />
+        </div>
       </div>
     </div>
   );
