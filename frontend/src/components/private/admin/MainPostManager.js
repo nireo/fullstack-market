@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { initMainPosts, removeMainPost } from '../../../reducers/mainReducer';
-import { Link } from 'react-router-dom';
-import Loading from '../../Loading';
-import { setNotification } from '../../../reducers/notificationReducer';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { initMainPosts, removeMainPost } from "../../../reducers/mainReducer";
+import { Link } from "react-router-dom";
+import Loading from "../../Loading";
+import { setNotification } from "../../../reducers/notificationReducer";
+import Pagination from "../../public/Pagination";
 
 const MainPostManager = props => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const [amountInPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     if (props.mainPosts === null) {
       props.initMainPosts();
@@ -17,9 +20,9 @@ const MainPostManager = props => {
   }
 
   const handleRemove = id => {
-    if (window.confirm('Are you sure you want to delete ID: ' + id)) {
+    if (window.confirm("Are you sure you want to delete ID: " + id)) {
       props.removeMainPost(id);
-      props.setNotification(`Post ID: ${id} has been deleted`, 'success', 2);
+      props.setNotification(`Post ID: ${id} has been deleted`, "success", 2);
     }
   };
 
@@ -29,16 +32,21 @@ const MainPostManager = props => {
       )
     : props.mainPosts;
 
-  const renderMainPosts = filteredSearch.map(m => (
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentPosts = filteredSearch.slice(firstPostIndex, lastPostIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
+
+  const renderMainPosts = currentPosts.map(m => (
     <tr key={m._id}>
       <td>{m._id}</td>
       <td>{m.title}</td>
       <td>{m.description.slice(0, 100)}</td>
-      <td style={{ color: 'green' }}>{m.price} $</td>
+      <td style={{ color: "green" }}>{m.price} $</td>
       <td>
         <Link
           className="nav-link"
-          style={{ color: 'black' }}
+          style={{ color: "black" }}
           onClick={() => handleRemove(m._id)}
         >
           Delete
@@ -72,6 +80,13 @@ const MainPostManager = props => {
           </thead>
           <tbody>{renderMainPosts}</tbody>
         </table>
+      </div>
+      <div className="container" style={{ paddingTop: "1rem" }}>
+        <Pagination
+          amountInPage={amountInPage}
+          totalPosts={currentPosts.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

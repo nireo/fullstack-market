@@ -7,10 +7,13 @@ import { updateBio } from "../../reducers/allUsersReducer";
 import { setNotification } from "../../reducers/notificationReducer";
 import reviewService from "../../services/review";
 import { removePost } from "../../reducers/postReducer";
+import Pagination from "./Pagination";
 
 const SingleUser = props => {
   const [showForm, setShowForm] = useState(false);
   const [bio, setBio] = useState("");
+  const [amountInPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -37,6 +40,14 @@ const SingleUser = props => {
       </div>
     );
   }
+
+  const lastReviewIndex = currentPage * amountInPage;
+  const firstReviewIndex = lastReviewIndex - amountInPage;
+  const currentReviews = user.reviewsPosted.slice(
+    firstReviewIndex,
+    lastReviewIndex
+  );
+  const paginate = pageNum => setCurrentPage(pageNum);
 
   if (user.username === "admin") {
     return <Redirect to="/users" />;
@@ -93,7 +104,7 @@ const SingleUser = props => {
     }
   };
 
-  const renderReviews = user.reviewsPosted.map(r => (
+  const renderReviews = currentReviews.map(r => (
     <tr key={r._id}>
       <td>{r.title}</td>
       <td>{r.description.slice(0, 100)}</td>
@@ -193,6 +204,13 @@ const SingleUser = props => {
           </thead>
           <tbody>{renderReviews}</tbody>
         </table>
+      </div>
+      <div className="container" style={{ paddingTop: "1rem" }}>
+        <Pagination
+          amountInPage={amountInPage}
+          totalPosts={user.reviewsPosted.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

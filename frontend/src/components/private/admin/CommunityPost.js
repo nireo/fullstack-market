@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { initPosts, removePost } from '../../../reducers/postReducer';
-import { Link } from 'react-router-dom';
-import Loading from '../../Loading';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { initPosts, removePost } from "../../../reducers/postReducer";
+import { Link } from "react-router-dom";
+import Loading from "../../Loading";
+import Pagination from "../../public/Pagination";
 
 const CommunityPost = props => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const [amountInPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     if (props.posts === null) {
       props.initPosts();
@@ -16,7 +19,7 @@ const CommunityPost = props => {
   }
 
   const handleRemove = id => {
-    if (window.confirm('Are you sure you want to delete ID: ' + id)) {
+    if (window.confirm("Are you sure you want to delete ID: " + id)) {
       props.removePost(id);
     }
   };
@@ -27,16 +30,21 @@ const CommunityPost = props => {
       )
     : props.posts;
 
-  const renderPosts = filteredSearch.map(p => (
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentPosts = filteredSearch.slice(firstPostIndex, lastPostIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
+
+  const renderPosts = currentPosts.map(p => (
     <tr key={p._id}>
       <td>{p._id}</td>
       <td>{p.title}</td>
       <td>{p.description.slice(0, 100)}</td>
-      <td style={{ color: 'green' }}>{p.price} $</td>
+      <td style={{ color: "green" }}>{p.price} $</td>
       <td>
         <Link
           className="nav-link"
-          style={{ color: 'black' }}
+          style={{ color: "black" }}
           onClick={() => handleRemove(p._id)}
         >
           Delete
@@ -69,6 +77,13 @@ const CommunityPost = props => {
           </thead>
           <tbody>{renderPosts}</tbody>
         </table>
+      </div>
+      <div className="container" style={{ paddingTop: "1rem" }}>
+        <Pagination
+          amountInPage={amountInPage}
+          totalPosts={filteredSearch.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

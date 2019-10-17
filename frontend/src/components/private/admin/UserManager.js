@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { initUsers, removeUser } from '../../../reducers/allUsersReducer';
-import { Link } from 'react-router-dom';
-import Loading from '../../Loading';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { initUsers, removeUser } from "../../../reducers/allUsersReducer";
+import { Link } from "react-router-dom";
+import Loading from "../../Loading";
+import Pagination from "../../public/Pagination";
 
 const UserManager = props => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
+  const [amountInPage] = useState(5);
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -17,7 +20,7 @@ const UserManager = props => {
   }
 
   const handleRemove = id => {
-    if (window.confirm('Are you sure you want to delete ID: ' + id)) {
+    if (window.confirm("Are you sure you want to delete ID: " + id)) {
       props.removeUser(id);
     }
   };
@@ -28,7 +31,12 @@ const UserManager = props => {
       )
     : props.users;
 
-  const renderUsers = filteredSearch.map(u => (
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentUsers = filteredSearch.slice(firstPostIndex, lastPostIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
+
+  const renderUsers = currentUsers.map(u => (
     <tr key={u._id}>
       <td>{u._id}</td>
       <td>{u.username}</td>
@@ -38,7 +46,7 @@ const UserManager = props => {
       <td>
         <Link
           className="nav-link"
-          style={{ color: 'black' }}
+          style={{ color: "black" }}
           onClick={() => handleRemove(u._id)}
         >
           Delete
@@ -73,6 +81,13 @@ const UserManager = props => {
           </thead>
           <tbody>{renderUsers}</tbody>
         </table>
+      </div>
+      <div className="container" style={{ paddingTop: "1rem" }}>
+        <Pagination
+          amountInPage={amountInPage}
+          paginate={paginate}
+          totalPosts={filteredSearch.length}
+        />
       </div>
     </div>
   );
