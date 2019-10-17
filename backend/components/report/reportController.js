@@ -28,6 +28,84 @@ exports.createReport = async (req, res, next) => {
   }
 };
 
+exports.getReportById = async (req, res, next) => {
+  const token = getToken(req);
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const user = await userModel.findById(decodedToken.id);
+    if (user.username === 'admin') {
+      await reportModel
+        .findById(req.params.id)
+        .populate('to')
+        .populate('from')
+        .exec((err, results) => {
+          if (err) return res.status(500);
+
+          return res.json(results);
+        });
+    } else {
+      return res.status(403).json({
+        error: 'forbidden'
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.getReportInPages = async (req, res, next) => {
+  const token = getToken(req);
+  const page = +req.params.page;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const user = await userModel.findById(decodedToken);
+    if (user.username === 'admin') {
+      if (page === 1) {
+        await reportModel
+          .find({})
+          .populate('to')
+          .populate('from')
+          .limit(5)
+          .exec((err, results) => {
+            if (err) return res.status(500);
+
+            return res.json(results);
+          });
+      } else {
+        await reportModel
+          .find({})
+          .populate('to')
+          .populate('from')
+          .skip(5 * page - 5)
+          .limit(5 * page)
+          .exec((err, results) => {
+            if (err) return res.status(500);
+
+            return res.json(results);
+          });
+      }
+    } else {
+      return res.status(403).json({
+        error: 'invalid token'
+      });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
 exports.getReports = async (req, res, next) => {
   const token = getToken(req);
   try {
