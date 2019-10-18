@@ -36,6 +36,7 @@ import SingleReport from "./components/private/admin/Reports/SingleReport";
 import ReportForm from "./components/public/ReportForm";
 import SettingsMain from "./components/private/settings/SettingsMain";
 import ShowContent from "./components/private/owned-items/ShowContent";
+import Dashboard from "./components/private/dashboard/Dashboard";
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -190,6 +191,11 @@ const Routes = props => {
               <Redirect to="/" />
             )
           }
+        />
+        <Route
+          exact
+          path="/dashboard"
+          render={() => (props.user ? <Dashboard /> : <Redirect to="/" />)}
         />
         <Route exact path="/tutorial" render={() => <Tutorial />} />
         <Route render={() => <NotFound />} />
