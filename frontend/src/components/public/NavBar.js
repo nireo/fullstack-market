@@ -80,9 +80,6 @@ const NavBar = props => {
                     <i className="fas fa-plus" /> Create Post
                   </Link>
                 )}
-                <Link className="dropdown-item" to="/edit">
-                  <i class="fas fa-edit"></i> Edit Posts
-                </Link>
                 {props.user.username === "admin" && (
                   <Link className="dropdown-item" to="/admin">
                     <i className="fas fa-chart-line" /> Admin panel
@@ -110,8 +107,8 @@ const NavBar = props => {
                   </Link>
                 )}
                 {props.user.username !== "admin" && (
-                  <Link className="dropdown-item" to="/edit-reviews">
-                    <i className="fas fa-scroll"></i> Edit reviews
+                  <Link className="dropdown-item" to="/dashboard">
+                    <i class="fas fa-chart-line"></i> Dashboard
                   </Link>
                 )}
                 {props.user.username !== "admin" && (

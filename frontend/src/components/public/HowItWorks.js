@@ -9,7 +9,7 @@ const HowItWorks = () => {
           <Invest style={{ width: "250px", height: "250px" }} />
         </div>
         <div className="col-md-8">
-          <h2>How it works</h2>
+          <h2>how it works</h2>
           <p style={{ fontSize: "1.25rem" }}>
             Anyone can signup for a free account and start posting and buying
             products. Since this site is 100% free please consider donating to
