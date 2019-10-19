@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Posts from "./pages/Posts";
 import EditPosts from "../EditPosts";
+import Reviews from "./pages/Reviews";
 
 const Dashboard = () => {
   const [page, setPage] = useState(1);
@@ -41,6 +42,11 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
+          </div>
+        )}
+        {page === 2 && (
+          <div>
+            <Reviews />
           </div>
         )}
       </div>

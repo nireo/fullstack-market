@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { setNotification } from '../../reducers/notificationReducer';
-import { Link } from 'react-router-dom';
-import EditReviewForm from './EditReviewForm';
-import reviewService from '../../services/review';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { setNotification } from "../../reducers/notificationReducer";
+import { Link } from "react-router-dom";
+import EditReviewForm from "./EditReviewForm";
+import reviewService from "../../services/review";
+import Pagination from "../public/Pagination";
 
 const EditReviews = ({ user, setNotification }) => {
   const [reviewToEdit, setReviewToEdit] = useState(null);
+  const [amountInPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
   if (user === null) {
     return null;
   }
@@ -22,45 +25,52 @@ const EditReviews = ({ user, setNotification }) => {
   }
 
   const handleRemove = id => {
-    if (window.confirm('Are you sure you want to delete ' + id)) {
+    if (window.confirm("Are you sure you want to delete " + id)) {
       try {
         reviewService.removeReview(id);
         setNotification(
-          'Review has been deleted, and will be fully removed on next reload',
-          'success',
+          "Review has been deleted, and will be fully removed on next reload",
+          "success",
           2
         );
       } catch {
-        setNotification('Something went while editing', 'error', 2);
+        setNotification("Something went while editing", "error", 2);
       }
     }
   };
 
-  const renderReviews = user.reviewsPosted.map(r => (
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentReviews = user.reviewsPosted.slice(
+    firstPostIndex,
+    lastPostIndex
+  );
+  const paginate = pageNum => setCurrentPage(pageNum);
+  const renderReviews = currentReviews.map(r => (
     <div key={r._id} className="col-md 6">
-      <div className="card" style={{ marginTop: '1rem' }}>
+      <div className="card" style={{ marginTop: "1rem" }}>
         <div className="card-body">
           <div className="row">
             <div className="col-md 9">
               <h5 className="card-title">{r.title}</h5>
               <p>{r.description}</p>
               <Link
-                style={{ color: 'black', textDecoration: 'none' }}
+                style={{ color: "black", textDecoration: "none" }}
                 onClick={() => setReviewToEdit(r)}
               >
                 Edit
               </Link>
-              {'  '}
+              {"  "}
               <Link
                 onClick={() => handleRemove(r._id)}
-                style={{ color: 'black', textDecoration: 'none' }}
+                style={{ color: "black", textDecoration: "none" }}
               >
                 Delete
               </Link>
             </div>
             <div className="col-md 3">
               <h6 className="card-subtitle">Stars: {r.stars}</h6>
-              <p>Recommended: {r.recommended ? 'Yes' : 'No'}</p>
+              <p>Recommended: {r.recommended ? "Yes" : "No"}</p>
             </div>
           </div>
         </div>
@@ -70,8 +80,6 @@ const EditReviews = ({ user, setNotification }) => {
 
   return (
     <div className="container">
-      <h2>Edit reviews</h2>
-      <p>All edits here, will be updated after reloading.</p>
       <div className="row">
         <div className="col-md 6">{renderReviews}</div>
         <div className="col-md 6">
@@ -80,6 +88,13 @@ const EditReviews = ({ user, setNotification }) => {
             setReviewToEdit={setReviewToEdit}
           />
         </div>
+      </div>
+      <div className="container" style={{ paddingTop: "1rem" }}>
+        <Pagination
+          amountInPage={amountInPage}
+          totalPosts={user.reviewsPosted.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

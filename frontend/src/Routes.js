@@ -28,9 +28,7 @@ import { initPosts } from "./reducers/postReducer";
 import { initMainPosts } from "./reducers/mainReducer";
 import { initUsers } from "./reducers/allUsersReducer";
 import Overview from "./components/public/personal-shop/Overview";
-import EditPosts from "./components/private/EditPosts";
 import OwnedItems from "./components/private/owned-items/OwnedItems";
-import EditReviews from "./components/private/EditReviews";
 import Tutorial from "./components/public/Tutorial/Tutorial";
 import SingleReport from "./components/private/admin/Reports/SingleReport";
 import ReportForm from "./components/public/ReportForm";
@@ -141,18 +139,8 @@ const Routes = props => {
         />
         <Route
           exact
-          path="/edit"
-          render={() => (props.user ? <EditPosts /> : <Redirect to="/" />)}
-        />
-        <Route
-          exact
           path="/owned-items"
           render={() => (props.user ? <OwnedItems /> : <Redirect to="/" />)}
-        />
-        <Route
-          exact
-          path="/edit-reviews"
-          render={() => (props.user ? <EditReviews /> : <Redirect to="/" />)}
         />
         <Route
           exact
