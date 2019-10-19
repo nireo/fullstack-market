@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { initUsers } from '../../reducers/allUsersReducer';
-import Loading from '../Loading';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { initUsers } from "../../reducers/allUsersReducer";
+import Loading from "../Loading";
+import { Link } from "react-router-dom";
 
 const Users = props => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   useEffect(() => {
     if (props.users === null) {
       props.initUsers();
@@ -22,21 +22,6 @@ const Users = props => {
       )
     : props.users;
 
-  const renderUsers = filteredSearch.map(u => {
-    if (u.username === 'admin') {
-      return null;
-    }
-    return (
-      <tr key={u._id}>
-        <td>
-          <Link to={`/profile/${u._id}`}>{u.username}</Link>
-        </td>
-        <td>{u.posts.length}</td>
-        <td>{u.reviewsPosted.length}</td>
-      </tr>
-    );
-  });
-
   return (
     <div className="container">
       <h4>Users</h4>
@@ -49,17 +34,18 @@ const Users = props => {
           onChange={({ target }) => setSearch(target.value)}
         />
       </div>
-      <div className="table-responsive">
-        <table className="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Posts</th>
-              <th>Reviews</th>
-            </tr>
-          </thead>
-          <tbody>{renderUsers}</tbody>
-        </table>
+      <div>
+        {filteredSearch.map(u => (
+          <div className="card" style={{ marginTop: "0.5rem" }}>
+            <div className="card-body">
+              <h5 className="card-title">{u.username}</h5>
+              <p className="card-text">{u.bio}</p>
+              <Link to={`/profile/${u._id}`}>
+                <button className="btn btn-primary">Go to profile</button>
+              </Link>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
