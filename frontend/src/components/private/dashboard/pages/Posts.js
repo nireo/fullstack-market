@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Posts = () => {
   return (
-    <div className="container">
+    <div className="container" style={{ paddingTop: "2rem" }}>
       <div className="card shadow-sm">
         <div className="card-header">
           <h4 className="my-0 font-weight-normal">Create post</h4>

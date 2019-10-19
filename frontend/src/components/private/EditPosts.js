@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { initUsers } from '../../reducers/allUsersReducer';
-import { setNotification } from '../../reducers/notificationReducer';
-import { removePost } from '../../reducers/postReducer';
-import Loading from '../Loading';
-import EditForm from './EditForm';
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { initUsers } from "../../reducers/allUsersReducer";
+import { setNotification } from "../../reducers/notificationReducer";
+import { removePost } from "../../reducers/postReducer";
+import Loading from "../Loading";
+import EditForm from "./EditForm";
+import Pagination from "../public/Pagination";
 
 const EditPosts = props => {
   const [postToEdit, setPostToEdit] = useState(null);
+  const [amountInPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
   if (props.user === null) {
     return <Loading />;
   }
@@ -18,7 +21,7 @@ const EditPosts = props => {
       <div className="container text-center">
         <h2>Edit posts</h2>
         <p>
-          You've got no posts, you can create posts in the{' '}
+          You've got no posts, you can create posts in the{" "}
           <Link to="/create">create</Link> page.
         </p>
       </div>
@@ -26,25 +29,30 @@ const EditPosts = props => {
   }
 
   const handleDelete = id => {
-    if (window.confirm('Are you sure you want delete the post')) {
+    if (window.confirm("Are you sure you want delete the post")) {
       try {
         props.removePost(id);
-        props.setNotification('Post has been deleted', 'success', 2);
+        props.setNotification("Post has been deleted", "success", 2);
       } catch {
-        props.setNotification('Something went wrong', 'error', 2);
+        props.setNotification("Something went wrong", "error", 2);
       }
     }
   };
 
-  const renderPosts = props.user.posts.map(p => (
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentPosts = props.user.posts.slice(firstPostIndex, lastPostIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
+
+  const renderPosts = currentPosts.map(p => (
     <div key={p._id} className="col-md 6">
-      <div className="card" style={{ marginTop: '1rem' }}>
+      <div className="card" style={{ marginTop: "1rem" }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
-          <h6 className="card-subtitle" style={{ color: 'green' }}>
+          <h6 className="card-subtitle" style={{ color: "green" }}>
             {p.price} $
           </h6>
-          <p className="card-text" style={{ paddingBottom: '1rem' }}>
+          <p className="card-text" style={{ paddingBottom: "1rem" }}>
             {p.description.slice(0, 100)}
           </p>
           <Link className="card-link" onClick={() => setPostToEdit(p)}>
@@ -60,13 +68,18 @@ const EditPosts = props => {
 
   return (
     <div className="container">
-      <h2>Edit posts</h2>
-      <p>All edits here, will be updated after reloading.</p>
       <div className="row">
         <div className="col-md 6">{renderPosts}</div>
         <div className="col-md 6">
           <EditForm post={postToEdit} setPost={setPostToEdit} />
         </div>
+      </div>
+      <div className="container" style={{ paddingTop: "1rem" }}>
+        <Pagination
+          amountInPage={amountInPage}
+          totalPosts={props.user.posts.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );
