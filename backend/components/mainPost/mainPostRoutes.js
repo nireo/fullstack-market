@@ -4,6 +4,7 @@ const mainPostController = require('./mainPostController');
 // Public routes
 router.get('/:page', mainPostController.getAllPosts);
 router.get('/id/:id', mainPostController.getMainPostWithId);
+router.get('/amount', mainPostController.getAmount);
 
 // Protected routes
 router.post('/', mainPostController.createPost);

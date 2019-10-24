@@ -137,3 +137,15 @@ exports.updatePost = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.getAmountOfPosts = async (req, res, next) => {
+  try {
+    const posts = await postModel.find({});
+    const amountObjects = {
+      amount: posts.length
+    };
+    return res.json(amountObjects);
+  } catch (e) {
+    next(e);
+  }
+};
