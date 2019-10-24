@@ -45,7 +45,7 @@ const EditPosts = props => {
   const paginate = pageNum => setCurrentPage(pageNum);
 
   const renderPosts = currentPosts.map(p => (
-    <div key={p._id} className="col-md 6">
+    <div key={p._id} className="col-md-12">
       <div className="card" style={{ marginTop: "1rem" }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
@@ -68,11 +68,33 @@ const EditPosts = props => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md 6">{renderPosts}</div>
-        <div className="col-md 6">
-          <EditForm post={postToEdit} setPost={setPostToEdit} />
+      <ul className="progressbar">
+        <div className="animated-text-left">
+          {postToEdit === null ? (
+            <li style={{ width: "50%" }} className="active">
+              Select post
+            </li>
+          ) : (
+            <li style={{ width: "50%" }}>Select post</li>
+          )}
         </div>
+        <div>
+          {postToEdit !== null ? (
+            <li style={{ width: "50%" }} className="active">
+              Edit
+            </li>
+          ) : (
+            <li style={{ width: "50%" }}>Edit</li>
+          )}
+        </div>
+      </ul>
+      <div style={{ paddingTop: "3rem" }}>
+        {postToEdit === null && <div>{renderPosts}</div>}
+        {postToEdit !== null && (
+          <div>
+            <EditForm post={postToEdit} setPost={setPostToEdit} />
+          </div>
+        )}
       </div>
       <div className="container" style={{ paddingTop: "1rem" }}>
         <Pagination
