@@ -40,11 +40,17 @@ const updateMainPost = async (postId, newObject) => {
   return response.data;
 };
 
+const getAmount = async () => {
+  const response = await axios.get(`${baseUrl}/amount`);
+  return response.data;
+};
+
 export default {
   getMainPosts,
   createMainPost,
   setToken,
   deleteMainPost,
   updateMainPost,
-  getMainPostWithId
+  getMainPostWithId,
+  getAmount
 };

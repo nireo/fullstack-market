@@ -9,6 +9,7 @@ import cartReducer from "./reducers/cartReducer";
 import allUsersReducer from "./reducers/allUsersReducer";
 import chatReducer from "./reducers/chatReducer";
 import reportReducer from "./reducers/reportReducer";
+import itemsReducer from "./reducers/itemLengths";
 
 const reducer = combineReducers({
   user: userReducer,
@@ -18,7 +19,8 @@ const reducer = combineReducers({
   cart: cartReducer,
   allUsers: allUsersReducer,
   chat: chatReducer,
-  report: reportReducer
+  report: reportReducer,
+  items: itemsReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));

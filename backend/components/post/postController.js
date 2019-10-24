@@ -140,11 +140,13 @@ exports.updatePost = async (req, res, next) => {
 
 exports.getAmountOfPosts = async (req, res, next) => {
   try {
-    const posts = await postModel.find({});
-    const amountObjects = {
-      amount: posts.length
-    };
-    return res.json(amountObjects);
+    await postModel.countDocuments({}, (err, results) => {
+      if (err) return res.status(500);
+
+      return res.json({
+        amount: results
+      });
+    });
   } catch (e) {
     next(e);
   }
