@@ -40,11 +40,17 @@ const updatePost = async (postId, newObject) => {
   return response.data;
 };
 
+const getItemLengths = async () => {
+  const response = await axios.get(`${baseUrl}/items`);
+  return response.data;
+};
+
 export default {
   setToken,
   getAllPosts,
   createNewPost,
   deletePost,
   updatePost,
-  getPostById
+  getPostById,
+  getItemLengths
 };

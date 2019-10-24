@@ -9,9 +9,16 @@ const CommunityPost = props => {
   const [search, setSearch] = useState("");
   const [amountInPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [pagesWithContent, setPagesWithContent] = useState([]);
   useEffect(() => {
     if (props.posts === null) {
-      props.initPosts();
+      props.initPosts(String(currentPage));
+      setPagesWithContent(pagesWithContent.concat(currentPage));
+    }
+
+    if (!pagesWithContent.includes(currentPage)) {
+      props.initPosts(String(currentPage));
+      setPagesWithContent(pagesWithContent.concat(currentPage));
     }
   }, [props]);
   if (props.posts === null) {
