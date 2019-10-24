@@ -47,7 +47,7 @@ const EditReviews = ({ user, setNotification }) => {
   );
   const paginate = pageNum => setCurrentPage(pageNum);
   const renderReviews = currentReviews.map(r => (
-    <div key={r._id} className="col-md 6">
+    <div key={r._id}>
       <div className="card" style={{ marginTop: "1rem" }}>
         <div className="card-body">
           <div className="row">
@@ -80,22 +80,44 @@ const EditReviews = ({ user, setNotification }) => {
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md 6">{renderReviews}</div>
-        <div className="col-md 6">
+      <ul className="progressbar">
+        <div className="animated-text-left">
+          {reviewToEdit === null ? (
+            <li style={{ width: "50%" }} className="active">
+              Select review
+            </li>
+          ) : (
+            <li style={{ width: "50%" }}>Select review</li>
+          )}
+        </div>
+        <div className="animated-text-right">
+          {reviewToEdit !== null ? (
+            <li style={{ width: "50%" }} className="active">
+              Edit
+            </li>
+          ) : (
+            <li style={{ width: "50%" }}>Edit</li>
+          )}
+        </div>
+      </ul>
+      {reviewToEdit === null && <div>{renderReviews}</div>}
+      {reviewToEdit !== null && (
+        <div>
           <EditReviewForm
             review={reviewToEdit}
             setReviewToEdit={setReviewToEdit}
           />
         </div>
-      </div>
-      <div className="container" style={{ paddingTop: "1rem" }}>
-        <Pagination
-          amountInPage={amountInPage}
-          totalPosts={user.reviewsPosted.length}
-          paginate={paginate}
-        />
-      </div>
+      )}
+      {reviewToEdit === null && (
+        <div className="container" style={{ paddingTop: "1rem" }}>
+          <Pagination
+            amountInPage={amountInPage}
+            totalPosts={user.reviewsPosted.length}
+            paginate={paginate}
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -78,7 +78,7 @@ const EditPosts = props => {
             <li style={{ width: "50%" }}>Select post</li>
           )}
         </div>
-        <div>
+        <div className="animated-text-right">
           {postToEdit !== null ? (
             <li style={{ width: "50%" }} className="active">
               Edit
@@ -96,13 +96,15 @@ const EditPosts = props => {
           </div>
         )}
       </div>
-      <div className="container" style={{ paddingTop: "1rem" }}>
-        <Pagination
-          amountInPage={amountInPage}
-          totalPosts={props.user.posts.length}
-          paginate={paginate}
-        />
-      </div>
+      {postToEdit === null && (
+        <div className="container" style={{ paddingTop: "1rem" }}>
+          <Pagination
+            amountInPage={amountInPage}
+            totalPosts={props.user.posts.length}
+            paginate={paginate}
+          />
+        </div>
+      )}
     </div>
   );
 };
