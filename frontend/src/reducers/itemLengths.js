@@ -10,10 +10,11 @@ import mainService from "../services/mainPost";
 const reducer = (state = [0, 0], action) => {
   switch (action.type) {
     case "SET_DATA_COMMUNITY":
-      const newArray = [action.data, state[1]];
-      return newArray;
+      const withCommunity = [action.data, state[1]];
+      return withCommunity;
     case "SET_DATA_MAIN":
-      const newArray = [state[0], action.data];
+      const withMain = [state[0], action.data];
+      return withMain;
     default:
       return state;
   }

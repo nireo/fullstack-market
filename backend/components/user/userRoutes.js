@@ -5,6 +5,7 @@ const userController = require('./userController.js');
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUserById);
 router.post('/', userController.createUser);
+router.get('/search', userController.searchForUser);
 
 // Private routes
 router.delete('/:id', userController.deleteUser);

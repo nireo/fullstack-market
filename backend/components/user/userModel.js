@@ -73,4 +73,15 @@ userSchema.set('toJSON', {
   }
 });
 
+userSchema.index(
+  {
+    username: 'text'
+  },
+  {
+    weights: {
+      username: 1
+    }
+  }
+);
+
 module.exports = mongoose.model('User', userSchema);

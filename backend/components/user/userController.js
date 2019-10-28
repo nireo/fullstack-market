@@ -4,6 +4,9 @@ const jwt = require('jsonwebtoken');
 const { getToken } = require('../../utils/helper');
 const config = require('../../utils/config');
 const postModel = require('../post/postModel');
+const {
+  InternalServerException
+} = require('../../exceptions/InternalException');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -257,5 +260,23 @@ exports.removeItemFromWishlist = async (req, res, next) => {
     }
   } catch (e) {
     next(e);
+  }
+};
+
+exports.searchForUser = async (req, res, next) => {
+  try {
+    await userModel.find(
+      {
+        $text: { $search: request.params.term }
+      },
+      (err, results) => {
+        if (err) return res.status(500);
+
+        return res.json(results);
+      }
+    );
+  } catch (e) {
+    res.status(500);
+    next();
   }
 };
