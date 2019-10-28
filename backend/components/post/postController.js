@@ -151,3 +151,21 @@ exports.getAmountOfPosts = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.searchForPost = async (req, res, next) => {
+  try {
+    await postModel.find(
+      {
+        $text: { $search: request.params.term }
+      },
+      (err, results) => {
+        if (err) return res.status(500);
+
+        return res.json(results);
+      }
+    );
+  } catch (e) {
+    res.status(500);
+    next(e);
+  }
+};

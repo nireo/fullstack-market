@@ -4,9 +4,6 @@ const jwt = require('jsonwebtoken');
 const { getToken } = require('../../utils/helper');
 const config = require('../../utils/config');
 const postModel = require('../post/postModel');
-const {
-  InternalServerException
-} = require('../../exceptions/InternalException');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
