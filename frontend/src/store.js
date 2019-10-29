@@ -10,17 +10,19 @@ import allUsersReducer from "./reducers/allUsersReducer";
 import chatReducer from "./reducers/chatReducer";
 import reportReducer from "./reducers/reportReducer";
 import itemsReducer from "./reducers/itemLengths";
+import searchReducer from "./reducers/searchReducer";
 
 const reducer = combineReducers({
-  user: userReducer,
-  mainPosts: mainReducer,
-  posts: postReducer,
-  notification: notificationReducer,
-  cart: cartReducer,
-  allUsers: allUsersReducer,
-  chat: chatReducer,
-  report: reportReducer,
-  items: itemsReducer
+    user: userReducer,
+    mainPosts: mainReducer,
+    posts: postReducer,
+    notification: notificationReducer,
+    cart: cartReducer,
+    allUsers: allUsersReducer,
+    chat: chatReducer,
+    report: reportReducer,
+    items: itemsReducer,
+    search: searchReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunk));
