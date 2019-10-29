@@ -23,24 +23,19 @@ const Search = ({ items, searchForItem, setNotification }) => {
     return (
         <div className="container">
             <form onSubmit={handleSearch} style={{ marginTop: "1rem" }}>
-                <div className="form-row align-items-center">
+                <div className="search">
                     <input
                         type="text"
                         value={search}
                         onChange={({ target }) => setSearch(target.value)}
-                        className="form-control"
                         placeholder="Search"
                     />
-                    <button
-                        style={{ marginTop: "1rem" }}
-                        type="submit"
-                        className="btn btn-primary"
-                    >
-                        Search
+                    <button style={{ marginTop: "1rem" }} type="submit">
+                        <i className="fa fa-search"></i>
                     </button>
                 </div>
             </form>
-            <div className="container" style={{ marginTop: "2rem" }}>
+            <div style={{ marginTop: "2rem" }}>
                 {items.map(i => (
                     <div
                         key={i._id}
