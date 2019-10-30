@@ -3,7 +3,10 @@ import post from "../services/post";
 const reducer = (state = [], action) => {
     switch (action.type) {
         case "SET_SEARCH":
-            return action.data;
+            if (state === []) {
+                return action.data;
+            }
+            return [...state, action.data];
         case "CLEAR_SEARCH":
             return [];
         default:

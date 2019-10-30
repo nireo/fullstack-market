@@ -137,7 +137,7 @@ const Routes = props => {
                     render={() => (props.user ? <Chat /> : <Redirect to="/" />)}
                 />
                 <Route path="/404" render={() => <NotFound />} />
-                <Route exact path="/explore" render={() => <Explore />} />
+                <Route exact path="/search" render={() => <Search />} />
                 <Route
                     exact
                     path="/official/post/:id"
@@ -204,7 +204,6 @@ const Routes = props => {
                         props.user ? <Dashboard /> : <Redirect to="/" />
                     }
                 />
-                <Route exact path="/search" render={() => <Search />} />
                 <Route exact path="/tutorial" render={() => <Tutorial />} />
                 <Route render={() => <NotFound />} />
             </Switch>
