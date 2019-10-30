@@ -24,7 +24,7 @@ import Chat from "./components/public/Chat";
 import NotFound from "./components/public/NotFound";
 import Explore from "./components/public/Explore";
 import SingleMainPost from "./components/public/MainPost/SingleMainPost";
-import { initPosts } from "./reducers/postReducer";
+import { initPosts, getPostWithId } from "./reducers/postReducer";
 import { initMainPosts } from "./reducers/mainReducer";
 import { initUsers } from "./reducers/allUsersReducer";
 import Overview from "./components/public/personal-shop/Overview";
@@ -40,10 +40,18 @@ import Search from "./components/public/search/Search";
 const Routes = props => {
     const findPostWithId = id => {
         if (props.posts === null) {
-            props.initPosts();
+            props.getPostWithId(id);
+            return props.posts[0];
+        } else {
+            const checkForPost = props.posts.find(p => p._id === id);
+            if (checkForPost) {
+                return checkForPost;
+            } else {
+                props.getPostWithId(id);
+                const post = props.posts.find(p => p._id === id);
+                return post;
+            }
         }
-        const post = props.posts.find(p => p._id === id);
-        return post;
     };
 
     return (
@@ -222,5 +230,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { initMainPosts, initPosts, initUsers }
+    { initMainPosts, initPosts, initUsers, getPostWithId }
 )(Routes);
