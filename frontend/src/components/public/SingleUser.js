@@ -8,6 +8,7 @@ import { setNotification } from "../../reducers/notificationReducer";
 import reviewService from "../../services/review";
 import { removePost } from "../../reducers/postReducer";
 import Pagination from "./Pagination";
+import RenderAmount from "./RenderAmount";
 
 const SingleUser = props => {
     const [showForm, setShowForm] = useState(false);
@@ -138,17 +139,21 @@ const SingleUser = props => {
 
     return (
         <div className="container">
-            <h2>{user.username}</h2>
-            <p>{user.personalShop.about}</p>
-            <Link to={`/report/user/${user._id}`}>Report</Link>
-            <div className="row">
+            <div className="row" style={{ marginTop: "1rem" }}>
                 <div className="col-2">
+                    <h2>{user.username}</h2>
+                    <p>{user.personalShop.about}</p>
+                    <Link to={`/report/user/${user._id}`}>
+                        <button className="button-basic button-pink">
+                            Report
+                        </button>
+                    </Link>
                     {props.user &&
                         (props.user.username === user.username &&
                             (!showForm ? (
                                 <button
                                     style={{ marginBottom: "1rem" }}
-                                    class="btn btn-outline-primary btn-sm"
+                                    class="button-basic button-bluish"
                                     onClick={() => setShowForm(true)}
                                 >
                                     Change bio
@@ -183,25 +188,75 @@ const SingleUser = props => {
                                 </form>
                             )))}
                 </div>
-                <div className="col-10">
+                <div className="col-10" style={{ marginTop: 0, paddingTop: 0 }}>
                     <div>
-                        <ul className="nav nav-tabs">
+                        <ul className="nav">
                             <li className="nav-item" onClick={() => setPage(1)}>
                                 {page === 1 ? (
-                                    <Link className="nav-link active">
-                                        Posts
+                                    <Link
+                                        className="nav-link active"
+                                        style={{
+                                            color: "black",
+                                            textDecoration: "none",
+                                            fontWeight: 500,
+                                            borderBottom: "2px solid #cca8e9"
+                                        }}
+                                    >
+                                        <strong>
+                                            Posts{" "}
+                                            <RenderAmount
+                                                amount={user.posts.length}
+                                            />
+                                        </strong>
                                     </Link>
                                 ) : (
-                                    <Link className="nav-link">Posts</Link>
+                                    <Link
+                                        style={{
+                                            color: "black",
+                                            textDecoration: "none"
+                                        }}
+                                        className="nav-link"
+                                    >
+                                        Posts{" "}
+                                        <RenderAmount
+                                            amount={user.posts.length}
+                                        />
+                                    </Link>
                                 )}
                             </li>
                             <li className="nav-item" onClick={() => setPage(2)}>
                                 {page === 2 ? (
-                                    <Link className="nav-link active">
-                                        Reviews
+                                    <Link
+                                        className="nav-link active"
+                                        style={{
+                                            color: "black",
+                                            textDecoration: "none",
+                                            fontWeight: 500,
+                                            borderBottom: "2px solid #cca8e9"
+                                        }}
+                                    >
+                                        <strong>
+                                            Reviews{" "}
+                                            <RenderAmount
+                                                amount={
+                                                    user.reviewsPosted.length
+                                                }
+                                            />
+                                        </strong>
                                     </Link>
                                 ) : (
-                                    <Link className="nav-link">Reviews</Link>
+                                    <Link
+                                        style={{
+                                            color: "black",
+                                            textDecoration: "none"
+                                        }}
+                                        className="nav-link"
+                                    >
+                                        Reviews{" "}
+                                        <RenderAmount
+                                            amount={user.reviewsPosted.length}
+                                        />
+                                    </Link>
                                 )}
                             </li>
                         </ul>
@@ -261,7 +316,6 @@ const SingleUser = props => {
                     </div>
                 </div>
             </div>
-            <hr />
         </div>
     );
 };
