@@ -42,26 +42,25 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
                 </div>
             </form>
             <div style={{ marginTop: "2rem" }}>
-                {items.length > 0 &&
-                    items.map(i => (
-                        <div
-                            key={i._id}
-                            className="card"
-                            style={{ marginTop: "0.5rem " }}
-                        >
-                            <div className="card-body">
-                                <h5 className="card-title">{i.title}</h5>
-                                <p className="card-text">
-                                    {i.description.slice(0, 50)}
-                                </p>
-                                <Link to={`/post/${i._id}`}>
-                                    <button className="btn btn-primary">
-                                        Read more
-                                    </button>
-                                </Link>
-                            </div>
+                {items.map(i => (
+                    <div
+                        key={i._id}
+                        className="card"
+                        style={{ marginTop: "0.5rem " }}
+                    >
+                        <div className="card-body">
+                            <h5 className="card-title">{i.title}</h5>
+                            <p className="card-text">
+                                {i.description.slice(0, 50)}
+                            </p>
+                            <Link to={`/post/${i._id}`}>
+                                <button className="btn btn-primary">
+                                    Read more
+                                </button>
+                            </Link>
                         </div>
-                    ))}
+                    </div>
+                ))}
                 {loading && <Loading />}
             </div>
             {items.length > 0 && (
