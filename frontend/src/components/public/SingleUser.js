@@ -13,7 +13,7 @@ import RenderAmount from "./RenderAmount";
 const SingleUser = props => {
     const [showForm, setShowForm] = useState(false);
     const [bio, setBio] = useState("");
-    const [amountInPage] = useState(5);
+    const [amountInPage] = useState(4);
     const [currentPage, setCurrentPage] = useState(1);
     const [page, setPage] = useState(1);
     useEffect(() => {
@@ -55,21 +55,6 @@ const SingleUser = props => {
         return <Redirect to="/users" />;
     }
 
-    const handlePostRemove = (id, title) => {
-        if (window.confirm("Are you sure you want to delete" + title)) {
-            try {
-                props.removePost(id);
-                props.setNotification(
-                    "Post has been successfully deleted",
-                    "success",
-                    3
-                );
-            } catch {
-                props.setNotification("Something went wrong", "error", 2);
-            }
-        }
-    };
-
     const handleReviewRemove = (id, title) => {
         if (window.confirm("Are you sure you want to delete " + title)) {
             try {
@@ -86,22 +71,30 @@ const SingleUser = props => {
     };
 
     const renderReviews = currentReviews.map(r => (
-        <tr key={r._id}>
-            <td>{r.title}</td>
-            <td>{r.description.slice(0, 100)}</td>
-            <td>{r.stars}</td>
-            <td>{r.recommend ? "True" : "False"}</td>
-            {props.user &&
-                (props.user._id === user._id && (
-                    <td onClick={() => handleReviewRemove(r._id, r.title)}>
-                        <Link
-                            style={{ color: "black", textDecoration: "none" }}
-                        >
-                            Delete
-                        </Link>
-                    </td>
-                ))}
-        </tr>
+        <div
+            className="box col-12 col-md-12 col-lg-12 mb-3"
+            style={{
+                marginTop: "0.25rem",
+                marginLeft: "0.25rem",
+                marginRight: "0.25rem"
+            }}
+            key={r._id}
+        >
+            <h6
+                className="d-flex position-relative"
+                style={{
+                    width: "100%",
+                    paddingTop: "0.5rem",
+                    paddingLeft: "0.5rem",
+                    color: "#2196f3"
+                }}
+            >
+                {r.title}
+            </h6>
+            <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
+                {r.description.slice(0, 50)}
+            </p>
+        </div>
     ));
 
     const renderPosts = user.posts.map(p => (
@@ -198,7 +191,12 @@ const SingleUser = props => {
                 </div>
                 <div className="col-10" style={{ marginTop: 0, paddingTop: 0 }}>
                     <div>
-                        <ul className="nav">
+                        <ul
+                            className="nav"
+                            style={{
+                                borderBottom: "1px solid #d1d5da"
+                            }}
+                        >
                             <li className="nav-item" onClick={() => setPage(1)}>
                                 {page === 1 ? (
                                     <Link
@@ -270,29 +268,12 @@ const SingleUser = props => {
                         </ul>
                         {page === 1 && (
                             <div>
-                                <div>{renderPosts}</div>
+                                <div className="mt-2">{renderPosts}</div>
                             </div>
                         )}
                         {page === 2 && (
-                            <div>
-                                <div className="table-responsive">
-                                    <table className="table table-striped table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Description</th>
-                                                <th>Stars</th>
-                                                <th>Recommended</th>
-                                                {props.user &&
-                                                    (props.user._id ===
-                                                        user._id && (
-                                                        <th>Actions</th>
-                                                    ))}
-                                            </tr>
-                                        </thead>
-                                        <tbody>{renderReviews}</tbody>
-                                    </table>
-                                </div>
+                            <div className="mt-3">
+                                {renderReviews}
                                 <div
                                     className="container"
                                     style={{ paddingTop: "1rem" }}
