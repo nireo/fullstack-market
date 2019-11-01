@@ -70,27 +70,6 @@ const SingleUser = props => {
         }
     };
 
-    const renderPosts = user.posts.map(p => (
-        <tr key={p._id}>
-            <td>
-                <Link to={`/community/post/${p._id}`}>{p.title}</Link>
-            </td>
-            <td>{p.description.slice(0, 100)}</td>
-            <td style={{ color: "green" }}>{p.price} $</td>
-            {props.user &&
-                (props.user._id === user._id && (
-                    <td>
-                        <Link
-                            style={{ color: "black", textDecoration: "none" }}
-                            onClick={() => handlePostRemove(p._id, p.title)}
-                        >
-                            Delete
-                        </Link>
-                    </td>
-                ))}
-        </tr>
-    ));
-
     const handleReviewRemove = (id, title) => {
         if (window.confirm("Are you sure you want to delete " + title)) {
             try {
@@ -123,6 +102,35 @@ const SingleUser = props => {
                     </td>
                 ))}
         </tr>
+    ));
+
+    const renderPosts = user.posts.map(p => (
+        <div
+            className="box col-12 col-md-12 col-lg-12 mb-3"
+            style={{
+                marginTop: "0.25rem",
+                marginLeft: "0.25rem",
+                marginRight: "0.25rem"
+            }}
+            key={p.title}
+        >
+            <Link to={`/community/post/${p._id}`}>
+                <h6
+                    className="d-flex position-relative"
+                    style={{
+                        width: "100%",
+                        paddingTop: "0.5rem",
+                        paddingLeft: "0.5rem",
+                        color: "#2196f3"
+                    }}
+                >
+                    {p.title}
+                </h6>
+            </Link>
+            <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
+                {p.description.slice(0, 50)}
+            </p>
+        </div>
     ));
 
     const handleBioUpdate = event => {
@@ -262,23 +270,7 @@ const SingleUser = props => {
                         </ul>
                         {page === 1 && (
                             <div>
-                                <div className="table-responsive">
-                                    <table className="table table-striped table-sm">
-                                        <thead>
-                                            <tr>
-                                                <th>Title</th>
-                                                <th>Description</th>
-                                                <th>Price</th>
-                                                {props.user &&
-                                                    (props.user._id ===
-                                                        user._id && (
-                                                        <th>Actions</th>
-                                                    ))}
-                                            </tr>
-                                        </thead>
-                                        <tbody>{renderPosts}</tbody>
-                                    </table>
-                                </div>
+                                <div>{renderPosts}</div>
                             </div>
                         )}
                         {page === 2 && (
