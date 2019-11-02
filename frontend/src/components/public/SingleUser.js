@@ -9,6 +9,7 @@ import reviewService from "../../services/review";
 import { removePost } from "../../reducers/postReducer";
 import Pagination from "./Pagination";
 import RenderAmount from "./RenderAmount";
+import UserPosts from "./SingleUser/UserPosts";
 
 const SingleUser = props => {
     const [showForm, setShowForm] = useState(false);
@@ -55,21 +56,6 @@ const SingleUser = props => {
         return <Redirect to="/users" />;
     }
 
-    const handleReviewRemove = (id, title) => {
-        if (window.confirm("Are you sure you want to delete " + title)) {
-            try {
-                reviewService.removeReview(id);
-                props.setNotification(
-                    "Review has been removed, it will updated on next reload",
-                    "success",
-                    3
-                );
-            } catch {
-                props.setNotification("Something went wrong", "error", 2);
-            }
-        }
-    };
-
     const renderReviews = currentReviews.map(r => (
         <div
             className="box col-12 col-md-12 col-lg-12 mb-3"
@@ -93,35 +79,6 @@ const SingleUser = props => {
             </h6>
             <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
                 {r.description.slice(0, 50)}
-            </p>
-        </div>
-    ));
-
-    const renderPosts = user.posts.map(p => (
-        <div
-            className="box col-12 col-md-12 col-lg-12 mb-3"
-            style={{
-                marginTop: "0.25rem",
-                marginLeft: "0.25rem",
-                marginRight: "0.25rem"
-            }}
-            key={p.title}
-        >
-            <Link to={`/community/post/${p._id}`}>
-                <h6
-                    className="d-flex position-relative"
-                    style={{
-                        width: "100%",
-                        paddingTop: "0.5rem",
-                        paddingLeft: "0.5rem",
-                        color: "#2196f3"
-                    }}
-                >
-                    {p.title}
-                </h6>
-            </Link>
-            <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
-                {p.description.slice(0, 50)}
             </p>
         </div>
     ));
@@ -268,7 +225,9 @@ const SingleUser = props => {
                         </ul>
                         {page === 1 && (
                             <div>
-                                <div className="mt-2">{renderPosts}</div>
+                                <div className="mt-2">
+                                    <UserPosts posts={user.posts} />
+                                </div>
                             </div>
                         )}
                         {page === 2 && (
