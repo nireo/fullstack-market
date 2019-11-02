@@ -12,8 +12,6 @@ import UserPosts from "./SingleUser/UserPosts";
 import UserReviews from "./SingleUser/UserReviews";
 
 const SingleUser = props => {
-    const [showForm, setShowForm] = useState(false);
-    const [bio, setBio] = useState("");
     const [page, setPage] = useState(1);
     useEffect(() => {
         if (props.users === null) {
@@ -46,18 +44,6 @@ const SingleUser = props => {
         return <Redirect to="/users" />;
     }
 
-    const handleBioUpdate = event => {
-        event.preventDefault();
-        if (bio === "") {
-            try {
-                props.updateBio(bio);
-                props.setNotification("Something went wrong", "error", 2);
-            } catch {
-                props.setNotification("Something went wrong", "error", 2);
-            }
-        }
-    };
-
     return (
         <div className="container">
             <div className="row" style={{ marginTop: "1rem" }}>
@@ -69,45 +55,6 @@ const SingleUser = props => {
                             Report
                         </button>
                     </Link>
-                    {props.user &&
-                        (props.user.username === user.username &&
-                            (!showForm ? (
-                                <button
-                                    style={{ marginBottom: "1rem" }}
-                                    class="button-basic button-bluish"
-                                    onClick={() => setShowForm(true)}
-                                >
-                                    Change bio
-                                </button>
-                            ) : (
-                                <form onSubmit={handleBioUpdate}>
-                                    <div class="form-group">
-                                        <label>Bio</label>
-                                        <textarea
-                                            className="form-control"
-                                            value={bio}
-                                            onChange={({ target }) =>
-                                                setBio(target.value)
-                                            }
-                                            maxLength={300}
-                                        />
-                                    </div>
-                                    <div class="form-group">
-                                        <button
-                                            type="submit"
-                                            className="btn btn-outline-primary btn-sm"
-                                        >
-                                            Change bio
-                                        </button>{" "}
-                                        <button
-                                            className="btn btn-outline-primary btn-sm"
-                                            onClick={() => setShowForm(false)}
-                                        >
-                                            Cancel
-                                        </button>
-                                    </div>
-                                </form>
-                            )))}
                 </div>
                 <div className="col-10" style={{ marginTop: 0, paddingTop: 0 }}>
                     <div>

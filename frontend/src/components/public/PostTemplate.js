@@ -10,6 +10,9 @@ const PostTemplate = ({ post, user, cart, addItemToCart }) => {
         if (cart !== null) {
             checkForItem = props.cart.find(i => i._id === post._id);
         }
+        if (checkForItem) {
+            return;
+        }
         addItemToCart(post);
     };
 
