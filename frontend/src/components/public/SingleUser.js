@@ -5,17 +5,15 @@ import { Link, Redirect } from "react-router-dom";
 import Loading from "../Loading";
 import { updateBio } from "../../reducers/allUsersReducer";
 import { setNotification } from "../../reducers/notificationReducer";
-import reviewService from "../../services/review";
 import { removePost } from "../../reducers/postReducer";
 import Pagination from "./Pagination";
 import RenderAmount from "./RenderAmount";
 import UserPosts from "./SingleUser/UserPosts";
+import UserReviews from "./SingleUser/UserReviews";
 
 const SingleUser = props => {
     const [showForm, setShowForm] = useState(false);
     const [bio, setBio] = useState("");
-    const [amountInPage] = useState(4);
-    const [currentPage, setCurrentPage] = useState(1);
     const [page, setPage] = useState(1);
     useEffect(() => {
         if (props.users === null) {
@@ -44,44 +42,9 @@ const SingleUser = props => {
         );
     }
 
-    const lastReviewIndex = currentPage * amountInPage;
-    const firstReviewIndex = lastReviewIndex - amountInPage;
-    const currentReviews = user.reviewsPosted.slice(
-        firstReviewIndex,
-        lastReviewIndex
-    );
-    const paginate = pageNum => setCurrentPage(pageNum);
-
     if (user.username === "admin") {
         return <Redirect to="/users" />;
     }
-
-    const renderReviews = currentReviews.map(r => (
-        <div
-            className="box col-12 col-md-12 col-lg-12 mb-3"
-            style={{
-                marginTop: "0.25rem",
-                marginLeft: "0.25rem",
-                marginRight: "0.25rem"
-            }}
-            key={r._id}
-        >
-            <h6
-                className="d-flex position-relative"
-                style={{
-                    width: "100%",
-                    paddingTop: "0.5rem",
-                    paddingLeft: "0.5rem",
-                    color: "#2196f3"
-                }}
-            >
-                {r.title}
-            </h6>
-            <p style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
-                {r.description.slice(0, 50)}
-            </p>
-        </div>
-    ));
 
     const handleBioUpdate = event => {
         event.preventDefault();
@@ -231,18 +194,8 @@ const SingleUser = props => {
                             </div>
                         )}
                         {page === 2 && (
-                            <div className="mt-3">
-                                {renderReviews}
-                                <div
-                                    className="container"
-                                    style={{ paddingTop: "1rem" }}
-                                >
-                                    <Pagination
-                                        amountInPage={amountInPage}
-                                        totalPosts={user.reviewsPosted.length}
-                                        paginate={paginate}
-                                    />
-                                </div>
+                            <div className="mt-2">
+                                <UserReviews reviews={user.reviewsPosted} />
                             </div>
                         )}
                     </div>
