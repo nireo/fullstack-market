@@ -22,7 +22,6 @@ import SingleUser from "./components/public/SingleUser";
 import Cart from "./components/private/Cart";
 import Chat from "./components/public/Chat";
 import NotFound from "./components/public/NotFound";
-import Explore from "./components/public/Explore";
 import SingleMainPost from "./components/public/MainPost/SingleMainPost";
 import { initPosts, getPostWithId } from "./reducers/postReducer";
 import { initMainPosts } from "./reducers/mainReducer";
