@@ -58,6 +58,7 @@ const CommunityPost = props => {
             </td>
         </tr>
     ));
+
     return (
         <div className="container" style={{ marginTop: "1.5rem" }}>
             <div className="card shadow-sm">
