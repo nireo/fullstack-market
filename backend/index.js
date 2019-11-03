@@ -10,13 +10,16 @@ const {
   getUser,
   getUsersInChat
 } = require('./socket/users');
+const user = {
+  username: 'Benelov Bot',
+  id: '1'
+};
 
 io.on('connection', socket => {
   socket.on('join', data => {
     addUser(socket.id, data.id, data.username);
     socket.emit('message', {
-      username: 'Benelov Bot',
-      id: '1',
+      user,
       text: 'Welcome to the chat room.'
     });
     socket.broadcast.emit('chatData', { users: getUsersInChat });
@@ -31,7 +34,7 @@ io.on('connection', socket => {
     const user = removeUser(socket.id);
     if (user) {
       io.emit('message', {
-        user: 'Benelov Bot',
+        user,
         text: `${user.username} has left.`
       });
 

@@ -59,11 +59,13 @@ const Chat = props => {
         }
     };
 
+    console.log(messages);
+
     const renderMessages = messages.map(c => {
         return (
             <li
                 className="media"
-                key={c.message}
+                key={c.user.username}
                 style={{ paddingBottom: "1rem" }}
             >
                 <div className="media-body">
@@ -71,9 +73,11 @@ const Chat = props => {
                         className="media-heading"
                         style={{ marginBottom: "0rem" }}
                     >
-                        <Link to={`/profile/${c.userId}`}>@{c.from}</Link>
+                        <Link to={`/profile/${c.user.id}`}>
+                            @{c.user.username}
+                        </Link>
                     </h6>
-                    {c.content}
+                    {c.text}
                 </div>
             </li>
         );
@@ -84,18 +88,23 @@ const Chat = props => {
             <form onSubmit={sendChatMessage}>
                 <h3>Chat</h3>
                 <ul className="list-unstyled">{renderMessages}</ul>
-                <div className="form-group">
-                    <input
-                        className="form-control"
-                        type="text"
-                        value={message}
-                        onChange={handleChange}
-                    />
+                <div className="row">
+                    <div className="col-9">
+                        <div className="form-group">
+                            <input
+                                className="form-control"
+                                type="text"
+                                value={message}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </div>
+                    <div className="col-3">
+                        <button type="submit" className="btn btn-primary">
+                            Send Message
+                        </button>
+                    </div>
                 </div>
-
-                <button type="submit" className="btn btn-primary">
-                    Send Message
-                </button>
             </form>
         </div>
     );
