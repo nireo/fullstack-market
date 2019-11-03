@@ -218,6 +218,14 @@ const Information = ({ user, setNotification, updateBio }) => {
                                         >
                                             Change bio
                                         </button>
+                                        <button
+                                            className="button-basic button-pink"
+                                            onClick={() =>
+                                                setShowEditForm(false)
+                                            }
+                                        >
+                                            Hide form
+                                        </button>
                                     </div>
                                 </form>
                             )}
