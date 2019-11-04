@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import Modal from "../../Modal";
 
 const OwnedItems = ({ user }) => {
     const [viewContent, setViewContent] = useState(null);
     const [allItems, setAllItems] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (!loaded && allItems === []) {
@@ -16,6 +18,13 @@ const OwnedItems = ({ user }) => {
     if (!user) {
         return null;
     }
+
+    const handleClose = event => {
+        event.preventDefault();
+
+        setShowModal(false);
+        setViewContent(null);
+    };
 
     return (
         <div className="container">
@@ -60,7 +69,10 @@ const OwnedItems = ({ user }) => {
                             borderRadius: "5px",
                             marginBottom: "0.25rem"
                         }}
-                        onClick={() => setViewContent(i)}
+                        onClick={() => {
+                            setShowModal(true);
+                            setViewContent(i);
+                        }}
                     >
                         View Content
                     </button>
@@ -83,6 +95,14 @@ const OwnedItems = ({ user }) => {
                     )}
                 </div>
             </div>
+            {viewContent && (
+                <Modal show={showModal} handleClose={handleClose}>
+                    <div className="container">
+                        <h4>{viewContent.title}</h4>
+                        <p>{viewContent.content}</p>
+                    </div>
+                </Modal>
+            )}
         </div>
     );
 };
