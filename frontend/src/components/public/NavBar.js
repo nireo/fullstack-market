@@ -14,8 +14,9 @@ const NavBar = props => {
             );
         }
     }, [props]);
+
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link className="navbar-brand mb-0 h1" to="/">
                 <strong style={{ color: "#aa96da" }}>benevol</strong>
             </Link>
