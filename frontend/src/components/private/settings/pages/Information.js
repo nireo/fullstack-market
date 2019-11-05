@@ -116,7 +116,7 @@ const Information = ({ user, setNotification, updateBio }) => {
                             <div className="col-3">
                                 <button
                                     type="submit"
-                                    className="btn btn-primary"
+                                    className="tutorial-button button-blue"
                                 >
                                     Change
                                 </button>
@@ -141,7 +141,7 @@ const Information = ({ user, setNotification, updateBio }) => {
                             <div className="col-3">
                                 <button
                                     type="submit"
-                                    className="btn btn-primary"
+                                    className="tutorial-button button-blue"
                                 >
                                     Change
                                 </button>
@@ -166,7 +166,7 @@ const Information = ({ user, setNotification, updateBio }) => {
                             <div className="col-3">
                                 <button
                                     type="submit"
-                                    className="btn btn-primary"
+                                    className="tutorial-button button-blue"
                                 >
                                     Change
                                 </button>
@@ -193,7 +193,7 @@ const Information = ({ user, setNotification, updateBio }) => {
                         <div className="col-6">
                             {showEditForm === false ? (
                                 <button
-                                    className="button-basic button-pink"
+                                    className="tutorial-button button-pink"
                                     onClick={() => setShowEditForm(true)}
                                 >
                                     Edit
@@ -214,12 +214,12 @@ const Information = ({ user, setNotification, updateBio }) => {
                                     <div className="form-group">
                                         <button
                                             type="submit"
-                                            className="button-basic button-bluish"
+                                            className="tutorial-button button-bluish"
                                         >
                                             Change bio
                                         </button>
                                         <button
-                                            className="button-basic button-pink"
+                                            className="tutorial-button button-pink"
                                             onClick={() =>
                                                 setShowEditForm(false)
                                             }

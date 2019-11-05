@@ -25,6 +25,18 @@ const CommunityPost = props => {
         return <Loading />;
     }
 
+    if (props.posts.length === 0) {
+        return (
+            <div className="container">
+                <h2 className="mt-2">No posts found</h2>
+                <p>
+                    No posts have been found. Please look at the main tab for
+                    more posts.
+                </p>
+            </div>
+        );
+    }
+
     const handleRemove = id => {
         if (window.confirm("Are you sure you want to delete ID: " + id)) {
             props.removePost(id);

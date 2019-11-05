@@ -3,6 +3,14 @@ body {
     font-weight: 300;
 }
 
+::selection {
+    background: #cca8e9;
+}
+
+::-moz-selection {
+    background: #cca8e9;
+}
+
 h1,
 h2,
 h3,
