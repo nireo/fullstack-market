@@ -12,6 +12,7 @@ const loginRoutes = require('./components/login/loginRoutes');
 const postRoutes = require('./components/post/postRoutes');
 const reviewRoutes = require('./components/review/reviewRoutes');
 const mainController = require('./components/mainPost/mainPostRoutes');
+const messageRouters = require('./components/message/messageRoutes');
 
 mongoose.set('useFindAndModify', false);
 
@@ -35,6 +36,7 @@ app.use('/api/login', loginRoutes);
 app.use('/api/review', reviewRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/main', mainController);
+app.use('/api/messages', messageRouters);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);
