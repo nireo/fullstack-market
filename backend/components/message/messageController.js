@@ -27,6 +27,29 @@ exports.getMessages = async (req, res, next) => {
   }
 };
 
+exports.newMessage = async (req, res, next) => {
+  const token = getToken(req);
+  const { content } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const newMessage = new messageModel({
+      content,
+      toUser: decodedToken.id
+    });
+
+    const saved = await newMessage.save();
+    return res.json(Saved);
+  } catch (e) {
+    next(e);
+  }
+};
+
 exports.deleteMessage = async (req, res, next) => {
   const token = getToken(req);
   try {

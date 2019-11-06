@@ -5,7 +5,7 @@ const messageController = require('./messageController');
 router.get('/', messageController.getMessages);
 
 // send message
-router.post('/:id');
+router.post('/:id', messageController.newMessage);
 
 // delete message
 router.delete('/:id', messageController.deleteMessage);

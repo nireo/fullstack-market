@@ -24,3 +24,5 @@ messageSchema.set('toJSON', {
     delete object.__v;
   }
 });
+
+module.exports = mongoose.model('Message', messageSchema);
