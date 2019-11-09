@@ -66,10 +66,12 @@ exports.createPost = async (req, res, next) => {
     }
 
     const user = await userModel.findById(decodedToken.id);
+
+    // price.toFixed is there so that the user can get a accurate representation of the price
     const newPost = new postModel({
       title,
       description,
-      price,
+      price: price.toFixed(2),
       posted: Date.now(),
       postedBy: decodedToken.id,
       content

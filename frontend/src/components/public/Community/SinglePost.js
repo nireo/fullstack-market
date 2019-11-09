@@ -125,46 +125,53 @@ const SinglePost = props => {
             </div>
             <h3 style={{ paddingTop: "2rem" }}>Reviews</h3>
             {props.user &&
-                (showReviewForm === false ? (
-                    <button
-                        onClick={() => setShowReviewForm(true)}
-                        className="btn btn-outline-primary"
-                    >
-                        Create review
-                    </button>
-                ) : (
-                    <div>
-                        <ReviewForm
-                            stars={stars}
-                            setStars={setStars}
-                            content={content}
-                            setContent={setContent}
-                            title={title}
-                            setTitle={setTitle}
-                            addReview={addReview}
-                            recommended={recommended}
-                            setRecommended={setRecommended}
-                        />
+                (userOwns &&
+                    (showReviewForm === false ? (
                         <button
-                            className="btn btn-outline-danger mt-2"
-                            onClick={() => setShowReviewForm(false)}
+                            onClick={() => setShowReviewForm(true)}
+                            className="btn btn-outline-primary"
                         >
-                            Hide review form
+                            Create review
                         </button>
-                    </div>
-                ))}
+                    ) : (
+                        <div>
+                            <ReviewForm
+                                stars={stars}
+                                setStars={setStars}
+                                content={content}
+                                setContent={setContent}
+                                title={title}
+                                setTitle={setTitle}
+                                addReview={addReview}
+                                recommended={recommended}
+                                setRecommended={setRecommended}
+                            />
+                            <button
+                                className="btn btn-outline-danger mt-2"
+                                onClick={() => setShowReviewForm(false)}
+                            >
+                                Hide review form
+                            </button>
+                        </div>
+                    )))}
             <hr />
             <div style={{ paddingTop: "2rem" }}>
-                {currentReviews.map(r => (
-                    <Review review={r} />
-                ))}
+                {props.post.reviews.length < 1 ? (
+                    <p>No reviews posted.</p>
+                ) : (
+                    currentReviews.map(r => <Review review={r} />)
+                )}
             </div>
             <div class="container" style={{ paddingTop: "1rem" }}>
-                <Pagination
-                    amountInPage={amountInPage}
-                    totalPosts={props.post.reviews.length}
-                    paginate={paginate}
-                />
+                {props.post.reviews.length < 1 ? (
+                    <div></div>
+                ) : (
+                    <Pagination
+                        amountInPage={amountInPage}
+                        totalPosts={props.post.reviews.length}
+                        paginate={paginate}
+                    />
+                )}
             </div>
         </div>
     );
