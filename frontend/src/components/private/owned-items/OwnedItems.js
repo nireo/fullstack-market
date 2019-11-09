@@ -78,23 +78,6 @@ const OwnedItems = ({ user }) => {
                     </button>
                 </div>
             ))}
-            <div className="mt-5">
-                <div className="text-center">
-                    {!viewContent ? (
-                        <p>No content selected</p>
-                    ) : (
-                        <div>
-                            <p>{viewContent.content}</p>
-                            <button
-                                className="btn btn-outline-danger mt-2"
-                                onClick={() => setViewContent(null)}
-                            >
-                                Hide content
-                            </button>
-                        </div>
-                    )}
-                </div>
-            </div>
             {viewContent && (
                 <Modal show={showModal} handleClose={handleClose}>
                     <div className="container">

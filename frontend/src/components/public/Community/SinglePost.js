@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setNotification } from "../../../reducers/notificationReducer";
@@ -16,7 +16,22 @@ const SinglePost = props => {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [amountInPage] = useState(3);
+    const [userOwns, setUserOwns] = useState(false);
+    const [checked, setCheck] = useState(false);
 
+    useEffect(() => {
+        if (props.post !== null) {
+            if (userOwns === false && checked === false) {
+                const ownedItem = props.user.communityItemsBought.find(
+                    p => p._id === props.post._id
+                );
+                setCheck(true);
+                if (ownedItem) {
+                    setUserOwns(true);
+                }
+            }
+        }
+    }, []);
     if (props.post === null) {
         return <Redirect to="/community" />;
     }
@@ -68,6 +83,7 @@ const SinglePost = props => {
                     <Link onClick={() => addToCart(props.post)}>
                         Add to cart
                     </Link>
+                    {userOwns && <p>You own this item</p>}
                 </div>
                 {!props.type && (
                     <div className="col">

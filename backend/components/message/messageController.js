@@ -40,7 +40,8 @@ exports.newMessage = async (req, res, next) => {
 
     const newMessage = new messageModel({
       content,
-      toUser: decodedToken.id
+      toUser: decodedToken.id,
+      createdAt: new Date()
     });
 
     const saved = await newMessage.save();
