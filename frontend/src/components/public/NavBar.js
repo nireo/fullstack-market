@@ -179,9 +179,33 @@ const NavBar = props => {
                                 data-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false"
+                                id="messageDropdown"
+                            >
+                                <i class="fas fa-bell"></i>
+                            </Link>
+                            <div
+                                className="dropdown-menu"
+                                aria-labelledby="messageDropdown"
+                            >
+                                <p className="dropdown-item">
+                                    0 new notifications
+                                </p>
+                                <div className="dropdown-divider"></div>
+                                <Link className="dropdown-item" to="/messages">
+                                    Message panel
+                                </Link>
+                            </div>
+                        </li>
+                        <li className="nav-item dropdown">
+                            <Link
+                                className="nav-link dropdown-toggle"
+                                role="button"
+                                data-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
                                 id="cartDropdown"
                             >
-                                <i className="fas fa-cart-plus" /> Cart
+                                <i className="fas fa-cart-plus" />
                             </Link>
                             <div
                                 className="dropdown-menu"
