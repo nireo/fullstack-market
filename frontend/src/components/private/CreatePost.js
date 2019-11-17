@@ -4,6 +4,7 @@ import { createPost } from "../../reducers/postReducer";
 import { setNotification } from "../../reducers/notificationReducer";
 import PostForm from "./PostForm";
 import CreatePostContent from "./CreatePostContent";
+import Finished from "./Finished";
 
 const CreatePost = ({ createPost, setNotification }) => {
     const [title, setTitle] = useState("");
@@ -25,11 +26,12 @@ const CreatePost = ({ createPost, setNotification }) => {
     return (
         <div className="container">
             <h2 style={{ marginTop: "1rem" }}>
-                Step {step}:{" "}
-                {step === 1 ? "set basic information" : "add your item"}
+                Step {step}: {step === 1 && "set basic information"}
+                {step === 2 && "add content"}
+                {step === 3 && "finished"}
             </h2>
             <hr />
-            {step === 1 ? (
+            {step === 1 && (
                 <PostForm
                     title={title}
                     setTitle={setTitle}
@@ -40,17 +42,16 @@ const CreatePost = ({ createPost, setNotification }) => {
                     handleCreation={handleCreation}
                     setStep={setStep}
                 />
-            ) : (
+            )}
+            {step === 2 && (
                 <CreatePostContent
                     setStep={setStep}
                     createPost={handleCreation}
                 />
             )}
+            {step === 3 && <Finished name={title} />}
         </div>
     );
 };
 
-export default connect(
-    null,
-    { createPost, setNotification }
-)(CreatePost);
+export default connect(null, { createPost, setNotification })(CreatePost);

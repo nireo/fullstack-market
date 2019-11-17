@@ -9,7 +9,7 @@ const Notification = props => {
 
   if (notification.type === "success") {
     return (
-      <div style={{ zIndex: 1 }} className="alert alert-success">
+      <div style={{ position: 'absolute', width: '100%' }} className="alert alert-success">
         {notification.content}
       </div>
     );
@@ -17,7 +17,7 @@ const Notification = props => {
 
   if (notification.type === "error") {
     return (
-      <div style={{ zIndex: 1 }} className="alert alert-danger">
+      <div style={{ position: 'absolute', width: '100%' }} className="alert alert-danger">
         {notification.content}
       </div>
     );

@@ -31,6 +31,7 @@ const CreatePostContent = ({ setStep, createPost }) => {
                     <button
                         type="submit"
                         className="tutorial-button button-blue mt-3 mr-2"
+                        onClick={() => setStep(3)}
                     >
                         Create
                     </button>
