@@ -514,3 +514,18 @@ h6 {
     color: white;
     background-color: #2196f3;
 }
+
+.format-toolbar {
+    display: flex;
+    border-bottom: solid 1.7px rgba(199, 198, 255, 0.15);
+    padding: 10px 0;
+    margin: 0 0 10px 0;
+}
+
+.tooltip-icon-button {
+    border: 0;
+}
+
+.tooltip-icon-button .active {
+    background-color: #7a7a7a;
+}
