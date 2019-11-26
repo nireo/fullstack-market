@@ -13,7 +13,7 @@ const OwnedItems = ({ user }) => {
             setLoaded(true);
             setAllItems(user.communityItemsBought.concat(user.mainItemsBought));
         }
-    }, [user]);
+    }, [user, allItems, loaded]);
 
     if (!user) {
         return null;
@@ -96,7 +96,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    null
-)(OwnedItems);
+export default connect(mapStateToProps, null)(OwnedItems);

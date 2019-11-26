@@ -31,16 +31,16 @@ const SinglePost = props => {
                 }
             }
         }
-    }, []);
+    }, [checked, props, userOwns]);
     if (props.post === null) {
         return <Redirect to="/community" />;
     }
 
-    const clearFields = () => {
-        setStars(0.0);
-        setContent("");
-        setTitle("");
-    };
+    // const clearFields = () => {
+    // setStars(0.0);
+    // setContent("");
+    // setTitle("");
+    // };
 
     const addToCart = toAdd => {
         let checkForItem;
@@ -54,16 +54,16 @@ const SinglePost = props => {
         props.setNotification("Item added to cart", "success", 2);
     };
 
-    const addReviewToPost = review => {
-        try {
-            props.setNotification("Review has been posted", "success", 2);
-            props.addReview(props.post._id, review);
-            clearFields();
-        } catch {
-            props.setNotification("Something went wrong", "error", 2);
-            clearFields();
-        }
-    };
+    // const addReviewToPost = review => {
+    // try {
+    // props.setNotification("Review has been posted", "success", 2);
+    // props.addReview(props.post._id, review);
+    // clearFields();
+    // } catch {
+    // props.setNotification("Something went wrong", "error", 2);
+    // clearFields();
+    // }
+    // };
 
     const lastPostIndex = currentPage * amountInPage;
     const firstPostIndex = lastPostIndex - amountInPage;
@@ -125,35 +125,35 @@ const SinglePost = props => {
             </div>
             <h3 style={{ paddingTop: "2rem" }}>Reviews</h3>
             {props.user &&
-                (userOwns &&
-                    (showReviewForm === false ? (
+                userOwns &&
+                (showReviewForm === false ? (
+                    <button
+                        onClick={() => setShowReviewForm(true)}
+                        className="btn btn-outline-primary"
+                    >
+                        Create review
+                    </button>
+                ) : (
+                    <div>
+                        <ReviewForm
+                            stars={stars}
+                            setStars={setStars}
+                            content={content}
+                            setContent={setContent}
+                            title={title}
+                            setTitle={setTitle}
+                            addReview={addReview}
+                            recommended={recommended}
+                            setRecommended={setRecommended}
+                        />
                         <button
-                            onClick={() => setShowReviewForm(true)}
-                            className="btn btn-outline-primary"
+                            className="btn btn-outline-danger mt-2"
+                            onClick={() => setShowReviewForm(false)}
                         >
-                            Create review
+                            Hide review form
                         </button>
-                    ) : (
-                        <div>
-                            <ReviewForm
-                                stars={stars}
-                                setStars={setStars}
-                                content={content}
-                                setContent={setContent}
-                                title={title}
-                                setTitle={setTitle}
-                                addReview={addReview}
-                                recommended={recommended}
-                                setRecommended={setRecommended}
-                            />
-                            <button
-                                className="btn btn-outline-danger mt-2"
-                                onClick={() => setShowReviewForm(false)}
-                            >
-                                Hide review form
-                            </button>
-                        </div>
-                    )))}
+                    </div>
+                ))}
             <hr />
             <div style={{ paddingTop: "2rem" }}>
                 {props.post.reviews.length < 1 ? (
@@ -184,7 +184,8 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { setNotification, addItemToCart, addReview }
-)(SinglePost);
+export default connect(mapStateToProps, {
+    setNotification,
+    addItemToCart,
+    addReview
+})(SinglePost);

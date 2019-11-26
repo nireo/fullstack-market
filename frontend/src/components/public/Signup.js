@@ -20,7 +20,7 @@ const Signup = props => {
         ) {
             setAllFields(true);
         }
-    }, []);
+    }, [allFields, confirm, email, password, username]);
 
     if (props.user !== null) {
         return null;
@@ -94,14 +94,14 @@ const Signup = props => {
                         onChange={handleChange}
                     />
                     {startedPassword &&
-                        (!/^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/.test(
+                        !/^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$/.test(
                             password
                         ) && (
                             <small className="form-text ">
                                 Minimum eight characters, at least one letter,
                                 one number and one special character
                             </small>
-                        ))}
+                        )}
                 </div>
                 <div className="form-group animated-text-left">
                     <input
@@ -137,7 +137,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    null
-)(Signup);
+export default connect(mapStateToProps, null)(Signup);

@@ -15,7 +15,7 @@ const MainPosts = props => {
         if (props.mainPost === null) {
             props.initMainPosts(String(currentPage));
         }
-    }, [props]);
+    }, [props, currentPage]);
 
     if (props.mainPost === null) {
         return <Loading />;
@@ -108,7 +108,8 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { initMainPosts, addItemToCart, setNotification }
-)(MainPosts);
+export default connect(mapStateToProps, {
+    initMainPosts,
+    addItemToCart,
+    setNotification
+})(MainPosts);

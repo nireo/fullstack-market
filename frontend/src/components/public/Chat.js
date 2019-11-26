@@ -28,7 +28,7 @@ const Chat = props => {
                 id: `${Math.floor(Math.random() * 100)}`
             });
         }
-    }, [socket, props]);
+    }, [props]);
 
     useEffect(() => {
         socket.on("message", message => {
@@ -117,7 +117,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { createMessage }
-)(Chat);
+export default connect(mapStateToProps, { createMessage })(Chat);

@@ -6,7 +6,6 @@ import Loading from "../Loading";
 import { updateBio } from "../../reducers/allUsersReducer";
 import { setNotification } from "../../reducers/notificationReducer";
 import { removePost } from "../../reducers/postReducer";
-import Pagination from "./Pagination";
 import RenderAmount from "./RenderAmount";
 import UserPosts from "./SingleUser/UserPosts";
 import UserReviews from "./SingleUser/UserReviews";
@@ -159,7 +158,9 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { initUsers, updateBio, setNotification, removePost }
-)(SingleUser);
+export default connect(mapStateToProps, {
+    initUsers,
+    updateBio,
+    setNotification,
+    removePost
+})(SingleUser);

@@ -20,7 +20,7 @@ const CommunityPost = props => {
             props.initPosts(String(currentPage));
             setPagesWithContent(pagesWithContent.concat(currentPage));
         }
-    }, [props]);
+    }, [props, currentPage, pagesWithContent]);
     if (props.posts === null) {
         return <Loading />;
     }
@@ -121,7 +121,6 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { initPosts, removePost }
-)(CommunityPost);
+export default connect(mapStateToProps, { initPosts, removePost })(
+    CommunityPost
+);
