@@ -183,6 +183,15 @@ h6 {
 .how-it-works-animation {
     animation-fill-mode: both;
     animation-name: straightLeft;
+    animation-delay: 2s;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    backface-visibility: hidden;
+}
+
+.footer-animation {
+    animation-fill-mode: both;
+    animation-name: fadeIn;
     animation-delay: 3s;
     animation-duration: 1s;
     animation-timing-function: ease-out;
