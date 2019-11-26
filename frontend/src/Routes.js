@@ -35,6 +35,7 @@ import SettingsMain from "./components/private/settings/SettingsMain";
 import ShowContent from "./components/private/owned-items/ShowContent";
 import Dashboard from "./components/private/dashboard/Dashboard";
 import Search from "./components/public/search/Search";
+import Contact from "./components/Contact";
 
 const Routes = props => {
     const findPostWithId = id => {
@@ -120,6 +121,7 @@ const Routes = props => {
                         )
                     }
                 />
+                <Route exact path="/contact" render={() => <Contact />} />
                 <Route
                     exact
                     path="/official/:id"
@@ -227,7 +229,9 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { initMainPosts, initPosts, initUsers, getPostWithId }
-)(Routes);
+export default connect(mapStateToProps, {
+    initMainPosts,
+    initPosts,
+    initUsers,
+    getPostWithId
+})(Routes);
