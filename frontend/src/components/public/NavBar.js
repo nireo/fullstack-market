@@ -239,7 +239,7 @@ const NavBar = props => {
                                     onClick={() => props.logOut()}
                                 >
                                     <i className="fas fa-sign-out-alt" />
-                                    Sign out
+                                    {"  "}Sign out
                                 </Link>
                             </li>
                         </ul>
