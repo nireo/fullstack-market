@@ -6,6 +6,7 @@ import axios from "axios";
 const Contact = ({ setNotification }) => {
     const [name, setName] = useState("");
     const [content, setContent] = useState("");
+    const [sent, setSent] = useState(false);
 
     const createMessage = event => {
         event.preventDefault();
@@ -22,6 +23,7 @@ const Contact = ({ setNotification }) => {
                         "success",
                         2
                     );
+                    setSent(true);
                 })
                 .catch(() => {
                     setNotification("Error sending message", "error", 2);
@@ -53,9 +55,21 @@ const Contact = ({ setNotification }) => {
                         rows="7"
                     />
                 </div>
-                <button type="submit" className="tutorial-button button-blue">
-                    send
-                </button>
+                {sent === true && (
+                    <button
+                        type="submit"
+                        className="tutorial-button button-blue"
+                        disabled="true"
+                    ></button>
+                )}
+                {sent === false && (
+                    <button
+                        type="submit"
+                        className="tutorial-button button-blue"
+                    >
+                        send
+                    </button>
+                )}
             </form>
         </div>
     );

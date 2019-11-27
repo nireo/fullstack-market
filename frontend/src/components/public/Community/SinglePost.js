@@ -20,7 +20,7 @@ const SinglePost = props => {
     const [checked, setCheck] = useState(false);
 
     useEffect(() => {
-        if (props.post !== null) {
+        if (props.post !== null && props.user !== null) {
             if (userOwns === false && checked === false) {
                 const ownedItem = props.user.communityItemsBought.find(
                     p => p._id === props.post._id
