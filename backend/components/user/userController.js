@@ -173,25 +173,6 @@ exports.buyCommunityItems = async (req, res, next) => {
   }
 };
 
-exports.updateBio = async (req, res, next) => {
-  const token = getToken(req);
-  const { bio } = req.body;
-  try {
-    const decodedToken = jwt.verify(token, config.SECRET);
-    if (!token || !decodedToken) {
-      return res.status(401).json({
-        error: 'invalid token'
-      });
-    }
-    const user = await userModel.findById(decodedToken.id);
-    user.personalShop.about = bio;
-    const saved = await user.save();
-    return res.json(saved);
-  } catch (e) {
-    next(e);
-  }
-};
-
 exports.addItemToWishlist = async (req, res, next) => {
   const token = getToken(req);
   const { postId } = req.body;
