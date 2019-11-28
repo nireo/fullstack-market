@@ -46,3 +46,31 @@ exports.getMessages = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.removeContactMessage = async (req, res, next) => {
+  const token = getToken(req);
+  const { id } = req.params;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const user = await userModel.findById(decodedToken.id);
+    if (!user) {
+      return res.status(404);
+    }
+
+    if (user === 'admin') {
+      await contactModel.findByIdAndRemove(id);
+      return res.status(204).end();
+    } else {
+      // since admin can only delete
+      return res.status(403);
+    }
+  } catch (e) {
+    next(e);
+  }
+};
