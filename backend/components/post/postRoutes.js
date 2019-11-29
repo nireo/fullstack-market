@@ -2,7 +2,8 @@ const router = require('express').Router();
 const postController = require('./postController');
 
 // Public routes
-router.get('/', postController.getAllPosts);
+router.get('/', postController.searchForPosts);
+router.get('/:page', postController.getAllPosts);
 router.get('/id/:id', postController.getPostById);
 router.get('/amount', postController.getAmountOfPosts);
 

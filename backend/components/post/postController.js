@@ -4,9 +4,8 @@ const userModel = require('../user/userModel');
 const { getToken } = require('../../utils/helper');
 const config = require('../../utils/config');
 
-exports.getAllPosts = async (req, res, next) => {
+exports.searchForPosts = async (req, res, next) => {
   try {
-    // first check if there is a search
     if (req.query.search) {
       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
@@ -16,34 +15,55 @@ exports.getAllPosts = async (req, res, next) => {
         return res.json(results);
       });
     } else {
-      // then handle page stuff
-
-      // convert string to number
-      const page = +req.params.page;
-      if (page === 1) {
-        await postModel
-          .find({})
-          .populate('postedBy')
-          .populate('reviews')
-          .limit(3)
-          .exec((err, results) => {
+      // if search is not included still send 15 of the most recent postings.
+      await postModel
+        .find({})
+        .limit(20)
+        .exec(
+          (err,
+          results => {
             if (err) return res.status(500);
 
             return res.json(results);
-          });
-      } else {
-        await postModel
-          .find({})
-          .populate('postedBy')
-          .populate('reviews')
-          .skip(3 * page - 3)
-          .limit(3 * page)
-          .exec((err, results) => {
-            if (err) return res.status(500);
+          })
+        );
+    }
+  } catch (e) {
+    next(e);
+  }
+};
 
-            return res.json(results);
-          });
-      }
+exports.getAllPosts = async (req, res, next) => {
+  try {
+    // first check if there is a search
+
+    // then handle page stuff
+
+    // convert string to number
+    const page = +req.params.page;
+    if (page === 1) {
+      await postModel
+        .find({})
+        .populate('postedBy')
+        .populate('reviews')
+        .limit(3)
+        .exec((err, results) => {
+          if (err) return res.status(500);
+
+          return res.json(results);
+        });
+    } else {
+      await postModel
+        .find({})
+        .populate('postedBy')
+        .populate('reviews')
+        .skip(3 * page - 3)
+        .limit(3 * page)
+        .exec((err, results) => {
+          if (err) return res.status(500);
+
+          return res.json(results);
+        });
     }
   } catch (e) {
     next(e);
