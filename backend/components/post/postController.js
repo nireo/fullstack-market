@@ -6,32 +6,44 @@ const config = require('../../utils/config');
 
 exports.getAllPosts = async (req, res, next) => {
   try {
-    // convert string to number
-    const page = +req.params.page;
+    // first check if there is a search
+    if (req.query.search) {
+      const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
-    if (page === 1) {
-      await postModel
-        .find({})
-        .populate('postedBy')
-        .populate('reviews')
-        .limit(3)
-        .exec((err, results) => {
-          if (err) return res.status(500);
+      await postModel.find({ title: regex }, (err, results) => {
+        if (err) return res.status(500);
 
-          return res.json(results);
-        });
+        return res.json(results);
+      });
     } else {
-      await postModel
-        .find({})
-        .populate('postedBy')
-        .populate('reviews')
-        .skip(3 * page - 3)
-        .limit(3 * page)
-        .exec((err, results) => {
-          if (err) return res.status(500);
+      // then handle page stuff
 
-          return res.json(results);
-        });
+      // convert string to number
+      const page = +req.params.page;
+      if (page === 1) {
+        await postModel
+          .find({})
+          .populate('postedBy')
+          .populate('reviews')
+          .limit(3)
+          .exec((err, results) => {
+            if (err) return res.status(500);
+
+            return res.json(results);
+          });
+      } else {
+        await postModel
+          .find({})
+          .populate('postedBy')
+          .populate('reviews')
+          .skip(3 * page - 3)
+          .limit(3 * page)
+          .exec((err, results) => {
+            if (err) return res.status(500);
+
+            return res.json(results);
+          });
+      }
     }
   } catch (e) {
     next(e);
@@ -154,21 +166,6 @@ exports.getAmountOfPosts = async (req, res, next) => {
   }
 };
 
-exports.searchForPost = async (req, res, next) => {
-  const { search } = req.body;
-  try {
-    await postModel.find(
-      {
-        $text: { $search: search }
-      },
-      (err, results) => {
-        if (err) return res.status(500);
-
-        return res.json(results);
-      }
-    );
-  } catch (e) {
-    res.status(500);
-    next(e);
-  }
-};
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}
