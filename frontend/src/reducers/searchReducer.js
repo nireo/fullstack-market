@@ -16,7 +16,7 @@ const reducer = (state = [], action) => {
 
 export const searchForItem = search => {
     return async dispatch => {
-        const results = await post.searchForItem(search);
+        const results = await post.searchPosts(search);
         dispatch({
             type: "SET_SEARCH",
             data: results

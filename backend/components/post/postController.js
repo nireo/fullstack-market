@@ -98,12 +98,16 @@ exports.createPost = async (req, res, next) => {
     }
 
     const user = await userModel.findById(decodedToken.id);
+    if (!user) {
+      return res.status(404);
+    }
 
+    const formattedPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2);
     // price.toFixed is there so that the user can get a accurate representation of the price
     const newPost = new postModel({
       title,
       description,
-      price: price.toFixed(2),
+      price: formattedPrice,
       posted: Date.now(),
       postedBy: decodedToken.id,
       content
@@ -174,18 +178,14 @@ exports.updatePost = async (req, res, next) => {
 
 exports.getAmountOfPosts = async (req, res, next) => {
   try {
-    await postModel.countDocuments({}, (err, results) => {
+    await postModel.countDocuments().exec((err, count) => {
       if (err) return res.status(500);
 
-      return res.json({
-        amount: results
-      });
+      return res.json({ count });
     });
   } catch (e) {
     next(e);
   }
 };
 
-function escapeRegex(text) {
-  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
-}
+const escapeRegex = text => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');

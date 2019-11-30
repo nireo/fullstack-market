@@ -45,15 +45,10 @@ const getItemLengths = async () => {
     return response.data;
 };
 
-const searchForItem = async search => {
-    // goes to /search/a since for some reason it doesn't work when
-    // its only /search
-    const object = {
-        search: search
-    };
-    console.log(search);
-    console.log(object);
-    const response = await axios.post(`${baseUrl}/search/a`, object);
+const searchPosts = async search => {
+    // this could be integrated into the normal query, but
+    // it's more convenient this way
+    const response = await axios.get(`${baseUrl}/?search=${search}`);
     return response.data;
 };
 
@@ -65,5 +60,5 @@ export default {
     updatePost,
     getPostById,
     getItemLengths,
-    searchForItem
+    searchPosts
 };
