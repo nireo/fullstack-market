@@ -63,6 +63,11 @@ const updateBio = async object => {
     return response.data;
 };
 
+const searchUsers = async search => {
+    const response = await axios.get(`${baseUrl}/?search=${search}`);
+    return response.data;
+};
+
 export default {
     makeNewUser,
     setToken,
@@ -73,5 +78,6 @@ export default {
     buyOfficialItems,
     updateBio,
     getUserById,
-    getConfig
+    getConfig,
+    searchUsers
 };

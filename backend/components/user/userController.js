@@ -7,15 +7,25 @@ const postModel = require('../post/postModel');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
-    await userModel
-      .find({})
-      .populate('reviewsPosted')
-      .populate('posts')
-      .exec((err, results) => {
+    if (req.query.search) {
+      const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+      await userModel.find({ title: regex }, (err, results) => {
         if (err) return res.status(500);
 
         return res.json(results);
       });
+    } else {
+      await userModel
+        .find({})
+        .populate('reviewsPosted')
+        .populate('posts')
+        .exec((err, results) => {
+          if (err) return res.status(500);
+
+          return res.json(results);
+        });
+    }
   } catch (e) {
     next(e);
   }
@@ -258,3 +268,5 @@ exports.searchForUser = async (req, res, next) => {
     next();
   }
 };
+
+const escapeRegex = text => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
