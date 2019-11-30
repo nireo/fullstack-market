@@ -5,6 +5,7 @@ const postModel = require('../post/postModel');
 const mainModel = require('../mainPost/mainPostModel');
 const config = require('../../utils/config');
 const { getToken } = require('../../utils/helper');
+const messageModel = require('../message/messageModel');
 
 exports.addReviewToMain = async (req, res, next) => {
   const { stars, title, description, recommended } = req.body;
@@ -75,8 +76,15 @@ exports.addReviewToPost = async (req, res, next) => {
         error: 'invalid token'
       });
     }
+
+    // find user & post
     const post = await postModel.findById(req.params.id);
     const user = await userModel.findById(decodedToken.id);
+    if (!user || !post) {
+      return res.status(404);
+    }
+
+    // create review
     const newReview = new reviewModel({
       stars,
       title,
@@ -88,6 +96,20 @@ exports.addReviewToPost = async (req, res, next) => {
     post.reviews = post.reviews.concat(savedReview._id);
     user.reviewsPosted = user.reviewsPosted.concat(savedReview._id);
     await user.save();
+
+    // create notification to inform seller about the review
+    const newNotification = new messageModel({
+      toUser: post.postedBy,
+      createdAt: new Date(),
+      content: `Your posting '${post.title}' has gotten a new review. Posted by '${user.username}'.`
+    });
+
+    // save the notification
+    await newNotification.save();
+
+    // send the post back so redux can properly change the store
+    // to feature the post with the review. Might be more efficient
+    // not to send the whole post, but it's ok for now.
     await post.save((err, postPopulate) => {
       if (err) return res.status(500);
       postPopulate
