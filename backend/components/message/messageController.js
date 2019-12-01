@@ -13,15 +13,11 @@ exports.getMessages = async (req, res, next) => {
       });
     }
 
-    await messageModel.find(
-      { toUser: decodedToken.id },
-      (err,
-      results => {
-        if (err) return res.status(500);
+    await messageModel.find({ toUser: decodedToken.id }, (err, results) => {
+      if (err) return res.status(500);
 
-        return res.json(results);
-      })
-    );
+      return res.json(results);
+    });
   } catch (e) {
     next(e);
   }

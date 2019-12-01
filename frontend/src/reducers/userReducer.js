@@ -14,7 +14,8 @@ const reducer = (state = null, action) => {
 
 export const handleLogin = (credentials, rememberMe) => {
   return async dispatch => {
-    const user = await loginService.login(credentials);
+    let user = await loginService.login(credentials);
+    user.user.token = user.token;
     if (rememberMe) {
       window.localStorage.setItem('user', JSON.stringify(user));
     }
