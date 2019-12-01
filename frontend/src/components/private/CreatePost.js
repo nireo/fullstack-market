@@ -1,57 +1,54 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { createPost } from "../../reducers/postReducer";
-import { setNotification } from "../../reducers/notificationReducer";
-import PostForm from "./PostForm";
-import CreatePostContent from "./CreatePostContent";
-import Finished from "./Finished";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { createPost } from '../../reducers/postReducer';
+import { setNotification } from '../../reducers/notificationReducer';
+import PostForm from './PostForm';
+import CreatePostContent from './CreatePostContent';
+import Finished from './Finished';
 
 const CreatePost = ({ createPost, setNotification }) => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
-    const [step, setStep] = useState(1);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState(0);
+  const [step, setStep] = useState(1);
 
-    const handleCreation = content => {
-        const newObject = {
-            title,
-            description,
-            price,
-            content
-        };
-        createPost(newObject);
-        setNotification("Post added", "success", 2);
+  const handleCreation = content => {
+    const newObject = {
+      title,
+      description,
+      price,
+      content
     };
+    createPost(newObject);
+    setNotification('Post added', 'success', 2);
+  };
 
-    return (
-        <div className="container">
-            <h2 style={{ marginTop: "1rem" }}>
-                Step {step}: {step === 1 && "set basic information"}
-                {step === 2 && "add content"}
-                {step === 3 && "finished"}
-            </h2>
-            <hr />
-            {step === 1 && (
-                <PostForm
-                    title={title}
-                    setTitle={setTitle}
-                    description={description}
-                    setDescription={setDescription}
-                    price={price}
-                    setPrice={setPrice}
-                    handleCreation={handleCreation}
-                    setStep={setStep}
-                />
-            )}
-            {step === 2 && (
-                <CreatePostContent
-                    setStep={setStep}
-                    createPost={handleCreation}
-                />
-            )}
-            {step === 3 && <Finished name={title} />}
-        </div>
-    );
+  return (
+    <div className="container">
+      <h2 style={{ marginTop: '1rem' }}>
+        Step {step}: {step === 1 && 'set basic information'}
+        {step === 2 && 'add content'}
+        {step === 3 && 'finished'}
+      </h2>
+      <hr />
+      {step === 1 && (
+        <PostForm
+          title={title}
+          setTitle={setTitle}
+          description={description}
+          setDescription={setDescription}
+          price={price}
+          setPrice={setPrice}
+          handleCreation={handleCreation}
+          setStep={setStep}
+        />
+      )}
+      {step === 2 && (
+        <CreatePostContent setStep={setStep} createPost={handleCreation} />
+      )}
+      {step === 3 && <Finished name={title} />}
+    </div>
+  );
 };
 
 export default connect(null, { createPost, setNotification })(CreatePost);
