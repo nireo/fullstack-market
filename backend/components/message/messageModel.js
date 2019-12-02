@@ -17,6 +17,10 @@ const messageSchema = new Schema({
   createdAt: {
     type: String,
     required: true
+  },
+  title: {
+    type: String,
+    required: true
   }
 });
 
