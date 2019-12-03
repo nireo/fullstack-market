@@ -18,15 +18,14 @@ exports.searchForPosts = async (req, res, next) => {
       // if search is not included still send 15 of the most recent postings.
       await postModel
         .find({})
+        .populate('postedBy')
+        .populate('reviews')
         .limit(20)
-        .exec(
-          (err,
-          results => {
-            if (err) return res.status(500);
+        .exec((err, results) => {
+          if (err) return res.status(500);
 
-            return res.json(results);
-          })
-        );
+          return res.json(results);
+        });
     }
   } catch (e) {
     next(e);

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import All from './All';
-import Reviews from './Reviews';
 import { removeMessage } from '../../../reducers/messageReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
 
@@ -17,7 +16,7 @@ const Message = ({ messages, removeMessage, setNotification }) => {
 
   useEffect(() => {
     if (review === [] && loadedReview === false) {
-      setReview(messages.filter(m => m.title.includes('Review')));
+      setReview(messages.filter(m => m.title.includes('review')));
       setLoadedReview(true);
     }
   }, [review, messages, setReview]);
@@ -40,23 +39,47 @@ const Message = ({ messages, removeMessage, setNotification }) => {
 
   return (
     <div className="container" style={{ paddingTop: '1.5rem' }}>
-      <div className="box">
+      <div className="box" style={{ paddingBottom: '2.5rem' }}>
         <div className="container">
           <h5 style={{ marginTop: '0.5rem' }}>Messages</h5>
           <div className="row">
-            <div className="col-md-3">
+            <div className="col-md-2">
               <div>
-                <Link>All</Link>
+                <Link onClick={() => setSelectedWindow('all')}>All</Link>
               </div>
               <div>
-                <Link>Reviews</Link>
+                <Link onClick={() => setSelectedWindow('review')}>Reviews</Link>
               </div>
             </div>
-            <div className="col-md-9">
-              {selectedWindow === 'all' && (
-                <All messages={messages} removeMessage={handleRemoveMessage} />
+            <div className="col-md-10">
+              {selected !== false ? (
+                <div>
+                  <h5>{selected.title}</h5>
+                  <p>{selected.content}</p>
+                  <button
+                    className="tutorial-button button-blue"
+                    style={{ marginTop: '0', marginRight: '0.25rem' }}
+                    onClick={() => setSelected(false)}
+                  >
+                    Close message
+                  </button>
+                  <button
+                    className="tutorial-button button-blue"
+                    style={{ margin: '0' }}
+                    onClick={() =>
+                      handleRemoveMessage(selected._id, selected.title)
+                    }
+                  >
+                    Remove message
+                  </button>
+                </div>
+              ) : (
+                <All
+                  messages={messages}
+                  setSelected={setSelected}
+                  removeMessage={handleRemoveMessage}
+                />
               )}
-              {selectedWindow === 'review' && <Reviews messages={review} />}
             </div>
           </div>
         </div>

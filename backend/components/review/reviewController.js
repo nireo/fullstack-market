@@ -101,7 +101,8 @@ exports.addReviewToPost = async (req, res, next) => {
     const newNotification = new messageModel({
       toUser: post.postedBy,
       createdAt: new Date(),
-      content: `Your posting '${post.title}' has gotten a new review. Posted by '${user.username}'.`
+      content: `Your posting '${post.title}' has gotten a new review. Posted by '${user.username}'.`,
+      title: 'New review has been posted.'
     });
 
     // save the notification
