@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import All from './All';
+import Reviews from './Reviews';
 
 const Message = ({ messages }) => {
   const [selected, setSelected] = useState(false);
+
+  // define these here so we don't need to use 'connect' everywhere
+  const [review, setReview] = useState([]);
+  const [loadedReview, setLoadedReview] = useState(false);
+
+  const [selectedWindow, setSelectedWindow] = useState('all');
+
+  useEffect(() => {
+    if (review === [] && loadedReview === false) {
+      setReview(messages.filter(m => m.title.includes('Review')));
+      setLoadedReview(true);
+    }
+  }, [review, messages, setReview]);
+
   return (
     <div className="container" style={{ paddingTop: '1.5rem' }}>
       <div className="box">
@@ -19,7 +35,8 @@ const Message = ({ messages }) => {
               </div>
             </div>
             <div className="col-md-9">
-              {selected === false && <div>this is the bigger grid</div>}
+              {selectedWindow === 'all' && <All messages={messages} />}
+              {selectedWindow === 'review' && <Reviews messages={review} />}
             </div>
           </div>
         </div>
