@@ -3,6 +3,7 @@ const messageModel = require('./messageModel');
 const { getToken } = require('../../utils/helper');
 const config = require('../../utils/config');
 
+// doesn't need a create route, since messages are created inside other routes.
 exports.getMessages = async (req, res, next) => {
   const token = getToken(req);
   try {
@@ -34,10 +35,8 @@ exports.deleteMessage = async (req, res, next) => {
     }
     const message = await messageModel.findById(req.params.id);
     if (message) {
-      if (message.toUser === decodedToken.id) {
-        await messageModel.findByIdAndRemove(message._id);
-        return res.status(204).end();
-      }
+      await messageModel.findByIdAndRemove(message._id);
+      return res.status(204).end();
     } else {
       return res.status(404);
     }

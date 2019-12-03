@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import All from './All';
 import Reviews from './Reviews';
+import { removeMessage } from '../../../reducers/messageReducer';
+import { setNotification } from '../../../reducers/notificationReducer';
 
-const Message = ({ messages }) => {
+const Message = ({ messages, removeMessage, setNotification }) => {
   const [selected, setSelected] = useState(false);
 
   // define these here so we don't need to use 'connect' everywhere
@@ -19,6 +21,22 @@ const Message = ({ messages }) => {
       setLoadedReview(true);
     }
   }, [review, messages, setReview]);
+
+  const handleRemoveMessage = (id, name) => {
+    // check if they're valid to provide a proper message
+    if (!id || !name) {
+      return;
+    }
+
+    if (window.confirm(`Are you sure you want to delete message: '${name}'`)) {
+      try {
+        removeMessage(id);
+        setNotification('Successfully removed message', 'success', 2);
+      } catch (error) {
+        setNotification('Problem with removing message', 'error', 2);
+      }
+    }
+  };
 
   return (
     <div className="container" style={{ paddingTop: '1.5rem' }}>
@@ -35,7 +53,9 @@ const Message = ({ messages }) => {
               </div>
             </div>
             <div className="col-md-9">
-              {selectedWindow === 'all' && <All messages={messages} />}
+              {selectedWindow === 'all' && (
+                <All messages={messages} removeMessage={handleRemoveMessage} />
+              )}
               {selectedWindow === 'review' && <Reviews messages={review} />}
             </div>
           </div>
@@ -49,4 +69,6 @@ const mapStateToProps = state => ({
   messages: state.messages
 });
 
-export default connect(mapStateToProps, null)(Message);
+export default connect(mapStateToProps, { removeMessage, setNotification })(
+  Message
+);
