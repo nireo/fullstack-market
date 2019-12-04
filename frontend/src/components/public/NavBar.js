@@ -159,7 +159,9 @@ const NavBar = props => {
                   className="dropdown-menu"
                   aria-labelledby="messageDropdown"
                 >
-                  <p className="dropdown-item">0 new notifications</p>
+                  <p className="dropdown-item disabled">
+                    {props.messages.length} new notifications
+                  </p>
                   <div className="dropdown-divider"></div>
                   <Link className="dropdown-item" to="/message-panel">
                     Message panel
@@ -207,7 +209,8 @@ const NavBar = props => {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    cart: state.cart
+    cart: state.cart,
+    messages: state.messages
   };
 };
 

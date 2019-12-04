@@ -73,6 +73,10 @@ const Message = ({ messages, removeMessage, setNotification }) => {
                     Remove message
                   </button>
                 </div>
+              ) : messages.length === 0 ? (
+                <div>
+                  <h4>No messages</h4>
+                </div>
               ) : (
                 <All
                   messages={messages}
