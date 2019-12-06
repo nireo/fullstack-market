@@ -33,11 +33,10 @@ export const checkLocalStorage = () => {
     const userInfo = localStorage.getItem('user');
     if (userInfo) {
       const userInfoJson = JSON.parse(userInfo);
-      console.log(userInfoJson);
       setTokens(userInfoJson.token);
       dispatch({
         type: 'LOG_IN',
-        data: userInfoJson
+        data: userInfoJson.user
       });
     }
   };

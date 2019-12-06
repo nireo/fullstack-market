@@ -15,7 +15,7 @@ export const Footer = () => {
           style={{
             textDecoration: 'none',
             color: 'black',
-            paddingRight: '1rem',
+            paddingRight: '1.5rem',
             fontFamily: 'Montserrat, sans-serif',
             weight: 900
           }}
@@ -54,7 +54,7 @@ export const Footer = () => {
             style={{
               textDecoration: 'none',
               color: 'black',
-              paddingLeft: '1rem',
+              paddingLeft: '1.5rem',
               fontFamily: 'Montserrat, sans-serif',
               weight: 900
             }}
