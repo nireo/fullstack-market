@@ -7,6 +7,7 @@ import ReviewForm from '../../private/ReviewForm';
 import { addReview } from '../../../reducers/postReducer';
 import Review from '../Review';
 import Pagination from '../Pagination';
+import Markdown from 'markdown-to-jsx';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
@@ -39,11 +40,11 @@ const SinglePost = props => {
     return <Redirect to="/community" />;
   }
 
-  // const clearFields = () => {
-  // setStars(0.0);
-  // setContent("");
-  // setTitle("");
-  // };
+  const clearFields = () => {
+    setStars(0.0);
+    setContent('');
+    setTitle('');
+  };
 
   const addToCart = toAdd => {
     let checkForItem;
@@ -57,16 +58,16 @@ const SinglePost = props => {
     props.setNotification('Item added to cart', 'success', 2);
   };
 
-  // const addReviewToPost = review => {
-  // try {
-  // props.setNotification("Review has been posted", "success", 2);
-  // props.addReview(props.post._id, review);
-  // clearFields();
-  // } catch {
-  // props.setNotification("Something went wrong", "error", 2);
-  // clearFields();
-  // }
-  // };
+  const addReviewToPost = review => {
+    try {
+      props.setNotification('Review has been posted', 'success', 2);
+      props.addReview(props.post._id, review);
+      clearFields();
+    } catch {
+      props.setNotification('Something went wrong', 'error', 2);
+      clearFields();
+    }
+  };
 
   const lastPostIndex = currentPage * amountInPage;
   const firstPostIndex = lastPostIndex - amountInPage;
@@ -82,9 +83,10 @@ const SinglePost = props => {
         <div className="col">
           <h1>{props.post.title}</h1>
           <h3 style={{ color: 'green' }}>{props.post.price} $</h3>
-          <p>{props.post.description}</p>
+          <div style={{ marginBottom: '3rem' }}>
+            <Markdown>{props.post.description}</Markdown>
+          </div>
           <Link onClick={() => addToCart(props.post)}>Add to cart</Link>
-          {userOwns && <p>You own this item</p>}
         </div>
         {!props.type && (
           <div className="col">
@@ -133,7 +135,7 @@ const SinglePost = props => {
               setContent={setContent}
               title={title}
               setTitle={setTitle}
-              addReview={addReview}
+              addReview={addReviewToPost}
               recommended={recommended}
               setRecommended={setRecommended}
             />
