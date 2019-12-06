@@ -5,12 +5,15 @@ import { setNotification } from '../../reducers/notificationReducer';
 import PostForm from './PostForm';
 import CreatePostContent from './CreatePostContent';
 import Finished from './Finished';
+import Modal from '../Modal';
+import Markdown from 'markdown-to-jsx';
 
 const CreatePost = ({ createPost, setNotification }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [step, setStep] = useState(1);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleCreation = content => {
     const newObject = {
@@ -23,6 +26,11 @@ const CreatePost = ({ createPost, setNotification }) => {
     setNotification('Post added', 'success', 2);
   };
 
+  const handleClose = event => {
+    event.preventDefault();
+    setShowPreview(false);
+  };
+
   return (
     <div className="container">
       <h2 style={{ marginTop: '1rem' }}>
@@ -32,16 +40,25 @@ const CreatePost = ({ createPost, setNotification }) => {
       </h2>
       <hr />
       {step === 1 && (
-        <PostForm
-          title={title}
-          setTitle={setTitle}
-          description={description}
-          setDescription={setDescription}
-          price={price}
-          setPrice={setPrice}
-          handleCreation={handleCreation}
-          setStep={setStep}
-        />
+        <div>
+          <PostForm
+            title={title}
+            setTitle={setTitle}
+            description={description}
+            setDescription={setDescription}
+            price={price}
+            setPrice={setPrice}
+            handleCreation={handleCreation}
+            setStep={setStep}
+            type="create"
+            setShowPreview={setShowPreview}
+          />
+          <Modal show={showPreview} handleClose={handleClose}>
+            <div className="container">
+              <Markdown>{description}</Markdown>
+            </div>
+          </Modal>
+        </div>
       )}
       {step === 2 && (
         <CreatePostContent setStep={setStep} createPost={handleCreation} />
