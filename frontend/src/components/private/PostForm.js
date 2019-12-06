@@ -12,9 +12,20 @@ const PostForm = props => {
       props.setStep(2);
     }
   };
+
+  const createPost = event => {
+    event.preventDefault();
+
+    if (props.type === 'create') {
+      return;
+    } else {
+      props.handleCreation();
+    }
+  };
+
   return (
     <div className="container">
-      <form onSubmit={props.handleCreation}>
+      <form onSubmit={createPost}>
         <div className="form-group">
           <label>Title</label>
           <input

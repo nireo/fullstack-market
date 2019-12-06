@@ -14,8 +14,9 @@ const CreatePost = ({ createPost, setNotification }) => {
   const [price, setPrice] = useState(0);
   const [step, setStep] = useState(1);
   const [showPreview, setShowPreview] = useState(false);
+  const [content, setContent] = useState('');
 
-  const handleCreation = content => {
+  const handleCreation = () => {
     const newObject = {
       title,
       description,
@@ -53,15 +54,32 @@ const CreatePost = ({ createPost, setNotification }) => {
             type="create"
             setShowPreview={setShowPreview}
           />
-          <Modal show={showPreview} handleClose={handleClose}>
-            <div className="container">
-              <Markdown>{description}</Markdown>
-            </div>
-          </Modal>
+          {description !== '' && (
+            <Modal show={showPreview} handleClose={handleClose}>
+              <div className="container">
+                <Markdown>{description}</Markdown>
+              </div>
+            </Modal>
+          )}
         </div>
       )}
       {step === 2 && (
-        <CreatePostContent setStep={setStep} createPost={handleCreation} />
+        <div>
+          <CreatePostContent
+            setStep={setStep}
+            createPost={handleCreation}
+            setContent={setContent}
+            content={content}
+            setShowPreview={setShowPreview}
+          />
+          {content !== '' && (
+            <Modal show={showPreview} handleClose={handleClose}>
+              <div className="container">
+                <Markdown>{content}</Markdown>
+              </div>
+            </Modal>
+          )}
+        </div>
       )}
       {step === 3 && <Finished name={title} />}
     </div>
