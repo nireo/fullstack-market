@@ -1,9 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Welcome = () => {
   return (
-    <div className="jumbotron text-center" style={{ height: "55vh" }}>
+    <div className="jumbotron text-center" style={{ height: '55vh' }}>
       <h1 className="main-page-heading" style={{ fontWeight: 900 }}>
         benevol
       </h1>

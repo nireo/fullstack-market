@@ -63,7 +63,7 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
                 className="card"
                 style={{ marginTop: '0.5rem ' }}
               >
-                <div className="card-body box">
+                <div className="card-body">
                   <h5 className="card-title">{i.title}</h5>
                   <p className="card-text">{i.description.slice(0, 150)}</p>
                   <Link to={`/post/${i._id}`}>

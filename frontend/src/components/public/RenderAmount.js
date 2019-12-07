@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const RenderAmount = ({ amount }) => {
-    return <div className="item-count">{amount}</div>;
+  return <div className="item-count">{amount}</div>;
 };
 
 export default RenderAmount;

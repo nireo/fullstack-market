@@ -1,17 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import reviewService from "../../services/review";
-import { setNotification } from "../../reducers/notificationReducer";
-import RenderStars from "../RenderStars";
+import React from 'react';
+import { connect } from 'react-redux';
+import reviewService from '../../services/review';
+import { setNotification } from '../../reducers/notificationReducer';
+import RenderStars from '../RenderStars';
 
 const Review = ({ review, user, setNotification }) => {
   const handleDelete = id => {
-    if (window.confirm("Are you sure you want to delete " + id)) {
+    if (window.confirm('Are you sure you want to delete ' + id)) {
       try {
         reviewService.removeReview(id);
-        setNotification("Review deleted successfully", "success", 2);
+        setNotification('Review deleted successfully', 'success', 2);
       } catch {
-        setNotification("Something went wrong", "error", 2);
+        setNotification('Something went wrong', 'error', 2);
       }
     }
   };
@@ -27,7 +27,7 @@ const Review = ({ review, user, setNotification }) => {
             </div>
             <div className="col-md 2">
               <strong class="d-block text-gray-dark">Recommended</strong>
-              {review.recommended ? "Yes" : "No"}
+              {review.recommended ? 'Yes' : 'No'}
             </div>
             <div className="col-md 2">
               <RenderStars stars={review.stars} />
@@ -53,7 +53,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { setNotification }
-)(Review);
+export default connect(mapStateToProps, { setNotification })(Review);

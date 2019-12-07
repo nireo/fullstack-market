@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { handleLogin } from "../../reducers/userReducer";
-import { logOut } from "../../reducers/userReducer";
-import { setNotification } from "../../reducers/notificationReducer";
-import Copyright from "../Copyright";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { handleLogin } from '../../reducers/userReducer';
+import { logOut } from '../../reducers/userReducer';
+import { setNotification } from '../../reducers/notificationReducer';
+import Copyright from '../Copyright';
 
 const Login = props => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
 
   if (props.user !== null) {
@@ -32,9 +32,9 @@ const Login = props => {
     };
     try {
       props.handleLogin(credentials, rememberMe);
-      props.setNotification("Logged in successfully", "success", 2);
+      props.setNotification('Logged in successfully', 'success', 2);
     } catch {
-      props.setNotification("Something went wrong", "error", 2);
+      props.setNotification('Something went wrong', 'error', 2);
     }
   };
 
@@ -46,7 +46,7 @@ const Login = props => {
         </h1>
         <div className="form-group animated-text-left">
           <input
-            style={{ width: "50%", display: "inline-block" }}
+            style={{ width: '50%', display: 'inline-block' }}
             type="text"
             className="form-control"
             placeholder="Username"
@@ -57,7 +57,7 @@ const Login = props => {
         </div>
         <div className="form-group animated-text-right">
           <input
-            style={{ width: "50%", display: "inline-block" }}
+            style={{ width: '50%', display: 'inline-block' }}
             type="password"
             className="form-control"
             placeholder="Password"
@@ -73,14 +73,14 @@ const Login = props => {
               type="checkbox"
               value={rememberMe}
               onClick={() => setRememberMe(!rememberMe)}
-            />{" "}
+            />{' '}
             Remember me
           </label>
         </div>
         <div>
           <button
             className="button button-animated button-pink"
-            style={{ width: "50%" }}
+            style={{ width: '50%' }}
             type="submit"
           >
             Login
@@ -98,7 +98,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { handleLogin, logOut, setNotification }
-)(Login);
+export default connect(mapStateToProps, {
+  handleLogin,
+  logOut,
+  setNotification
+})(Login);
