@@ -66,7 +66,7 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
                 <div className="card-body">
                   <h5 className="card-title">{i.title}</h5>
                   <p className="card-text">{i.description.slice(0, 150)}</p>
-                  <Link to={`/post/${i._id}`}>
+                  <Link to={`/community/post/${i._id}`}>
                     <button className="tutorial-button button-pink">
                       Read more
                     </button>

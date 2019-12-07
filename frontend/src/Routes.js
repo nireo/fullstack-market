@@ -37,6 +37,7 @@ import Dashboard from './components/private/dashboard/Dashboard';
 import Search from './components/public/search/Search';
 import Contact from './components/Contact';
 import Message from './components/private/Message/Message';
+import Layout from './components/public/New/Layout';
 
 const Routes = props => {
   const findPostWithId = id => {
@@ -202,6 +203,7 @@ const Routes = props => {
           render={() => (props.user ? <Message /> : <Redirect to="/" />)}
         />
         <Route exact path="/tutorial" render={() => <Tutorial />} />
+        <Route exact path="/new" render={() => <Layout />} />
         <Route render={() => <NotFound />} />
       </Switch>
     </Router>
