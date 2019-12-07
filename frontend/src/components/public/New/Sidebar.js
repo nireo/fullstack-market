@@ -9,48 +9,45 @@ const Sidebar = ({ showSidebar, username }) => {
         </div>
 
         <ul className="list-unstyled components">
-          <li className="active">
+          <li>
+            <a href="#">All</a>
+          </li>
+          <li>
             <a
-              href="#homeSubmenu"
+              href="#postSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
               className="dropdown-toggle"
             >
-              Home
+              Posts
             </a>
-            <ul className="collapse list-unstyled" id="homeSubmenu">
+            <ul className="collapse list-unstyled" id="postSubmenu">
               <li>
-                <a href="#">Home 1</a>
+                <a href="#">Create</a>
               </li>
               <li>
-                <a href="#">Home 2</a>
+                <a href="#">Edit</a>
               </li>
               <li>
-                <a href="#">Home 3</a>
+                <a href="#">Remove</a>
               </li>
             </ul>
           </li>
           <li>
-            <a href="#">About</a>
-          </li>
-          <li>
             <a
-              href="#pageSubmenu"
+              href="#reviewsSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
               className="dropdown-toggle"
             >
-              Pages
+              Reviews
             </a>
-            <ul className="collapse list-unstyled" id="pageSubmenu">
+            <ul className="collapse list-unstyled" id="reviewsSubmenu">
               <li>
-                <a href="#">Page 1</a>
+                <a href="#">Edit</a>
               </li>
               <li>
-                <a href="#">Page 2</a>
-              </li>
-              <li>
-                <a href="#">Page 3</a>
+                <a href="#">Remove</a>
               </li>
             </ul>
           </li>

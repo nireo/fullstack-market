@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import { connect } from 'react-redux';
+import { PostMain } from './Posts/PostMain';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
@@ -9,18 +10,18 @@ const Layout = ({ user }) => {
     <div className="wrapper">
       <Sidebar showSidebar={showSidebar} username={user.username} />
       <div id="content">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <div className="container-fluid">
-            <button
-              onClick={() => setShowSidebar(!showSidebar)}
-              type="button"
-              className="btn btn-info"
-            >
-              <i className="fas fa-align-left"></i>
-              <span>Toggle Sidebar</span>
-            </button>
-          </div>
-        </nav>
+        <div className="container-fluid">
+          <button
+            style={{ background: 'none', color: 'inherit', border: 'none' }}
+            onClick={() => setShowSidebar(!showSidebar)}
+          >
+            <i className="fas fa-align-left"></i>
+            <span>{'  '}Toggle sidebar</span>
+          </button>
+        </div>
+        <div style={{ paddingTop: '2rem' }}>
+          <PostMain />
+        </div>
       </div>
     </div>
   );
