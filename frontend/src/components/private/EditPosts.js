@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { initUsers } from "../../reducers/allUsersReducer";
-import { setNotification } from "../../reducers/notificationReducer";
-import { removePost } from "../../reducers/postReducer";
-import Loading from "../Loading";
-import EditForm from "./EditForm";
-import Pagination from "../public/Pagination";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { initUsers } from '../../reducers/allUsersReducer';
+import { setNotification } from '../../reducers/notificationReducer';
+import { removePost } from '../../reducers/postReducer';
+import Loading from '../Loading';
+import EditForm from './EditForm';
+import Pagination from '../public/Pagination';
 
 const EditPosts = props => {
   const [postToEdit, setPostToEdit] = useState(null);
@@ -21,7 +21,7 @@ const EditPosts = props => {
       <div className="container text-center">
         <h2>Edit posts</h2>
         <p>
-          You've got no posts, you can create posts in the{" "}
+          You've got no posts, you can create posts in the{' '}
           <Link to="/create">create</Link> page.
         </p>
       </div>
@@ -29,12 +29,12 @@ const EditPosts = props => {
   }
 
   const handleDelete = id => {
-    if (window.confirm("Are you sure you want delete the post")) {
+    if (window.confirm('Are you sure you want delete the post')) {
       try {
         props.removePost(id);
-        props.setNotification("Post has been deleted", "success", 2);
+        props.setNotification('Post has been deleted', 'success', 2);
       } catch {
-        props.setNotification("Something went wrong", "error", 2);
+        props.setNotification('Something went wrong', 'error', 2);
       }
     }
   };
@@ -46,21 +46,28 @@ const EditPosts = props => {
 
   const renderPosts = currentPosts.map(p => (
     <div key={p._id} className="col-md-12">
-      <div className="card" style={{ marginTop: "1rem" }}>
+      <div className="card box" style={{ marginTop: '1rem' }}>
         <div className="card-body">
           <h5 className="card-title">{p.title}</h5>
-          <h6 className="card-subtitle" style={{ color: "green" }}>
+          <h6 className="card-subtitle" style={{ color: 'green' }}>
             {p.price} $
           </h6>
-          <p className="card-text" style={{ paddingBottom: "1rem" }}>
+          <p className="card-text" style={{ paddingBottom: '1rem' }}>
             {p.description.slice(0, 100)}
           </p>
-          <Link className="card-link" onClick={() => setPostToEdit(p)}>
+          <button
+            className="tutorial-button button-blue"
+            onClick={() => setPostToEdit(p)}
+            style={{ marginRight: '1rem' }}
+          >
             Edit
-          </Link>
-          <Link className="card-link" onClick={() => handleDelete(p._id)}>
+          </button>
+          <button
+            className="tutorial-button button-blue"
+            onClick={() => handleDelete(p._id)}
+          >
             Delete
-          </Link>
+          </button>
         </div>
       </div>
     </div>
@@ -71,24 +78,24 @@ const EditPosts = props => {
       <ul className="progressbar">
         <div className="animated-text-left">
           {postToEdit === null ? (
-            <li style={{ width: "50%" }} className="active">
+            <li style={{ width: '50%' }} className="active">
               Select post
             </li>
           ) : (
-            <li style={{ width: "50%" }}>Select post</li>
+            <li style={{ width: '50%' }}>Select post</li>
           )}
         </div>
         <div className="animated-text-right">
           {postToEdit !== null ? (
-            <li style={{ width: "50%" }} className="active">
+            <li style={{ width: '50%' }} className="active">
               Edit
             </li>
           ) : (
-            <li style={{ width: "50%" }}>Edit</li>
+            <li style={{ width: '50%' }}>Edit</li>
           )}
         </div>
       </ul>
-      <div style={{ paddingTop: "3rem" }}>
+      <div style={{ paddingTop: '3rem' }}>
         {postToEdit === null && <div>{renderPosts}</div>}
         {postToEdit !== null && (
           <div>
@@ -97,7 +104,7 @@ const EditPosts = props => {
         )}
       </div>
       {postToEdit === null && (
-        <div className="container" style={{ paddingTop: "1rem" }}>
+        <div className="container" style={{ paddingTop: '1rem' }}>
           <Pagination
             amountInPage={amountInPage}
             totalPosts={props.user.posts.length}
@@ -116,7 +123,8 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { initUsers, setNotification, removePost }
-)(EditPosts);
+export default connect(mapStateToProps, {
+  initUsers,
+  setNotification,
+  removePost
+})(EditPosts);
