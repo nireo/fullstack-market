@@ -203,7 +203,11 @@ const Routes = props => {
           render={() => (props.user ? <Message /> : <Redirect to="/" />)}
         />
         <Route exact path="/tutorial" render={() => <Tutorial />} />
-        <Route exact path="/new" render={() => <Layout />} />
+        <Route
+          exact
+          path="/new"
+          render={() => (props.user ? <Layout /> : <Redirect to="/" />)}
+        />
         <Route render={() => <NotFound />} />
       </Switch>
     </Router>

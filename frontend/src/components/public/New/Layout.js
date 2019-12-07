@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
+import { connect } from 'react-redux';
 
 // here the sidebar and content are divided
-const Layout = () => {
+const Layout = ({ user }) => {
   const [showSidebar, setShowSidebar] = useState(true);
-
   return (
     <div className="wrapper">
-      <Sidebar showSidebar={showSidebar} />
+      <Sidebar showSidebar={showSidebar} username={user.username} />
       <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="container-fluid">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="container-fluid">
             <button
               onClick={() => setShowSidebar(!showSidebar)}
               type="button"
-              id="sidebarCollapse"
-              class="btn btn-info"
+              className="btn btn-info"
             >
-              <i class="fas fa-align-left"></i>
+              <i className="fas fa-align-left"></i>
               <span>Toggle Sidebar</span>
             </button>
           </div>
@@ -27,4 +26,8 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps, null)(Layout);

@@ -1,24 +1,24 @@
 import React from 'react';
 
-const Sidebar = ({ showSideBar }) => {
+const Sidebar = ({ showSidebar, username }) => {
   return (
     <div>
-      <nav id="sidebar">
-        <div class="sidebar-header">
-          <h3>Users dashboard</h3>
+      <nav id="sidebar" className={`${showSidebar ? '' : 'active'}`}>
+        <div className="sidebar-header">
+          <h3>{username}'s dashboard</h3>
         </div>
 
-        <ul class="list-unstyled components">
-          <li class="active">
+        <ul className="list-unstyled components">
+          <li className="active">
             <a
               href="#homeSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
-              class="dropdown-toggle"
+              className="dropdown-toggle"
             >
               Home
             </a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
+            <ul className="collapse list-unstyled" id="homeSubmenu">
               <li>
                 <a href="#">Home 1</a>
               </li>
@@ -38,11 +38,11 @@ const Sidebar = ({ showSideBar }) => {
               href="#pageSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
-              class="dropdown-toggle"
+              className="dropdown-toggle"
             >
               Pages
             </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
+            <ul className="collapse list-unstyled" id="pageSubmenu">
               <li>
                 <a href="#">Page 1</a>
               </li>
