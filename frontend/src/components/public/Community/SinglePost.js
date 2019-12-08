@@ -8,6 +8,7 @@ import { addReview } from '../../../reducers/postReducer';
 import Review from '../Review';
 import Pagination from '../Pagination';
 import Markdown from 'markdown-to-jsx';
+import { Helmet } from 'react-helmet';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
@@ -79,6 +80,10 @@ const SinglePost = props => {
 
   return (
     <div className="container" style={{ paddingTop: '1rem' }}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Post - benevol</title>
+      </Helmet>
       <div className="row">
         <div className="col">
           <h1>{props.post.title}</h1>

@@ -4,6 +4,7 @@ import { searchForItem, clearSearch } from '../../../reducers/searchReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
 import Loading from '../../Loading';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
   const [search, setSearch] = useState('');
@@ -31,6 +32,10 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
 
   return (
     <div className="container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Search - benevol</title>
+      </Helmet>
       <form onSubmit={handleSearch} style={{ marginTop: '1rem' }}>
         <div className="search">
           <input

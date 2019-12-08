@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import All from './All';
 import { removeMessage } from '../../../reducers/messageReducer';
 import { setNotification } from '../../../reducers/notificationReducer';
+import { Helmet } from 'react-helmet';
 
 const Message = ({ messages, removeMessage, setNotification }) => {
   const [selected, setSelected] = useState(false);
@@ -39,6 +40,10 @@ const Message = ({ messages, removeMessage, setNotification }) => {
 
   return (
     <div className="container" style={{ paddingTop: '1.5rem' }}>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Messages - benevol</title>
+      </Helmet>
       <div className="box" style={{ paddingBottom: '2.5rem' }}>
         <div className="container">
           <h5 style={{ marginTop: '0.5rem' }}>Messages</h5>

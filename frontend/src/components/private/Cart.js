@@ -5,6 +5,7 @@ import { setNotification } from '../../reducers/notificationReducer';
 import { Link } from 'react-router-dom';
 import userService from '../../services/user';
 import { setUserInfo } from '../../reducers/userReducer';
+import { Helmet } from 'react-helmet';
 
 const Cart = props => {
   const [total, setTotal] = useState(0);
@@ -119,6 +120,10 @@ const Cart = props => {
 
   return (
     <div className="container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Cart - benevol</title>
+      </Helmet>
       <h2 style={{ paddingBottom: '2em' }}>Your cart</h2>
       <h5>Items in cart: {props.cart.length}</h5>
       {renderCartItems}
@@ -147,7 +152,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { clearCart, setNotification, removeItemFromCart, setUserInfo }
-)(Cart);
+export default connect(mapStateToProps, {
+  clearCart,
+  setNotification,
+  removeItemFromCart,
+  setUserInfo
+})(Cart);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CreatePost from '../../private/CreatePost';
 import EditPosts from '../../private/EditPosts';
+import { Helmet } from 'react-helmet';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
@@ -12,6 +13,10 @@ const Layout = ({ user }) => {
 
   return (
     <div className="wrapper">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Dashboard - benevol</title>
+      </Helmet>
       <Sidebar showSidebar={showSidebar} username={user.username} />
       <div id="content">
         <nav className="navbar navbar-expand-lg navbar-light bg-light box">

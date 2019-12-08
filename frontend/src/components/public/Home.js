@@ -3,10 +3,15 @@ import Welcome from './Welcome';
 import About from './About';
 import HowItWorks from './HowItWorks';
 import { Footer } from './Footer';
+import { Helmet } from 'react-helmet';
 
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Home - benevol</title>
+      </Helmet>
       <div>
         <Welcome />
       </div>

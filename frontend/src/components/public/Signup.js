@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../../services/user';
 import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 const Signup = props => {
   const [email, setEmail] = useState('');
@@ -52,6 +53,10 @@ const Signup = props => {
 
   return (
     <div className="text-center container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Signup - benevol</title>
+      </Helmet>
       <form onSubmit={handleSignup} className="form-signin">
         <h1 className="h3 mb-3 font-weight-normal animate-fade-in">Signup</h1>
         <div className="form-group animated-text-right">

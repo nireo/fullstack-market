@@ -4,6 +4,7 @@ import { handleLogin } from '../../reducers/userReducer';
 import { logOut } from '../../reducers/userReducer';
 import { setNotification } from '../../reducers/notificationReducer';
 import Copyright from '../Copyright';
+import { Helmet } from 'react-helmet';
 
 const Login = props => {
   const [username, setUsername] = useState('');
@@ -40,6 +41,10 @@ const Login = props => {
 
   return (
     <div className="text-center container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Login - benevol</title>
+      </Helmet>
       <form onSubmit={handleLogin} className="form-signin">
         <h1 className="h3 mb-3 font-weight-normal animate-fade-in">
           Please sign in

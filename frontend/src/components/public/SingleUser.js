@@ -9,6 +9,7 @@ import { removePost } from '../../reducers/postReducer';
 import RenderAmount from './RenderAmount';
 import UserPosts from './SingleUser/UserPosts';
 import UserReviews from './SingleUser/UserReviews';
+import { Helmet } from 'react-helmet';
 
 const SingleUser = props => {
   const [page, setPage] = useState(1);
@@ -45,6 +46,10 @@ const SingleUser = props => {
 
   return (
     <div className="container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{user.username}'s profile - benevol</title>
+      </Helmet>
       <div className="row" style={{ marginTop: '1rem' }}>
         <div className="col-2">
           <h2>{user.username}</h2>

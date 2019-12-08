@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { initUsers } from '../../reducers/allUsersReducer';
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const Users = props => {
   const [search, setSearch] = useState('');
@@ -24,6 +25,10 @@ const Users = props => {
 
   return (
     <div className="container">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Users - benevol</title>
+      </Helmet>
       <div className="form-group" style={{ marginTop: '1rem' }}>
         <input
           type="text"
