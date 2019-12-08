@@ -7,6 +7,7 @@ import EditPosts from '../../private/EditPosts';
 import { Helmet } from 'react-helmet';
 import { Preview } from './Preview';
 import { PostDisplay } from './PostDisplay';
+import { ReviewDisplay } from './ReviewDisplay';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
@@ -30,6 +31,12 @@ const Layout = ({ user }) => {
           <PostDisplay
             setShowSidebar={setShowSidebar}
             showSidebar={showSidebar}
+          />
+        )}
+        {pageToShow === 'review' && (
+          <ReviewDisplay
+            showSidebar={showSidebar}
+            setShowSidebar={setShowSidebar}
           />
         )}
       </div>
