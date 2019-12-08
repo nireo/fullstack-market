@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({ showSidebar, username }) => {
   return (
@@ -10,9 +11,6 @@ const Sidebar = ({ showSidebar, username }) => {
 
         <ul className="list-unstyled components">
           <li>
-            <a href="#">All</a>
-          </li>
-          <li>
             <a
               href="#postSubmenu"
               data-toggle="collapse"
@@ -23,13 +21,13 @@ const Sidebar = ({ showSidebar, username }) => {
             </a>
             <ul className="collapse list-unstyled" id="postSubmenu">
               <li>
-                <a href="#">Create</a>
+                <a>Create</a>
               </li>
               <li>
-                <a href="#">Edit</a>
+                <a>Edit</a>
               </li>
               <li>
-                <a href="#">Remove</a>
+                <a>Remove</a>
               </li>
             </ul>
           </li>
@@ -44,12 +42,18 @@ const Sidebar = ({ showSidebar, username }) => {
             </a>
             <ul className="collapse list-unstyled" id="reviewsSubmenu">
               <li>
-                <a href="#">Edit</a>
+                <a>Edit</a>
               </li>
               <li>
-                <a href="#">Remove</a>
+                <a>Remove</a>
               </li>
             </ul>
+          </li>
+          <li>
+            <a>Statistics</a>
+          </li>
+          <li>
+            <a>Settings</a>
           </li>
         </ul>
       </nav>

@@ -5,11 +5,14 @@ import { Link } from 'react-router-dom';
 import CreatePost from '../../private/CreatePost';
 import EditPosts from '../../private/EditPosts';
 import { Helmet } from 'react-helmet';
+import { Preview } from './Preview';
+import { PostDisplay } from './PostDisplay';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
   const [showSidebar, setShowSidebar] = useState(true);
   const [showPostContent, setShowPostContent] = useState('create');
+  const [pageToShow, setPageToShow] = useState('preview');
 
   return (
     <div className="wrapper">
@@ -76,6 +79,7 @@ const Layout = ({ user }) => {
           </div>
         </nav>
         <div>
+          {pageToShow === 'preview' && <Preview />}
           {showPostContent === 'create' && (
             <div className="container" style={{ paddingTop: '2rem' }}>
               <div className="box" style={{ paddingBottom: '1rem' }}>
@@ -85,6 +89,12 @@ const Layout = ({ user }) => {
           )}
           {showPostContent === 'edit' && <EditPosts />}
         </div>
+        {pageToShow === 'post' && (
+          <PostDisplay
+            setShowSidebar={setShowSidebar}
+            showSidebar={showSidebar}
+          />
+        )}
       </div>
     </div>
   );
