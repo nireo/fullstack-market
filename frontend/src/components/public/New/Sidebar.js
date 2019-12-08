@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Sidebar = ({ showSidebar, username }) => {
+const Sidebar = ({ showSidebar, username, setPageToShow }) => {
   return (
     <div>
       <nav id="sidebar" className={`${showSidebar ? '' : 'active'}`}>
@@ -11,49 +11,64 @@ const Sidebar = ({ showSidebar, username }) => {
 
         <ul className="list-unstyled components">
           <li>
-            <a
-              href="#postSubmenu"
+            <Link
+              id="postDropdown"
               data-toggle="collapse"
               aria-expanded="false"
-              className="dropdown-toggle"
+              className="dropdown-toggle sidebar-link"
+              onClick={() => setPageToShow('post')}
             >
               Posts
-            </a>
-            <ul className="collapse list-unstyled" id="postSubmenu">
+            </Link>
+            <ul
+              className="collapse list-unstyled"
+              aria-labelledby="postDropdown"
+            >
               <li>
-                <a>Create</a>
+                <Link className="sidebar-link">Create</Link>
               </li>
               <li>
-                <a>Edit</a>
+                <Link className="sidebar-link">Edit</Link>
               </li>
               <li>
-                <a>Remove</a>
+                <Link className="sidebar-link">Remove</Link>
               </li>
             </ul>
           </li>
           <li>
-            <a
+            <Link
               href="#reviewsSubmenu"
               data-toggle="collapse"
               aria-expanded="false"
-              className="dropdown-toggle"
+              className="dropdown-toggle sidebar-link"
+              onClick={() => setPageToShow('review')}
             >
               Reviews
-            </a>
+            </Link>
             <ul className="collapse list-unstyled" id="reviewsSubmenu">
               <li>
-                <a>Edit</a>
+                <Link className="sidebar-link">Edit</Link>
               </li>
               <li>
-                <a>Remove</a>
+                <Link className="sidebar-link">Remove</Link>
               </li>
             </ul>
           </li>
           <li>
-            <a>Statistics</a>
+            <Link
+              className="sidebar-link"
+              onClick={() => setPageToShow('stats')}
+            >
+              Statistics
+            </Link>
           </li>
           <li>
-            <a>Settings</a>
+            <Link
+              className="sidebar-link"
+              onClick={() => setPageToShow('settings')}
+            >
+              Settings
+            </Link>
           </li>
         </ul>
       </nav>
