@@ -12,6 +12,14 @@ const Sidebar = ({ showSidebar, username, setPageToShow }) => {
         <ul className="list-unstyled components">
           <li>
             <Link
+              className="sidebar-link"
+              onClick={() => setPageToShow('preview')}
+            >
+              Preview
+            </Link>
+          </li>
+          <li>
+            <Link
               id="postDropdown"
               data-toggle="collapse"
               aria-expanded="false"

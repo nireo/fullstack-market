@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const Preview = () => {
+export const Preview = ({ showSidebar, setShowSidebar }) => {
   return (
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light bg-light box">
@@ -25,33 +25,6 @@ export const Preview = () => {
           >
             <i className="fas fa-align-justify"></i>
           </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="nav navbar-nav ml-auto">
-              <li
-                className={`nav-item ${showContent === 'edit' ? 'active' : ''}`}
-              >
-                <Link
-                  onClick={() => setShowContent('edit')}
-                  className="nav-link"
-                >
-                  Edit
-                </Link>
-              </li>
-              <li
-                className={`nav-item ${
-                  showContent === 'create' ? 'active' : ''
-                }`}
-              >
-                <Link
-                  onClick={() => setShowContent('create')}
-                  className="nav-link"
-                >
-                  Create
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
       </nav>
       <div>
