@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import CreatePost from '../../private/CreatePost';
-import EditPosts from '../../private/EditPosts';
 import { Helmet } from 'react-helmet';
 import { Preview } from './Preview';
 import { PostDisplay } from './PostDisplay';
 import ReviewDisplay from './ReviewDisplay';
+import { Settings } from './Settings';
+import { Statistics } from './Statistics';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
@@ -42,6 +41,15 @@ const Layout = ({ user }) => {
         )}
         {pageToShow === 'review' && (
           <ReviewDisplay
+            showSidebar={showSidebar}
+            setShowSidebar={setShowSidebar}
+          />
+        )}
+        {pageToShow === 'settings' && (
+          <Settings showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+        )}
+        {pageToShow === 'settings' && (
+          <Statistics
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
           />

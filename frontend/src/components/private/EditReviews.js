@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { setNotification } from '../../reducers/notificationReducer';
-import { Link } from 'react-router-dom';
 import EditReviewForm from './EditReviewForm';
 import reviewService from '../../services/review';
 import Pagination from '../public/Pagination';

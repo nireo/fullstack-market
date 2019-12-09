@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export const Settings = ({ setShowSidebar, showSidebar }) => {
+export const Statistics = ({ setShowSidebar, showSidebar }) => {
   const [showContent, setShowContent] = useState('main');
 
   return (
