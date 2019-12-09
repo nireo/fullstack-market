@@ -1,8 +1,10 @@
 import React from 'react';
 
-export const Preview = () => {
+export const Settings = ({ setShowSidebar, showSidebar }) => {
+  const [showContent, setShowContent] = useState('main');
+
   return (
-    <div className="container">
+    <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light box">
         <div className="container-fluid">
           <button
@@ -54,13 +56,6 @@ export const Preview = () => {
           </div>
         </div>
       </nav>
-      <div>
-        <h2>Dashboard</h2>
-        <p style={{ fontSize: '18px' }}>
-          In this page you can manage your shop and profile. As you can see,
-          there is a sidebar which you can use to navigate this site.
-        </p>
-      </div>
     </div>
   );
 };
