@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Information } from './Settings/Information';
+import EditInfo from './Settings/EditInfo';
 
 const Settings = ({ setShowSidebar, showSidebar, user }) => {
   const [showContent, setShowContent] = useState('information');
@@ -82,7 +83,7 @@ const Settings = ({ setShowSidebar, showSidebar, user }) => {
           </div>
         </div>
       )}
-      {showContent === 'edit' && <div>hello</div>}
+      {showContent === 'edit' && <EditInfo />}
     </div>
   );
 };
