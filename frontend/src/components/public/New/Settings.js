@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Information } from './Settings/Information';
 
-export const Settings = ({ setShowSidebar, showSidebar }) => {
-  const [showContent, setShowContent] = useState('main');
+const Settings = ({ setShowSidebar, showSidebar, user }) => {
+  const [showContent, setShowContent] = useState('information');
 
   return (
     <div>
@@ -32,6 +34,18 @@ export const Settings = ({ setShowSidebar, showSidebar }) => {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="nav navbar-nav ml-auto">
               <li
+                className={`nav-item ${
+                  showContent === 'information' ? 'active' : ''
+                }`}
+              >
+                <Link
+                  onClick={() => setShowContent('information')}
+                  className="nav-link"
+                >
+                  Information
+                </Link>
+              </li>
+              <li
                 className={`nav-item ${showContent === 'edit' ? 'active' : ''}`}
               >
                 <Link
@@ -42,21 +56,39 @@ export const Settings = ({ setShowSidebar, showSidebar }) => {
                 </Link>
               </li>
               <li
-                className={`nav-item ${
-                  showContent === 'create' ? 'active' : ''
-                }`}
+                className={`nav-item ${showContent === 'bio' ? 'active' : ''}`}
               >
                 <Link
-                  onClick={() => setShowContent('create')}
+                  onClick={() => setShowContent('bio')}
                   className="nav-link"
                 >
-                  Create
+                  Bio
                 </Link>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      {showContent === 'information' && (
+        <div className="container" style={{ paddingTop: '2rem' }}>
+          <div
+            className="box"
+            style={{
+              padding: '1rem'
+            }}
+          >
+            <h3>Information</h3>
+            <Information user={user} />
+          </div>
+        </div>
+      )}
+      {showContent === 'edit' && <div>hello</div>}
     </div>
   );
 };
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps, null)(Settings);

@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { Preview } from './Preview';
 import { PostDisplay } from './PostDisplay';
 import ReviewDisplay from './ReviewDisplay';
-import { Settings } from './Settings';
+import Settings from './Settings';
 import { Statistics } from './Statistics';
 
 // here the sidebar and content are divided
@@ -48,7 +48,7 @@ const Layout = ({ user }) => {
         {pageToShow === 'settings' && (
           <Settings showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         )}
-        {pageToShow === 'settings' && (
+        {pageToShow === 'statistics' && (
           <Statistics
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
