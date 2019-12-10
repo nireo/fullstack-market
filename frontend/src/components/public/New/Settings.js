@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Information } from './Settings/Information';
 import EditInfo from './Settings/EditInfo';
+import Bio from './Settings/Bio';
 
 const Settings = ({ setShowSidebar, showSidebar, user }) => {
   const [showContent, setShowContent] = useState('information');
@@ -84,6 +85,7 @@ const Settings = ({ setShowSidebar, showSidebar, user }) => {
         </div>
       )}
       {showContent === 'edit' && <EditInfo />}
+      {showContent === 'bio' && <Bio />}
     </div>
   );
 };
