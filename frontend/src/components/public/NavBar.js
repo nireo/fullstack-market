@@ -109,11 +109,6 @@ const NavBar = props => {
                     </Link>
                   )}
                   {props.user.username !== 'admin' && (
-                    <Link className="dropdown-item" to="/dashboard">
-                      <i class="fas fa-chart-line"></i> Dashboard
-                    </Link>
-                  )}
-                  {props.user.username !== 'admin' && (
                     <Link className="dropdown-item" to="/new">
                       New
                     </Link>

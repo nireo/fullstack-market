@@ -32,7 +32,6 @@ import Tutorial from './components/public/Tutorial/Tutorial';
 import SingleReport from './components/private/admin/Reports/SingleReport';
 import ReportForm from './components/public/ReportForm';
 import ShowContent from './components/private/owned-items/ShowContent';
-import Dashboard from './components/private/dashboard/Dashboard';
 import Search from './components/public/search/Search';
 import Contact from './components/Contact';
 import Message from './components/private/Message/Message';
@@ -185,11 +184,6 @@ const Routes = props => {
               <Redirect to="/" />
             )
           }
-        />
-        <Route
-          exact
-          path="/dashboard"
-          render={() => (props.user ? <Dashboard /> : <Redirect to="/" />)}
         />
         <Route
           exact
