@@ -31,7 +31,6 @@ import OwnedItems from './components/private/owned-items/OwnedItems';
 import Tutorial from './components/public/Tutorial/Tutorial';
 import SingleReport from './components/private/admin/Reports/SingleReport';
 import ReportForm from './components/public/ReportForm';
-import SettingsMain from './components/private/settings/SettingsMain';
 import ShowContent from './components/private/owned-items/ShowContent';
 import Dashboard from './components/private/dashboard/Dashboard';
 import Search from './components/public/search/Search';
@@ -175,11 +174,6 @@ const Routes = props => {
               <Redirect to="/" />
             )
           }
-        />
-        <Route
-          exact
-          path="/settings"
-          render={() => (props.user ? <SettingsMain /> : <Redirect to="/" />)}
         />
         <Route
           exact
