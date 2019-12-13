@@ -56,7 +56,11 @@ const Layout = ({ user }) => {
           />
         )}
         {pageToShow === 'owned' && (
-          <Owned showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
+          <Owned
+            showSidebar={showSidebar}
+            setShowSidebar={setShowSidebar}
+            user={user}
+          />
         )}
       </div>
     </div>
