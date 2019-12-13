@@ -7,6 +7,7 @@ import { PostDisplay } from './PostDisplay';
 import ReviewDisplay from './ReviewDisplay';
 import Settings from './Settings';
 import { Statistics } from './Statistics';
+import { Owned } from './Owned';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
@@ -48,11 +49,14 @@ const Layout = ({ user }) => {
         {pageToShow === 'settings' && (
           <Settings showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         )}
-        {pageToShow === 'statistics' && (
+        {pageToShow === 'stats' && (
           <Statistics
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
           />
+        )}
+        {pageToShow === 'owned' && (
+          <Owned showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
         )}
       </div>
     </div>

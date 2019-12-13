@@ -78,6 +78,14 @@ const Sidebar = ({ showSidebar, username, setPageToShow }) => {
               Settings
             </Link>
           </li>
+          <li>
+            <Link
+              className="sidebar-link"
+              onClick={() => setPageToShow('owned')}
+            >
+              Owned
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

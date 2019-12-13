@@ -37,6 +37,7 @@ const SinglePost = props => {
       }
     }
   }, [checked, props, userOwns]);
+  
   if (props.post === null) {
     return <Redirect to="/community" />;
   }

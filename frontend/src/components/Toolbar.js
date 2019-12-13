@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
 export const Toolbar = ({ children }) => {
-    return <div className="format-toolbar">{children}</div>;
+  return <div className="format-toolbar">{children}</div>;
 };
