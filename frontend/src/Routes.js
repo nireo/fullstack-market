@@ -27,11 +27,9 @@ import { initPosts, getPostWithId } from './reducers/postReducer';
 import { initMainPosts } from './reducers/mainReducer';
 import { initUsers } from './reducers/allUsersReducer';
 import Overview from './components/public/personal-shop/Overview';
-import OwnedItems from './components/private/owned-items/OwnedItems';
 import Tutorial from './components/public/Tutorial/Tutorial';
 import SingleReport from './components/private/admin/Reports/SingleReport';
 import ReportForm from './components/public/ReportForm';
-import ShowContent from './components/private/owned-items/ShowContent';
 import Search from './components/public/search/Search';
 import Contact from './components/Contact';
 import Message from './components/private/Message/Message';
@@ -149,11 +147,6 @@ const Routes = props => {
         />
         <Route
           exact
-          path="/owned-items"
-          render={() => (props.user ? <OwnedItems /> : <Redirect to="/" />)}
-        />
-        <Route
-          exact
           path="/report/:id"
           render={({ match }) =>
             props.user && props.user.username === 'admin' ? (
@@ -169,17 +162,6 @@ const Routes = props => {
           render={({ match }) =>
             props.user ? (
               <ReportForm id={match.params.id} />
-            ) : (
-              <Redirect to="/" />
-            )
-          }
-        />
-        <Route
-          exact
-          path="/owned-items/content/:id"
-          render={({ match }) =>
-            props.user ? (
-              <ShowContent id={match.params.id} />
             ) : (
               <Redirect to="/" />
             )

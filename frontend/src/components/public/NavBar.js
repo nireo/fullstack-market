@@ -96,11 +96,6 @@ const NavBar = props => {
                     </Link>
                   )}
                   {props.user.username !== 'admin' && (
-                    <Link className="dropdown-item" to={'/owned-items'}>
-                      <i class="fas fa-archive"></i> Owned items
-                    </Link>
-                  )}
-                  {props.user.username !== 'admin' && (
                     <Link
                       className="dropdown-item"
                       to={`/profile/${props.user._id}`}
