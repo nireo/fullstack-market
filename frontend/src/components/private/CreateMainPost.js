@@ -49,7 +49,6 @@ const CreateMainPost = props => {
   );
 };
 
-export default connect(
-  null,
-  { createMainPost, setNotification }
-)(CreateMainPost);
+export default connect(null, { createMainPost, setNotification })(
+  CreateMainPost
+);

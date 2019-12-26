@@ -83,11 +83,6 @@ const Routes = props => {
         />
         <Route
           exact
-          path="/create"
-          render={() => (!props.user ? <Redirect to="/" /> : <CreatePost />)}
-        />
-        <Route
-          exact
           path="/create/main"
           render={() => {
             if (props.user) {

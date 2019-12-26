@@ -203,10 +203,10 @@ exports.addItemToWishlist = async (req, res, next) => {
 
     const user = await userModel.findById(decodedToken.id);
     if (user) {
-      // check if the user object has a wishlist entry
       if (!user.wishlist) {
         user.wishlist = [];
       }
+
       user.wishlist = [...user.wishlist, postId];
       const saved = await user.save();
       return res.json(saved);
@@ -233,7 +233,6 @@ exports.removeItemFromWishlist = async (req, res, next) => {
 
     const user = await userModel.findById(decodedToken.id);
     if (user) {
-      // don't know if fully necessary, but just incase
       if (!user.wishlist) {
         user.wishlist = [];
       }

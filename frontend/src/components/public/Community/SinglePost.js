@@ -9,6 +9,7 @@ import Review from '../Review';
 import Pagination from '../Pagination';
 import Markdown from 'markdown-to-jsx';
 import { Helmet } from 'react-helmet';
+import userService from '../../../services/user';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
@@ -37,7 +38,7 @@ const SinglePost = props => {
       }
     }
   }, [checked, props, userOwns]);
-  
+
   if (props.post === null) {
     return <Redirect to="/community" />;
   }
@@ -71,6 +72,15 @@ const SinglePost = props => {
     }
   };
 
+  const addToWishList = async id => {
+    try {
+      await userService.addItemToWishlist(id);
+      props.setNotification('Item has been added wishlist', 'success', 2);
+    } catch {
+      props.setNotification('Something went wrong', 'error', 2);
+    }
+  };
+
   const lastPostIndex = currentPage * amountInPage;
   const firstPostIndex = lastPostIndex - amountInPage;
   const currentReviews = props.post.reviews.slice(
@@ -92,7 +102,17 @@ const SinglePost = props => {
           <div style={{ marginBottom: '3rem' }}>
             <Markdown>{props.post.description}</Markdown>
           </div>
-          <Link onClick={() => addToCart(props.post)}>Add to cart</Link>
+          <div>
+            <Link
+              style={{ marginRight: '1rem' }}
+              onClick={() => addToCart(props.post)}
+            >
+              Add to cart
+            </Link>
+            <Link onClick={() => addToWishList(props.post._id)}>
+              Add to wishlist
+            </Link>
+          </div>
         </div>
         {!props.type && (
           <div className="col">

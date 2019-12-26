@@ -73,15 +73,6 @@ const NavBar = props => {
                   <i className="fas fa-user" /> {props.user.username}
                 </Link>
                 <div className="dropdown-menu" aria-labelledby="userDropdown">
-                  {props.user.username === 'admin' ? (
-                    <Link className="dropdown-item" to="/create/main">
-                      <i className="fas fa-plus" /> Create Post
-                    </Link>
-                  ) : (
-                    <Link className="dropdown-item" to={`/create`}>
-                      <i className="fas fa-plus" /> Create Post
-                    </Link>
-                  )}
                   {props.user.username === 'admin' && (
                     <Link className="dropdown-item" to="/admin">
                       <i className="fas fa-chart-line" /> Admin panel
@@ -105,7 +96,7 @@ const NavBar = props => {
                   )}
                   {props.user.username !== 'admin' && (
                     <Link className="dropdown-item" to="/new">
-                      New
+                      Dashboard
                     </Link>
                   )}
                 </div>

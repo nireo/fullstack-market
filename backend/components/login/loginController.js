@@ -12,7 +12,8 @@ exports.loginHandler = async (req, res, next) => {
       .populate('communityItemsBought')
       .populate('mainItemsBought')
       .populate('posts')
-      .populate('reviewsPosted');
+      .populate('reviewsPosted')
+      .populate('wishlist');
 
     const checkPassword =
       user === null ? false : await bcrypt.compare(password, user.passwordHash);
