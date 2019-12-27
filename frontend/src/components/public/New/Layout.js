@@ -8,6 +8,7 @@ import ReviewDisplay from './ReviewDisplay';
 import Settings from './Settings';
 import { Statistics } from './Statistics';
 import { Owned } from './Owned';
+import { Wishlist } from './Wishlist';
 
 // here the sidebar and content are divided
 const Layout = ({ user }) => {
@@ -57,6 +58,13 @@ const Layout = ({ user }) => {
         )}
         {pageToShow === 'owned' && (
           <Owned
+            showSidebar={showSidebar}
+            setShowSidebar={setShowSidebar}
+            user={user}
+          />
+        )}
+        {pageToShow === 'wishlist' && (
+          <Wishlist
             showSidebar={showSidebar}
             setShowSidebar={setShowSidebar}
             user={user}

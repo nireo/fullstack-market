@@ -10,3 +10,6 @@ Different types of services are divided into components. Components include a co
 
 #### Frontend
 Im using redux for state management, to easily transfer states around multiple files. Some of the styles are from bootstrap, but at this moment, there is more of my own styling. Component folder is divided into public and private components. Meaning private can be accessed only when logged in, but public components can accessed by both. Components that belong to both, are placed in neither.
+
+### Features
+This project has a lot of different features. The main features are posting items for sale, signing up, searching for items and managing your shop. Other notable features include web socket chat, tutorial, personal shop which is sort of like a store front which you can customize to your liking. 

@@ -58,6 +58,14 @@ const Sidebar = ({ showSidebar, username, setPageToShow }) => {
               Owned
             </Link>
           </li>
+          <li>
+            <Link
+              className="sidebar-link"
+              onClick={() => setPageToShow('wishlist')}
+            >
+              Wishlist
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>
