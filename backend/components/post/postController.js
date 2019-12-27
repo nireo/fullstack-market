@@ -34,11 +34,6 @@ exports.searchForPosts = async (req, res, next) => {
 
 exports.getAllPosts = async (req, res, next) => {
   try {
-    // first check if there is a search
-
-    // then handle page stuff
-
-    // convert string to number
     const page = +req.params.page;
     if (page === 1) {
       await postModel
@@ -93,6 +88,12 @@ exports.createPost = async (req, res, next) => {
     if (!token || !decodedToken) {
       return res.status(401).json({
         error: 'invalid token'
+      });
+    }
+
+    if (!price || !title || !description || !content) {
+      return res.status(400).json({
+        error: 'invalid request body'
       });
     }
 
@@ -155,6 +156,12 @@ exports.updatePost = async (req, res, next) => {
     if (!token || !decodedToken) {
       return res.status(401).json({
         error: 'invalid token'
+      });
+    }
+
+    if (!price || !title || !description || !content) {
+      return res.status(400).json({
+        error: 'invalid request body'
       });
     }
 

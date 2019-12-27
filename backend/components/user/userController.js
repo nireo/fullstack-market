@@ -50,6 +50,12 @@ exports.getUserById = async (req, res, next) => {
 exports.createUser = async (req, res, next) => {
   const { username, password, email } = req.body;
   try {
+    if (!username || !password || !email) {
+      return res.status(400).json({
+        error: 'invalid token'
+      });
+    }
+
     const saltRounds = 10;
     await bcrypt.hash(password, saltRounds, async (err, passwordHash) => {
       if (err) return res.status(500);
@@ -104,6 +110,12 @@ exports.updateUser = async (req, res, next) => {
       });
     }
 
+    if (!email || !username || !bio) {
+      return res.status(400).json({
+        error: 'invalid token'
+      });
+    }
+
     const user = await userModel.findById(req.params.id);
     const updatedUser = {
       email: email ? email : user.email,
@@ -129,6 +141,13 @@ exports.buyMainItems = async (req, res, next) => {
         error: 'invalid token'
       });
     }
+
+    if (!postId) {
+      return res.status(400).json({
+        error: 'invalid token'
+      });
+    }
+
     const user = await userModel.findById(decodedToken.id);
     user.mainItemsBought = user.mainItemsBought.concat(postId);
     await user.save((err, populateUser) => {
@@ -158,6 +177,13 @@ exports.buyCommunityItems = async (req, res, next) => {
         error: 'invalid token'
       });
     }
+
+    if (!ids) {
+      return res.status(400).json({
+        error: 'invalid request body'
+      });
+    }
+
     const user = await userModel.findById(decodedToken.id);
     if (ids.length === 1) {
       user.communityItemsBought = user.communityItemsBought.concat(ids[0]);
@@ -191,6 +217,12 @@ exports.addItemToWishlist = async (req, res, next) => {
     if (!token || !decodedToken) {
       return res.status(401).json({
         error: 'invalid token'
+      });
+    }
+
+    if (!postId) {
+      return res.status(400).json({
+        error: 'invalid request body'
       });
     }
 

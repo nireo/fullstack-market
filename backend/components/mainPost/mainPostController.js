@@ -60,6 +60,13 @@ exports.createPost = async (req, res, next) => {
         error: 'invalid token'
       });
     }
+
+    if (!title || !description || !price || !content) {
+      return res.status(400).json({
+        error: 'invalid request body'
+      });
+    }
+
     if (decodedToken.username === 'admin') {
       const newMainPost = new mainPostModel({
         title,
@@ -109,6 +116,12 @@ exports.updatePost = async (req, res, next) => {
     if (!decodedToken || !token) {
       return res.status(401).json({
         error: 'invalid token'
+      });
+    }
+
+    if (!title || !description || !price || !content) {
+      return res.status(400).json({
+        error: 'invalid request body'
       });
     }
 

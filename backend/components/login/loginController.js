@@ -18,6 +18,12 @@ exports.loginHandler = async (req, res, next) => {
     const checkPassword =
       user === null ? false : await bcrypt.compare(password, user.passwordHash);
 
+    if (!checkPassword) {
+      return res.status(401).json({
+        error: 'invalid username or password'
+      });
+    }
+
     if (!(user && checkPassword)) {
       return res.status(401).json({
         error: 'invalid username or password'

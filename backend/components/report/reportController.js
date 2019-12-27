@@ -14,6 +14,13 @@ exports.createReport = async (req, res, next) => {
         error: 'invalid token'
       });
     }
+
+    if (!content) {
+      return res.status(400).json({
+        error: 'invalid request body'
+      });
+    }
+
     const from = await userModel.findById(decodedToken.id);
     const to = await userModel.findById(req.params.id);
     const newReport = new reportModel({
