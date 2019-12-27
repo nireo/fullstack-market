@@ -13,7 +13,7 @@ export const PostDisplay = ({ setShowSidebar, showSidebar }) => {
             onClick={() => setShowSidebar(!showSidebar)}
             type="button"
             id="sidebarCollapse"
-            className="btn btn-info"
+            className="btn btn-dark"
           >
             <i className="fas fa-align-left"></i>
             <span>Toggle Sidebar</span>

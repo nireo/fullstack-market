@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 const ReviewDisplay = ({ setShowSidebar, showSidebar, user }) => {
   const [showContent, setShowContent] = useState('edit');
 
-  console.log(user);
-
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light box">
@@ -16,7 +14,7 @@ const ReviewDisplay = ({ setShowSidebar, showSidebar, user }) => {
             onClick={() => setShowSidebar(!showSidebar)}
             type="button"
             id="sidebarCollapse"
-            className="btn btn-info"
+            className="btn btn-dark"
           >
             <i className="fas fa-align-left"></i>
             <span>Toggle Sidebar</span>

@@ -558,8 +558,9 @@ h6 {
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
-  background: #6d7fcc;
-  color: #fff;
+  background: #000000;
+  color: #000000;
+  box-shadow: rgba(0, 0, 0, 0.11) 0px 1px 6px 0px;
   transition: all 0.3s;
 }
 
@@ -574,7 +575,7 @@ h6 {
 }
 
 #sidebar ul p {
-  color: #fff;
+  color: #000000;
   padding: 10px;
 }
 
@@ -584,13 +585,13 @@ h6 {
   display: block;
 }
 #sidebar ul li .sidebar-link:hover {
-  color: #6d7fcc;
+  color: #000000;
   background: #fff;
 }
 
 #sidebar ul li.active > .sidebar-link,
 a[aria-expanded='true'] {
-  color: #fff;
+  color: #000000;
   background: #6d7fcc;
 }
 ul ul .sidebar-link {

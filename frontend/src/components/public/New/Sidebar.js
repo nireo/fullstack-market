@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const Sidebar = ({ showSidebar, username, setPageToShow }) => {
   return (
     <div>
-      <nav id="sidebar" className={`${showSidebar ? '' : 'active'}`}>
-        <div className="sidebar-header">
+      <nav id="sidebar" className={`bg-light ${showSidebar ? '' : 'active'}`}>
+        <div className="sidebar-header bg-light">
           <h3>{username}'s dashboard</h3>
         </div>
 
