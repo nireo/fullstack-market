@@ -42,7 +42,7 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
             type="text"
             value={search}
             onChange={({ target }) => setSearch(target.value)}
-            placeholder="Search for something..."
+            placeholder="Search for items"
             style={{
               border: '2px solid #cca8e9'
             }}
