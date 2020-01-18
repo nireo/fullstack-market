@@ -52,6 +52,12 @@ const userSchema = new Schema({
       type: String,
       default: 'No about given',
       max: 300
+    },
+    color: {
+      type: String,
+      default: '#cca8e9',
+      // color is stored as a hex value so accept only length 7 strings
+      max: 7
     }
   },
   wishlist: [
