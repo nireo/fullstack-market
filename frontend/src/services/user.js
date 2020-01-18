@@ -79,6 +79,15 @@ const removeItemFromWishlist = async id => {
   return response.data;
 };
 
+const updatePersonalShop = async (about, color) => {
+  const response = await axios.put(
+    `${baseUrl}/personal`,
+    { about, color },
+    getConfig()
+  );
+  return response.data;
+};
+
 export default {
   makeNewUser,
   setToken,
@@ -92,5 +101,6 @@ export default {
   getConfig,
   searchUsers,
   addItemToWishlist,
-  removeItemFromWishlist
+  removeItemFromWishlist,
+  updatePersonalShop
 };

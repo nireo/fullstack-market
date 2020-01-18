@@ -23,17 +23,10 @@ const Users = props => {
     return <Loading />;
   }
 
-  const filteredSearch = search
-    ? props.users.filter(u =>
-        u.username.toLowerCase().includes(search.toLowerCase())
-      )
-    : props.users;
-
   const handleSearch = async event => {
     event.preventDefault();
     setSearched(false);
     setLoading(true);
-
     try {
       const users = await user.searchUsers(search);
       setUsers(users);
@@ -44,8 +37,6 @@ const Users = props => {
       setLoading(false);
     }
   };
-
-  console.log(users);
 
   return (
     <div className="container">

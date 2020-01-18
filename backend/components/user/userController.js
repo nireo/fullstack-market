@@ -279,6 +279,30 @@ exports.removeItemFromWishlist = async (req, res, next) => {
       });
     }
   } catch (e) {
+    res.status(500);
+    next(e);
+  }
+};
+
+exports.updatePersonalShop = async (req, res, next) => {
+  const token = getToken(req);
+  const { about, color } = req.body;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!decodedToken || !token) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const user = await userModel.findById(decodedToken.id);
+    user.personalShop.about = about;
+    user.personalShop.color = color;
+    // item will be set in the front-end so no need to send it back
+    await user.save();
+    return res.status(200);
+  } catch (e) {
+    res.status(500);
     next(e);
   }
 };

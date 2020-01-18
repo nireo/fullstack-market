@@ -28,6 +28,11 @@ export const handleLogin = (credentials, rememberMe) => {
   };
 };
 
+export const setNewInfo = user => {
+  // use login since it has all the needed functionality
+  return { type: 'LOG_IN', data: user };
+};
+
 export const checkLocalStorage = () => {
   return async dispatch => {
     const userInfo = localStorage.getItem('user');

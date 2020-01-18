@@ -124,7 +124,7 @@ const Cart = props => {
         <meta charSet="utf-8" />
         <title>Cart - benevol</title>
       </Helmet>
-      <h2 style={{ paddingBottom: '2em' }}>Your cart</h2>
+      <h2 style={{ paddingBottom: '2rem', paddingTop: '2rem' }}>Your cart</h2>
       <h5>Items in cart: {props.cart.length}</h5>
       {renderCartItems}
       <hr />

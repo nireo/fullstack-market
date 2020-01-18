@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-import Loading from "../../Loading";
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import Loading from '../../Loading';
+import userService from '../../../services/user';
+import { setNotification } from '../../../reducers/notificationReducer';
+import { setNewInfo, setUserInfo } from '../../../reducers/userReducer';
 
-const EditPersonalPage = ({ color, oldAbout }) => {
+const EditPersonalPage = ({
+  color,
+  oldAbout,
+  setNotification,
+  setNewInfo,
+  user
+}) => {
   const [newColor, setNewColor] = useState(null);
   const [about, setAbout] = useState(null);
 
@@ -20,14 +29,26 @@ const EditPersonalPage = ({ color, oldAbout }) => {
     return <Loading />;
   }
 
-  const updateShop = event => {
+  const updateShop = async event => {
     event.preventDefault();
+    try {
+      await userService.updatePersonalShop(about, newColor);
+      const properties = {
+        about,
+        color: newColor
+      };
+      let newUserInfo = { ...user, personalShop: properties };
+      setNotification('Successfully updated shop', 'success', 2);
+    } catch {
+      setNotification('Error while updating shop', 'error', 2);
+    }
   };
 
   return (
-    <div className="container">
+    <div>
       <form onSubmit={updateShop}>
         <div className="form-group">
+          <label>About (same as your profile)</label>
           <textarea
             className="form-control"
             value={about}
@@ -36,6 +57,7 @@ const EditPersonalPage = ({ color, oldAbout }) => {
           />
         </div>
         <div className="form-group">
+          <label>Banner color</label>
           <input
             className="form-control"
             type="color"
@@ -55,7 +77,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  null
-)(EditPersonalPage);
+export default connect(mapStateToProps, { setNotification, setNewInfo })(
+  EditPersonalPage
+);
