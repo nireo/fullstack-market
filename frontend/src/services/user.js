@@ -56,7 +56,8 @@ const updateBio = async object => {
 };
 
 const searchUsers = async search => {
-  const response = await axios.get(`${baseUrl}/?search=${search}`);
+  let url = `${baseUrl}/?search=${search}`;
+  const response = await axios.get(url);
   return response.data;
 };
 

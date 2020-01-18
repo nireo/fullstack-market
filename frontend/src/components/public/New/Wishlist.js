@@ -36,7 +36,11 @@ export const Wishlist = ({ showSidebar, setShowSidebar, user }) => {
               <div
                 key={i._id}
                 className="box container"
-                style={{ marginBottom: '1rem' }}
+                style={{
+                  marginBottom: '1rem',
+                  paddingTop: '1rem',
+                  paddingBottom: '1rem'
+                }}
               >
                 <h6 className="d-flex position-relative">{i.title}</h6>
                 <p>{i.description.slice(0, 100)}</p>

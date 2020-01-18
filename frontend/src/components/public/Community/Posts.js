@@ -68,7 +68,6 @@ const Posts = props => {
         <meta charSet="utf-8" />
         <title>Community - benevol</title>
       </Helmet>
-      <hr />
       {renderPosts.length === 0 ? (
         <div className="text-center">
           <p>No items have been posted</p>

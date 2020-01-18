@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '../../Modal';
+import { Link } from 'react-router-dom';
 
 export const Owned = ({ setShowSidebar, showSidebar, user }) => {
   const [showModal, setShowModal] = useState(false);
@@ -48,34 +49,26 @@ export const Owned = ({ setShowSidebar, showSidebar, user }) => {
           <h2>Owned items</h2>
           <div>
             {user.communityItemsBought.map(i => (
-              <div key={i._id} className="box" style={{ margin: '0.5rem' }}>
-                <h6
-                  className="d-flex position-relative"
-                  style={{ paddingTop: '0.5rem', paddingLeft: '0.5rem' }}
-                >
-                  {i.title}
-                </h6>
-                <p style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem' }}>
-                  {i.description.slice(0, 50)}
-                </p>
-                <button
-                  className="button-blue size-small"
-                  style={{
-                    border: 'none',
-                    padding: '2px 4px',
-                    textAlign: 'center',
-                    textDecoration: 'none',
-                    display: 'inline-block',
-                    borderRadius: '5px',
-                    marginBottom: '0.25rem'
-                  }}
+              <div
+                key={i._id}
+                className="box container"
+                style={{
+                  marginBottom: '1rem',
+                  paddingTop: '1rem',
+                  paddingLeft: '1rem'
+                }}
+              >
+                <h6 className="d-flex position-relative">{i.title}</h6>
+                <p>{i.description.slice(0, 50)}</p>
+                <Link
+                  style={{ paddingBottom: '1rem' }}
                   onClick={() => {
                     setShowModal(true);
                     setViewContent(i);
                   }}
                 >
-                  View Content
-                </button>
+                  View content
+                </Link>
               </div>
             ))}
           </div>

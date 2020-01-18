@@ -29,13 +29,14 @@ const Users = props => {
       )
     : props.users;
 
-  const handleSearch = event => {
+  const handleSearch = async event => {
     event.preventDefault();
     setSearched(false);
     setLoading(true);
 
     try {
-      user.searchUsers(search);
+      const users = await user.searchUsers(search);
+      setUsers(users);
       setLoading(false);
       setSearched(true);
     } catch {
@@ -43,6 +44,8 @@ const Users = props => {
       setLoading(false);
     }
   };
+
+  console.log(users);
 
   return (
     <div className="container">

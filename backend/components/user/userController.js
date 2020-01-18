@@ -8,9 +8,10 @@ const postModel = require('../post/postModel');
 exports.getAllUsers = async (req, res, next) => {
   try {
     if (req.query.search) {
+      console.log('test');
       const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
-      await userModel.find({ title: regex }, (err, results) => {
+      await userModel.find({ username: regex }, (err, results) => {
         if (err) return res.status(500);
 
         return res.json(results);
