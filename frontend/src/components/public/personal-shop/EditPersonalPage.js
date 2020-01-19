@@ -38,6 +38,7 @@ const EditPersonalPage = ({
         color: newColor
       };
       let newUserInfo = { ...user, personalShop: properties };
+      setNewInfo(newUserInfo);
       setNotification('Successfully updated shop', 'success', 2);
     } catch {
       setNotification('Error while updating shop', 'error', 2);
@@ -48,7 +49,7 @@ const EditPersonalPage = ({
     <div>
       <form onSubmit={updateShop}>
         <div className="form-group">
-          <label>About (same as your profile)</label>
+          <label>About</label>
           <textarea
             className="form-control"
             value={about}

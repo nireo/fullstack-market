@@ -12,6 +12,8 @@ const Overview = props => {
   const [showForm, setShowForm] = useState(false);
   const [user, setUser] = useState(null);
   const [changeFeatured, setChangeFeatured] = useState(false);
+  const [editPinned, setEditPinned] = useState(false);
+  const [editedPinned, setEditedPinned] = useState([]);
 
   useEffect(() => {
     if (props.users === null) {
@@ -19,6 +21,17 @@ const Overview = props => {
     }
     if (props.users) {
       setUser(props.users.find(u => u._id === props.id));
+      if (editedPinned === []) {
+        const editedPins = props.user.posts.map(item => {
+          const template = {
+            checked: false,
+            id: item._id,
+            title: item.title
+          };
+          return template;
+        });
+        setEditedPinned(editedPins);
+      }
     }
   }, [props]);
 
@@ -35,6 +48,11 @@ const Overview = props => {
     setChangeFeatured(false);
   };
 
+  const closePinned = event => {
+    event.preventDefault();
+    setEditPinned(false);
+  };
+
   return (
     <div>
       <div
@@ -44,13 +62,33 @@ const Overview = props => {
         <h1 style={{ color: 'white' }}>{user.username}'s shop</h1>
       </div>
       <Modal show={changeFeatured} handleClose={handleClose}>
-        <p>modal test</p>
+        <div className="container">
+          <EditPersonalPage
+            color="#4f81c7"
+            oldAbout={user.personalShop.about}
+          />
+        </div>
+      </Modal>
+      <Modal show={editPinned} handleClose={closePinned}>
+        <div className="container">
+          <h3>Edit pinned posts</h3>
+          <div className="form-check">
+            <div>
+              {editedPinned.map(item => (
+                <div>
+                  {item.title}
+                  {item._id}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </Modal>
       <Pinned posts={user.posts} />
       <div className="container">
         <button
           className="button-basic button-pink"
-          onClick={() => setChangeFeatured(true)}
+          onClick={() => setEditPinned(true)}
         >
           Change pinned
         </button>
@@ -62,7 +100,7 @@ const Overview = props => {
           (!showForm ? (
             <div>
               <button
-                onClick={() => setShowForm(true)}
+                onClick={() => setChangeFeatured(true)}
                 className="btn btn-primary"
               >
                 Edit

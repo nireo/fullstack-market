@@ -30,7 +30,7 @@ export const Wishlist = ({ showSidebar, setShowSidebar, user }) => {
       </nav>
       <div className="container" style={{ marginTop: '2rem' }}>
         <div className="box" style={{ padding: '1rem' }}>
-          <h2>Your wishlist</h2>
+          <h2 style={{ paddingBottom: '1rem' }}>Your wishlist</h2>
           <div>
             {user.wishlist.map(i => (
               <div

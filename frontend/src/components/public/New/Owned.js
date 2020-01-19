@@ -46,7 +46,7 @@ export const Owned = ({ setShowSidebar, showSidebar, user }) => {
           </Modal>
         )}
         <div className="box" style={{ padding: '1rem' }}>
-          <h2>Owned items</h2>
+          <h2 style={{ paddingBottom: '1rem' }}>Owned items</h2>
           <div>
             {user.communityItemsBought.map(i => (
               <div
