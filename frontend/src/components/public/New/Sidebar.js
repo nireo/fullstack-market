@@ -37,14 +37,6 @@ const Sidebar = ({ showSidebar, username, setPageToShow }) => {
           <li>
             <Link
               className="sidebar-link"
-              onClick={() => setPageToShow('stats')}
-            >
-              Statistics
-            </Link>
-          </li>
-          <li>
-            <Link
-              className="sidebar-link"
               onClick={() => setPageToShow('settings')}
             >
               Settings

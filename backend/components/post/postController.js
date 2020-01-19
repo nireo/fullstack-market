@@ -67,7 +67,7 @@ exports.getAllPosts = async (req, res, next) => {
 exports.getPostById = async (req, res, next) => {
   try {
     await postModel
-      .findById(request.params.id)
+      .findById(req.params.id)
       .populate('postedBy')
       .populate('reviews')
       .exec((err, results) => {

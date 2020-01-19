@@ -6,7 +6,6 @@ import { Preview } from './Preview';
 import { PostDisplay } from './PostDisplay';
 import ReviewDisplay from './ReviewDisplay';
 import Settings from './Settings';
-import { Statistics } from './Statistics';
 import { Owned } from './Owned';
 import { Wishlist } from './Wishlist';
 
@@ -49,12 +48,6 @@ const Layout = ({ user }) => {
         )}
         {pageToShow === 'settings' && (
           <Settings showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
-        )}
-        {pageToShow === 'stats' && (
-          <Statistics
-            showSidebar={showSidebar}
-            setShowSidebar={setShowSidebar}
-          />
         )}
         {pageToShow === 'owned' && (
           <Owned
