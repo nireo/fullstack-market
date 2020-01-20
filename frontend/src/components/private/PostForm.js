@@ -83,15 +83,6 @@ const PostForm = props => {
             >
               Next
             </button>
-            {props.type === 'create' && (
-              <button
-                className="tutorial-button button-blue"
-                style={{ marginTop: '0.5rem' }}
-                onClick={() => props.setShowPreview(true)}
-              >
-                Show preview
-              </button>
-            )}
           </div>
         )}
       </form>

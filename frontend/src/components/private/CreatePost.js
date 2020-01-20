@@ -7,6 +7,7 @@ import CreatePostContent from './CreatePostContent';
 import Finished from './Finished';
 import Modal from '../Modal';
 import Markdown from 'markdown-to-jsx';
+import { Link } from 'react-router-dom';
 
 const CreatePost = ({ createPost, setNotification }) => {
   const [title, setTitle] = useState('');
@@ -60,6 +61,11 @@ const CreatePost = ({ createPost, setNotification }) => {
                 <Markdown>{description}</Markdown>
               </div>
             </Modal>
+          )}
+          {description !== '' && (
+            <div>
+              <Link onClick={() => setShowPreview(true)}>Show preview</Link>
+            </div>
           )}
         </div>
       )}

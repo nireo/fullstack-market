@@ -57,6 +57,7 @@ const SingleUser = props => {
           <Link to={`/report/user/${user._id}`}>
             <button className="button-basic button-pink">Report</button>
           </Link>
+          <p>You can change your about, in the dashboard</p>
         </div>
         <div className="col-10" style={{ marginTop: 0, paddingTop: 0 }}>
           <div>
