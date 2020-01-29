@@ -24,6 +24,10 @@ const reviewSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  helpfulCount: {
+    type: Number,
+    default: 0
   }
 });
 

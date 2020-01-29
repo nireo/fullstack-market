@@ -166,3 +166,32 @@ exports.updateReview = async (req, res, next) => {
     next(e);
   }
 };
+
+exports.addHelpful = async (req, res, next) => {
+  // take token so that only users can update posts, the token itself doesn't
+  // really matter
+  const token = getToken(req);
+  const id = req.params.id;
+  try {
+    const decodedToken = jwt.verify(token, config.SECRET);
+    if (!token || !decodedToken) {
+      return res.status(401).json({
+        error: 'invalid token'
+      });
+    }
+
+    const review = await reviewModel.findById(id);
+    if (review) {
+      const updated = await reviewModel.findByIdAndUpdate(
+        review._id,
+        { ...review, helpfulCount: review.helpfulCount + 1 },
+        { new: true }
+      );
+      return res.json(updated);
+    }
+
+    return res.status(404);
+  } catch (e) {
+    next(e);
+  }
+};
