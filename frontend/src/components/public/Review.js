@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import reviewService from '../../services/review';
 import { setNotification } from '../../reducers/notificationReducer';
 import RenderStars from '../RenderStars';
 
 const Review = ({ review, user, setNotification }) => {
+  const [disabledButton, setDisableButton] = useState(false);
   const handleDelete = id => {
     if (window.confirm('Are you sure you want to delete ' + id)) {
       try {
@@ -16,10 +17,12 @@ const Review = ({ review, user, setNotification }) => {
     }
   };
 
+  const addHelpful = () => {};
+
   return (
-    <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <div class="my-3 p-3 bg-white rounded box small">
       <div class="media text-muted pt-3">
-        <p class="media-body pb-3 mb-0 small lh-125">
+        <p class="media-body pb-3 mb-0">
           <div className="row">
             <div className="col-md 8">
               <strong class="d-block text-gray-dark">{review.title}</strong>
@@ -43,6 +46,14 @@ const Review = ({ review, user, setNotification }) => {
           )}
         </p>
       </div>
+      <p>0 people found this helpful</p>
+      <button
+        className="tutorial-button button-pink"
+        style={{ marginTop: '0' }}
+        disabled={disabledButton}
+      >
+        Helpful
+      </button>
     </div>
   );
 };

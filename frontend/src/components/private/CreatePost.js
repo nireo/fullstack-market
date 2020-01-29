@@ -63,7 +63,7 @@ const CreatePost = ({ createPost, setNotification }) => {
             </Modal>
           )}
           {description !== '' && (
-            <div>
+            <div className="container">
               <Link onClick={() => setShowPreview(true)}>Show preview</Link>
             </div>
           )}
@@ -84,6 +84,11 @@ const CreatePost = ({ createPost, setNotification }) => {
                 <Markdown>{content}</Markdown>
               </div>
             </Modal>
+          )}
+          {content !== '' && (
+            <div className="container">
+              <Link onClick={() => setShowPreview(true)}>Show preview</Link>
+            </div>
           )}
         </div>
       )}

@@ -50,7 +50,7 @@ const Users = props => {
             type="text"
             value={search}
             onChange={({ target }) => setSearch(target.value)}
-            placeholder="Search for items"
+            placeholder="Search for users"
             style={{
               border: '2px solid #cca8e9'
             }}

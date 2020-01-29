@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 
-const CreatePostContent = ({
-  setStep,
-  createPost,
-  setShowPreview,
-  content,
-  setContent
-}) => {
+const CreatePostContent = ({ setStep, createPost, content, setContent }) => {
   const [type, setType] = useState('text');
 
   const handleFunctionCall = event => {
@@ -48,12 +42,6 @@ const CreatePostContent = ({
           </button>
         </div>
       </form>
-      <button
-        className="tutorial-button button-blue mt-3"
-        onClick={() => setShowPreview(true)}
-      >
-        Show preview
-      </button>
     </div>
   );
 };

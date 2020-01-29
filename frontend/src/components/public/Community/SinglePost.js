@@ -21,6 +21,7 @@ const SinglePost = props => {
   const [amountInPage] = useState(3);
   const [userOwns, setUserOwns] = useState(false);
   const [checked, setCheck] = useState(false);
+  const [alreadyInCart, setAlreadyInCart] = useState(null);
 
   useEffect(() => {
     if (props.post !== null && props.user !== null) {
@@ -35,6 +36,15 @@ const SinglePost = props => {
         if (ownedItem) {
           setUserOwns(true);
         }
+      }
+    }
+
+    if (alreadyInCart === null) {
+      const found = props.cart.find(item => item._id === props.post._id);
+      if (found) {
+        setAlreadyInCart(true);
+      } else {
+        setAlreadyInCart(false);
       }
     }
   }, [checked, props, userOwns]);
@@ -103,15 +113,24 @@ const SinglePost = props => {
             <Markdown>{props.post.description}</Markdown>
           </div>
           <div>
-            <Link
+            <button
+              className={`tutorial-button ${
+                alreadyInCart === false || alreadyInCart === null
+                  ? 'button-pink'
+                  : ''
+              }`}
               style={{ marginRight: '1rem' }}
               onClick={() => addToCart(props.post)}
+              disabled={alreadyInCart === null || alreadyInCart === true}
             >
               Add to cart
-            </Link>
-            <Link onClick={() => addToWishList(props.post._id)}>
+            </button>
+            <button
+              className="tutorial-button button-pink"
+              onClick={() => addToWishList(props.post._id)}
+            >
               Add to wishlist
-            </Link>
+            </button>
           </div>
         </div>
         {!props.type && (
