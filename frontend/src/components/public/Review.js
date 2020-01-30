@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import reviewService from '../../services/review';
 import { setNotification } from '../../reducers/notificationReducer';
 import RenderStars from '../RenderStars';
+import { addHelpful } from '../../reducers/postReducer';
 
 const Review = ({ review, user, setNotification }) => {
   const [disabledButton, setDisableButton] = useState(false);
@@ -17,7 +18,9 @@ const Review = ({ review, user, setNotification }) => {
     }
   };
 
-  const addHelpful = () => {};
+  const addHelpful = () => {
+    props.addHelpful(review._id);
+  };
 
   return (
     <div class="my-3 p-3 bg-white rounded box small">
@@ -48,9 +51,10 @@ const Review = ({ review, user, setNotification }) => {
       </div>
       <p>0 people found this helpful</p>
       <button
-        className="tutorial-button button-pink"
+        className={`tutorial-button ${disabledButton ? '' : 'button-pink'}`}
         style={{ marginTop: '0' }}
         disabled={disabledButton}
+        onClick={() => addHelpful()}
       >
         Helpful
       </button>
@@ -64,4 +68,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { setNotification })(Review);
+export default connect(mapStateToProps, { setNotification, addHelpful })(
+  Review
+);

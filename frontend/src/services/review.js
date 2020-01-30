@@ -39,6 +39,11 @@ const editReview = async (id, object) => {
   return response.data;
 };
 
+const addHelpful = async id => {
+  const response = await axios.put(`${baseUrl}/helpful/${id}`, getConfig());
+  return response.data;
+};
+
 export default {
   editReview,
   setToken,
