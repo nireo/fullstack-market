@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import reviewService from '../../services/review';
 import { setNotification } from '../../reducers/notificationReducer';
 import RenderStars from '../RenderStars';
-import { addHelpful } from '../../reducers/postReducer';
+import { updateReviewHelpful as r_addHelpful } from '../../reducers/postReducer';
 
-const Review = ({ review, user, setNotification }) => {
+const Review = ({ review, user, setNotification, r_addHelpful }) => {
   const [disabledButton, setDisableButton] = useState(false);
   const handleDelete = id => {
     if (window.confirm('Are you sure you want to delete ' + id)) {
@@ -19,7 +19,7 @@ const Review = ({ review, user, setNotification }) => {
   };
 
   const addHelpful = () => {
-    props.addHelpful(review._id);
+    r_addHelpful(review._id);
   };
 
   return (
@@ -39,25 +39,28 @@ const Review = ({ review, user, setNotification }) => {
               <RenderStars stars={review.stars} />
             </div>
           </div>
-          {user && user._id === review.postedBy && (
-            <button
-              onClick={() => handleDelete(review._id)}
-              className="btn btn-outline-danger btn-sm mb-0 pb-0 mt-2"
-            >
-              Delete
-            </button>
-          )}
         </p>
       </div>
       <p>0 people found this helpful</p>
-      <button
-        className={`tutorial-button ${disabledButton ? '' : 'button-pink'}`}
-        style={{ marginTop: '0' }}
-        disabled={disabledButton}
-        onClick={() => addHelpful()}
-      >
-        Helpful
-      </button>
+      <div>
+        <button
+          className={`tutorial-button ${disabledButton ? '' : 'button-pink'}`}
+          style={{ marginTop: '0' }}
+          disabled={disabledButton}
+          onClick={() => addHelpful()}
+        >
+          Helpful
+        </button>
+        {user && user._id === review.postedBy && (
+          <button
+            onClick={() => handleDelete(review._id)}
+            className="tutorial-button button-pink"
+            style={{ marginTop: '0', marginLeft: '1rem' }}
+          >
+            Delete
+          </button>
+        )}
+      </div>
     </div>
   );
 };
@@ -68,6 +71,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { setNotification, addHelpful })(
+export default connect(mapStateToProps, { setNotification, r_addHelpful })(
   Review
 );

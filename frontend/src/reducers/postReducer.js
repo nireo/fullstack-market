@@ -24,13 +24,13 @@ const reducer = (state = null, action) => {
       }
       return [...state, action.data];
     case 'UPDATE_REVIEW':
-      let post = state.find(p => p._id === action.id);
+      let postWithReview = state.find(p => p._id === action.id);
       // if we don't find the post, don't do anything
-      if (!post) {
+      if (!postWithReview) {
         return state;
       }
 
-      const updatedReviews = post.reviews.map(r =>
+      const updatedReviews = postWithReview.reviews.map(r =>
         r._id === action.data._id ? action.data : r
       );
       post.reviews = updatedReviews;

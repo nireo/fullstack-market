@@ -22,6 +22,7 @@ const SinglePost = props => {
   const [userOwns, setUserOwns] = useState(false);
   const [checked, setCheck] = useState(false);
   const [alreadyInCart, setAlreadyInCart] = useState(null);
+  const [alreadyWish, setAlreadyWish] = useState(null);
 
   useEffect(() => {
     if (props.post !== null && props.user !== null) {
@@ -39,12 +40,21 @@ const SinglePost = props => {
       }
     }
 
-    if (alreadyInCart === null) {
+    if (alreadyInCart === null && props.user !== null) {
       const found = props.cart.find(item => item._id === props.post._id);
       if (found) {
         setAlreadyInCart(true);
       } else {
         setAlreadyInCart(false);
+      }
+    }
+
+    if (props.user !== null && alreadyWish === null) {
+      const found = props.user.wishlist.map(p => p._id === props.post._id);
+      if (found) {
+        setAlreadyWish(true);
+      } else {
+        setAlreadyWish(false);
       }
     }
   }, [checked, props, userOwns]);
@@ -112,26 +122,37 @@ const SinglePost = props => {
           <div style={{ marginBottom: '3rem' }}>
             <Markdown>{props.post.description}</Markdown>
           </div>
-          <div>
-            <button
-              className={`tutorial-button ${
-                alreadyInCart === false || alreadyInCart === null
-                  ? 'button-pink'
-                  : ''
-              }`}
-              style={{ marginRight: '1rem' }}
-              onClick={() => addToCart(props.post)}
-              disabled={alreadyInCart === null || alreadyInCart === true}
-            >
-              Add to cart
-            </button>
-            <button
-              className="tutorial-button button-pink"
-              onClick={() => addToWishList(props.post._id)}
-            >
-              Add to wishlist
-            </button>
-          </div>
+          {props.user ? (
+            <div>
+              <button
+                className={`tutorial-button ${
+                  alreadyInCart === false || alreadyInCart === null
+                    ? 'button-pink'
+                    : ''
+                }`}
+                style={{ marginRight: '1rem' }}
+                onClick={() => addToCart(props.post)}
+                disabled={alreadyInCart === null || alreadyInCart}
+              >
+                Add to cart
+              </button>
+              <button
+                className={`tutorial-button ${
+                  alreadyWish === false || alreadyWish === null
+                    ? 'button-pink'
+                    : ''
+                }`}
+                disabled={alreadyWish === null || alreadyWish}
+                onClick={() => addToWishList(props.post._id)}
+              >
+                Add to wishlist
+              </button>
+            </div>
+          ) : (
+            <p>
+              <strong>You need to be logged in to buy</strong>
+            </p>
+          )}
         </div>
         {!props.type && (
           <div className="col">
@@ -167,7 +188,8 @@ const SinglePost = props => {
         (showReviewForm === false ? (
           <button
             onClick={() => setShowReviewForm(true)}
-            className="btn btn-outline-primary"
+            className="tutorial-button button-pink"
+            style={{ marginTop: '0' }}
           >
             Create review
           </button>
