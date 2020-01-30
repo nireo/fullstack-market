@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { checkLocalStorage } from './reducers/userReducer';
 import { getMessages } from './reducers/messageReducer';
 import './components/styles.css';
+import ReactTooltip from 'react-tooltip';
 
 const App = ({ user, checkLocalStorage, getMessages }) => {
   // loaded variable for loading messages
@@ -22,6 +23,7 @@ const App = ({ user, checkLocalStorage, getMessages }) => {
   return (
     <div className="animation-delays animate fadeIn">
       <Routes />
+      <ReactTooltip />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import Pagination from '../Pagination';
 import Markdown from 'markdown-to-jsx';
 import { Helmet } from 'react-helmet';
 import userService from '../../../services/user';
+import ReactTooltip from 'react-tooltip';
 
 const SinglePost = props => {
   const [title, setTitle] = useState('');
@@ -115,6 +116,7 @@ const SinglePost = props => {
         <meta charSet="utf-8" />
         <title>Post - benevol</title>
       </Helmet>
+      <ReactTooltip />
       <div className="row">
         <div className="col">
           <h1>{props.post.title}</h1>
@@ -124,29 +126,59 @@ const SinglePost = props => {
           </div>
           {props.user ? (
             <div>
-              <button
-                className={`tutorial-button ${
-                  alreadyInCart === false || alreadyInCart === null
-                    ? 'button-pink'
-                    : ''
-                }`}
-                style={{ marginRight: '1rem' }}
-                onClick={() => addToCart(props.post)}
-                disabled={alreadyInCart === null || alreadyInCart}
-              >
-                Add to cart
-              </button>
-              <button
-                className={`tutorial-button ${
-                  alreadyWish === false || alreadyWish === null
-                    ? 'button-pink'
-                    : ''
-                }`}
-                disabled={alreadyWish === null || alreadyWish}
-                onClick={() => addToWishList(props.post._id)}
-              >
-                Add to wishlist
-              </button>
+              {alreadyInCart === null || alreadyInCart ? (
+                <button
+                  className={`tutorial-button ${
+                    alreadyInCart === false || alreadyInCart === null
+                      ? 'button-pink'
+                      : ''
+                  }`}
+                  style={{ marginRight: '1rem' }}
+                  disabled={true}
+                  data-tip="Already in cart"
+                >
+                  Add to cart
+                </button>
+              ) : (
+                <button
+                  className={`tutorial-button ${
+                    alreadyInCart === false || alreadyInCart === null
+                      ? 'button-pink'
+                      : ''
+                  }`}
+                  style={{ marginRight: '1rem' }}
+                  onClick={() => addToCart(props.post)}
+                  disabled={alreadyInCart === null || alreadyInCart}
+                  data-tip="Add to cart"
+                >
+                  Add to cart
+                </button>
+              )}
+              {alreadyWish === null || alreadyWish ? (
+                <button
+                  className={`tutorial-button ${
+                    alreadyWish === false || alreadyWish === null
+                      ? 'button-pink'
+                      : ''
+                  }`}
+                  disabled={true}
+                  data-tip="Already in your wishlist"
+                >
+                  Add to wishlist
+                </button>
+              ) : (
+                <button
+                  className={`tutorial-button ${
+                    alreadyWish === false || alreadyWish === null
+                      ? 'button-pink'
+                      : ''
+                  }`}
+                  disabled={alreadyWish === null || alreadyWish}
+                  onClick={() => addToWishList(props.post._id)}
+                >
+                  Add to wishlist
+                </button>
+              )}
             </div>
           ) : (
             <p>
