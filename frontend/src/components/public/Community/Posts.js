@@ -13,21 +13,23 @@ const Posts = props => {
   const [currentPage, setCurrentPage] = useState(1);
   const [amountInPage] = useState(3);
   const [allPostAmount, setAllPostAmount] = useState(0);
-
-  const getPostCount = async () => {
-    const response = await axios.get('/api/post/amount/all');
-    return response.data;
-  };
+  const [pagesWithContent, setPagesWithContent] = useState([]);
 
   useEffect(() => {
-    if (props.posts === null) {
+    if (props.posts === null || !pagesWithContent.includes(currentPage)) {
       props.initPosts(String(currentPage));
+      setPagesWithContent(pagesWithContent.concat(currentPage));
     }
 
     if (allPostAmount == 0) {
-      axios.get('/api/post/amount/all').then(response => {
-        setAllPostAmount(response.data.count);
-      });
+      axios
+        .get('/api/post/amount/all')
+        .then(response => {
+          setAllPostAmount(response.data.count);
+        })
+        .catch(() => {
+          props.setNotification('Problem with loading posts', 'error', 3);
+        });
     }
   }, [props, currentPage]);
 

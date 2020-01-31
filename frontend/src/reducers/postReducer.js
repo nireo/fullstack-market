@@ -4,7 +4,11 @@ import reviewService from '../services/review';
 const reducer = (state = null, action) => {
   switch (action.type) {
     case 'INIT_POSTS':
-      return action.data;
+      if (state === null) {
+        return action.data;
+      }
+
+      return state.concat(action.data);
     case 'CREATE_NEW_POST':
       if (state === null) {
         return action.data;
