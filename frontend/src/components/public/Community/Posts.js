@@ -7,19 +7,35 @@ import { setNotification } from '../../../reducers/notificationReducer';
 import { addItemToCart } from '../../../reducers/cartReducer';
 import Loading from '../../Loading';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 
 const Posts = props => {
   const [currentPage, setCurrentPage] = useState(1);
   const [amountInPage] = useState(3);
+  const [allPostAmount, setAllPostAmount] = useState(0);
+
+  const getPostCount = async () => {
+    const response = await axios.get('/api/post/amount/all');
+    return response.data;
+  };
+
   useEffect(() => {
     if (props.posts === null) {
       props.initPosts(String(currentPage));
+    }
+
+    if (allPostAmount == 0) {
+      axios.get('/api/post/amount/all').then(response => {
+        setAllPostAmount(response.data.count);
+      });
     }
   }, [props, currentPage]);
 
   if (props.posts === null) {
     return <Loading />;
   }
+
+  console.log(allPostAmount);
 
   const addToCart = toAdd => {
     let checkForItem;
@@ -88,7 +104,7 @@ const Posts = props => {
       <div class="container" style={{ paddingTop: '1rem' }}>
         <Pagination
           amountInPage={amountInPage}
-          totalPosts={props.posts.length}
+          totalPosts={allPostAmount}
           paginate={paginate}
         />
       </div>
