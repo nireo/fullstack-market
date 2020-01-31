@@ -189,6 +189,8 @@ exports.getAmountOfPosts = async (req, res, next) => {
 
       return res.json({ count });
     });
+    // const number = await postModel.countDocuments();
+    // console.log(number);
   } catch (e) {
     next(e);
   }

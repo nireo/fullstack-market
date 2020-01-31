@@ -5,7 +5,7 @@ const postController = require('./postController');
 router.get('/', postController.searchForPosts);
 router.get('/:page', postController.getAllPosts);
 router.get('/id/:id', postController.getPostById);
-router.get('/amount', postController.getAmountOfPosts);
+router.get('/amount/all', postController.getAmountOfPosts);
 
 // Protected routes
 router.post('/', postController.createPost);

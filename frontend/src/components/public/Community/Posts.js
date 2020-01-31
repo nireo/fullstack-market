@@ -50,12 +50,21 @@ const Posts = props => {
             {p.description.slice(0, 250)}
           </p>
           {props.user && (
-            <Link className="card-link" onClick={() => addToCart(p)}>
+            <button
+              className="tutorial-button button-pink"
+              onClick={() => addToCart(p)}
+              style={{ marginTop: '0' }}
+            >
               Add to cart
-            </Link>
+            </button>
           )}
-          <Link to={`/community/post/${p._id}`} className="card-link">
-            Read more
+          <Link to={`/community/post/${p._id}`}>
+            <button
+              style={{ marginTop: '0', marginLeft: '1rem' }}
+              className="tutorial-button button-pink"
+            >
+              Read more
+            </button>
           </Link>
         </div>
       </div>
