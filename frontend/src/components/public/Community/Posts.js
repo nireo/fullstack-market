@@ -37,8 +37,6 @@ const Posts = props => {
     return <Loading />;
   }
 
-  console.log(allPostAmount);
-
   const addToCart = toAdd => {
     let checkForItem;
     if (props.cart !== null) {

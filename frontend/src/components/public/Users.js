@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { setNotification } from '../../reducers/notificationReducer';
 import user from '../../services/user';
+import Pagination from './Pagination';
 
 const Users = props => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [amountInPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     if (props.users === null) {
@@ -32,11 +36,17 @@ const Users = props => {
       setUsers(users);
       setLoading(false);
       setSearched(true);
+      setSearchTerm(search);
     } catch {
       props.setNotification('Something went wrong with the search', 'error', 2);
       setLoading(false);
     }
   };
+
+  const lastUserIndex = currentPage * amountInPage;
+  const firstUserIndex = lastUserIndex - amountInPage;
+  const currentUsers = users.slice(firstUserIndex, lastUserIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
 
   return (
     <div className="container">
@@ -64,7 +74,12 @@ const Users = props => {
         </div>
       </form>
       <div>
-        {users.map(u => (
+        {searched === true && users.length === 0 && (
+          <div style={{ textAlign: 'center' }}>
+            <p>No users with the found with the name: "{searchTerm}"</p>
+          </div>
+        )}
+        {currentUsers.map(u => (
           <div key={u._id} className="card box" style={{ marginTop: '0.5rem' }}>
             <div className="card-body">
               <h5 className="card-title">{u.username}</h5>
@@ -77,6 +92,18 @@ const Users = props => {
             </div>
           </div>
         ))}
+        {users.length !== 0 && (
+          <div>
+            <hr />
+            <div className="container" style={{ paddingTop: '1rem' }}>
+              <Pagination
+                amountInPage={amountInPage}
+                paginate={paginate}
+                totalPosts={users.length}
+              />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
