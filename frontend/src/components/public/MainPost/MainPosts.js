@@ -24,12 +24,20 @@ const MainPosts = props => {
 
   if (props.mainPost.length === 0) {
     return (
-      <div className="container">
+      <div className="container" style={{ marginTop: '3rem' }}>
         <h2 className="mt-2">No posts found</h2>
         <p>
           No posts have been found. Please look at the community tab for more
           posts.
         </p>
+        <Link to="/">
+          <button
+            className="tutorial-button button-pink"
+            style={{ marginTop: '0' }}
+          >
+            Go home
+          </button>
+        </Link>
       </div>
     );
   }

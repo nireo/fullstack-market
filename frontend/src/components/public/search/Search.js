@@ -5,11 +5,19 @@ import { setNotification } from '../../../reducers/notificationReducer';
 import Loading from '../../Loading';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import Pagination from '../Pagination';
 
 const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [amountInPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  if (!items) {
+    return null;
+  }
 
   const handleSearch = event => {
     event.preventDefault();
@@ -29,6 +37,13 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
     event.preventDefault();
     clearSearch();
   };
+
+  const lastPostIndex = currentPage * amountInPage;
+  const firstPostIndex = lastPostIndex - amountInPage;
+  const currentPosts = items.slice(firstPostIndex, lastPostIndex);
+  const paginate = pageNum => setCurrentPage(pageNum);
+
+  console.log(items);
 
   return (
     <div className="container">
@@ -62,7 +77,7 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
                 <p>No postings found.</p>
               </div>
             )
-          : items[0].map(i => (
+          : currentPosts[0].map(i => (
               <div
                 key={i._id}
                 className="card"
@@ -89,6 +104,18 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
           >
             Clear results
           </button>
+        </div>
+      )}
+      {items.length !== 0 && (
+        <div>
+          <hr />
+          <div className="container" style={{ marginTop: '1rem' }}>
+            <Pagination
+              amountInPage={amountInPage}
+              paginate={paginate}
+              totalPosts={items[0].length}
+            />
+          </div>
         </div>
       )}
     </div>
