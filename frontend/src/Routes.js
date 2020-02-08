@@ -14,13 +14,11 @@ import MainPosts from './components/public/MainPost/MainPosts';
 import Posts from './components/public/Community/Posts';
 import Notification from './components/public/Notification';
 import SinglePost from './components/public/Community/SinglePost';
-import CreatePost from './components/private/CreatePost';
 import CreateMainPost from './components/private/CreateMainPost';
 import AdminPanel from './components/private/admin/AdminPanel';
 import Users from './components/public/Users';
 import SingleUser from './components/public/SingleUser';
 import Cart from './components/private/Cart';
-import Chat from './components/public/Chat';
 import NotFound from './components/public/NotFound';
 import SingleMainPost from './components/public/MainPost/SingleMainPost';
 import { initPosts, getPostWithId } from './reducers/postReducer';
@@ -122,11 +120,6 @@ const Routes = props => {
           exact
           path="/cart"
           render={() => (props.user ? <Cart /> : <Redirect to="/" />)}
-        />
-        <Route
-          exact
-          path="/chat"
-          render={() => (props.user ? <Chat /> : <Redirect to="/" />)}
         />
         <Route path="/404" render={() => <NotFound />} />
         <Route exact path="/search" render={() => <Search />} />

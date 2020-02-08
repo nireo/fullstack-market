@@ -43,8 +43,6 @@ const Search = ({ items, searchForItem, setNotification, clearSearch }) => {
   const currentPosts = items.slice(firstPostIndex, lastPostIndex);
   const paginate = pageNum => setCurrentPage(pageNum);
 
-  console.log(items);
-
   return (
     <div className="container">
       <Helmet>

@@ -102,13 +102,6 @@ const NavBar = props => {
                 </div>
               </li>
             )}
-            {props.user && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/chat">
-                  <i className="far fa-comments" /> Chat
-                </Link>
-              </li>
-            )}
           </ul>
           {!props.user ? (
             <ul className="navbar-nav">
