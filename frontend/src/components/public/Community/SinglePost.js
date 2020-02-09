@@ -193,7 +193,7 @@ const SinglePost = props => {
                 <h5 className="card-title">Posted by</h5>
                 <h6 className="card-subtitle">
                   <Link
-                    to={`/profile/${props.post.postedBy._id}`}
+                    to={`/profile/${props.post.postedBy.username}`}
                     className="text-muted"
                   >
                     {props.post.postedBy.username}
@@ -247,7 +247,7 @@ const SinglePost = props => {
           </div>
         ))}
       <hr />
-      <div style={{ paddingTop: '2rem' }}>
+      <div>
         {props.post.reviews.length < 1 ? (
           <p>No reviews posted.</p>
         ) : (

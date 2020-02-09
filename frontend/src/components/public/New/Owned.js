@@ -61,11 +61,12 @@ export const Owned = ({ setShowSidebar, showSidebar, user }) => {
                 <h6 className="d-flex position-relative">{i.title}</h6>
                 <p>{i.description.slice(0, 50)}</p>
                 <Link
-                  style={{ paddingBottom: '1rem' }}
+                  style={{ marginBottom: '0.5rem', marginTop: '0' }}
                   onClick={() => {
                     setShowModal(true);
                     setViewContent(i);
                   }}
+                  className="tutorial-button button-pink"
                 >
                   View content
                 </Link>

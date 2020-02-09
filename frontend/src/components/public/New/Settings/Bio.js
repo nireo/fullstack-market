@@ -44,7 +44,7 @@ const Bio = ({ user, setNotification, updateBio }) => {
             />
           </div>
           <div className="form-group">
-            <button type="submit" className="tutorial-button button-bluish">
+            <button type="submit" className="tutorial-button button-pink">
               Change bio
             </button>
           </div>

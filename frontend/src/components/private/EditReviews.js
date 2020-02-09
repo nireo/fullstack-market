@@ -55,7 +55,7 @@ const EditReviews = ({ user, setNotification }) => {
               <p>{r.description}</p>
               <button
                 onClick={() => setReviewToEdit(r)}
-                className="tutorial-button button-blue"
+                className="tutorial-button button-pink"
                 style={{
                   marginRight: '1rem'
                 }}
@@ -64,7 +64,7 @@ const EditReviews = ({ user, setNotification }) => {
               </button>
               <button
                 onClick={() => handleRemove(r._id)}
-                className="tutorial-button button-blue"
+                className="tutorial-button button-pink"
               >
                 Delete
               </button>

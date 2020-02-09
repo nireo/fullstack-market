@@ -69,7 +69,7 @@ const PostForm = props => {
             {'  '}
             <button
               onClick={() => props.setPost(null)}
-              className="btn btn-outline-danger"
+              className="tutorial-button button-pink"
             >
               Close
             </button>
@@ -78,7 +78,7 @@ const PostForm = props => {
           <div>
             <button
               onClick={checkNextStep}
-              className="tutorial-button button-blue"
+              className="tutorial-button button-pink"
               style={{ marginTop: '0.5rem', marginRight: '0.75rem' }}
             >
               Next

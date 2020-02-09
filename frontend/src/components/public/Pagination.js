@@ -10,12 +10,6 @@ const Pagination = ({ amountInPage, totalPosts, paginate }) => {
   return (
     <nav>
       <ul className="pagination">
-        <li className="page-item">
-          <Link className="page-link" style={{ color: 'black' }}>
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </Link>
-        </li>
         {amountOfPages.map(n => (
           <li key={n} className="page-item">
             <Link
@@ -27,12 +21,6 @@ const Pagination = ({ amountInPage, totalPosts, paginate }) => {
             </Link>
           </li>
         ))}
-        <li className="page-item">
-          <Link className="page-link" style={{ color: 'black' }}>
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </Link>
-        </li>
       </ul>
     </nav>
   );

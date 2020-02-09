@@ -47,7 +47,11 @@ const EditInfo = ({ setNotification, user }) => {
               </div>
             </div>
             <div className="col-3">
-              <button type="submit" className="tutorial-button button-blue">
+              <button
+                style={{ marginTop: '0' }}
+                type="submit"
+                className="tutorial-button button-pink"
+              >
                 Change
               </button>
             </div>
@@ -67,7 +71,11 @@ const EditInfo = ({ setNotification, user }) => {
               </div>
             </div>
             <div className="col-3">
-              <button type="submit" className="tutorial-button button-blue">
+              <button
+                style={{ marginTop: '0' }}
+                type="submit"
+                className="tutorial-button button-pink"
+              >
                 Change
               </button>
             </div>
@@ -87,7 +95,11 @@ const EditInfo = ({ setNotification, user }) => {
               </div>
             </div>
             <div className="col-3">
-              <button type="submit" className="tutorial-button button-blue">
+              <button
+                style={{ marginTop: '0' }}
+                type="submit"
+                className="tutorial-button button-pink"
+              >
                 Change
               </button>
             </div>

@@ -46,7 +46,8 @@ export const Wishlist = ({ showSidebar, setShowSidebar, user }) => {
                 <p>{i.description.slice(0, 100)}</p>
                 <Link
                   to={`/community/post/${i._id}`}
-                  style={{ paddingBottom: '1rem' }}
+                  style={{ marginBottom: '0.5rem', marginTop: '0' }}
+                  className="tutorial-button button-pink"
                 >
                   View post
                 </Link>
