@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { initUsers } from '../../reducers/allUsersReducer';
+import { initUsers, getUserWithId } from '../../reducers/allUsersReducer';
 import { Link, Redirect } from 'react-router-dom';
 import Loading from '../Loading';
 import { updateBio } from '../../reducers/allUsersReducer';
@@ -10,19 +10,26 @@ import RenderAmount from './RenderAmount';
 import UserPosts from './SingleUser/UserPosts';
 import UserReviews from './SingleUser/UserReviews';
 import { Helmet } from 'react-helmet';
+import axios from 'axios';
 
 const SingleUser = props => {
   const [page, setPage] = useState(1);
+  const [user, setUser] = useState(null);
+
   useEffect(() => {
-    if (props.users === null) {
-      props.initUsers();
+    if (user === null) {
+      loadUser();
     }
   }, [props]);
-  if (props.users === null) {
+
+  const loadUser = async () => {
+    const data = await axios.get(`/api/user/${props.id}`);
+    setUser(data.data[0]);
+  };
+
+  if (user === null) {
     return <Loading />;
   }
-
-  const user = props.users.find(u => u._id === props.id);
 
   if (!user) {
     return (

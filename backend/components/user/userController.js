@@ -32,10 +32,10 @@ exports.getAllUsers = async (req, res, next) => {
   }
 };
 
-exports.getUserById = async (req, res, next) => {
+exports.getUserByUsername = async (req, res, next) => {
   try {
     await userModel
-      .findById(request.params.id)
+      .find({ username: req.params.username })
       .populate('reviewsPosted')
       .populate('posts')
       .exec((err, results) => {
