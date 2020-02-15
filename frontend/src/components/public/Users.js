@@ -80,16 +80,24 @@ const Users = props => {
           </div>
         )}
         {currentUsers.map(u => (
-          <div key={u._id} className="card box" style={{ marginTop: '0.5rem' }}>
-            <div className="card-body">
-              <h5 className="card-title">{u.username}</h5>
-              <p className="card-text">{u.bio}</p>
-              <Link to={`/profile/${u.username}`}>
-                <button className="tutorial-button button-pink">
-                  Go to profile
-                </button>
-              </Link>
-            </div>
+          <div>
+            {u.username !== 'admin' && (
+              <div
+                key={u._id}
+                className="card box"
+                style={{ marginTop: '0.5rem' }}
+              >
+                <div className="card-body">
+                  <h5 className="card-title">{u.username}</h5>
+                  <p className="card-text">{u.bio}</p>
+                  <Link to={`/profile/${u.username}`}>
+                    <button className="tutorial-button button-pink">
+                      Go to profile
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
         ))}
         {users.length !== 0 && (

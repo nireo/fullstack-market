@@ -49,5 +49,6 @@ export default {
   setToken,
   postMainReview,
   postCommunityReview,
-  removeReview
+  removeReview,
+  addHelpful
 };

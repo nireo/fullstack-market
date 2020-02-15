@@ -89,7 +89,7 @@ const NavBar = props => {
                   {props.user.username !== 'admin' && (
                     <Link
                       className="dropdown-item"
-                      to={`/profile/${props.user._id}`}
+                      to={`/profile/${props.user.username}`}
                     >
                       <i className="fas fa-user"></i> My Profile
                     </Link>

@@ -104,10 +104,9 @@ const SinglePost = props => {
 
   const lastPostIndex = currentPage * amountInPage;
   const firstPostIndex = lastPostIndex - amountInPage;
-  const currentReviews = props.post.reviews.slice(
-    firstPostIndex,
-    lastPostIndex
-  );
+  const currentReviews = props.post.reviews
+    ? props.post.reviews.slice(firstPostIndex, lastPostIndex)
+    : [];
   const paginate = pageNum => setCurrentPage(pageNum);
 
   return (
