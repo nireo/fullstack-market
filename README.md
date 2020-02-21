@@ -1,15 +1,58 @@
-## Fullstack market
-This is a fullstack e-commerce app built with React.js and Express.js.
+## Full-stack market
 
-### About the project
-The project is supposed to be a site, which contains main store postings, only posted by the admin. Other than that there is a community tab, where anyone can post different items they want to sell. Users can sign-up with their own credentials, or use OAuth with Google supported.
+This is a full-stack e-commerce application built with [React](https://reactjs.org/) and [Express](https://expressjs.com/).
 
-#### Backend
-Different types of services are divided into components. Components include a controller, model and routes. Socket related items are found in the `/socket` folder, as the name suggests. The tests are included in the `/tests` folder. The server itself starts from the `index.js` file, but the routes and middleware are defined in the `app.js` file.
+### About
 
+It is basically a marketplace where anyone can sign up and start selling products. The application has a clean and minimal interface to help users to interact with the marketplace. I built it all by myself without any type of instructions or tutorials, just to test my skills. I wasn't planning on making the project this big, but this was a interesting passion project so I didn't see any point in stopping development. By now the application has all the things I can think of. It really has been a blast making up cool features and implementing them in this application.
 
-#### Frontend
-Im using redux for state management, to easily transfer states around multiple files. Some of the styles are from bootstrap, but at this moment, there is more of my own styling. Component folder is divided into public and private components. Meaning private can be accessed only when logged in, but public components can accessed by both. Components that belong to both, are placed in neither.
+### Challenges
 
-### Features
-This project has a lot of different features. The main features are posting items for sale, signing up, searching for items and managing your shop. Other notable features include web socket chat, tutorial, personal shop which is sort of like a store front which you can customize to your liking. 
+The application was not hard to build since it is basically a CRUD application. Even though this was the case, I ran into many problems, but in the end I figured out how to solve them myself. Building this application has opened my eyes to the importance of clean code. Since the project is ~40K lines of code, scaling the application proved to be difficult. During the timespan in which I built this application I learned many things, like CSS animations or optimizing the back-end and front-end.
+
+### Technologies
+
+At first I wanted to construct the back-end with something other than Javascript, but in the end I decided to stick with it. I'm a bit sad that I didn't know about Typescript at the time of starting this project, since that would've immensely helped me with bugs.
+
+- Javascript
+- NodeJS
+- Express
+- MongoDB
+- React
+- Redux
+- Jest
+- Markdown
+
+### Setting up the project
+
+```
+$ git clone https://github.com/nireo/fullstack-market
+$ cd fullstack-market/backend
+$ npm install
+$ cd ../frontend
+$ npm install
+```
+
+Now that you've installed all the dependencies it is time to run the code. First you need to setup a `.env` file with a [MongoDB](https://www.mongodb.com/) address and the port number.
+
+```
+// .env.js
+PORT=3001
+MONGO_URI='mongodb+srv://<username>:<password>@cluster0-ww9qd.mongodb.net/<dbname>?retryWrites=true&w=majority'
+```
+
+#### Run back-end
+
+Make sure you're in the back-end directory and run:
+
+```
+$ npm run dev
+```
+
+#### Run front-end
+
+Make sure you're in the front-end directory and run:
+
+```
+$ npm start
+```
